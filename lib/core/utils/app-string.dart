@@ -6,6 +6,7 @@ class AppStrings {
   static const String skip='تخطي';
   static const String yes='نعم';
   static const String cancel='الغاء';
+  static const String resendOtp2='اعد الارسال/تغيير الرقم';
   static const String volunteerHasBeenLeftSuccessfully='تمت مغادرة الفرصة';
   static const String oldPassword='كلمة المرور القديمة';
   static const String passwordChangedSuccessfully='تم تغيير كلمة المرور بنجاح';

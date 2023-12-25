@@ -21,25 +21,21 @@ class _ElectionsThanksScreenState extends State<ElectionsThanksScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Screenshot(
-          controller: screenshotController,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                thanksImage,
-                thanksText,
-                SizedBox(
-                  height: 80.h,
-                ),
-                SaveButton(
-                    onTap: () {
-                      takwScreenShot();
-                    },
-                    text: AppStrings.save)
-              ],
-            ),
+      body: Screenshot(
+        controller: screenshotController,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              thanksImage,
+              thanksText,
+              SizedBox(height: 80.h),
+              SaveButton(
+                  onTap: () {
+                    takeScreenShot();
+                  },
+                  text: AppStrings.save)
+            ],
           ),
         ),
       ),
@@ -64,7 +60,7 @@ class _ElectionsThanksScreenState extends State<ElectionsThanksScreen> {
       );
   ScreenshotController screenshotController = ScreenshotController();
   Uint8List? image;
-  Future<void> takwScreenShot() async {
+  Future<void> takeScreenShot() async {
     await screenshotController
         .capture(delay: const Duration(milliseconds: 100))
         .then((Uint8List? image) async {

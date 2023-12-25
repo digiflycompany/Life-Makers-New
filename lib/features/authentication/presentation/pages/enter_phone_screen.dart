@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:life_makers/core/utils/extensions.dart';
+import 'package:life_makers/core/widgets/custom_snack_bar.dart';
 import 'package:life_makers/features/authentication/domain/sign_up_cubit/sign_up_cubit.dart';
 import 'package:life_makers/features/authentication/domain/sign_up_cubit/sign_up_states.dart';
 import 'package:life_makers/features/authentication/presentation/pages/otp_screen.dart';
@@ -17,18 +18,18 @@ import '../widgets/email_textfield.dart';
 class EnterPhoneScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   bool loading =false;
-    EnterPhoneScreen({super.key});
+  EnterPhoneScreen({super.key});
   final TextEditingController phoneController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final otpResetPasswordCubit = context.read<SignUpCubit>();
     return BlocConsumer<SignUpCubit, SignUpState>(
       listener: (context, state) {
-
         if(state is otpResetPasswordSentLoading){
           loading =true;
         } else if(state is otpResetPasswordSentSuccess){
-          Navigator.push(context, PageTransition(
+          loading =false;
+          Navigator.pushReplacement(context, PageTransition(
             type: PageTransitionType.fade,
             duration: const Duration(milliseconds: 400),
             child:  BlocProvider.value(
@@ -38,10 +39,8 @@ class EnterPhoneScreen extends StatelessWidget {
           ),
           );
         } else if(state is otpResetPasswordSentFailure){
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(state.error),
-            duration: Duration(seconds: 2),
-          ));
+          CustomSnackBars.showErrorToast(title: state.error);
+          loading =false;
         }
       },
       builder: (context, state) {
@@ -67,38 +66,38 @@ class EnterPhoneScreen extends StatelessWidget {
                           phoneTextField,
                           SizedBox(height: 75.h),
                           Padding(
-                            padding:  EdgeInsets.symmetric(horizontal: 7.w),
-                            child: GestureDetector(
-                              onTap: (){
-                                if(_formKey.currentState!.validate()){
-                                  otpResetPasswordCubit.OtpResetPasswordCheck(phoneController.text);
-                                }
-                              },
-                              child: Container(
-                                width: 420.w,
-                                height: 63.h,
-                                decoration: BoxDecoration(
-                                  color: AppColors.orangeBorderColor,
-                                  borderRadius: BorderRadius.circular(8.r),
-                                ),
-                                child:  Center(
-                                  child: loading == true ?Transform.scale(
-                                    scale: 0.4,
-                                    child: CircularProgressIndicator(
-                                      color: AppColors.white,
-                                    ),
-                                  ):Text(
-                                    AppStrings.send,
-                                    style: const TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: FontFamilies.alexandria,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 12
+                              padding:  EdgeInsets.symmetric(horizontal: 7.w),
+                              child: GestureDetector(
+                                onTap: (){
+                                  if(_formKey.currentState!.validate()){
+                                    otpResetPasswordCubit.OtpResetPasswordCheck(phoneController.text);
+                                  }
+                                },
+                                child: Container(
+                                  width: 420.w,
+                                  height: 63.h,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.orangeBorderColor,
+                                    borderRadius: BorderRadius.circular(8.r),
+                                  ),
+                                  child:  Center(
+                                    child: loading == true ?Transform.scale(
+                                      scale: 0.4,
+                                      child: CircularProgressIndicator(
+                                        color: AppColors.white,
+                                      ),
+                                    ):Text(
+                                      AppStrings.send,
+                                      style: const TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: FontFamilies.alexandria,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 12
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            )
+                              )
                           ),
                         ],
                       ),
