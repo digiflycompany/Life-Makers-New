@@ -97,7 +97,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                 context,
                 PageTransition(
                   type: PageTransitionType.fade,
-                  duration: const Duration(milliseconds: 700),
+                  duration: const Duration(milliseconds: 400),
                   child: LoginScreen(),
                 ));
           } else if (state is DeleteAccountFailure) {
@@ -287,6 +287,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                       child: Column(
                         children: [
                           TextField(
+                            enabled: false,
                               controller: emailController,
                               cursorColor: AppColors.blueColor,
                               textInputAction: TextInputAction.next,
@@ -336,6 +337,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                 Flexible(
                                     child: TextField(
                                         controller: phoneController,
+                                           enabled: false,
                                         keyboardType: TextInputType.phone,
                                         textInputAction: TextInputAction.next,
                                         cursorColor: AppColors.blueColor,
@@ -350,6 +352,8 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                 ),
                                 Flexible(
                                     child: TextField(
+                                        enabled: false,
+
                                         controller: whatsappController,
                                         cursorColor: AppColors.blueColor,
                                         textInputAction: TextInputAction.next,
@@ -370,6 +374,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                               children: [
                                 Flexible(
                                     child: TextField(
+                                       enabled: false,
                                         controller: nationalIDController,
                                         keyboardType: TextInputType.number,
                                         textInputAction: TextInputAction.next,
@@ -406,47 +411,12 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                 Flexible(
                                     child: TextField(
                                         controller: addressController,
-                                        keyboardType: TextInputType.number,
+                                        keyboardType: TextInputType.name,
                                         textInputAction: TextInputAction.next,
                                         cursorColor: AppColors.blueColor,
                                         cursorWidth: 1,
                                         decoration: InputDecoration(
                                           labelText: 'العنوان * ',
-                                          labelStyle: buildLabelStyle(),
-                                          focusedBorder: buildUnderlineInputBorder(),
-                                        ))),
-                                const SizedBox(
-                                  width: 34,
-                                ),
-                                Flexible(
-                                    child: TextField(
-                                        controller: governorateController,
-                                        cursorColor: AppColors.blueColor,
-                                        textInputAction: TextInputAction.next,
-                                        keyboardType: TextInputType.name,
-                                        cursorWidth: 1,
-                                        decoration: InputDecoration(
-                                          labelText: 'المحافظة * ',
-                                          labelStyle: buildLabelStyle(),
-                                          focusedBorder: buildUnderlineInputBorder(),
-                                        ))),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 15),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Flexible(
-                                    child: TextField(
-                                        controller: centerController,
-                                        keyboardType: TextInputType.number,
-                                        textInputAction: TextInputAction.next,
-                                        cursorColor: AppColors.blueColor,
-                                        cursorWidth: 1,
-                                        decoration: InputDecoration(
-                                          labelText: 'مركز * ',
                                           labelStyle: buildLabelStyle(),
                                           focusedBorder: buildUnderlineInputBorder(),
                                         ))),
@@ -465,6 +435,44 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                           labelStyle: buildLabelStyle(),
                                           focusedBorder: buildUnderlineInputBorder(),
                                         ))),
+
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 15),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+
+                                Flexible(
+                                    child: TextField(
+                                        controller: governorateController,
+                                        cursorColor: AppColors.blueColor,
+                                        textInputAction: TextInputAction.next,
+                                        keyboardType: TextInputType.name,
+                                        cursorWidth: 1,
+                                        decoration: InputDecoration(
+                                          labelText: 'المحافظة * ',
+                                          labelStyle: buildLabelStyle(),
+                                          focusedBorder: buildUnderlineInputBorder(),
+                                        ))),
+                                const SizedBox(
+                                  width: 34,
+                                ),
+                                Flexible(
+                                    child: TextField(
+                                        controller: centerController,
+                                        keyboardType: TextInputType.name,
+                                        textInputAction: TextInputAction.next,
+                                        cursorColor: AppColors.blueColor,
+                                        cursorWidth: 1,
+                                        decoration: InputDecoration(
+                                          labelText: 'مركز * ',
+                                          labelStyle: buildLabelStyle(),
+                                          focusedBorder: buildUnderlineInputBorder(),
+                                        ))),
+
                               ],
                             ),
                           ),
