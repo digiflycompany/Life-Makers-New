@@ -24,13 +24,13 @@ class _JoinedProgramCardState extends State<JoinedProgramCard> {
   @override
   void initState() {
     volunteerCubit = context.read<VolunteerCubit>();
-    volunteerCubit.getVolunteerProgramTraining();
+    volunteerCubit.getJoinedVolunteerOpportunities();
     super.initState();
   }
   Future<void> _refresh() async {
     try {
       await Future.delayed(const Duration(seconds: 1));
-      await volunteerCubit.getVolunteerProgramTraining();
+      await volunteerCubit.getJoinedVolunteerOpportunities();
       setState(() {}); // Force a rebuild
     } catch (error) {
       if (kDebugMode) {

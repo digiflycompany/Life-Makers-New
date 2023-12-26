@@ -356,6 +356,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         else
                           return SizedBox.shrink();
                       }),
+                    if(selectedActivityType == 1) tabBar1,
+                    if(selectedActivityType == 1) pages1,
                   ],
                 );
               }),
@@ -543,6 +545,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
           texts,
         ],
       );
+  get tabBar1 => Stack(
+    children: [
+      divider,
+      tabs,
+      texts,
+    ],
+  );
   get pages => Expanded(
         child: PageView(
           //physics:const ClampingScrollPhysics(),
@@ -563,6 +572,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ],
         ),
       );
+  get pages1 => SizedBox(
+    height: 300,
+    child: PageView(
+      //physics:const ClampingScrollPhysics(),
+      //reverse: true,
+      controller: _pageController,
+      onPageChanged: (int page) {
+        setState(() {
+          _currentPage = page;
+        });
+      },
+      children: [
+        Text(''),
+        Text(''),
+        Text(''),
+        // PreviousSeasonalCampaignsScreen(),
+        // CurrentSeasonalCampaignsScreen(),
+        // UpcomingSeasonalCampaigns(),
+      ],
+    ),
+  );
   get img => Center(child: Image.asset(AppAssets.lifeMakerBanner));
   get firstText => Align(
         alignment: AlignmentDirectional.center,
