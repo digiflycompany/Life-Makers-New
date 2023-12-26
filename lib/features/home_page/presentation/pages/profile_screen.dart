@@ -36,17 +36,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   late PageController _pageController2;
   int _currentPage = 0;
   int _currentPage2 = 0;
-  Future<void> _refresh() async {
-    try {
-      await Future.delayed(const Duration(seconds: 1));
-      await volunteerCubit.getJoinedVolunteerOpportunities();
-      setState(() {}); // Force a rebuild
-    } catch (error) {
-      if (kDebugMode) {
-        print('Error refreshing data: $error');
-      }
-    }
-  }
   late VolunteerCubit volunteerCubit;
 
   late AllCampaignsCubit allCampaignsCubit;

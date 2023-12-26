@@ -49,6 +49,8 @@ class _ChangePasswordAfterLoginScreenState extends State<ChangePasswordAfterLogi
                 child: EditAccountScreen(),
               ));
         } else if (state is changePasswordAfterLoginFailure) {
+           CustomSnackBars.showErrorToast(title: state.error);
+          loading =false;
         }
       },
       builder: (context, state) {
