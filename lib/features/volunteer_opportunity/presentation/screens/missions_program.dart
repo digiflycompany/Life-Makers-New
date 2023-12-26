@@ -25,7 +25,6 @@ class _MissionsProgramState extends State<MissionsProgram> {
       body: SafeArea(
         child: Column(
           children: [
-
             SizedBox(height: 20.h,),
             Expanded(child: RemoteTasksCard())
           ],

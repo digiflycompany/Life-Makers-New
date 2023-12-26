@@ -13,6 +13,7 @@ import 'package:page_transition/page_transition.dart';
 
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/widgets/custom_snack_bar.dart';
+import '../../../../services/shared_preferences/preferences_helper.dart';
 
 
 class RemoteTasksDetails extends StatefulWidget {
@@ -128,43 +129,45 @@ class _RemoteTasksDetailsState extends State<RemoteTasksDetails> {
                         ),
                       ),
                       Spacer(),
-                      if( remoteTasksCubit.remoteTasksModel?.volunteerOpportunities![widget.index].userJoined==true)
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 20.h),
-                          child: state is leftRemoteTasksLoading
-                              ? Center(
-                            child: Transform.scale(
-                              scale: 0.5,
-                              child: CircularProgressIndicator(
-                                color: AppColors.orangeBorderColor,
+                      if(!PreferencesHelper.getIsVisitor)...[
+                        if( remoteTasksCubit.remoteTasksModel?.volunteerOpportunities![widget.index].userJoined==true)
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 20.h),
+                            child: state is leftRemoteTasksLoading
+                                ? Center(
+                              child: Transform.scale(
+                                scale: 0.5,
+                                child: CircularProgressIndicator(
+                                  color: AppColors.orangeBorderColor,
+                                ),
                               ),
-                            ),
-                          )
-                              : NewsButton2(
-                              onTap: () {
-                                remoteTasksCubit.leftRemoteTasks('${remoteTasksCubit.remoteTasksModel?.volunteerOpportunities![widget.index].id}');
-                              },
-                              text: AppStrings.leave),
-                        ),
-                      if( remoteTasksCubit.remoteTasksModel?.volunteerOpportunities![widget.index].userJoined==false)
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 20.h),
-                          child: state is JoinRemoteTasksLoading
-                              ? Center(
-                            child: Transform.scale(
-                              scale: 0.5,
-                              child: CircularProgressIndicator(
-                                color: AppColors.orangeBorderColor,
+                            )
+                                : NewsButton2(
+                                onTap: () {
+                                  remoteTasksCubit.leftRemoteTasks('${remoteTasksCubit.remoteTasksModel?.volunteerOpportunities![widget.index].id}');
+                                },
+                                text: AppStrings.leave),
+                          ),
+                        if( remoteTasksCubit.remoteTasksModel?.volunteerOpportunities![widget.index].userJoined==false)
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 20.h),
+                            child: state is JoinRemoteTasksLoading
+                                ? Center(
+                              child: Transform.scale(
+                                scale: 0.5,
+                                child: CircularProgressIndicator(
+                                  color: AppColors.orangeBorderColor,
+                                ),
                               ),
-                            ),
-                          )
-                              : NewsButton2(
-                              onTap: () {
-                                remoteTasksCubit.joinRemoteTasks('${remoteTasksCubit.remoteTasksModel?.volunteerOpportunities![widget.index].id}');
+                            )
+                                : NewsButton2(
+                                onTap: () {
+                                  remoteTasksCubit.joinRemoteTasks('${remoteTasksCubit.remoteTasksModel?.volunteerOpportunities![widget.index].id}');
 
-                              },
-                              text: AppStrings.join),
-                        ),
+                                },
+                                text: AppStrings.join),
+                          ),
+                      ],
                     ],
                   ),
                 ),
