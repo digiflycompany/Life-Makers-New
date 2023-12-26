@@ -11,6 +11,7 @@ import 'package:life_makers/features/volunteer_opportunity/presentation/screens/
 import 'package:page_transition/page_transition.dart';
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/widgets/custom_snack_bar.dart';
+import '../../../../services/shared_preferences/preferences_helper.dart';
 import '../../cubit/volunteer_cubit.dart';
 
 class TrainingProgramDetails extends StatefulWidget {
@@ -128,42 +129,44 @@ class _TrainingProgramDetailsState extends State<TrainingProgramDetails> {
                         ),
                       ),
                       Spacer(),
-                      if( volunteerCubit.volunteerPracticalTrainingModel?.volunteerOpportunities![widget.index].userJoined==true)
+                      if(!PreferencesHelper.getIsVisitor)...[
+                        if( volunteerCubit.volunteerPracticalTrainingModel?.volunteerOpportunities![widget.index].userJoined==true)
                           Padding(
-                        padding: EdgeInsets.only(bottom: 20.h),
-                        child:state is UserLeftProgramLoading
-                            ? Center(
-                          child: Transform.scale(
-                            scale: 0.5,
-                            child: CircularProgressIndicator(
-                              color: AppColors.orangeBorderColor,
-                            ),
-                          ),
-                        )
-                            :  NewsButton2(
+                            padding: EdgeInsets.only(bottom: 20.h),
+                            child:state is UserLeftProgramLoading
+                                ? Center(
+                              child: Transform.scale(
+                                scale: 0.5,
+                                child: CircularProgressIndicator(
+                                  color: AppColors.orangeBorderColor,
+                                ),
+                              ),
+                            )
+                                :  NewsButton2(
                                 onTap: () {
                                   volunteerCubit.leftProgram('${volunteerCubit.volunteerPracticalTrainingModel?.volunteerOpportunities![widget.index].id}');
                                 },
                                 text:AppStrings.leave),
-                      ),
-                      if( volunteerCubit.volunteerPracticalTrainingModel?.volunteerOpportunities![widget.index].userJoined==false)
-                          Padding(
-                        padding: EdgeInsets.only(bottom: 20.h),
-                        child: state is UserJoinedProgramLoading
-                            ? Center(
-                          child: Transform.scale(
-                            scale: 0.5,
-                            child: CircularProgressIndicator(
-                              color: AppColors.orangeBorderColor,
-                            ),
                           ),
-                        )
-                            : NewsButton2(
-                            onTap: () {
-                              volunteerCubit.JoinProgram('${volunteerCubit.volunteerPracticalTrainingModel?.volunteerOpportunities![widget.index].id}');
-                            },
-                            text: AppStrings.join),
-                      ),
+                        if( volunteerCubit.volunteerPracticalTrainingModel?.volunteerOpportunities![widget.index].userJoined==false)
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 20.h),
+                            child: state is UserJoinedProgramLoading
+                                ? Center(
+                              child: Transform.scale(
+                                scale: 0.5,
+                                child: CircularProgressIndicator(
+                                  color: AppColors.orangeBorderColor,
+                                ),
+                              ),
+                            )
+                                : NewsButton2(
+                                onTap: () {
+                                  volunteerCubit.JoinProgram('${volunteerCubit.volunteerPracticalTrainingModel?.volunteerOpportunities![widget.index].id}');
+                                },
+                                text: AppStrings.join),
+                          ),
+                      ],
                     ],
                   ),
                 ),
