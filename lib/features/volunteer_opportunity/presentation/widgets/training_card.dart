@@ -38,13 +38,6 @@ class _TrainingCardState extends State<TrainingCard> {
       }
     }
   }
-
-  // Future<void> _refresh() async {
-    // Add logic to refresh data here
-    // For example, you can call an API or reload the data from your data source
-    // Here's an example:
-    // volunteerCubit.getVolunteerProgramTraining(); // Replace with your method
-  //}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -173,39 +166,6 @@ class _TrainingCardState extends State<TrainingCard> {
         padding:  EdgeInsets.only(left: 13.w),
         child: SvgPicture.asset(AppAssets.dotsIcon,height: 13.h,),
       ));
-  // get titleText => Align(
-  //   alignment:AlignmentDirectional.centerStart,
-  //   child: Padding(
-  //     padding: EdgeInsets.only(right: 0.w),
-  //     child:  Text(
-  //       '${volunteerCubit.volunteerPracticalTrainingModel?.volunteerOpportunities?[index].name}',
-  //       style: TextStyle(
-  //           color: AppColors.darkBlueColor,
-  //           fontFamily: FontFamilies.alexandria,
-  //           fontWeight: FontWeight.w500,
-  //           fontSize: 13.5
-  //       ),
-  //     ),
-  //   ),
-  // );
-  // get descriptionText => Align(
-  //   alignment:AlignmentDirectional.centerStart,
-  //   child: Padding(
-  //     padding: EdgeInsets.only(right: 0.w),
-  //     child: const Text(
-  //       AppStrings.dummyData,
-  //       style: TextStyle(
-  //           color: Colors.black,
-  //           fontFamily: FontFamilies.alexandria,
-  //           fontWeight: FontWeight.w400,
-  //           fontSize: 10,
-  //           height: 1.56
-  //       ),
-  //       textDirection: TextDirection.rtl,
-  //       maxLines: 3,
-  //     ),
-  //   ),
-  // );
   get calendarIcon => SvgPicture.asset(AppAssets.calendarIcon,width: 12.w,);
   get dateText => Padding(
     padding:  EdgeInsets.only(top: 2.h),
@@ -219,38 +179,4 @@ class _TrainingCardState extends State<TrainingCard> {
       ),
     ),
   );
-  // get content => Column(
-  //   children: [
-  //     SizedBox(height: 12.h,),
-  //     dotsIcon,
-  //     titleText,
-  //     SizedBox(height: 11.h,),
-  //     descriptionText,
-  //     SizedBox(height: 8.h,),
-  //   ],
-  // );
-  // get trainingCard => GestureDetector(
-  //   onTap: (){
-  //     Navigator.push(context, PageTransition(
-  //         type: PageTransitionType.fade,
-  //         duration: const Duration(milliseconds: 600),
-  //         child: const OneDayActivityScreen()));
-  //   },
-  //   child: Container(
-  //     decoration: BoxDecoration(
-  //       color: AppColors.trainingCardColor,
-  //       border: Border.all(color: AppColors.darkBlueColor,width:1.6.w),
-  //       borderRadius: BorderRadius.circular(20.r),
-  //     ),
-  //     child: Padding(
-  //       padding:  EdgeInsets.only(right: 13.w),
-  //       child: Stack(
-  //         children: [
-  //           logoImg,
-  //           content,
-  //         ],
-  //       ),
-  //     ),
-  //   ),
-  // );
 }

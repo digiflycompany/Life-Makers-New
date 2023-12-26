@@ -39,7 +39,6 @@ class LoginCubit extends Cubit<LoginState> {
       if (response.statusCode == 200) {
         UserModel userModel = UserModel.fromJson(response.data);
         await PreferencesHelper.saveToken(token: response.data['token']);
-        print(response.data['token']);
         await PreferencesHelper.saveUserModel(userModel);
 
         emit(LoginSuccess());

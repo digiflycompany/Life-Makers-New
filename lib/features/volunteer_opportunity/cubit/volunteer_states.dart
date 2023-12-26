@@ -41,3 +41,13 @@ class UserLeftProgramFailure extends VolunteerState {
 
   UserLeftProgramFailure(this.error);
 }
+
+class JoinedProgramLoading extends VolunteerState {}
+
+class JoinedProgramSuccess extends VolunteerState {}
+
+class JoinedProgramFailure extends VolunteerState {
+  final String error;
+
+  JoinedProgramFailure(this.error);
+}
