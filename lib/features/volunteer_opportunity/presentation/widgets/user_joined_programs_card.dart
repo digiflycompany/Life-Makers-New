@@ -56,14 +56,14 @@ class _JoinedProgramCardState extends State<JoinedProgramCard> {
         onRefresh: _refresh,
         child: BlocBuilder<VolunteerCubit, VolunteerState>(
           builder: (context, state) {
-            if(state is VolunteerProgramLoading)  {
+            if(state is JoinedProgramLoading)  {
               return Align(
                 alignment: AlignmentDirectional.center,
                 child: CircularProgressIndicator(
                   color: AppColors.orangeBorderColor,
                 ),
               );
-            } else {
+            } else if(state is JoinedProgramSuccess ){
               return GridView.builder(
                 physics: const AlwaysScrollableScrollPhysics(),
                 shrinkWrap: true,
@@ -145,6 +145,28 @@ class _JoinedProgramCardState extends State<JoinedProgramCard> {
                     ),
                   );
                 },
+              );
+            } else{
+              return Center(
+                child: Padding(
+                  padding:  EdgeInsets.only(bottom: 50.h),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(AppAssets.noCampaignsImg),
+                      SizedBox(height: 30.h,),
+                      const Text(
+                        AppStrings.noCampaignsText,
+                        style: TextStyle(
+                            color:AppColors.greyNoCampaignsTextColor,
+                            fontFamily: FontFamilies.alexandria,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 13
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               );
             }
           },
