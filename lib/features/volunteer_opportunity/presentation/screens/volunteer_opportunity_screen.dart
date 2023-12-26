@@ -10,6 +10,7 @@ import 'package:life_makers/features/volunteer_opportunity/cubit/suggestion_stat
 import 'package:life_makers/features/volunteer_opportunity/presentation/screens/activity_program.dart';
 import 'package:life_makers/features/volunteer_opportunity/presentation/screens/missions_program.dart';
 import 'package:life_makers/features/volunteer_opportunity/presentation/screens/training_programs.dart';
+import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app-string.dart';
@@ -94,14 +95,16 @@ class _VolunteerOpportunityScreenState
                   SizedBox(
                     height: 25.h,
                   ),
-                  GestureDetector(
-                      onTap: () {
-                        _showSuggestionPopup(context);
-                      },
-                      child: Image.asset(
-                        AppAssets.volunteerCard4,
-                        scale: 0.85,
-                      )),
+                  if(!PreferencesHelper.getIsVisitor)...[
+                    GestureDetector(
+                        onTap: () {
+                          _showSuggestionPopup(context);
+                        },
+                        child: Image.asset(
+                          AppAssets.volunteerCard4,
+                          scale: 0.85,
+                        )),
+                  ],
                 ],
               ),
             ),

@@ -68,10 +68,14 @@ class _MenuScreenState extends State<MenuScreen> {
                       height: 4.h,
                     ),
                     closeDrawerIcon,
-                    SizedBox(
+                    if(!PreferencesHelper.getIsVisitor)...[
+                      SizedBox(
                       height: 20.h,
                     ),
-                    mentorshipEdit,
+                    ],
+                    if(!PreferencesHelper.getIsVisitor)...[
+                      mentorshipEdit,
+                    ],
                     SizedBox(
                       height: 20.h,
                     ),

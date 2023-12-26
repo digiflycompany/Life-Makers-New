@@ -33,7 +33,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
   String? selectedCityName;
   String? selectedAreaName;
-  final _phoneFormKey = GlobalKey<FormState>();
   late SignUpCubit signUpCubit;
   final TextEditingController controller = TextEditingController();
   final TextEditingController textEditingController = TextEditingController();

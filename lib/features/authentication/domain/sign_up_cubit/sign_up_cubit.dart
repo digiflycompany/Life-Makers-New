@@ -124,9 +124,6 @@ class SignUpCubit extends Cubit<SignUpState> {
         data: {'phone': phone},
       );
       if (response.statusCode == 200) {
-        // UserModel userModel = UserModel.fromJson(response.data);
-        // await PreferencesHelper.saveToken(token: response.data['token']);
-        // await  PreferencesHelper.saveUserModel(userModel);
         emit(OtpSendSuccess());
       } else {
         emit(OtpSendFailure("Invalid credentials"));

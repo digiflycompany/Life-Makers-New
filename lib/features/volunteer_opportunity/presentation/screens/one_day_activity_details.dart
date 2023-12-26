@@ -13,6 +13,7 @@ import 'package:page_transition/page_transition.dart';
 
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/widgets/custom_snack_bar.dart';
+import '../../../../services/shared_preferences/preferences_helper.dart';
 
 
 class OneDayActivityDetails extends StatefulWidget {
@@ -128,42 +129,44 @@ class _OneDayActivityDetailsState extends State<OneDayActivityDetails> {
                         ),
                       ),
                       Spacer(),
-                      if( oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].userJoined==true)
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 20.h),
-                          child: state is leftOneDayActivityLoading
-                              ? Center(
-                            child: Transform.scale(
-                              scale: 0.5,
-                              child: CircularProgressIndicator(
-                                color: AppColors.orangeBorderColor,
+                      if(!PreferencesHelper.getIsVisitor)...[
+                        if( oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].userJoined==true)
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 20.h),
+                            child: state is leftOneDayActivityLoading
+                                ? Center(
+                              child: Transform.scale(
+                                scale: 0.5,
+                                child: CircularProgressIndicator(
+                                  color: AppColors.orangeBorderColor,
+                                ),
                               ),
-                            ),
-                          )
-                              : NewsButton2(
-                              onTap: () {
-                                oneDayActivityCubit.leftOneDayActivity('${oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].id}');
-                              },
-                              text: AppStrings.leave),
-                        ),
-                      if( oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].userJoined==false)
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 20.h),
-                          child: state is JoinOneDayActivityLoading
-                              ? Center(
-                            child: Transform.scale(
-                              scale: 0.5,
-                              child: CircularProgressIndicator(
-                                color: AppColors.orangeBorderColor,
+                            )
+                                : NewsButton2(
+                                onTap: () {
+                                  oneDayActivityCubit.leftOneDayActivity('${oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].id}');
+                                },
+                                text: AppStrings.leave),
+                          ),
+                        if( oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].userJoined==false)
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 20.h),
+                            child: state is JoinOneDayActivityLoading
+                                ? Center(
+                              child: Transform.scale(
+                                scale: 0.5,
+                                child: CircularProgressIndicator(
+                                  color: AppColors.orangeBorderColor,
+                                ),
                               ),
-                            ),
-                          )
-                              : NewsButton2(
-                              onTap: () {
-                                oneDayActivityCubit.JoinOneDayActivity('${oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].id}');
-                              },
-                              text: AppStrings.join),
-                        ),
+                            )
+                                : NewsButton2(
+                                onTap: () {
+                                  oneDayActivityCubit.JoinOneDayActivity('${oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].id}');
+                                },
+                                text: AppStrings.join),
+                          ),
+                      ],
                     ],
                   ),
                 ),
