@@ -92,6 +92,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         'city_center': city_center,
         'previous_experience': previous_experience,
       },
+    // ignore: body_might_complete_normally_catch_error
     ).catchError((e) {
       emit(SignUpFailure('خطأ في إنشاء الحساب'));
     });

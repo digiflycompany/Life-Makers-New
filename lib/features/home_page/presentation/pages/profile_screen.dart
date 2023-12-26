@@ -369,48 +369,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
-
-  // get detailsCard => Container(
-  //     width: 376.w,
-  //     height: 231.h,
-  //     decoration:  BoxDecoration(
-  //       borderRadius: BorderRadius.circular(20.r),
-  //       gradient: const LinearGradient(
-  //         colors: [
-  //           AppColors.gradientColor1,
-  //           AppColors.gradientColor2,
-  //         ],
-  //         begin: Alignment.topLeft,
-  //         end: Alignment.bottomRight,
-  //       ),
-  //     ),
-  //     child:  Column(
-  //       children: [
-  //         details,
-  //         SizedBox(height: 20.h,),
-  //         activitiesAndMore,
-  //         SizedBox(height: 17.h,),
-  //         cards,
-  //       ],
-  //     )
-  // );
-  // get details => Row(
-  //   textDirection: TextDirection.rtl,
-  //   children: [
-  //     SizedBox(width:11.w),
-  //     circleAvatar,
-  //     SizedBox(width: 10.w,),
-  //     nameAndProgress,
-  //     SizedBox(width:13.w),
-  //     crownIcon,
-  //     SizedBox(width:11.w),
-  //     dropDownIcon,
-  //   ],
-  // );
   void _changePage(int page) {
     _pageController.animateToPage(
       page,
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 1),
       curve: Curves.easeInOut,
     );
   }
@@ -517,7 +479,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ],
         ),
       );
-  get previousText => GestureDetector(
+  get previousText => InkWell(
         onTap: () {
           _changePage(0);
         },
@@ -532,7 +494,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               fontSize: 11.5),
         ),
       );
-  get currentText => GestureDetector(
+  get currentText => InkWell(
         onTap: () {
           _changePage(1);
         },
@@ -547,7 +509,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               fontSize: 11.5),
         ),
       );
-  get upcomingText => GestureDetector(
+  get upcomingText => InkWell(
         onTap: () {
           _changePage(2);
         },
