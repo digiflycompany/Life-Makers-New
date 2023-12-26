@@ -4,8 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:life_makers/core/utils/app-assets.dart';
 import 'package:life_makers/core/utils/extensions.dart';
+import 'package:life_makers/core/utils/size-utils.dart';
 import 'package:life_makers/features/campaign_details/cubit/all_campaigns_cubit.dart';
 import 'package:life_makers/features/edit_account/screens/edit_account_screen.dart';
+import 'package:life_makers/features/volunteer_opportunity/presentation/screens/user_joined_training_program.dart';
 import 'package:life_makers/services/cubit/global_cubit_state.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 import 'package:page_transition/page_transition.dart';
@@ -28,7 +30,9 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   late PageController _pageController;
+  late PageController _pageController2;
   int _currentPage = 0;
+  int _currentPage2 = 0;
 
   late AllCampaignsCubit allCampaignsCubit;
 
@@ -36,8 +40,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: _currentPage);
+    _pageController2 = PageController(initialPage: _currentPage2);
     allCampaignsCubit = context.read<AllCampaignsCubit>();
-
     allCampaignsCubit.getAllCampaigns();
   }
 
@@ -130,7 +134,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     PageTransition(
                                         type: PageTransitionType.fade,
                                         duration:
-                                            const Duration(milliseconds: 400),
+                                        const Duration(milliseconds: 400),
                                         child: EditAccountScreen()));
                               },
                               child: Text(
@@ -192,7 +196,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                    CrossAxisAlignment.center,
                                     children: [
                                       Container(
                                         width: 150,
@@ -200,16 +204,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         decoration: BoxDecoration(
                                             color: Colors.white,
                                             borderRadius:
-                                                BorderRadius.circular(10)),
+                                            BorderRadius.circular(10)),
                                         child: SvgPicture.network(
                                             '${PreferencesHelper.getUserModel?.user?.qrCode}'),
                                       ),
                                       const SizedBox(height: 8),
                                       Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        MainAxisAlignment.center,
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.center,
+                                        CrossAxisAlignment.center,
                                         children: [
                                           const Text(
                                             'امسح هنا',
@@ -324,45 +328,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     if (selectedActivityType == 0)
                       BlocBuilder<AllCampaignsCubit, CubitBaseState>(
                           builder: (context, state) {
-                        if (state == CubitBaseState.done) {
-                          return Directionality(
-                            textDirection: TextDirection.rtl,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 10),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  if (_currentPage == 0)
-                                    buildCampaignGridView(
-                                        context: context,
-                                        campaigns: allCampaignsCubit
-                                            .campaignsModel?.allPastCampaigns),
-                                  if (_currentPage == 1)
-                                    buildCampaignGridView(
-                                        context: context,
-                                        campaigns: allCampaignsCubit
-                                            .campaignsModel?.allCurrentCampaigns),
-                                  if (_currentPage == 2)
-                                    buildCampaignGridView(
-                                        context: context,
-                                        campaigns: allCampaignsCubit
-                                            .campaignsModel?.allNextCampaigns),
-                                ],
-                              ),
-                            ),
-                          );
-                        } else if (state == CubitBaseState.loading)
-                          return Center(child: CircularProgressIndicator());
-                        else
-                          return SizedBox.shrink();
-                      }),
+                            if (state == CubitBaseState.done) {
+                              return Directionality(
+                                textDirection: TextDirection.rtl,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      if (_currentPage == 0)
+                                        buildCampaignGridView(
+                                            context: context,
+                                            campaigns: allCampaignsCubit
+                                                .campaignsModel?.allPastCampaigns),
+                                      if (_currentPage == 1)
+                                        buildCampaignGridView(
+                                            context: context,
+                                            campaigns: allCampaignsCubit
+                                                .campaignsModel?.allCurrentCampaigns),
+                                      if (_currentPage == 2)
+                                        buildCampaignGridView(
+                                            context: context,
+                                            campaigns: allCampaignsCubit
+                                                .campaignsModel?.allNextCampaigns),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            } else if (state == CubitBaseState.loading)
+                              return Center(child: CircularProgressIndicator());
+                            else
+                              return SizedBox.shrink();
+                          }),
+                    if(selectedActivityType == 1) tabBar2,
                   ],
                 );
               }),
               SizedBox(
                 height: 11.h,
               ),
-              pages,
+              selectedActivityType==1?pages2:pages,
             ],
           ),
         ),
@@ -379,576 +384,750 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   get title => TitleText(text: AppStrings.seasonalCampaigns);
   get popUpIcon => GestureDetector(
-        onTap: () {
-          Navigator.pop(context);
-        },
-        child: SvgPicture.asset(
-          AppAssets.popUpIcon,
-        ),
-      );
+    onTap: () {
+      Navigator.pop(context);
+    },
+    child: SvgPicture.asset(
+      AppAssets.popUpIcon,
+    ),
+  );
   get header => Row(
-        children: [
-          SizedBox(
-            width: 156.w,
-          ),
-          title,
-          SizedBox(
-            width: 115.w,
-          ),
-          popUpIcon,
-        ],
-      );
+    children: [
+      SizedBox(
+        width: 156.w,
+      ),
+      title,
+      SizedBox(
+        width: 115.w,
+      ),
+      popUpIcon,
+    ],
+  );
   get divider => Padding(
-        padding: EdgeInsets.only(top: 33.h),
-        child: Divider(
-          thickness: 1.w,
-        ),
-      );
+    padding: EdgeInsets.only(top: 33.h),
+    child: Divider(
+      thickness: 1.w,
+    ),
+  );
   get previousContainer => Container(
-        width: 70.w,
-        height: 43.h,
-        decoration: BoxDecoration(
-          border: Border(
-            top: BorderSide(
-                color: _currentPage == 0 ? Colors.grey.shade300 : Colors.white,
-                width: 1.w),
-            left: BorderSide(
-                color: _currentPage == 0 ? Colors.grey.shade300 : Colors.white,
-                width: 1.w),
-            right: BorderSide(
-                color: _currentPage == 0 ? Colors.grey.shade300 : Colors.white,
-                width: 1.w),
-            bottom: BorderSide(
-                color: _currentPage == 0 ? Colors.white : Colors.transparent,
-                width: 2.5.w),
-          ),
-        ),
-      );
+    width: 70.w,
+    height: 43.h,
+    decoration: BoxDecoration(
+      border: Border(
+        top: BorderSide(
+            color: _currentPage == 0 ? Colors.grey.shade300 : Colors.white,
+            width: 1.w),
+        left: BorderSide(
+            color: _currentPage == 0 ? Colors.grey.shade300 : Colors.white,
+            width: 1.w),
+        right: BorderSide(
+            color: _currentPage == 0 ? Colors.grey.shade300 : Colors.white,
+            width: 1.w),
+        bottom: BorderSide(
+            color: _currentPage == 0 ? Colors.white : Colors.transparent,
+            width: 2.5.w),
+      ),
+    ),
+  );
   get currentContainer => Container(
-        width: 70.w,
-        height: 43.h,
-        decoration: BoxDecoration(
-          border: Border(
-            top: BorderSide(
-                color: _currentPage == 1 ? Colors.grey.shade300 : Colors.white,
-                width: 1.w),
-            left: BorderSide(
-                color: _currentPage == 1 ? Colors.grey.shade300 : Colors.white,
-                width: 1.w),
-            right: BorderSide(
-                color: _currentPage == 1 ? Colors.grey.shade300 : Colors.white,
-                width: 1.w),
-            bottom: BorderSide(
-                color: _currentPage == 1 ? Colors.white : Colors.transparent,
-                width: 2.5.w),
-          ),
-        ),
-      );
+    width: 70.w,
+    height: 43.h,
+    decoration: BoxDecoration(
+      border: Border(
+        top: BorderSide(
+            color: _currentPage == 1 ? Colors.grey.shade300 : Colors.white,
+            width: 1.w),
+        left: BorderSide(
+            color: _currentPage == 1 ? Colors.grey.shade300 : Colors.white,
+            width: 1.w),
+        right: BorderSide(
+            color: _currentPage == 1 ? Colors.grey.shade300 : Colors.white,
+            width: 1.w),
+        bottom: BorderSide(
+            color: _currentPage == 1 ? Colors.white : Colors.transparent,
+            width: 2.5.w),
+      ),
+    ),
+  );
   get upcomingContainer => Container(
-        width: 70.w,
-        height: 43.h,
-        decoration: BoxDecoration(
-          border: Border(
-            top: BorderSide(
-                color: _currentPage == 2 ? Colors.grey.shade300 : Colors.white,
-                width: 1.w),
-            left: BorderSide(
-                color: _currentPage == 2 ? Colors.grey.shade300 : Colors.white,
-                width: 1.w),
-            right: BorderSide(
-                color: _currentPage == 2 ? Colors.grey.shade300 : Colors.white,
-                width: 1.w),
-            bottom: BorderSide(
-                color: _currentPage == 2 ? Colors.white : Colors.transparent,
-                width: 2.5.w),
-          ),
-        ),
-      );
+    width: 70.w,
+    height: 43.h,
+    decoration: BoxDecoration(
+      border: Border(
+        top: BorderSide(
+            color: _currentPage == 2 ? Colors.grey.shade300 : Colors.white,
+            width: 1.w),
+        left: BorderSide(
+            color: _currentPage == 2 ? Colors.grey.shade300 : Colors.white,
+            width: 1.w),
+        right: BorderSide(
+            color: _currentPage == 2 ? Colors.grey.shade300 : Colors.white,
+            width: 1.w),
+        bottom: BorderSide(
+            color: _currentPage == 2 ? Colors.white : Colors.transparent,
+            width: 2.5.w),
+      ),
+    ),
+  );
   get tabs => Padding(
-        padding: EdgeInsets.only(
-          left: 13.w,
-          right: 12.w,
-        ),
-        child: Row(
-          textDirection: TextDirection.rtl,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            previousContainer,
-            currentContainer,
-            upcomingContainer,
-          ],
-        ),
-      );
+    padding: EdgeInsets.only(
+      left: 13.w,
+      right: 12.w,
+    ),
+    child: Row(
+      textDirection: TextDirection.rtl,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        previousContainer,
+        currentContainer,
+        upcomingContainer,
+      ],
+    ),
+  );
   get previousText => InkWell(
-        onTap: () {
-          _changePage(0);
-        },
-        child: Text(
-          AppStrings.past,
-          style: TextStyle(
-              color: _currentPage == 0
-                  ? AppColors.orangeBorderColor
-                  : AppColors.greyTabColor,
-              fontFamily: FontFamilies.alexandria,
-              fontWeight: _currentPage == 0 ? FontWeight.w600 : FontWeight.w400,
-              fontSize: 11.5),
-        ),
-      );
+    onTap: () {
+      _changePage(0);
+    },
+    child: Text(
+      AppStrings.past,
+      style: TextStyle(
+          color: _currentPage == 0
+              ? AppColors.orangeBorderColor
+              : AppColors.greyTabColor,
+          fontFamily: FontFamilies.alexandria,
+          fontWeight: _currentPage == 0 ? FontWeight.w600 : FontWeight.w400,
+          fontSize: 11.5),
+    ),
+  );
   get currentText => InkWell(
-        onTap: () {
-          _changePage(1);
-        },
-        child: Text(
-          AppStrings.current,
-          style: TextStyle(
-              color: _currentPage == 1
-                  ? AppColors.greenTextColor
-                  : AppColors.greyTabColor,
-              fontFamily: FontFamilies.alexandria,
-              fontWeight: _currentPage == 1 ? FontWeight.w600 : FontWeight.w400,
-              fontSize: 11.5),
-        ),
-      );
+    onTap: () {
+      _changePage(1);
+    },
+    child: Text(
+      AppStrings.current,
+      style: TextStyle(
+          color: _currentPage == 1
+              ? AppColors.greenTextColor
+              : AppColors.greyTabColor,
+          fontFamily: FontFamilies.alexandria,
+          fontWeight: _currentPage == 1 ? FontWeight.w600 : FontWeight.w400,
+          fontSize: 11.5),
+    ),
+  );
   get upcomingText => InkWell(
-        onTap: () {
-          _changePage(2);
-        },
-        child: Text(
-          AppStrings.upcoming,
-          style: TextStyle(
-              color: _currentPage == 2
-                  ? AppColors.blueTextColor
-                  : AppColors.greyTabColor,
-              fontFamily: FontFamilies.alexandria,
-              fontWeight: _currentPage == 2 ? FontWeight.w600 : FontWeight.w400,
-              fontSize: 11.5),
-        ),
-      );
+    onTap: () {
+      _changePage(2);
+    },
+    child: Text(
+      AppStrings.upcoming,
+      style: TextStyle(
+          color: _currentPage == 2
+              ? AppColors.blueTextColor
+              : AppColors.greyTabColor,
+          fontFamily: FontFamilies.alexandria,
+          fontWeight: _currentPage == 2 ? FontWeight.w600 : FontWeight.w400,
+          fontSize: 11.5),
+    ),
+  );
   get texts => Padding(
-        padding: EdgeInsets.only(left: 25.w, right: 25.w, top: 13.h),
-        child: Row(
-          textDirection: TextDirection.rtl,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            previousText,
-            currentText,
-            upcomingText,
-          ],
-        ),
-      );
+    padding: EdgeInsets.only(left: 25.w, right: 25.w, top: 13.h),
+    child: Row(
+      textDirection: TextDirection.rtl,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        previousText,
+        currentText,
+        upcomingText,
+      ],
+    ),
+  );
   get tabBar => Stack(
-        children: [
-          divider,
-          tabs,
-          texts,
-        ],
-      );
+    children: [
+      divider,
+      tabs,
+      texts,
+    ],
+  );
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  get tabBar2 => Stack(
+    children: [
+      divider2,
+      tabs2,
+      texts2,
+    ],
+  );
+  get texts2 => Padding(
+    padding: EdgeInsets.only(left: 25.w, right: 25.w, top: 13.h),
+    child: Row(
+      textDirection: TextDirection.rtl,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        previousText2,
+        currentText2,
+        upcomingText2,
+      ],
+    ),
+  );
+  get previousText2 => InkWell(
+    onTap: () {
+      _changePage2(0);
+    },
+    child: Text(
+      'برامجك',
+      style: TextStyle(
+          color: _currentPage2 == 0
+              ? AppColors.blueTextColor
+              : AppColors.greyTabColor,
+          fontFamily: FontFamilies.alexandria,
+          fontWeight: _currentPage2 == 0 ? FontWeight.w600 : FontWeight.w400,
+          fontSize: 11.5),
+    ),
+  );
+  get currentText2 => InkWell(
+    onTap: () {
+      _changePage2(1);
+    },
+    child: Text(
+      'أنشطتك',
+      style: TextStyle(
+          color: _currentPage2 == 1
+              ? AppColors.blueTextColor
+              : AppColors.greyTabColor,
+          fontFamily: FontFamilies.alexandria,
+          fontWeight: _currentPage2 == 1 ? FontWeight.w600 : FontWeight.w400,
+          fontSize: 11.5),
+    ),
+  );
+  get upcomingText2 => InkWell(
+    onTap: () {
+      _changePage2(2);
+    },
+    child: Text(
+      'مهامك',
+      style: TextStyle(
+          color: _currentPage2 == 2
+              ? AppColors.blueTextColor
+              : AppColors.greyTabColor,
+          fontFamily: FontFamilies.alexandria,
+          fontWeight: _currentPage2 == 2 ? FontWeight.w600 : FontWeight.w400,
+          fontSize: 11.5),
+    ),
+  );
+  get divider2 => Padding(
+    padding: EdgeInsets.only(top: 33.h),
+    child: Divider(
+      thickness: 1.w,
+    ),
+  );
+  get tabs2 => Padding(
+    padding: EdgeInsets.only(
+      left: 13.w,
+      right: 12.w,
+    ),
+    child: Row(
+      textDirection: TextDirection.rtl,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        previousContainer2,
+        currentContainer2,
+        upcomingContainer2,
+      ],
+    ),
+  );
+  get previousContainer2 => Container(
+    width: 70.w,
+    height: 43.h,
+    decoration: BoxDecoration(
+      border: Border(
+        top: BorderSide(
+            color: _currentPage2 == 0 ? Colors.grey.shade300 : Colors.white,
+            width: 1.w),
+        left: BorderSide(
+            color: _currentPage2 == 0 ? Colors.grey.shade300 : Colors.white,
+            width: 1.w),
+        right: BorderSide(
+            color: _currentPage2 == 0 ? Colors.grey.shade300 : Colors.white,
+            width: 1.w),
+        bottom: BorderSide(
+            color: _currentPage2 == 0 ? Colors.white : Colors.transparent,
+            width: 2.5.w),
+      ),
+    ),
+  );
+  get currentContainer2 => Container(
+    width: 70.w,
+    height: 43.h,
+    decoration: BoxDecoration(
+      border: Border(
+        top: BorderSide(
+            color: _currentPage2 == 1 ? Colors.grey.shade300 : Colors.white,
+            width: 1.w),
+        left: BorderSide(
+            color: _currentPage2 == 1 ? Colors.grey.shade300 : Colors.white,
+            width: 1.w),
+        right: BorderSide(
+            color: _currentPage2 == 1 ? Colors.grey.shade300 : Colors.white,
+            width: 1.w),
+        bottom: BorderSide(
+            color: _currentPage2 == 1 ? Colors.white : Colors.transparent,
+            width: 2.5.w),
+      ),
+    ),
+  );
+  get upcomingContainer2 => Container(
+    width: 70.w,
+    height: 43.h,
+    decoration: BoxDecoration(
+      border: Border(
+        top: BorderSide(
+            color: _currentPage2 == 2 ? Colors.grey.shade300 : Colors.white,
+            width: 1.w),
+        left: BorderSide(
+            color: _currentPage2 == 2 ? Colors.grey.shade300 : Colors.white,
+            width: 1.w),
+        right: BorderSide(
+            color: _currentPage2 == 2 ? Colors.grey.shade300 : Colors.white,
+            width: 1.w),
+        bottom: BorderSide(
+            color: _currentPage2 == 2 ? Colors.white : Colors.transparent,
+            width: 2.5.w),
+      ),
+    ),
+  );
+  void _changePage2(int page) {
+    _pageController2.animateToPage(
+      page,
+      duration: const Duration(milliseconds: 1),
+      curve: Curves.easeInOut,
+    );
+  }
+  get pages2 => SizedBox(
+    height: 356,
+    child: PageView(
+      controller: _pageController2,
+      onPageChanged: (int page) {
+        setState(() {
+          _currentPage2 = page;
+        });
+      },
+      children: [
+        UserJoinedPrograms(),
+        Text('ssssssssssssssssssssssssssssssssssss'),
+        Text('sssssssssssssssssssssssssssssssssss'),
+      ],
+    ),
+  );
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   get pages => Expanded(
-        child: PageView(
-          //physics:const ClampingScrollPhysics(),
-          //reverse: true,
-          controller: _pageController,
-          onPageChanged: (int page) {
-            setState(() {
-              _currentPage = page;
-            });
-          },
-          children: [
-            Text(''),
-            Text(''),
-            Text(''),
-            // PreviousSeasonalCampaignsScreen(),
-            // CurrentSeasonalCampaignsScreen(),
-            // UpcomingSeasonalCampaigns(),
-          ],
-        ),
-      );
+    child: PageView(
+      //physics:const ClampingScrollPhysics(),
+      //reverse: true,
+      controller: _pageController,
+      onPageChanged: (int page) {
+        setState(() {
+          _currentPage = page;
+        });
+      },
+      children: [
+        Text(''),
+        Text(''),
+        Text(''),
+        // PreviousSeasonalCampaignsScreen(),
+        // CurrentSeasonalCampaignsScreen(),
+        // UpcomingSeasonalCampaigns(),
+      ],
+    ),
+  );
   get img => Center(child: Image.asset(AppAssets.lifeMakerBanner));
   get firstText => Align(
-        alignment: AlignmentDirectional.center,
-        child: Padding(
-          padding: EdgeInsets.only(top: 50.h),
-          child: const Text(
-            AppStrings.lifeMakers,
-            textDirection: TextDirection.rtl,
-            style: TextStyle(
-                color: Colors.white,
-                fontFamily: FontFamilies.alexandria,
-                fontWeight: FontWeight.w700,
-                fontSize: 13),
-          ),
-        ),
-      );
-  get secondText => Align(
-        alignment: AlignmentDirectional.center,
-        child: Padding(
-          padding: EdgeInsets.only(top: 75.h),
-          child: const Text(
-            AppStrings.becomeVolunteer,
-            textDirection: TextDirection.rtl,
-            style: TextStyle(
-                color: Colors.white,
-                fontFamily: FontFamilies.alexandria,
-                fontWeight: FontWeight.w400,
-                fontSize: 10),
-          ),
-        ),
-      );
-  get banner => Stack(
-        children: [
-          img,
-          firstText,
-          secondText,
-        ],
-      );
-  get dropDownIcon => GestureDetector(
-        onTap: () {},
-        child: Padding(
-          padding: EdgeInsets.only(top: 70.h),
-          child: SvgPicture.asset(
-            AppAssets.dropDownIcon,
-            width: 7.w,
-            height: 7.h,
-          ),
-        ),
-      );
-  get crownIcon => GestureDetector(
-        onTap: () {},
-        child: Padding(
-          padding: EdgeInsets.only(top: 64.h),
-          child: Image.asset(AppAssets.crownPng),
-        ),
-      );
-  get name => Padding(
-        padding: EdgeInsets.only(left: 127.w, top: 20.h),
-        child: const Text(
-          AppStrings.lailaAhmed,
-          style: TextStyle(
-              color: Colors.white,
-              fontFamily: FontFamilies.alexandria,
-              fontWeight: FontWeight.w500,
-              fontSize: 13),
-        ),
-      );
-  get progressLine => Align(
-        alignment: AlignmentDirectional.centerStart,
-        child: Container(
-          width: 200.w,
-          height: 10.h,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius:
-                BorderRadius.circular(15.r), // Adjust the radius as needed
-          ),
-          child: Padding(
-            padding: EdgeInsets.only(
-                right: 2.7.w, top: 2.7.h, bottom: 2.7.w, left: 113.w),
-            child: Container(
-              width: 60.w,
-              height: 8.h,
-              decoration: BoxDecoration(
-                color: Colors.orange,
-                borderRadius:
-                    BorderRadius.circular(15.r), // Adjust the radius as needed
-              ),
-            ),
-          ),
-        ),
-      );
-  get nameAndProgress => Column(
-        children: [
-          SizedBox(
-            height: 10.h,
-          ),
-          name,
-          SizedBox(
-            height: 20.h,
-          ),
-          progressLine,
-        ],
-      );
-  get circleAvatar => Align(
-        alignment: AlignmentDirectional.topEnd,
-        child: Padding(
-          padding: EdgeInsets.only(top: 19.h),
-          child: CircleAvatar(
-              radius: 40.r, backgroundColor: Colors.white, child: Text('M')),
-        ),
-      );
-  get details => Row(
+    alignment: AlignmentDirectional.center,
+    child: Padding(
+      padding: EdgeInsets.only(top: 50.h),
+      child: const Text(
+        AppStrings.lifeMakers,
         textDirection: TextDirection.rtl,
-        children: [
-          SizedBox(width: 11.w),
-          circleAvatar,
-          SizedBox(
-            width: 10.w,
+        style: TextStyle(
+            color: Colors.white,
+            fontFamily: FontFamilies.alexandria,
+            fontWeight: FontWeight.w700,
+            fontSize: 13),
+      ),
+    ),
+  );
+  get secondText => Align(
+    alignment: AlignmentDirectional.center,
+    child: Padding(
+      padding: EdgeInsets.only(top: 75.h),
+      child: const Text(
+        AppStrings.becomeVolunteer,
+        textDirection: TextDirection.rtl,
+        style: TextStyle(
+            color: Colors.white,
+            fontFamily: FontFamilies.alexandria,
+            fontWeight: FontWeight.w400,
+            fontSize: 10),
+      ),
+    ),
+  );
+  get banner => Stack(
+    children: [
+      img,
+      firstText,
+      secondText,
+    ],
+  );
+  get dropDownIcon => GestureDetector(
+    onTap: () {},
+    child: Padding(
+      padding: EdgeInsets.only(top: 70.h),
+      child: SvgPicture.asset(
+        AppAssets.dropDownIcon,
+        width: 7.w,
+        height: 7.h,
+      ),
+    ),
+  );
+  get crownIcon => GestureDetector(
+    onTap: () {},
+    child: Padding(
+      padding: EdgeInsets.only(top: 64.h),
+      child: Image.asset(AppAssets.crownPng),
+    ),
+  );
+  get name => Padding(
+    padding: EdgeInsets.only(left: 127.w, top: 20.h),
+    child: const Text(
+      AppStrings.lailaAhmed,
+      style: TextStyle(
+          color: Colors.white,
+          fontFamily: FontFamilies.alexandria,
+          fontWeight: FontWeight.w500,
+          fontSize: 13),
+    ),
+  );
+  get progressLine => Align(
+    alignment: AlignmentDirectional.centerStart,
+    child: Container(
+      width: 200.w,
+      height: 10.h,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius:
+        BorderRadius.circular(15.r), // Adjust the radius as needed
+      ),
+      child: Padding(
+        padding: EdgeInsets.only(
+            right: 2.7.w, top: 2.7.h, bottom: 2.7.w, left: 113.w),
+        child: Container(
+          width: 60.w,
+          height: 8.h,
+          decoration: BoxDecoration(
+            color: Colors.orange,
+            borderRadius:
+            BorderRadius.circular(15.r), // Adjust the radius as needed
           ),
-          nameAndProgress,
-          SizedBox(width: 13.w),
-          crownIcon,
-          SizedBox(width: 11.w),
-          dropDownIcon,
-        ],
-      );
+        ),
+      ),
+    ),
+  );
+  get nameAndProgress => Column(
+    children: [
+      SizedBox(
+        height: 10.h,
+      ),
+      name,
+      SizedBox(
+        height: 20.h,
+      ),
+      progressLine,
+    ],
+  );
+  get circleAvatar => Align(
+    alignment: AlignmentDirectional.topEnd,
+    child: Padding(
+      padding: EdgeInsets.only(top: 19.h),
+      child: CircleAvatar(
+          radius: 40.r, backgroundColor: Colors.white, child: Text('M')),
+    ),
+  );
+  get details => Row(
+    textDirection: TextDirection.rtl,
+    children: [
+      SizedBox(width: 11.w),
+      circleAvatar,
+      SizedBox(
+        width: 10.w,
+      ),
+      nameAndProgress,
+      SizedBox(width: 13.w),
+      crownIcon,
+      SizedBox(width: 11.w),
+      dropDownIcon,
+    ],
+  );
   get arrowIcon => Padding(
-        padding: EdgeInsets.only(top: 3.h),
-        child: SvgPicture.asset(
-          AppAssets.arrowIcon,
-          width: 10.w,
-          height: 10.h,
-        ),
-      );
+    padding: EdgeInsets.only(top: 3.h),
+    child: SvgPicture.asset(
+      AppAssets.arrowIcon,
+      width: 10.w,
+      height: 10.h,
+    ),
+  );
   get moreText => const Text(
-        AppStrings.more,
-        style: TextStyle(
-            color: Colors.white,
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
-            fontFamily: FontFamilies.alexandria),
-      );
+    AppStrings.more,
+    style: TextStyle(
+        color: Colors.white,
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
+        fontFamily: FontFamilies.alexandria),
+  );
   get activitiesText => const Text(
-        AppStrings.activities,
+    AppStrings.activities,
+    style: TextStyle(
+        color: Colors.white,
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
+        fontFamily: FontFamilies.alexandria),
+  );
+  get activitiesAndMore => Row(
+    children: [
+      SizedBox(
+        width: 20.w,
+      ),
+      arrowIcon,
+      SizedBox(
+        width: 5.w,
+      ),
+      moreText,
+      SizedBox(
+        width: 240.w,
+      ),
+      activitiesText,
+    ],
+  );
+  get upcomingText3 => Align(
+    alignment: AlignmentDirectional.topEnd,
+    child: Padding(
+      padding: EdgeInsets.only(left: 8.w, top: 4.h),
+      child: const Text(
+        AppStrings.upcoming,
         style: TextStyle(
-            color: Colors.white,
+            fontFamily: FontFamilies.alexandria,
+            fontWeight: FontWeight.w700,
+            color: AppColors.blueTextColor,
+            fontSize: 7),
+      ),
+    ),
+  );
+  get educationText => Align(
+    alignment: AlignmentDirectional.centerStart,
+    child: Padding(
+      padding: EdgeInsets.only(right: 5.w),
+      child: const Text(
+        AppStrings.education,
+        style: TextStyle(
+            color: AppColors.blueTextColor,
             fontSize: 12,
             fontWeight: FontWeight.w500,
             fontFamily: FontFamilies.alexandria),
-      );
-  get activitiesAndMore => Row(
-        children: [
-          SizedBox(
-            width: 20.w,
-          ),
-          arrowIcon,
-          SizedBox(
-            width: 5.w,
-          ),
-          moreText,
-          SizedBox(
-            width: 240.w,
-          ),
-          activitiesText,
-        ],
-      );
-  get upcomingText3 => Align(
-        alignment: AlignmentDirectional.topEnd,
-        child: Padding(
-          padding: EdgeInsets.only(left: 8.w, top: 4.h),
-          child: const Text(
-            AppStrings.upcoming,
-            style: TextStyle(
-                fontFamily: FontFamilies.alexandria,
-                fontWeight: FontWeight.w700,
-                color: AppColors.blueTextColor,
-                fontSize: 7),
-          ),
-        ),
-      );
-  get educationText => Align(
-        alignment: AlignmentDirectional.centerStart,
-        child: Padding(
-          padding: EdgeInsets.only(right: 5.w),
-          child: const Text(
-            AppStrings.education,
-            style: TextStyle(
-                color: AppColors.blueTextColor,
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-                fontFamily: FontFamilies.alexandria),
-          ),
-        ),
-      );
+      ),
+    ),
+  );
   get upcomingCard => Container(
-        width: 117.w,
-        height: 49.h,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(23.r),
-          color: Colors.white70,
-          border: Border.all(
-            color: AppColors.blueTextColor,
-            width: 1.5, // Adjust the border width as needed
-          ),
-        ),
-        child: Column(
-          children: [
-            upcomingText3,
-            educationText,
-          ],
-        ),
-      );
+    width: 117.w,
+    height: 49.h,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(23.r),
+      color: Colors.white70,
+      border: Border.all(
+        color: AppColors.blueTextColor,
+        width: 1.5, // Adjust the border width as needed
+      ),
+    ),
+    child: Column(
+      children: [
+        upcomingText3,
+        educationText,
+      ],
+    ),
+  );
   get currentText4 => Align(
-        alignment: AlignmentDirectional.topStart,
-        child: Padding(
-          padding: EdgeInsets.only(left: 8.w, top: 4.h),
-          child: const Text(
-            AppStrings.current,
-            style: TextStyle(
-                fontFamily: FontFamilies.alexandria,
-                fontWeight: FontWeight.w700,
-                color: AppColors.greenTextColor,
-                fontSize: 7),
-          ),
-        ),
-      );
+    alignment: AlignmentDirectional.topStart,
+    child: Padding(
+      padding: EdgeInsets.only(left: 8.w, top: 4.h),
+      child: const Text(
+        AppStrings.current,
+        style: TextStyle(
+            fontFamily: FontFamilies.alexandria,
+            fontWeight: FontWeight.w700,
+            color: AppColors.greenTextColor,
+            fontSize: 7),
+      ),
+    ),
+  );
   get palestineText => Align(
-        alignment: AlignmentDirectional.centerStart,
-        child: Padding(
-          padding: EdgeInsets.only(right: 7.w, bottom: 2.h),
-          child: const Text(
-            AppStrings.palestine,
-            textDirection: TextDirection.rtl,
-            style: TextStyle(
-                color: AppColors.greenTextColor,
-                fontSize: 11,
-                fontWeight: FontWeight.w500,
-                fontFamily: FontFamilies.alexandria),
-          ),
-        ),
-      );
+    alignment: AlignmentDirectional.centerStart,
+    child: Padding(
+      padding: EdgeInsets.only(right: 7.w, bottom: 2.h),
+      child: const Text(
+        AppStrings.palestine,
+        textDirection: TextDirection.rtl,
+        style: TextStyle(
+            color: AppColors.greenTextColor,
+            fontSize: 11,
+            fontWeight: FontWeight.w500,
+            fontFamily: FontFamilies.alexandria),
+      ),
+    ),
+  );
   get currentPalestineCard => Container(
-        width: 117.w,
-        height: 49.h,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(23.r),
-          color: Colors.white70,
-          border: Border.all(
-            color: AppColors.greenBorderColor,
-            width: 1.5, // Adjust the border width as needed
-          ),
-        ),
-        child: Stack(
-          children: [
-            currentText3,
-            palestineText,
-          ],
-        ),
-      );
+    width: 117.w,
+    height: 49.h,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(23.r),
+      color: Colors.white70,
+      border: Border.all(
+        color: AppColors.greenBorderColor,
+        width: 1.5, // Adjust the border width as needed
+      ),
+    ),
+    child: Stack(
+      children: [
+        currentText3,
+        palestineText,
+      ],
+    ),
+  );
   get currentText3 => Align(
-        alignment: AlignmentDirectional.topEnd,
-        child: Padding(
-          padding: EdgeInsets.only(left: 8.w, top: 4.h),
-          child: const Text(
-            AppStrings.current,
-            style: TextStyle(
-                fontFamily: FontFamilies.alexandria,
-                fontWeight: FontWeight.w700,
-                color: AppColors.greenTextColor,
-                fontSize: 7),
-          ),
-        ),
-      );
+    alignment: AlignmentDirectional.topEnd,
+    child: Padding(
+      padding: EdgeInsets.only(left: 8.w, top: 4.h),
+      child: const Text(
+        AppStrings.current,
+        style: TextStyle(
+            fontFamily: FontFamilies.alexandria,
+            fontWeight: FontWeight.w700,
+            color: AppColors.greenTextColor,
+            fontSize: 7),
+      ),
+    ),
+  );
   get previousTex3 => Align(
-        alignment: AlignmentDirectional.topStart,
-        child: Padding(
-          padding: EdgeInsets.only(left: 8.w, top: 4.h),
-          child: const Text(
-            AppStrings.past,
-            style: TextStyle(
-                fontFamily: FontFamilies.alexandria,
-                fontWeight: FontWeight.w700,
-                color: AppColors.orangeBorderColor,
-                fontSize: 7),
-          ),
-        ),
-      );
-  get orphanText => Align(
-        alignment: AlignmentDirectional.centerStart,
-        child: Padding(
-          padding: EdgeInsets.only(right: 5.w),
-          child: const Text(
-            AppStrings.orphan,
-            style: TextStyle(
-                color: AppColors.greenTextColor,
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-                fontFamily: FontFamilies.alexandria),
-          ),
-        ),
-      );
-  get previousOrphanText => Align(
-        alignment: AlignmentDirectional.centerStart,
-        child: Padding(
-          padding: EdgeInsets.only(right: 5.w),
-          child: const Text(
-            AppStrings.orphan,
-            style: TextStyle(
-                color: AppColors.orangeBorderColor,
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-                fontFamily: FontFamilies.alexandria),
-          ),
-        ),
-      );
-  get currentOrphanCard => Container(
-        width: 117.w,
-        height: 49.h,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(23.r),
-          color: Colors.white70,
-          border: Border.all(
-            color: AppColors.greenBorderColor,
-            width: 1.5, // Adjust the border width as needed
-          ),
-        ),
-        child: Column(
-          children: [
-            currentText3,
-            orphanText,
-          ],
-        ),
-      );
-  get previousOrphanCard => Container(
-        width: 117.w,
-        height: 49.h,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(23.r),
-          color: Colors.white70,
-          border: Border.all(
+    alignment: AlignmentDirectional.topStart,
+    child: Padding(
+      padding: EdgeInsets.only(left: 8.w, top: 4.h),
+      child: const Text(
+        AppStrings.past,
+        style: TextStyle(
+            fontFamily: FontFamilies.alexandria,
+            fontWeight: FontWeight.w700,
             color: AppColors.orangeBorderColor,
-            width: 1.5, // Adjust the border width as needed
-          ),
-        ),
-        child: Column(
-          children: [
-            previousText2,
-            previousOrphanText,
-          ],
-        ),
-      );
+            fontSize: 7),
+      ),
+    ),
+  );
+  get orphanText => Align(
+    alignment: AlignmentDirectional.centerStart,
+    child: Padding(
+      padding: EdgeInsets.only(right: 5.w),
+      child: const Text(
+        AppStrings.orphan,
+        style: TextStyle(
+            color: AppColors.greenTextColor,
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
+            fontFamily: FontFamilies.alexandria),
+      ),
+    ),
+  );
+  get previousOrphanText => Align(
+    alignment: AlignmentDirectional.centerStart,
+    child: Padding(
+      padding: EdgeInsets.only(right: 5.w),
+      child: const Text(
+        AppStrings.orphan,
+        style: TextStyle(
+            color: AppColors.orangeBorderColor,
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
+            fontFamily: FontFamilies.alexandria),
+      ),
+    ),
+  );
+  get currentOrphanCard => Container(
+    width: 117.w,
+    height: 49.h,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(23.r),
+      color: Colors.white70,
+      border: Border.all(
+        color: AppColors.greenBorderColor,
+        width: 1.5, // Adjust the border width as needed
+      ),
+    ),
+    child: Column(
+      children: [
+        currentText3,
+        orphanText,
+      ],
+    ),
+  );
+  get previousOrphanCard => Container(
+    width: 117.w,
+    height: 49.h,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(23.r),
+      color: Colors.white70,
+      border: Border.all(
+        color: AppColors.orangeBorderColor,
+        width: 1.5, // Adjust the border width as needed
+      ),
+    ),
+    child: Column(
+      children: [
+        previousText2,
+        previousOrphanText,
+      ],
+    ),
+  );
   get cards => Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10.w),
-        child: SizedBox(
-          height: 49.h,
-          child: ListView(
-            physics: const BouncingScrollPhysics(),
-            scrollDirection: Axis.horizontal,
-            //reverse: true,
-            children: [
-              currentOrphanCard,
-              SizedBox(
-                width: 6.w,
-              ),
-              currentPalestineCard,
-              SizedBox(
-                width: 6.w,
-              ),
-              upcomingCard,
-              SizedBox(
-                width: 6.w,
-              ),
-              upcomingCard,
-              SizedBox(
-                width: 6.w,
-              ),
-              previousOrphanCard,
-              SizedBox(
-                width: 6.w,
-              ),
-              previousOrphanCard,
-            ],
+    padding: EdgeInsets.symmetric(horizontal: 10.w),
+    child: SizedBox(
+      height: 49.h,
+      child: ListView(
+        physics: const BouncingScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        //reverse: true,
+        children: [
+          currentOrphanCard,
+          SizedBox(
+            width: 6.w,
           ),
-        ),
-      );
+          currentPalestineCard,
+          SizedBox(
+            width: 6.w,
+          ),
+          upcomingCard,
+          SizedBox(
+            width: 6.w,
+          ),
+          upcomingCard,
+          SizedBox(
+            width: 6.w,
+          ),
+          previousOrphanCard,
+          SizedBox(
+            width: 6.w,
+          ),
+          previousOrphanCard,
+        ],
+      ),
+    ),
+  );
   get detailsCard => Container(
       width: 376.w,
       height: 231.h,
@@ -977,180 +1156,180 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ],
       ));
   get newsText => Padding(
-        padding: EdgeInsets.only(top: 13.h, right: 4.w),
-        child: Text(
-          AppStrings.news,
-          maxLines: 2,
-          textDirection: TextDirection.rtl,
-          overflow: TextOverflow.ellipsis,
-          style: TextStyle(
-            height: 2.h,
-            color: Colors.white,
-            fontFamily: FontFamilies.alexandria,
-            fontWeight: FontWeight.w400,
-            fontSize: 10.4,
-          ),
-        ),
-      );
+    padding: EdgeInsets.only(top: 13.h, right: 4.w),
+    child: Text(
+      AppStrings.news,
+      maxLines: 2,
+      textDirection: TextDirection.rtl,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        height: 2.h,
+        color: Colors.white,
+        fontFamily: FontFamilies.alexandria,
+        fontWeight: FontWeight.w400,
+        fontSize: 10.4,
+      ),
+    ),
+  );
   get infoIcon => Padding(
-        padding: EdgeInsets.only(right: 9.w, top: 23.h),
-        child: SvgPicture.asset(
-          AppAssets.urgentNewsIcon,
-          width: 22.w,
-          height: 22.h,
-        ),
-      );
+    padding: EdgeInsets.only(right: 9.w, top: 23.h),
+    child: SvgPicture.asset(
+      AppAssets.urgentNewsIcon,
+      width: 22.w,
+      height: 22.h,
+    ),
+  );
   get newsCard => Padding(
-        padding: EdgeInsets.symmetric(horizontal: 14.w),
-        child: SizedBox(
-          height: 71.h,
-          child: PageView.builder(
-            reverse: true,
-            controller: _pageController,
-            itemCount: 3, // Adjust the number of items based on your ListView
-            onPageChanged: (int page) {
-              setState(() {
-                _currentPage = page;
-              });
-            },
-            itemBuilder: (BuildContext context, int index) {
-              return newsSample;
-            },
-          ),
-        ),
-      );
-  get textNews => Text(
-        AppStrings.news2,
-        textDirection: TextDirection.rtl,
-        style: TextStyle(
-            height: 2.h,
-            color: Colors.black,
-            fontFamily: FontFamilies.alexandria,
-            fontWeight: FontWeight.w400,
-            fontSize: 11),
-      );
-  get dateCircleAvatar => Padding(
-        padding: EdgeInsets.only(right: 13.5.w),
-        child: CircleAvatar(
-          backgroundColor: AppColors.darkBlueColor,
-          radius: 35.r,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              dateText,
-              SizedBox(
-                height: 3.h,
-              ),
-              yearText,
-            ],
-          ),
-        ),
-      );
-  get newsContainer => Container(
-        width: 430.w,
-        height: 115.h,
-        decoration: const BoxDecoration(color: Colors.white),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            textNews,
-            SizedBox(
-              width: 12.w,
-            ),
-            dateCircleAvatar,
-          ],
-        ),
-      );
-  get newsList => Expanded(
-        child: ListView.builder(
-            itemCount: 6,
-            itemBuilder: (BuildContext context, int index) {
-              return Column(
-                children: [
-                  newsContainer,
-                  SizedBox(
-                    height: 8.h,
-                  ),
-                ],
-              );
-            }),
-      );
-  get newsSample => GestureDetector(
-        onTap: () {
-          Navigator.push(
-              context,
-              PageTransition(
-                  type: PageTransitionType.fade,
-                  duration: const Duration(milliseconds: 400),
-                  child: NewsDetails()));
+    padding: EdgeInsets.symmetric(horizontal: 14.w),
+    child: SizedBox(
+      height: 71.h,
+      child: PageView.builder(
+        reverse: true,
+        controller: _pageController,
+        itemCount: 3, // Adjust the number of items based on your ListView
+        onPageChanged: (int page) {
+          setState(() {
+            _currentPage = page;
+          });
         },
-        child: Container(
-          margin: EdgeInsets.only(left: 4.w, right: 4.w),
-          width: 383.w,
-          height: 71.h,
-          decoration: BoxDecoration(
-            color: AppColors.redColor,
-            borderRadius: BorderRadius.circular(7.r),
+        itemBuilder: (BuildContext context, int index) {
+          return newsSample;
+        },
+      ),
+    ),
+  );
+  get textNews => Text(
+    AppStrings.news2,
+    textDirection: TextDirection.rtl,
+    style: TextStyle(
+        height: 2.h,
+        color: Colors.black,
+        fontFamily: FontFamilies.alexandria,
+        fontWeight: FontWeight.w400,
+        fontSize: 11),
+  );
+  get dateCircleAvatar => Padding(
+    padding: EdgeInsets.only(right: 13.5.w),
+    child: CircleAvatar(
+      backgroundColor: AppColors.darkBlueColor,
+      radius: 35.r,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          dateText,
+          SizedBox(
+            height: 3.h,
           ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.end,
+          yearText,
+        ],
+      ),
+    ),
+  );
+  get newsContainer => Container(
+    width: 430.w,
+    height: 115.h,
+    decoration: const BoxDecoration(color: Colors.white),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        textNews,
+        SizedBox(
+          width: 12.w,
+        ),
+        dateCircleAvatar,
+      ],
+    ),
+  );
+  get newsList => Expanded(
+    child: ListView.builder(
+        itemCount: 6,
+        itemBuilder: (BuildContext context, int index) {
+          return Column(
             children: [
-              newsText,
+              newsContainer,
               SizedBox(
-                width: 5.w,
+                height: 8.h,
               ),
-              infoIcon,
             ],
+          );
+        }),
+  );
+  get newsSample => GestureDetector(
+    onTap: () {
+      Navigator.push(
+          context,
+          PageTransition(
+              type: PageTransitionType.fade,
+              duration: const Duration(milliseconds: 400),
+              child: NewsDetails()));
+    },
+    child: Container(
+      margin: EdgeInsets.only(left: 4.w, right: 4.w),
+      width: 383.w,
+      height: 71.h,
+      decoration: BoxDecoration(
+        color: AppColors.redColor,
+        borderRadius: BorderRadius.circular(7.r),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          newsText,
+          SizedBox(
+            width: 5.w,
           ),
-        ),
-      );
+          infoIcon,
+        ],
+      ),
+    ),
+  );
   get dotsIndicator => Directionality(
-        textDirection: TextDirection.rtl,
-        child: DotsIndicator(
-          dotsCount: 3,
-          position: _currentPage,
-          decorator: DotsDecorator(
-            color: Colors.red.shade300,
-            activeColor: Colors.red.shade300,
-            size: const Size.square(6.0),
-            activeSize: Size(39.0.w, 6),
-            activeShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.0)),
-            spacing: const EdgeInsets.all(1),
-          ),
-        ),
-      );
+    textDirection: TextDirection.rtl,
+    child: DotsIndicator(
+      dotsCount: 3,
+      position: _currentPage,
+      decorator: DotsDecorator(
+        color: Colors.red.shade300,
+        activeColor: Colors.red.shade300,
+        size: const Size.square(6.0),
+        activeSize: Size(39.0.w, 6),
+        activeShape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5.0)),
+        spacing: const EdgeInsets.all(1),
+      ),
+    ),
+  );
   get dateText => const Text(
-        AppStrings.october15,
-        textDirection: TextDirection.rtl,
-        style: TextStyle(
-            color: Colors.white,
-            fontSize: 11.5,
-            fontWeight: FontWeight.w400,
-            fontFamily: FontFamilies.alexandria),
-      );
+    AppStrings.october15,
+    textDirection: TextDirection.rtl,
+    style: TextStyle(
+        color: Colors.white,
+        fontSize: 11.5,
+        fontWeight: FontWeight.w400,
+        fontFamily: FontFamilies.alexandria),
+  );
   get yearText => const Text(
-        AppStrings.year2023,
-        textDirection: TextDirection.rtl,
-        style: TextStyle(
-            color: Colors.white,
-            fontSize: 11.5,
-            fontWeight: FontWeight.w400,
-            fontFamily: FontFamilies.alexandria),
-      );
-  get previousText2 => Align(
-        alignment: AlignmentDirectional.topEnd,
-        child: Padding(
-          padding: EdgeInsets.only(left: 8.w, top: 4.h),
-          child: const Text(
-            AppStrings.past,
-            style: TextStyle(
-                fontFamily: FontFamilies.alexandria,
-                fontWeight: FontWeight.w700,
-                color: AppColors.orangeBorderColor,
-                fontSize: 7),
-          ),
-        ),
-      );
+    AppStrings.year2023,
+    textDirection: TextDirection.rtl,
+    style: TextStyle(
+        color: Colors.white,
+        fontSize: 11.5,
+        fontWeight: FontWeight.w400,
+        fontFamily: FontFamilies.alexandria),
+  );
+  // get previousText2 => Align(
+  //   alignment: AlignmentDirectional.topEnd,
+  //   child: Padding(
+  //     padding: EdgeInsets.only(left: 8.w, top: 4.h),
+  //     child: const Text(
+  //       AppStrings.past,
+  //       style: TextStyle(
+  //           fontFamily: FontFamilies.alexandria,
+  //           fontWeight: FontWeight.w700,
+  //           color: AppColors.orangeBorderColor,
+  //           fontSize: 7),
+  //     ),
+  //   ),
+  // );
 }
