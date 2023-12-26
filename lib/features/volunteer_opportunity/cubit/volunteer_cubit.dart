@@ -8,43 +8,46 @@ import 'package:life_makers/features/volunteer_opportunity/models/programs_model
 
 import '../../../services/shared_preferences/preferences_helper.dart';
 import '../../authentication/data/apis/api.dart';
+import '../../home_page/data/models/user_joined_volunteers_model.dart';
 
 class VolunteerCubit extends Cubit<VolunteerState> {
   VolunteerCubit() : super(VolunteerInitial());
   Dio dio = Dio();
   VolunteerPracticalTrainingModel? volunteerPracticalTrainingModel;
+  UserJoinedVolunteerOpportunities? userJoinedVolunteerOpportunities;
   OneDayActivityModel? oneDayActivityModel;
 
   VolunteerRepo? volunteerRepo = VolunteerRepoImp();
-  Future<void> reset()async {
+  Future<void> reset() async {
     emit(VolunteerInitial());
   }
-  Future<void> getVolunteerProgramTraining() async {
-      emit(VolunteerProgramLoading());
-     try {
-       Response? response = await volunteerRepo
-           ?.getVolunteersTrainingPractical();
-       if (response?.statusCode == 200) {
-         volunteerPracticalTrainingModel =
-             VolunteerPracticalTrainingModel.fromJson(response?.data);
-         emit(VolunteerProgramSuccess());
-       } else {
-         emit(VolunteerProgramFailure('Something Went Wrong'));
-       }
-     } on DioException catch (dioException) {
-       if (dioException.response != null) {
-         if (kDebugMode) {
-           print('Server responded with status code: ${dioException.response!.statusCode}');
-         }
-         emit(VolunteerProgramFailure('Something Went Wrong'));
-       } else {
-         if (kDebugMode) {
-           print('Dio exception: ${dioException.message}');
-         }
-         emit(VolunteerProgramFailure("Dio exception: ${dioException.message}"));
-       }
-     }
 
+  Future<void> getVolunteerProgramTraining() async {
+    emit(VolunteerProgramLoading());
+    try {
+      Response? response =
+          await volunteerRepo?.getVolunteersTrainingPractical();
+      if (response?.statusCode == 200) {
+        volunteerPracticalTrainingModel =
+            VolunteerPracticalTrainingModel.fromJson(response?.data);
+        emit(VolunteerProgramSuccess());
+      } else {
+        emit(VolunteerProgramFailure('Something Went Wrong'));
+      }
+    } on DioException catch (dioException) {
+      if (dioException.response != null) {
+        if (kDebugMode) {
+          print(
+              'Server responded with status code: ${dioException.response!.statusCode}');
+        }
+        emit(VolunteerProgramFailure('Something Went Wrong'));
+      } else {
+        if (kDebugMode) {
+          print('Dio exception: ${dioException.message}');
+        }
+        emit(VolunteerProgramFailure("Dio exception: ${dioException.message}"));
+      }
+    }
   }
 
   Future<void> JoinProgram(String programId) async {
@@ -55,27 +58,31 @@ class VolunteerCubit extends Cubit<VolunteerState> {
     try {
       Response? response = await dio.post(
         EndPoints.userJoinVolunteer,
-        options: Options(headers: {'Authorization': 'Bearer ${PreferencesHelper.getToken()}'}),
+        options: Options(headers: {
+          'Authorization': 'Bearer ${PreferencesHelper.getToken()}'
+        }),
         data: {
           'volunteer_opportunity_id': programId,
         },
       );
       if (response.statusCode == 200) {
         emit(UserJoinedProgramSuccess());
-      }else{
+      } else {
         UserJoinedProgramFailure('حدث خطأ حاول مجددا');
       }
-    }on DioException catch (dioException) {
+    } on DioException catch (dioException) {
       if (dioException.response != null) {
         if (kDebugMode) {
-          print('Server responded with status code: ${dioException.response!.statusCode}');
+          print(
+              'Server responded with status code: ${dioException.response!.statusCode}');
         }
         emit(UserJoinedProgramFailure('حدث خطأ حاول مجددا'));
       } else {
         if (kDebugMode) {
           print('Dio exception: ${dioException.message}');
         }
-        emit(UserJoinedProgramFailure("Dio exception: ${dioException.message}"));
+        emit(
+            UserJoinedProgramFailure("Dio exception: ${dioException.message}"));
       }
     }
   }
@@ -88,20 +95,23 @@ class VolunteerCubit extends Cubit<VolunteerState> {
     try {
       Response? response = await dio.post(
         EndPoints.userLeftVolunteer,
-        options: Options(headers: {'Authorization': 'Bearer ${PreferencesHelper.getToken()}'}),
+        options: Options(headers: {
+          'Authorization': 'Bearer ${PreferencesHelper.getToken()}'
+        }),
         data: {
           'volunteer_opportunity_id': programId,
         },
       );
       if (response.statusCode == 200) {
         emit(UserLeftProgramSuccess());
-      }else{
+      } else {
         UserLeftProgramFailure('حدث خطأ حاول مجددا');
       }
-    }on DioException catch (dioException) {
+    } on DioException catch (dioException) {
       if (dioException.response != null) {
         if (kDebugMode) {
-          print('Server responded with status code: ${dioException.response!.statusCode}');
+          print(
+              'Server responded with status code: ${dioException.response!.statusCode}');
         }
         emit(UserLeftProgramFailure('حدث خطأ حاول مجددا'));
       } else {
@@ -113,6 +123,19 @@ class VolunteerCubit extends Cubit<VolunteerState> {
     }
   }
 
-
-
+  Future<void> getJoinedVolunteerOpportunities() async {
+    emit(JoinedProgramLoading());
+    try {
+      Response response =
+          await dio.get(EndPoints.userJoinedVolunteerOpportunities);
+      if (response.statusCode == 200) {
+        userJoinedVolunteerOpportunities= UserJoinedVolunteerOpportunities.fromJson(response.data);
+        emit(JoinedProgramSuccess());
+      } else {
+        throw Exception('Failed to load program volunteer opportunities');
+      }
+    } catch (error) {
+      emit(JoinedProgramFailure('Failed to load program volunteer opportunities: $error'));
+    }
+  }
 }

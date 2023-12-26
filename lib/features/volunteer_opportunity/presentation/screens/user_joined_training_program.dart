@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:life_makers/core/utils/extensions.dart';
-import 'package:life_makers/features/volunteer_opportunity/presentation/widgets/training_card.dart';
+import 'package:life_makers/features/volunteer_opportunity/presentation/widgets/user_joined_programs_card.dart';
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-string.dart';
 import '../../../../core/widgets/title_text.dart';
  class UserJoinedPrograms extends StatefulWidget {
    const UserJoinedPrograms({super.key});
 
-   @override
-   State<UserJoinedPrograms> createState() => _UserJoinedProgramsState();
- }
+  @override
+  State<UserJoinedPrograms> createState() => _UserJoinedProgramsState();
+}
 
- class _UserJoinedProgramsState extends State<UserJoinedPrograms> {
+class _UserJoinedProgramsState extends State<UserJoinedPrograms> {
    @override
    Widget build(BuildContext context) {
      return Scaffold(
@@ -21,14 +21,16 @@ import '../../../../core/widgets/title_text.dart';
          child: Column(
            children: [
              SizedBox(height: 10.h,),
-             Expanded(child: TrainingCard()),
+             Expanded(child: JoinedProgramCard()),
            ],
          ),
        ),
      );
    }
+
    get title => TitleText(
        text: AppStrings.chooseProgram);
+
    get popUpIcon => GestureDetector(
      onTap: (){
        Navigator.pop(context);
@@ -37,6 +39,7 @@ import '../../../../core/widgets/title_text.dart';
        AppAssets.popUpIcon,
      ),
    );
+
    get header => Row(
      children: [
        SizedBox(width: 177.w,),
@@ -45,4 +48,4 @@ import '../../../../core/widgets/title_text.dart';
        popUpIcon,
      ],
    );
- }
+}
