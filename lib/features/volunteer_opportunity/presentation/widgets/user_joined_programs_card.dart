@@ -49,7 +49,9 @@ class _JoinedProgramCardState extends State<JoinedProgramCard> {
     );
   }
 
-  Widget buildGridView() {
+  Widget buildGridView(
+
+      ) {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: RefreshIndicator(
@@ -148,24 +150,22 @@ class _JoinedProgramCardState extends State<JoinedProgramCard> {
               );
             } else{
               return Center(
-                child: Padding(
-                  padding:  EdgeInsets.only(bottom: 50.h),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset(AppAssets.noCampaignsImg),
-                      SizedBox(height: 30.h,),
-                      const Text(
-                        AppStrings.noCampaignsText,
-                        style: TextStyle(
-                            color:AppColors.greyNoCampaignsTextColor,
-                            fontFamily: FontFamilies.alexandria,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 13
-                        ),
-                      )
-                    ],
-                  ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset(AppAssets.noCampaignsImg),
+                    SizedBox(height: 30.h,),
+                    const Text(
+                      AppStrings.noCampaignsText,
+                      style: TextStyle(
+                          color:AppColors.greyNoCampaignsTextColor,
+                          fontFamily: FontFamilies.alexandria,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 13
+                      ),
+                    )
+                  ],
                 ),
               );
             }

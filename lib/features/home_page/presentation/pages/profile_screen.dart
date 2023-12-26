@@ -1,13 +1,15 @@
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:life_makers/core/utils/app-assets.dart';
 import 'package:life_makers/core/utils/extensions.dart';
-import 'package:life_makers/core/utils/size-utils.dart';
 import 'package:life_makers/features/campaign_details/cubit/all_campaigns_cubit.dart';
 import 'package:life_makers/features/edit_account/screens/edit_account_screen.dart';
-import 'package:life_makers/features/volunteer_opportunity/presentation/screens/user_joined_training_program.dart';
+import 'package:life_makers/features/volunteer_opportunity/cubit/volunteer_cubit.dart';
+import 'package:life_makers/features/volunteer_opportunity/cubit/volunteer_states.dart';
+import 'package:life_makers/features/volunteer_opportunity/presentation/widgets/user_joined_programs_card.dart';
 import 'package:life_makers/services/cubit/global_cubit_state.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 import 'package:page_transition/page_transition.dart';
@@ -18,6 +20,7 @@ import '../../../../core/utils/app_fonts.dart';
 import '../../../../core/widgets/format_name.dart';
 import '../../../../core/widgets/title_text.dart';
 import '../../../seasonal_campaigns/presentation/build_seasonal_widget.dart';
+import '../../../volunteer_opportunity/presentation/screens/training_program_details.dart';
 import 'news_details.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -33,6 +36,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
   late PageController _pageController2;
   int _currentPage = 0;
   int _currentPage2 = 0;
+  Future<void> _refresh() async {
+    try {
+      await Future.delayed(const Duration(seconds: 1));
+      await volunteerCubit.getJoinedVolunteerOpportunities();
+      setState(() {}); // Force a rebuild
+    } catch (error) {
+      if (kDebugMode) {
+        print('Error refreshing data: $error');
+      }
+    }
+  }
+  late VolunteerCubit volunteerCubit;
 
   late AllCampaignsCubit allCampaignsCubit;
 
@@ -42,12 +57,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _pageController = PageController(initialPage: _currentPage);
     _pageController2 = PageController(initialPage: _currentPage2);
     allCampaignsCubit = context.read<AllCampaignsCubit>();
+    volunteerCubit=context.read<VolunteerCubit>();
+    volunteerCubit.getJoinedVolunteerOpportunities();
     allCampaignsCubit.getAllCampaigns();
   }
 
   @override
   void dispose() {
     _pageController.dispose();
+    _pageController2.dispose();
     super.dispose();
   }
 
@@ -303,8 +321,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   : Colors.white,
                             ),
                             onPressed: () {
-                              selectedActivityType = 1;
-                              setState(() {});
+                              setState(() {
+                                selectedActivityType = 1;
+                              });
                             },
                             child: Text(
                               'فرصة تطوعية',
@@ -361,13 +380,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               return SizedBox.shrink();
                           }),
                     if(selectedActivityType == 1) tabBar2,
+                    if(selectedActivityType ==1)
+                      pages2,
+                    if(selectedActivityType ==0)
+                      pages,
                   ],
                 );
               }),
               SizedBox(
                 height: 11.h,
               ),
-              selectedActivityType==1?pages2:pages,
+
             ],
           ),
         ),
@@ -704,7 +727,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
   get pages2 => SizedBox(
-    height: 356,
+    height: 320,
+    width: double.infinity,
     child: PageView(
       controller: _pageController2,
       onPageChanged: (int page) {
@@ -713,16 +737,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
         });
       },
       children: [
-        UserJoinedPrograms(),
-        Text('ssssssssssssssssssssssssssssssssssss'),
-        Text('sssssssssssssssssssssssssssssssssss'),
+        JoinedProgramCard(),
+        JoinedProgramCard(),
+        JoinedProgramCard(),
       ],
     ),
   );
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  get pages => Expanded(
+  get pages => SizedBox(
+    height: 400,
     child: PageView(
       //physics:const ClampingScrollPhysics(),
       //reverse: true,
@@ -1318,18 +1343,43 @@ class _ProfileScreenState extends State<ProfileScreen> {
         fontWeight: FontWeight.w400,
         fontFamily: FontFamilies.alexandria),
   );
-  // get previousText2 => Align(
-  //   alignment: AlignmentDirectional.topEnd,
-  //   child: Padding(
-  //     padding: EdgeInsets.only(left: 8.w, top: 4.h),
-  //     child: const Text(
-  //       AppStrings.past,
-  //       style: TextStyle(
-  //           fontFamily: FontFamilies.alexandria,
-  //           fontWeight: FontWeight.w700,
-  //           color: AppColors.orangeBorderColor,
-  //           fontSize: 7),
-  //     ),
-  //   ),
-  // );
+  get logoImg => Align(
+      alignment: AlignmentDirectional.bottomEnd,
+      child: Padding(
+          padding:  EdgeInsets.only(left: 9.w,bottom: 6.h),
+          child: SvgPicture.asset(AppAssets.blueLifeMakersLogo,)
+      ));
+  get dotsIcon => Align(
+      alignment: AlignmentDirectional.centerEnd,
+      child: Padding(
+        padding:  EdgeInsets.only(left: 13.w),
+        child: SvgPicture.asset(AppAssets.dotsIcon,height: 13.h,),
+      ));
+  get calendarIcon => SvgPicture.asset(AppAssets.calendarIcon,width: 12.w,);
+// get dateText => Padding(
+//   padding:  EdgeInsets.only(top: 2.h),
+//   child: const Text(
+//     AppStrings.date,
+//     style: TextStyle(
+//         color: Colors.grey,
+//         fontFamily: FontFamilies.alexandria,
+//         fontWeight: FontWeight.w400,
+//         fontSize: 9.5
+//     ),
+//   ),
+// );
+// get previousText2 => Align(
+//   alignment: AlignmentDirectional.topEnd,
+//   child: Padding(
+//     padding: EdgeInsets.only(left: 8.w, top: 4.h),
+//     child: const Text(
+//       AppStrings.past,
+//       style: TextStyle(
+//           fontFamily: FontFamilies.alexandria,
+//           fontWeight: FontWeight.w700,
+//           color: AppColors.orangeBorderColor,
+//           fontSize: 7),
+//     ),
+//   ),
+// );
 }
