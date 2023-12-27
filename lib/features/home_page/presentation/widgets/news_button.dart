@@ -100,7 +100,7 @@ class pendingButton extends StatelessWidget {
         width: 380.w,
         height: 60.h,
         decoration: BoxDecoration(
-          color: AppColors.smallTextColor,
+          color: AppColors.greyTabColor,
           borderRadius: BorderRadius.circular(5.r),
         ),
         child:  Center(
@@ -108,17 +108,17 @@ class pendingButton extends StatelessWidget {
             textDirection: TextDirection.rtl,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SvgPicture.asset(AppAssets.joinCampaignIcon),
-              SizedBox(width: 5.w,),
               Text(
                 text!,
                 style: const TextStyle(
                     color: Colors.white,
                     fontFamily: FontFamilies.alexandria,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13
                 ),
               ),
+              SizedBox(width: 5.w,),
+              Icon(Icons.watch_later,color: Colors.white,size: 18,),
             ],
           ),
         ),

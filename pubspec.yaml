@@ -56,8 +56,8 @@ dependencies:
   screenshot: ^2.1.0
   share_plus: ^7.2.1
   path_provider: ^2.1.1
-  dropdown_search:
   dropdown_button2:
+  flutter_windowmanager:
 
 dev_dependencies:
   flutter_test:
