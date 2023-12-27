@@ -39,7 +39,7 @@ class LoginCubit extends Cubit<LoginState> {
       if (response.statusCode == 200) {
         UserModel userModel = UserModel.fromJson(response.data);
         await PreferencesHelper.saveToken(token: response.data['token']);
-        print(response.data['token']);
+        //print(response.data['token']);
         await PreferencesHelper.saveUserModel(userModel);
 
         emit(LoginSuccess());
@@ -54,13 +54,13 @@ class LoginCubit extends Cubit<LoginState> {
           print(
               'Server responded with status code: ${dioException.response!.statusCode}');
         }
-        emit(LoginFailure('اسم مستخدم خاطيء أو رقم سري خاطيء حاول مجددا'));
+        emit(LoginFailure('اسم مستخدم خاطيء أو رقم سري خاطيء'));
       } else {
         // Something went wrong with the request
         if (kDebugMode) {
           print('Dio exception: ${dioException.message}');
         }
-        emit(LoginFailure("Dio exception: Bad InternetConnection"));
+        emit(LoginFailure("تأكد من شبكة الانترنت"));
       }
     }
   }
