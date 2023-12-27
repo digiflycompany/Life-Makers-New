@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_makers/features/authentication/data/models/city_model.dart';
+import 'package:life_makers/features/authentication/data/models/error_change_password_model.dart';
 import 'package:life_makers/features/authentication/data/models/phone_user_mode.dart';
 import 'package:life_makers/features/authentication/data/models/register_error_model.dart';
 import 'package:life_makers/features/authentication/domain/sign_up_cubit/sign_up_states.dart';
@@ -253,7 +254,6 @@ class SignUpCubit extends Cubit<SignUpState> {
       print(token);
     }
     emit(changePasswordAfterLoginLoading());
-    try {
       final response = await dio.post(
         EndPoints.changePasswordAfterLogin,
         options: Options(headers: {
@@ -264,22 +264,12 @@ class SignUpCubit extends Cubit<SignUpState> {
           'password': password,
           'password_confirmation': password_confirmation,
         },
-      );
-      if (response.statusCode == 200) {
+      ).catchError((e) {
+        emit(changePasswordAfterLoginFailure('كلمة المرور القديمة غير صحيحة'));
+      });
+      if (response.statusCode == 200 && response.data['status'] == true) {
         emit(changePasswordAfterLoginSuccess());
       }
-      if (response.statusCode == 401) {
-        emit(changePasswordAfterLoginFailure('Invalid Credentials'));
-      } else {
-        emit(changePasswordAfterLoginFailure("Invalid credentials"));
-      }
-    } catch (e) {
-      if (kDebugMode) {
-        print('حدث خطأ أثناء التسجيل حاول مره اخرى');
-      }
-      emit(changePasswordAfterLoginFailure(
-          "Phone Number is taken.. Try Another one"));
-    }
   }
 
   Future<void> fetchCityData() async {

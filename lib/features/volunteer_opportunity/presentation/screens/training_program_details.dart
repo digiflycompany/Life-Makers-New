@@ -16,7 +16,6 @@ import '../../cubit/volunteer_cubit.dart';
 
 class TrainingProgramDetails extends StatefulWidget {
   final int index;
-
   TrainingProgramDetails({required this.index});
 
   @override
@@ -36,14 +35,14 @@ class _TrainingProgramDetailsState extends State<TrainingProgramDetails> {
     return BlocConsumer<VolunteerCubit, VolunteerState>(
         listener: (context, state) {
           if(state is UserJoinedProgramSuccess){
-            volunteerCubit.volunteerPracticalTrainingModel?.volunteerOpportunities![widget.index].userJoined=true;
+            volunteerCubit.volunteerPracticalTrainingModel?.volunteerOpportunities![widget.index].userJoined=='true';
             Navigator.push(context, PageTransition(
                 type: PageTransitionType.fade,
                 duration: const Duration(milliseconds: 520),
                 child:  VolunteerThanksScreen()));
           }
           if( state is UserLeftProgramSuccess){
-            volunteerCubit.volunteerPracticalTrainingModel?.volunteerOpportunities![widget.index].userJoined=false;
+            volunteerCubit.volunteerPracticalTrainingModel?.volunteerOpportunities![widget.index].userJoined=='false';
             CustomSnackBars.showSuccessToast(title: AppStrings.volunteerHasBeenLeftSuccessfully,);
           }
         },
@@ -130,7 +129,7 @@ class _TrainingProgramDetailsState extends State<TrainingProgramDetails> {
                       ),
                       Spacer(),
                       if(!PreferencesHelper.getIsVisitor)...[
-                        if( volunteerCubit.volunteerPracticalTrainingModel?.volunteerOpportunities![widget.index].userJoined==true)
+                        if( volunteerCubit.volunteerPracticalTrainingModel?.volunteerOpportunities![widget.index].userJoined=='true')
                           Padding(
                             padding: EdgeInsets.only(bottom: 20.h),
                             child:state is UserLeftProgramLoading
@@ -148,7 +147,26 @@ class _TrainingProgramDetailsState extends State<TrainingProgramDetails> {
                                 },
                                 text:AppStrings.leave),
                           ),
-                        if( volunteerCubit.volunteerPracticalTrainingModel?.volunteerOpportunities![widget.index].userJoined==false)
+                        if( volunteerCubit.volunteerPracticalTrainingModel?.volunteerOpportunities![widget.index].userJoined=='pending')
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 20.h),
+                            child:state is UserJoinedProgramLoading
+                                ? Center(
+                              child: Transform.scale(
+                                scale: 0.5,
+                                child: CircularProgressIndicator(
+                                  color: AppColors.orangeBorderColor,
+                                ),
+                              ),
+                            )
+                                :  pendingButton(
+                                onTap: () {
+                                 // volunteerCubit.leftProgram('${volunteerCubit.volunteerPracticalTrainingModel?.volunteerOpportunities![widget.index].id}');
+                                 CustomSnackBars.showInfoSnackBar(title: AppStrings.pendingText);
+                                },
+                                text:AppStrings.pendingText),
+                          ),
+                        if( volunteerCubit.volunteerPracticalTrainingModel?.volunteerOpportunities![widget.index].userJoined=='false')
                           Padding(
                             padding: EdgeInsets.only(bottom: 20.h),
                             child: state is UserJoinedProgramLoading

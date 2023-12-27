@@ -37,14 +37,14 @@ class _OneDayActivityDetailsState extends State<OneDayActivityDetails> {
     return BlocConsumer<OneDayActivityCubit, OneDayActivityState>(
         listener: (context, state) {
           if(state is JoinOneDayActivitySuccess){
-            oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].userJoined=true;
+            oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].userJoined=='true';
             Navigator.push(context, PageTransition(
                 type: PageTransitionType.fade,
                 duration: const Duration(milliseconds: 450),
                 child:  VolunteerThanksScreen()));
           }
           if(state is leftOneDayActivitySuccess){
-            oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].userJoined=false;
+            oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].userJoined=='false';
             CustomSnackBars.showSuccessToast(title: AppStrings.volunteerHasBeenLeftSuccessfully,);
           }
         },
@@ -130,7 +130,7 @@ class _OneDayActivityDetailsState extends State<OneDayActivityDetails> {
                       ),
                       Spacer(),
                       if(!PreferencesHelper.getIsVisitor)...[
-                        if( oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].userJoined==true)
+                        if( oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].userJoined=='true')
                           Padding(
                             padding: EdgeInsets.only(bottom: 20.h),
                             child: state is leftOneDayActivityLoading
@@ -148,7 +148,25 @@ class _OneDayActivityDetailsState extends State<OneDayActivityDetails> {
                                 },
                                 text: AppStrings.leave),
                           ),
-                        if( oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].userJoined==false)
+                        if( oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].userJoined=='pending')
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 20.h),
+                            child: state is leftOneDayActivityLoading
+                                ? Center(
+                              child: Transform.scale(
+                                scale: 0.5,
+                                child: CircularProgressIndicator(
+                                  color: AppColors.orangeBorderColor,
+                                ),
+                              ),
+                            )
+                                : pendingButton(
+                                onTap: () {
+                                  CustomSnackBars.showInfoSnackBar(title: AppStrings.pendingText);
+                                },
+                                text:AppStrings.pendingText),
+                          ),
+                        if( oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].userJoined=='false')
                           Padding(
                             padding: EdgeInsets.only(bottom: 20.h),
                             child: state is JoinOneDayActivityLoading

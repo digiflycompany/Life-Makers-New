@@ -56,7 +56,6 @@ class _VolunteerOpportunityScreenState
                       },
                       child: Image.asset(
                         AppAssets.volunteerCard1,
-
                         scale: 0.85,
                       )),
                   SizedBox(
