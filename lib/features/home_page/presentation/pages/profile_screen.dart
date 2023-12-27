@@ -9,7 +9,9 @@ import 'package:life_makers/features/campaign_details/cubit/all_campaigns_cubit.
 import 'package:life_makers/features/edit_account/screens/edit_account_screen.dart';
 import 'package:life_makers/features/volunteer_opportunity/cubit/volunteer_cubit.dart';
 import 'package:life_makers/features/volunteer_opportunity/cubit/volunteer_states.dart';
+import 'package:life_makers/features/volunteer_opportunity/presentation/widgets/user_joined_one_day_activity.dart';
 import 'package:life_makers/features/volunteer_opportunity/presentation/widgets/user_joined_programs_card.dart';
+import 'package:life_makers/features/volunteer_opportunity/presentation/widgets/user_joined_remote_tasks_card.dart';
 import 'package:life_makers/services/cubit/global_cubit_state.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 import 'package:page_transition/page_transition.dart';
@@ -719,6 +721,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     height: 320,
     width: double.infinity,
     child: PageView(
+      reverse: true,
       controller: _pageController2,
       onPageChanged: (int page) {
         setState(() {
@@ -727,8 +730,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       },
       children: [
         JoinedProgramCard(),
-        JoinedProgramCard(),
-        JoinedProgramCard(),
+        JoinedOneDayActivity(),
+        JoinedRemoteTasks(),
       ],
     ),
   );
