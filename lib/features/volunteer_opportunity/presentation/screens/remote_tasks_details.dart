@@ -37,14 +37,14 @@ class _RemoteTasksDetailsState extends State<RemoteTasksDetails> {
     return BlocConsumer<RemoteTasksCubit, RemoteTasksState>(
         listener: (context, state) {
           if(state is JoinRemoteTasksSuccess){
-            remoteTasksCubit.remoteTasksModel?.volunteerOpportunities![widget.index].userJoined=true;
+            remoteTasksCubit.remoteTasksModel?.volunteerOpportunities![widget.index].userJoined=='true';
             Navigator.push(context, PageTransition(
                 type: PageTransitionType.fade,
                 duration: const Duration(milliseconds: 450),
                 child:  VolunteerThanksScreen()));
           }
           if(state is leftRemoteTasksSuccess){
-            remoteTasksCubit.remoteTasksModel?.volunteerOpportunities![widget.index].userJoined=false;
+            remoteTasksCubit.remoteTasksModel?.volunteerOpportunities![widget.index].userJoined=='false';
             CustomSnackBars.showSuccessToast(title: AppStrings.volunteerHasBeenLeftSuccessfully,);
           }
         },
@@ -130,7 +130,7 @@ class _RemoteTasksDetailsState extends State<RemoteTasksDetails> {
                       ),
                       Spacer(),
                       if(!PreferencesHelper.getIsVisitor)...[
-                        if( remoteTasksCubit.remoteTasksModel?.volunteerOpportunities![widget.index].userJoined==true)
+                        if( remoteTasksCubit.remoteTasksModel?.volunteerOpportunities![widget.index].userJoined=='true')
                           Padding(
                             padding: EdgeInsets.only(bottom: 20.h),
                             child: state is leftRemoteTasksLoading
@@ -148,7 +148,26 @@ class _RemoteTasksDetailsState extends State<RemoteTasksDetails> {
                                 },
                                 text: AppStrings.leave),
                           ),
-                        if( remoteTasksCubit.remoteTasksModel?.volunteerOpportunities![widget.index].userJoined==false)
+                        if( remoteTasksCubit.remoteTasksModel?.volunteerOpportunities![widget.index].userJoined=='pending')
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 20.h),
+                            child: state is leftRemoteTasksLoading
+                                ? Center(
+                              child: Transform.scale(
+                                scale: 0.5,
+                                child: CircularProgressIndicator(
+                                  color: AppColors.orangeBorderColor,
+                                ),
+                              ),
+                            )
+                                : pendingButton(
+                                onTap: () {
+                                  // volunteerCubit.leftProgram('${volunteerCubit.volunteerPracticalTrainingModel?.volunteerOpportunities![widget.index].id}');
+                                  CustomSnackBars.showInfoSnackBar(title: AppStrings.pendingText);
+                                },
+                                text:AppStrings.pendingText),
+                          ),
+                        if( remoteTasksCubit.remoteTasksModel?.volunteerOpportunities![widget.index].userJoined=='false')
                           Padding(
                             padding: EdgeInsets.only(bottom: 20.h),
                             child: state is JoinRemoteTasksLoading

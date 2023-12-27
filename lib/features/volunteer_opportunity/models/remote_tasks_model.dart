@@ -45,7 +45,7 @@ class VolunteerOpportunities {
   String? photo;
   int? isActive;
   String? shortDetails;
-  bool? userJoined;
+  String? userJoined;
   List<Volunteers>? volunteers;
 
   VolunteerOpportunities(
