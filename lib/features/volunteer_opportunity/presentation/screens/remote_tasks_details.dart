@@ -10,7 +10,6 @@ import 'package:life_makers/features/volunteer_opportunity/cubit/remote_tasks_cu
 import 'package:life_makers/features/volunteer_opportunity/cubit/remote_tasks_states.dart';
 import 'package:life_makers/features/volunteer_opportunity/presentation/screens/volunteers_thanks_screen.dart';
 import 'package:page_transition/page_transition.dart';
-
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/widgets/custom_snack_bar.dart';
 import '../../../../services/shared_preferences/preferences_helper.dart';
@@ -37,14 +36,14 @@ class _RemoteTasksDetailsState extends State<RemoteTasksDetails> {
     return BlocConsumer<RemoteTasksCubit, RemoteTasksState>(
         listener: (context, state) {
           if(state is JoinRemoteTasksSuccess){
-            remoteTasksCubit.remoteTasksModel?.volunteerOpportunities![widget.index].userJoined=='true';
+              remoteTasksCubit.remoteTasksModel?.volunteerOpportunities![widget.index].userJoined='pending';
             Navigator.push(context, PageTransition(
                 type: PageTransitionType.fade,
                 duration: const Duration(milliseconds: 450),
                 child:  VolunteerThanksScreen()));
           }
           if(state is leftRemoteTasksSuccess){
-            remoteTasksCubit.remoteTasksModel?.volunteerOpportunities![widget.index].userJoined=='false';
+            remoteTasksCubit.remoteTasksModel?.volunteerOpportunities![widget.index].userJoined='false';
             CustomSnackBars.showSuccessToast(title: AppStrings.volunteerHasBeenLeftSuccessfully,);
           }
         },
@@ -182,7 +181,6 @@ class _RemoteTasksDetailsState extends State<RemoteTasksDetails> {
                                 : NewsButton2(
                                 onTap: () {
                                   remoteTasksCubit.joinRemoteTasks('${remoteTasksCubit.remoteTasksModel?.volunteerOpportunities![widget.index].id}');
-
                                 },
                                 text: AppStrings.join),
                           ),

@@ -35,11 +35,11 @@ class _TrainingProgramDetailsState extends State<TrainingProgramDetails> {
     return BlocConsumer<VolunteerCubit, VolunteerState>(
         listener: (context, state) {
           if(state is UserJoinedProgramSuccess){
-            volunteerCubit.volunteerPracticalTrainingModel?.volunteerOpportunities![widget.index].userJoined=='true';
-            Navigator.push(context, PageTransition(
-                type: PageTransitionType.fade,
-                duration: const Duration(milliseconds: 520),
-                child:  VolunteerThanksScreen()));
+            volunteerCubit.volunteerPracticalTrainingModel?.volunteerOpportunities![widget.index].userJoined=='pending';
+            // Navigator.push(context, PageTransition(
+            //     type: PageTransitionType.fade,
+            //     duration: const Duration(milliseconds: 520),
+            //     child:  VolunteerThanksScreen()));
           }
           if( state is UserLeftProgramSuccess){
             volunteerCubit.volunteerPracticalTrainingModel?.volunteerOpportunities![widget.index].userJoined=='false';
