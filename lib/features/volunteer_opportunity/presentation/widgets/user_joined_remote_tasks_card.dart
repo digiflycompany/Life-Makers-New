@@ -12,14 +12,14 @@ import '../../../../core/utils/app-string.dart';
 import '../../../../core/utils/app_fonts.dart';
 import '../../cubit/volunteer_cubit.dart';
 
-class JoinedProgramCard extends StatefulWidget {
-  const JoinedProgramCard({super.key});
+class JoinedRemoteTasks extends StatefulWidget {
+  const JoinedRemoteTasks({super.key});
 
   @override
-  State<JoinedProgramCard> createState() => _JoinedProgramCardState();
+  State<JoinedRemoteTasks> createState() => _JoinedRemoteTasksState();
 }
 
-class _JoinedProgramCardState extends State<JoinedProgramCard> {
+class _JoinedRemoteTasksState extends State<JoinedRemoteTasks> {
   late VolunteerCubit volunteerCubit;
   @override
   void initState() {
@@ -75,10 +75,10 @@ class _JoinedProgramCardState extends State<JoinedProgramCard> {
                   crossAxisSpacing: 18.h, // Adjust the spacing between items horizontally
                   mainAxisSpacing: 18.w,  // Adjust the spacing between items vertically
                 ),
-                itemCount: volunteerCubit.userJoinedVolunteerOpportunities?.programVolunteerOpportunities?.length, // Number of items in the grid
+                itemCount: volunteerCubit.userJoinedVolunteerOpportunities?.tasksVolunteerOpportunities?.length, // Number of items in the grid
                 itemBuilder: (context, index) {
                   // Replace the following with your actual components/widgets
-                  final   currentItem = volunteerCubit.userJoinedVolunteerOpportunities!.programVolunteerOpportunities![index];
+                  final   currentItem = volunteerCubit.userJoinedVolunteerOpportunities!.tasksVolunteerOpportunities![index];
                   if (kDebugMode) {
                     print(currentItem);
                   }
@@ -109,7 +109,7 @@ class _JoinedProgramCardState extends State<JoinedProgramCard> {
                                   child: Padding(
                                     padding: EdgeInsets.only(right: 0.w),
                                     child:  Text(
-                                      '${volunteerCubit.userJoinedVolunteerOpportunities?.programVolunteerOpportunities?[index].name}',
+                                      '${volunteerCubit.userJoinedVolunteerOpportunities?.tasksVolunteerOpportunities?[index].name}',
                                       style: TextStyle(
                                           color: AppColors.darkBlueColor,
                                           fontFamily: FontFamilies.alexandria,
@@ -125,7 +125,7 @@ class _JoinedProgramCardState extends State<JoinedProgramCard> {
                                   child: Padding(
                                     padding: EdgeInsets.only(right: 0.w),
                                     child:  Text(
-                                      '${volunteerCubit.userJoinedVolunteerOpportunities?.programVolunteerOpportunities?[index].shortDetails}',
+                                      '${volunteerCubit.userJoinedVolunteerOpportunities?.tasksVolunteerOpportunities?[index].shortDetails}',
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontFamily: FontFamilies.alexandria,
@@ -157,7 +157,7 @@ class _JoinedProgramCardState extends State<JoinedProgramCard> {
                     SvgPicture.asset(AppAssets.noCampaignsImg),
                     SizedBox(height: 30.h,),
                     const Text(
-                      'لا يوجد برامج',
+                      'لا يوجد مهام',
                       style: TextStyle(
                           color:AppColors.greyNoCampaignsTextColor,
                           fontFamily: FontFamilies.alexandria,

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/features/volunteer_opportunity/cubit/volunteer_states.dart';
-import 'package:life_makers/features/volunteer_opportunity/presentation/screens/training_program_details.dart';
+import 'package:life_makers/features/volunteer_opportunity/presentation/screens/one_day_activity_details.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-color.dart';
@@ -12,14 +12,14 @@ import '../../../../core/utils/app-string.dart';
 import '../../../../core/utils/app_fonts.dart';
 import '../../cubit/volunteer_cubit.dart';
 
-class JoinedProgramCard extends StatefulWidget {
-  const JoinedProgramCard({super.key});
+class JoinedOneDayActivity extends StatefulWidget {
+  const JoinedOneDayActivity({super.key});
 
   @override
-  State<JoinedProgramCard> createState() => _JoinedProgramCardState();
+  State<JoinedOneDayActivity> createState() => _JoinedOneDayActivityState();
 }
 
-class _JoinedProgramCardState extends State<JoinedProgramCard> {
+class _JoinedOneDayActivityState extends State<JoinedOneDayActivity> {
   late VolunteerCubit volunteerCubit;
   @override
   void initState() {
@@ -75,10 +75,10 @@ class _JoinedProgramCardState extends State<JoinedProgramCard> {
                   crossAxisSpacing: 18.h, // Adjust the spacing between items horizontally
                   mainAxisSpacing: 18.w,  // Adjust the spacing between items vertically
                 ),
-                itemCount: volunteerCubit.userJoinedVolunteerOpportunities?.programVolunteerOpportunities?.length, // Number of items in the grid
+                itemCount: volunteerCubit.userJoinedVolunteerOpportunities?.activityVolunteerOpportunities?.length, // Number of items in the grid
                 itemBuilder: (context, index) {
                   // Replace the following with your actual components/widgets
-                  final   currentItem = volunteerCubit.userJoinedVolunteerOpportunities!.programVolunteerOpportunities![index];
+                  final   currentItem = volunteerCubit.userJoinedVolunteerOpportunities!.activityVolunteerOpportunities![index];
                   if (kDebugMode) {
                     print(currentItem);
                   }
@@ -87,7 +87,7 @@ class _JoinedProgramCardState extends State<JoinedProgramCard> {
                       Navigator.push(context, PageTransition(
                           type: PageTransitionType.fade,
                           duration: const Duration(milliseconds: 600),
-                          child:  TrainingProgramDetails(index: index,)));
+                          child:  OneDayActivityDetails(index: index,)));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -109,7 +109,7 @@ class _JoinedProgramCardState extends State<JoinedProgramCard> {
                                   child: Padding(
                                     padding: EdgeInsets.only(right: 0.w),
                                     child:  Text(
-                                      '${volunteerCubit.userJoinedVolunteerOpportunities?.programVolunteerOpportunities?[index].name}',
+                                      '${volunteerCubit.userJoinedVolunteerOpportunities?.activityVolunteerOpportunities?[index].name}',
                                       style: TextStyle(
                                           color: AppColors.darkBlueColor,
                                           fontFamily: FontFamilies.alexandria,
@@ -125,7 +125,7 @@ class _JoinedProgramCardState extends State<JoinedProgramCard> {
                                   child: Padding(
                                     padding: EdgeInsets.only(right: 0.w),
                                     child:  Text(
-                                      '${volunteerCubit.userJoinedVolunteerOpportunities?.programVolunteerOpportunities?[index].shortDetails}',
+                                      '${volunteerCubit.userJoinedVolunteerOpportunities?.activityVolunteerOpportunities?[index].shortDetails}',
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontFamily: FontFamilies.alexandria,
@@ -157,7 +157,7 @@ class _JoinedProgramCardState extends State<JoinedProgramCard> {
                     SvgPicture.asset(AppAssets.noCampaignsImg),
                     SizedBox(height: 30.h,),
                     const Text(
-                      'لا يوجد برامج',
+                      'لا يوجد أنشطة',
                       style: TextStyle(
                           color:AppColors.greyNoCampaignsTextColor,
                           fontFamily: FontFamilies.alexandria,

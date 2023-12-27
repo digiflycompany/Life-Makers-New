@@ -24,7 +24,7 @@ import 'features/home_page/cubit/home_calender_cubit.dart';
 import 'features/non_seasonal_campaigns/cubit/non_seasonal_campaigns_cubit.dart';
 import 'features/seasonal_campaigns/cubit/seasonal_campaigns_cubit.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
   PreferencesHelper.init();
