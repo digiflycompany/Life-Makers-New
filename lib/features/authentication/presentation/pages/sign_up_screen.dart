@@ -30,7 +30,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  final _formKey = GlobalKey<FormState>();
+  // final _formKey = GlobalKey<FormState>();
   String? selectedCityName;
   String? selectedAreaName;
   late SignUpCubit signUpCubit;
@@ -128,7 +128,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }, builder: (context, state) {
       return Scaffold(
           body: Form(
-        key: _formKey,
+        // key: _formKey,
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Padding(
@@ -766,14 +766,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     : AuthButton(
                         text: AppStrings.createAccount,
                         onTap: () {
-                          if (_formKey.currentState!.validate()) {
+                          // if (_formKey.currentState!.validate()) {
                             if (isConfirmed == true && otpSent == true) {
                               _handleSignUp();
                             } else if (isConfirmed == false ||
                                 otpSent == false) {
                               CustomSnackBars.showErrorToast(
                                   title: 'برجاء تأكيد رقم الهاتف');
-                            }
+                            // }
                           }
                         },
                       ),

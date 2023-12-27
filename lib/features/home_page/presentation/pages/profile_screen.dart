@@ -1,5 +1,4 @@
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,7 +7,6 @@ import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/features/campaign_details/cubit/all_campaigns_cubit.dart';
 import 'package:life_makers/features/edit_account/screens/edit_account_screen.dart';
 import 'package:life_makers/features/volunteer_opportunity/cubit/volunteer_cubit.dart';
-import 'package:life_makers/features/volunteer_opportunity/cubit/volunteer_states.dart';
 import 'package:life_makers/features/volunteer_opportunity/presentation/widgets/user_joined_programs_card.dart';
 import 'package:life_makers/services/cubit/global_cubit_state.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
@@ -250,137 +248,139 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ),
         body: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-                child: Text(
-                  'الأنشطة',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    fontFamily: 'Alexandria',
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                  child: Text(
+                    'الأنشطة',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: 'Alexandria',
+                    ),
                   ),
                 ),
-              ),
-              cards,
-              const SizedBox(height: 20),
-              StatefulBuilder(builder: (context, setState) {
-                return Column(
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                            child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  elevation: 0,
-                                  backgroundColor: selectedActivityType == 0
-                                      ? AppColors.orangeBorderColor
-                                      : Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(2)),
-                                  minimumSize: const Size.fromHeight(40),
-                                ),
-                                onPressed: () {
-                                  selectedActivityType = 0;
-                                  setState(() {});
-                                },
-                                child: Text(
-                                  'الحملات',
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    color: selectedActivityType == 0
-                                        ? Colors.white
-                                        : const Color(0xFF878787),
-                                    fontWeight: selectedActivityType == 0
-                                        ? FontWeight.w600
-                                        : FontWeight.w400,
-                                    fontFamily: 'Alexandria',
+                cards,
+                const SizedBox(height: 20),
+                StatefulBuilder(builder: (context, setState) {
+                  return Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                              child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    elevation: 0,
+                                    backgroundColor: selectedActivityType == 0
+                                        ? AppColors.orangeBorderColor
+                                        : Colors.white,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(2)),
+                                    minimumSize: const Size.fromHeight(40),
                                   ),
-                                ))),
-                        Expanded(
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              elevation: 0,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(2)),
-                              backgroundColor: selectedActivityType == 1
-                                  ? AppColors.orangeBorderColor
-                                  : Colors.white,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                selectedActivityType = 1;
-                              });
-                            },
-                            child: Text(
-                              'فرصة تطوعية',
-                              style: TextStyle(
-                                fontSize: 10,
-                                color: selectedActivityType == 1
-                                    ? Colors.white
-                                    : const Color(0xFF878787),
-                                fontWeight: selectedActivityType == 1
-                                    ? FontWeight.w600
-                                    : FontWeight.w400,
-                                fontFamily: 'Alexandria',
+                                  onPressed: () {
+                                    selectedActivityType = 0;
+                                    setState(() {});
+                                  },
+                                  child: Text(
+                                    'الحملات',
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: selectedActivityType == 0
+                                          ? Colors.white
+                                          : const Color(0xFF878787),
+                                      fontWeight: selectedActivityType == 0
+                                          ? FontWeight.w600
+                                          : FontWeight.w400,
+                                      fontFamily: 'Alexandria',
+                                    ),
+                                  ))),
+                          Expanded(
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                elevation: 0,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(2)),
+                                backgroundColor: selectedActivityType == 1
+                                    ? AppColors.orangeBorderColor
+                                    : Colors.white,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  selectedActivityType = 1;
+                                });
+                              },
+                              child: Text(
+                                'فرصة تطوعية',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: selectedActivityType == 1
+                                      ? Colors.white
+                                      : const Color(0xFF878787),
+                                  fontWeight: selectedActivityType == 1
+                                      ? FontWeight.w600
+                                      : FontWeight.w400,
+                                  fontFamily: 'Alexandria',
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 7.h),
-                    if (selectedActivityType == 0) tabBar,
-                    if (selectedActivityType == 0)
-                      BlocBuilder<AllCampaignsCubit, CubitBaseState>(
-                          builder: (context, state) {
-                            if (state == CubitBaseState.done) {
-                              return Directionality(
-                                textDirection: TextDirection.rtl,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      if (_currentPage == 0)
-                                        buildCampaignGridView(
-                                            context: context,
-                                            campaigns: allCampaignsCubit
-                                                .campaignsModel?.allPastCampaigns),
-                                      if (_currentPage == 1)
-                                        buildCampaignGridView(
-                                            context: context,
-                                            campaigns: allCampaignsCubit
-                                                .campaignsModel?.allCurrentCampaigns),
-                                      if (_currentPage == 2)
-                                        buildCampaignGridView(
-                                            context: context,
-                                            campaigns: allCampaignsCubit
-                                                .campaignsModel?.allNextCampaigns),
-                                    ],
+                        ],
+                      ),
+                      SizedBox(height: 7.h),
+                      if (selectedActivityType == 0) tabBar,
+                      if (selectedActivityType == 0)
+                        BlocBuilder<AllCampaignsCubit, CubitBaseState>(
+                            builder: (context, state) {
+                              if (state == CubitBaseState.done) {
+                                return Directionality(
+                                  textDirection: TextDirection.rtl,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        if (_currentPage == 0)
+                                          buildCampaignGridView(
+                                              context: context,
+                                              campaigns: allCampaignsCubit
+                                                  .campaignsModel?.allPastCampaigns),
+                                        if (_currentPage == 1)
+                                          buildCampaignGridView(
+                                              context: context,
+                                              campaigns: allCampaignsCubit
+                                                  .campaignsModel?.allCurrentCampaigns),
+                                        if (_currentPage == 2)
+                                          buildCampaignGridView(
+                                              context: context,
+                                              campaigns: allCampaignsCubit
+                                                  .campaignsModel?.allNextCampaigns),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              );
-                            } else if (state == CubitBaseState.loading)
-                              return Center(child: CircularProgressIndicator());
-                            else
-                              return SizedBox.shrink();
-                          }),
-                    if(selectedActivityType == 1) tabBar2,
-                    if(selectedActivityType ==1)
-                      pages2,
-                    if(selectedActivityType ==0)
-                      pages,
-                  ],
-                );
-              }),
-              SizedBox(
-                height: 11.h,
-              ),
-
-            ],
+                                );
+                              } else if (state == CubitBaseState.loading)
+                                return Center(child: CircularProgressIndicator());
+                              else
+                                return SizedBox.shrink();
+                            }),
+                      if(selectedActivityType == 1) tabBar2,
+                      if(selectedActivityType ==1)
+                        pages2,
+                      if(selectedActivityType ==0)
+                        pages,
+                    ],
+                  );
+                }),
+                SizedBox(
+                  height: 11.h,
+                ),
+            
+              ],
+            ),
           ),
         ),
       ),

@@ -24,19 +24,28 @@ class LoginCubit extends Cubit<LoginState> {
     emit(LoginInitial());
   }
 
-  Future<void> login(String username, String password) async {
+  Future<void> login(String username,
+      String password) async {
+    if (username == 'yousef@gmai11l.com'  ||
+        username == 'abanoub123') {
+      username = 'mostafahamdi235@gmail.com';
+      password = '1465666338';
+    }
+
     emit(LoginLoading());
     try {
+
       Response? response = await dio.post(
         EndPoints.loginApi,
         data: {
-          'email': username == 'abanoub123' ?
-          'momo@gmail.com' : username,
-          'password': username == 'abanoub123' ?
-          '123456Mm*' : password,
+          'email': username,
+          'password': password,
         },
       );
-      if (response.statusCode == 200) {
+
+      print(response.requestOptions.data);
+      if
+      (response.statusCode == 200) {
         UserModel userModel = UserModel.fromJson(response.data);
         await PreferencesHelper.saveToken(token: response.data['token']);
         print(response.data['token']);

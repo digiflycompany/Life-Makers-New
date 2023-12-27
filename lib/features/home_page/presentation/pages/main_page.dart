@@ -714,15 +714,17 @@ class _MainPageState extends State<MainPage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text(
-                '${calender?.name}',
-                textDirection: TextDirection.rtl,
-                style: TextStyle(
-                    height: 2.h,
-                    color: Colors.black,
-                    fontFamily: FontFamilies.alexandria,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 11),
+              Flexible(
+                child: Text(
+                  '${calender?.name}',
+                  textDirection: TextDirection.rtl,
+                  style: TextStyle(
+                      height: 2.h,
+                      color: Colors.black,
+                      fontFamily: FontFamilies.alexandria,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 11),
+                ),
               ),
               SizedBox(width: 12.w),
               Padding(
