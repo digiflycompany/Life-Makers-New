@@ -280,19 +280,19 @@ class _MenuScreenState extends State<MenuScreen> {
                               img: AppAssets.volunteerIcon,
                               font: 11.5),
                         )),
-                    SizedBox(
-                      height: 0.h,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 22.h),
-                      child: const DrawerText(
-                          text: AppStrings.volunteerBoardOfDirectors,
-                          img: AppAssets.volunteerBoardOfDirectorsIcon,
-                          font: 11.5),
-                    ),
-                    SizedBox(
-                      height: 0.h,
-                    ),
+                    // SizedBox(
+                    //   height: 0.h,
+                    // ),
+                    // Padding(
+                    //   padding: EdgeInsets.symmetric(vertical: 22.h),
+                    //   child: const DrawerText(
+                    //       text: AppStrings.volunteerBoardOfDirectors,
+                    //       img: AppAssets.volunteerBoardOfDirectorsIcon,
+                    //       font: 11.5),
+                    // ),
+                    // SizedBox(
+                    //   height: 0.h,
+                    // ),
                     // if (PreferencesHelper.getUserModel?.user?.voted == false)
                     if (!PreferencesHelper.getIsVisitor)
                       InkWell(

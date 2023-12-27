@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_makers/features/authentication/data/models/city_model.dart';
-import 'package:life_makers/features/authentication/data/models/error_change_password_model.dart';
 import 'package:life_makers/features/authentication/data/models/phone_user_mode.dart';
 import 'package:life_makers/features/authentication/data/models/register_error_model.dart';
 import 'package:life_makers/features/authentication/domain/sign_up_cubit/sign_up_states.dart';

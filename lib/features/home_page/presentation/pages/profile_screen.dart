@@ -1,5 +1,4 @@
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,7 +7,6 @@ import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/features/campaign_details/cubit/all_campaigns_cubit.dart';
 import 'package:life_makers/features/edit_account/screens/edit_account_screen.dart';
 import 'package:life_makers/features/volunteer_opportunity/cubit/volunteer_cubit.dart';
-import 'package:life_makers/features/volunteer_opportunity/cubit/volunteer_states.dart';
 import 'package:life_makers/features/volunteer_opportunity/presentation/widgets/user_joined_one_day_activity.dart';
 import 'package:life_makers/features/volunteer_opportunity/presentation/widgets/user_joined_programs_card.dart';
 import 'package:life_makers/features/volunteer_opportunity/presentation/widgets/user_joined_remote_tasks_card.dart';
@@ -22,7 +20,6 @@ import '../../../../core/utils/app_fonts.dart';
 import '../../../../core/widgets/format_name.dart';
 import '../../../../core/widgets/title_text.dart';
 import '../../../seasonal_campaigns/presentation/build_seasonal_widget.dart';
-import '../../../volunteer_opportunity/presentation/screens/training_program_details.dart';
 import 'news_details.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -499,52 +496,66 @@ class _ProfileScreenState extends State<ProfileScreen> {
     ),
   );
   get previousText => InkWell(
+    splashColor: Colors.transparent,
     onTap: () {
       _changePage(0);
     },
-    child: Text(
-      AppStrings.past,
-      style: TextStyle(
-          color: _currentPage == 0
-              ? AppColors.orangeBorderColor
-              : AppColors.greyTabColor,
-          fontFamily: FontFamilies.alexandria,
-          fontWeight: _currentPage == 0 ? FontWeight.w600 : FontWeight.w400,
-          fontSize: 11.5),
+    child: Padding(
+      padding: const EdgeInsets.only(top: 12,left: 2,bottom: 12,right: 2),
+      child: Center(
+        child: Text(
+          AppStrings.past,
+          style: TextStyle(
+              color: _currentPage == 0
+                  ? AppColors.orangeBorderColor
+                  : AppColors.greyTabColor,
+              fontFamily: FontFamilies.alexandria,
+              fontWeight: _currentPage == 0 ? FontWeight.w600 : FontWeight.w400,
+              fontSize: 11.5),
+        ),
+      ),
     ),
   );
   get currentText => InkWell(
+    splashColor: Colors.transparent,
     onTap: () {
       _changePage(1);
     },
-    child: Text(
-      AppStrings.current,
-      style: TextStyle(
-          color: _currentPage == 1
-              ? AppColors.greenTextColor
-              : AppColors.greyTabColor,
-          fontFamily: FontFamilies.alexandria,
-          fontWeight: _currentPage == 1 ? FontWeight.w600 : FontWeight.w400,
-          fontSize: 11.5),
+    child: Padding(
+      padding: const EdgeInsets.only(top: 12,left: 12,bottom: 12,right: 17),
+      child: Text(
+        AppStrings.current,
+        style: TextStyle(
+            color: _currentPage == 1
+                ? AppColors.greenTextColor
+                : AppColors.greyTabColor,
+            fontFamily: FontFamilies.alexandria,
+            fontWeight: _currentPage == 1 ? FontWeight.w600 : FontWeight.w400,
+            fontSize: 11.5),
+      ),
     ),
   );
   get upcomingText => InkWell(
+    splashColor: Colors.transparent,
     onTap: () {
       _changePage(2);
     },
-    child: Text(
-      AppStrings.upcoming,
-      style: TextStyle(
-          color: _currentPage == 2
-              ? AppColors.blueTextColor
-              : AppColors.greyTabColor,
-          fontFamily: FontFamilies.alexandria,
-          fontWeight: _currentPage == 2 ? FontWeight.w600 : FontWeight.w400,
-          fontSize: 11.5),
+    child: Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: Text(
+        AppStrings.upcoming,
+        style: TextStyle(
+            color: _currentPage == 2
+                ? AppColors.blueTextColor
+                : AppColors.greyTabColor,
+            fontFamily: FontFamilies.alexandria,
+            fontWeight: _currentPage == 2 ? FontWeight.w600 : FontWeight.w400,
+            fontSize: 11.5),
+      ),
     ),
   );
   get texts => Padding(
-    padding: EdgeInsets.only(left: 25.w, right: 25.w, top: 13.h),
+    padding: EdgeInsets.only(left: 12.w, right: 25.w, top: 2.h),
     child: Row(
       textDirection: TextDirection.rtl,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -573,7 +584,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     ],
   );
   get texts2 => Padding(
-    padding: EdgeInsets.only(left: 25.w, right: 25.w, top: 13.h),
+    padding: EdgeInsets.only(left: 12.w, right: 25.w, top: 2.h),
     child: Row(
       textDirection: TextDirection.rtl,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -585,48 +596,60 @@ class _ProfileScreenState extends State<ProfileScreen> {
     ),
   );
   get previousText2 => InkWell(
+    splashColor: Colors.transparent,
     onTap: () {
       _changePage2(0);
     },
-    child: Text(
-      'برامجك',
-      style: TextStyle(
-          color: _currentPage2 == 0
-              ? AppColors.blueTextColor
-              : AppColors.greyTabColor,
-          fontFamily: FontFamilies.alexandria,
-          fontWeight: _currentPage2 == 0 ? FontWeight.w600 : FontWeight.w400,
-          fontSize: 11.5),
+    child: Padding(
+      padding: const EdgeInsets.only(top: 12,left: 2,bottom: 12,right: 0),
+      child: Text(
+        'برامجك',
+        style: TextStyle(
+            color: _currentPage2 == 0
+                ? AppColors.blueTextColor
+                : AppColors.greyTabColor,
+            fontFamily: FontFamilies.alexandria,
+            fontWeight: _currentPage2 == 0 ? FontWeight.w600 : FontWeight.w400,
+            fontSize: 11.5),
+      ),
     ),
   );
   get currentText2 => InkWell(
+    splashColor: Colors.transparent,
     onTap: () {
       _changePage2(1);
     },
-    child: Text(
-      'أنشطتك',
-      style: TextStyle(
-          color: _currentPage2 == 1
-              ? AppColors.blueTextColor
-              : AppColors.greyTabColor,
-          fontFamily: FontFamilies.alexandria,
-          fontWeight: _currentPage2 == 1 ? FontWeight.w600 : FontWeight.w400,
-          fontSize: 11.5),
+    child: Padding(
+      padding: const EdgeInsets.only(top: 12,left: 12,bottom: 12,right: 24),
+      child: Text(
+        'أنشطتك',
+        style: TextStyle(
+            color: _currentPage2 == 1
+                ? AppColors.blueTextColor
+                : AppColors.greyTabColor,
+            fontFamily: FontFamilies.alexandria,
+            fontWeight: _currentPage2 == 1 ? FontWeight.w600 : FontWeight.w400,
+            fontSize: 11.5),
+      ),
     ),
   );
   get upcomingText2 => InkWell(
+    splashColor: Colors.transparent,
     onTap: () {
       _changePage2(2);
     },
-    child: Text(
-      'مهامك',
-      style: TextStyle(
-          color: _currentPage2 == 2
-              ? AppColors.blueTextColor
-              : AppColors.greyTabColor,
-          fontFamily: FontFamilies.alexandria,
-          fontWeight: _currentPage2 == 2 ? FontWeight.w600 : FontWeight.w400,
-          fontSize: 11.5),
+    child: Padding(
+      padding: const EdgeInsets.only(top: 12,left: 10,bottom: 12,right: 17),
+      child: Text(
+        'مهامك',
+        style: TextStyle(
+            color: _currentPage2 == 2
+                ? AppColors.blueTextColor
+                : AppColors.greyTabColor,
+            fontFamily: FontFamilies.alexandria,
+            fontWeight: _currentPage2 == 2 ? FontWeight.w600 : FontWeight.w400,
+            fontSize: 11.5),
+      ),
     ),
   );
   get divider2 => Padding(
