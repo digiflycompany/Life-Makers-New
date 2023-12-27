@@ -28,6 +28,7 @@ class AppStrings {
   static const String forgetPassword = 'نسيت كلمة المرور';
   static const String enterPhoneNumberForConfirmation = 'ادخل رقم الهاتف الخاص بك لارسال رمز التحقق';
   static const String enter = 'دخول';
+  static const String pendingText = 'يرجى الانتظار لضمان مراجعة طلبك';
   static const String doNotHaveAccount = 'ليس لديك حساب؟';
   static const String createAccount = 'انشاء حساب';
   static const String mainPage = 'الرئيسية';

@@ -155,16 +155,16 @@ class _TrainingProgramDetailsState extends State<TrainingProgramDetails> {
                               child: Transform.scale(
                                 scale: 0.5,
                                 child: CircularProgressIndicator(
-                                  color: AppColors.smallTextColor,
+                                  color: AppColors.orangeBorderColor,
                                 ),
                               ),
                             )
-                                :  NewsButton2(
+                                :  pendingButton(
                                 onTap: () {
                                  // volunteerCubit.leftProgram('${volunteerCubit.volunteerPracticalTrainingModel?.volunteerOpportunities![widget.index].id}');
-                                 CustomSnackBars.showInfoSnackBar(title: 'يرجى الانتظار لضمان مراجعة طلبك');
+                                 CustomSnackBars.showInfoSnackBar(title: AppStrings.pendingText);
                                 },
-                                text:'يرجى الانتظار لضمان مراجعة طلبك'),
+                                text:AppStrings.pendingText),
                           ),
                         if( volunteerCubit.volunteerPracticalTrainingModel?.volunteerOpportunities![widget.index].userJoined=='false')
                           Padding(
