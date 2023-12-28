@@ -12,7 +12,6 @@ import 'package:page_transition/page_transition.dart';
 import '../../../../core/utils/app-assets.dart';
 import '../../../core/utils/app-string.dart';
 import '../../../core/utils/app_fonts.dart';
-import '../../../core/widgets/format_name.dart';
 import '../../authentication/presentation/pages/login_screen.dart';
 import '../../home_page/domain/menu_page_cubit/menu_page_cubit.dart';
 import '../../home_page/domain/menu_page_cubit/menu_page_states.dart';
