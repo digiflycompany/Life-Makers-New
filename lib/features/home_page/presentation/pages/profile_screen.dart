@@ -17,7 +17,6 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app-string.dart';
 import '../../../../core/utils/app_fonts.dart';
-import '../../../../core/widgets/format_name.dart';
 import '../../../../core/widgets/title_text.dart';
 import '../../../seasonal_campaigns/presentation/build_seasonal_widget.dart';
 import 'news_details.dart';
@@ -105,16 +104,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 right: 25,
                 child: Row(
                   children: [
-                    Container(
-                      height: 60,
-                      width: 60,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.grey)),
-                      child: Center(
-                          child: Text(PreferencesHelper.getIsVisitor
-                              ? 'زائر'
-                              : formatName(PreferencesHelper.getName))),
+                    InkWell(
+                      onTap: (){
+                        Navigator.pushReplacement(
+                            context,
+                            PageTransition(
+                                type: PageTransitionType.fade,
+                                duration: const Duration(milliseconds: 400),
+                                child: EditAccountScreen()));
+                      },
+                      splashColor: Colors.transparent,
+                      child: Container(
+                        height: 60,
+                        width: 60,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.grey)),
+                        child: SvgPicture.asset(AppAssets.circleAvatar2),
+                      ),
                     ),
                     const SizedBox(width: 10),
                     Column(
@@ -163,14 +170,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               width: 190,
                               backgroundColor: const Color(0xffF1F1F1),
                               progressColor: const Color(0xffF7936F),
-                              percent: 0.5,
+                              percent: 0,
                               isRTL: true,
                               lineHeight: 8,
                               padding: EdgeInsets.zero,
                               barRadius: const Radius.circular(5),
                             ),
                             SizedBox(width: 10),
-                            Image.asset(AppAssets.crownPng),
+                           // Image.asset(AppAssets.crownPng),
                           ],
                         )
                       ],
@@ -747,7 +754,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     height: 420,
     width: double.infinity,
     child: PageView(
-      reverse: true,
       controller: _pageController2,
       onPageChanged: (int page) {
         setState(() {
@@ -768,7 +774,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     height: 420,
     child: PageView(
       //physics:const ClampingScrollPhysics(),
-      //reverse: true,
+      reverse: true,
       controller: _pageController,
       onPageChanged: (int page) {
         setState(() {
@@ -1162,11 +1168,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           SizedBox(
             width: 6.w,
           ),
-          previousOrphanCard,
-          SizedBox(
-            width: 6.w,
-          ),
-          previousOrphanCard,
         ],
       ),
     ),
