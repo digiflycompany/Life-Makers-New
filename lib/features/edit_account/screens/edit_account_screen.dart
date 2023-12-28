@@ -12,7 +12,6 @@ import 'package:page_transition/page_transition.dart';
 import '../../../../core/utils/app-assets.dart';
 import '../../../core/utils/app-string.dart';
 import '../../../core/utils/app_fonts.dart';
-import '../../../core/widgets/format_name.dart';
 import '../../authentication/presentation/pages/login_screen.dart';
 import '../../home_page/domain/menu_page_cubit/menu_page_cubit.dart';
 import '../../home_page/domain/menu_page_cubit/menu_page_states.dart';
@@ -261,13 +260,26 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                           ),
                         ),
                       ),
-                      Container(
-                        height: 80,
-                        width: 80,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.grey)),
-                        child: SvgPicture.asset(AppAssets.circleAvatar2),
+                      Stack(
+                        children: [
+                          Container(
+                            height: 80,
+                            width: 80,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(color: Colors.grey)),
+                            child: SvgPicture.asset(AppAssets.circleAvatar2),
+                          ),
+                          Positioned(
+                              top: 63.h,
+                              left: 60.w,
+                              child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  onTap: (){
+
+                                  },
+                                  child: Icon(Icons.camera_alt,color: AppColors.gradientColor1,))),
+                        ],
                       ),
                     ],
                   )
