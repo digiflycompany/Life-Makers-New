@@ -111,10 +111,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(color: Colors.grey)),
-                      child: Center(
-                          child: Text(PreferencesHelper.getIsVisitor
-                              ? 'زائر'
-                              : formatName(PreferencesHelper.getName))),
+                      child: SvgPicture.asset(AppAssets.circleAvatar2),
                     ),
                     const SizedBox(width: 10),
                     Column(
@@ -163,14 +160,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               width: 190,
                               backgroundColor: const Color(0xffF1F1F1),
                               progressColor: const Color(0xffF7936F),
-                              percent: 0.5,
+                              percent: 0,
                               isRTL: true,
                               lineHeight: 8,
                               padding: EdgeInsets.zero,
                               barRadius: const Radius.circular(5),
                             ),
                             SizedBox(width: 10),
-                            Image.asset(AppAssets.crownPng),
+                           // Image.asset(AppAssets.crownPng),
                           ],
                         )
                       ],
@@ -768,7 +765,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     height: 420,
     child: PageView(
       //physics:const ClampingScrollPhysics(),
-      //reverse: true,
+      reverse: true,
       controller: _pageController,
       onPageChanged: (int page) {
         setState(() {

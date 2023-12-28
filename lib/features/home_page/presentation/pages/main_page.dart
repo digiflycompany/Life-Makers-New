@@ -17,7 +17,6 @@ import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app-string.dart';
 import '../../../../core/utils/app_fonts.dart';
-import '../../../../core/widgets/format_name.dart';
 import '../../../seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import '../../cubit/emergency_campaigns_cubit.dart';
 import '../../data/models/home_calender_model.dart';
@@ -275,11 +274,22 @@ class _MainPageState extends State<MainPage> {
           child: CircleAvatar(
               radius: 40.r,
               backgroundColor: Colors.white,
-              child: Text(
-                  PreferencesHelper.getIsVisitor?'':
-                  formatName(PreferencesHelper.getName))),
+              child:SvgPicture.asset(AppAssets.circleAvatar2)),
         ),
       );
+
+  // get circleAvatar => Align(
+  //   alignment: AlignmentDirectional.topEnd,
+  //   child: Padding(
+  //     padding: EdgeInsets.only(top: 19.h),
+  //     child: CircleAvatar(
+  //         radius: 40.r,
+  //         backgroundColor: Colors.white,
+  //         child: Text(
+  //             PreferencesHelper.getIsVisitor?'':
+  //             formatName(PreferencesHelper.getName))),
+  //   ),
+  // );
   get details => Row(
         textDirection: TextDirection.rtl,
         children: [
@@ -333,7 +343,7 @@ class _MainPageState extends State<MainPage> {
                   PageTransition(
                       type: PageTransitionType.fade,
                       duration: const Duration(milliseconds: 400),
-                      child: ProfileScreen()));
+                      child: ProfileScreen(hasBackButton: true,)));
             },
             child: Padding(
               padding: const EdgeInsets.all(8.0),
