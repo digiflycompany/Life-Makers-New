@@ -62,4 +62,6 @@ class EndPoints {
       'https://life-makers.digifly-eg.com/api/change-password';
   static const String userJoinedVolunteerOpportunities =
       'https://life-makers.digifly-eg.com/api/all-user-volunteer-opportunities';
+  static const String appSettings =
+      'https://life-makers.digifly-eg.com/api/app-settings';
 }
