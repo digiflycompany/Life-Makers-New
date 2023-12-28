@@ -77,6 +77,7 @@ class AppAssets {
   static const String lifeMakersProfileIcon =
       "$svgPath/lifeMakersProfileIcon.svg";
   static const String qrCode = "$svgPath/qrCode.svg";
+  static const String qrCode2 = "$svgPath/qrCode1.svg";
   static const String newsPopUp = "$svgPath/newsPopUp.svg";
   static const String newsArrow = "$svgPath/newsArrow.svg";
   static const String joinCampaignIcon = "$svgPath/joinCampaignIcon.svg";

@@ -9,7 +9,6 @@ import 'package:life_makers/features/edit_account/cubit/edit_account_cubit.dart'
 import 'package:life_makers/services/cubit/global_cubit_state.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 import 'package:page_transition/page_transition.dart';
-
 import '../../../../core/utils/app-assets.dart';
 import '../../../core/utils/app-string.dart';
 import '../../../core/utils/app_fonts.dart';
@@ -268,8 +267,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(color: Colors.grey)),
-                        child: Center(
-                            child: Text(formatName(PreferencesHelper.getName))),
+                        child: SvgPicture.asset(AppAssets.circleAvatar2),
                       ),
                     ],
                   )

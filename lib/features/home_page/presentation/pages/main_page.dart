@@ -690,6 +690,73 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
             ),
+          Positioned(
+            top: 17,
+            left:17,
+            child: InkWell(
+                onTap: () {
+                  if (!PreferencesHelper.getIsVisitor)
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            content: Container(
+                              decoration: BoxDecoration(
+                                color: const Color(0xff0E395E),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              padding: const EdgeInsets.only(top: 30),
+                              // margin: const EdgeInsets.only(bottom: 22),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment:
+                                CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    width: 150,
+                                    height: 150,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:
+                                        BorderRadius.circular(10)),
+                                    child: SvgPicture.network(
+                                        '${PreferencesHelper.getUserModel?.user?.qrCode}'),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.center,
+                                    children: [
+                                      const Text(
+                                        'امسح هنا',
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontFamily: 'Alexandria',
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                      SvgPicture.asset(
+                                          'assets/svg/tie.svg'),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 14),
+                                ],
+                              ),
+                            ),
+                          );
+                        });
+                },
+                child: SvgPicture.asset(
+                  AppAssets.qrCode2,
+                )),
+          )
         ],
       ));
   newsText({required String text}) {
@@ -742,15 +809,19 @@ class _MainPageState extends State<MainPage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text(
-                '${calender?.name}',
-                textDirection: TextDirection.rtl,
-                style: TextStyle(
-                    height: 2.h,
-                    color: Colors.black,
-                    fontFamily: FontFamilies.alexandria,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 11),
+              SizedBox(
+                width: 250.w,
+                child: Text(
+                  '${calender?.name}',
+                  textDirection: TextDirection.rtl,
+                  maxLines: 2,
+                  style: TextStyle(
+                      height: 2.h,
+                      color: Colors.black,
+                      fontFamily: FontFamilies.alexandria,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 11),
+                ),
               ),
               SizedBox(width: 12.w),
               Padding(
