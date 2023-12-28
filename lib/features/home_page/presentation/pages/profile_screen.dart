@@ -106,7 +106,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     InkWell(
                       onTap: (){
-                        Navigator.pushReplacement(
+                        Navigator.push(
                             context,
                             PageTransition(
                                 type: PageTransitionType.fade,

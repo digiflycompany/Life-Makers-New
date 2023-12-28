@@ -141,7 +141,7 @@ class _MainPageState extends State<MainPage> {
                             );
                         } else if (state == CubitBaseState.loading) {
                           return Center(
-                              child: CircularProgressIndicator.adaptive());
+                              child: CircularProgressIndicator(color: AppColors.orangeBorderColor,));
                         }
                         return SizedBox.shrink();
                       },
@@ -163,7 +163,7 @@ class _MainPageState extends State<MainPage> {
                                   .homeCalenderModel?.calender?[index]);
                         });
                   } else if (state == CubitBaseState.loading) {
-                    return Center(child: CircularProgressIndicator.adaptive());
+                    return Center(child: CircularProgressIndicator(color: AppColors.orangeBorderColor,));
                   }
                   return SizedBox.shrink();
                 }),
