@@ -36,6 +36,15 @@ class MenuCubit extends Cubit<MenuState> {
       }
     }
   }
+  bool isVisible =false;
+  // String? apiDateString = appSettingsModel?.data?.electionsStartDate;
+  // DateTime? startTime;
+  // DateTime? endTime;
+
+  void toggleCampaigns() {
+    isVisible = !isVisible;
+    emit(MenuInitial());
+  }
 
   Future<void> fetchDateAndTime() async{
     emit(fetchDateTimeLoading());

@@ -8,6 +8,7 @@ import 'package:life_makers/core/widgets/title_text.dart';
 import 'package:life_makers/features/home_page/cubit/home_calender_cubit.dart';
 import 'package:life_makers/features/home_page/presentation/pages/home_calender_details_screen.dart';
 import 'package:life_makers/features/home_page/presentation/pages/news_details.dart';
+import 'package:life_makers/features/home_page/presentation/pages/profile_screen.dart';
 import 'package:life_makers/services/cubit/global_cubit_state.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 import 'package:page_transition/page_transition.dart';
@@ -248,7 +249,7 @@ class _MainPageState extends State<MainPage> {
     width: 190,
     backgroundColor: const Color(0xffF1F1F1),
     progressColor: const Color(0xffF7936F),
-    percent: 0.5,
+    percent: 0,
     isRTL: true,
     lineHeight: 8,
     padding: EdgeInsets.zero,
@@ -291,9 +292,9 @@ class _MainPageState extends State<MainPage> {
           SizedBox(
             width: 10.w,
           ),
-          crownIcon,
-          SizedBox(width: 5.w),
-          dropDownIcon,
+          //crownIcon,
+         // SizedBox(width: 5.w),
+          //dropDownIcon,
         ],
       );
   get arrowIcon => Padding(
@@ -323,15 +324,32 @@ class _MainPageState extends State<MainPage> {
   get activitiesAndMore => Row(
         children: [
           SizedBox(
-            width: 20.w,
+            width: 12.w,
           ),
-          arrowIcon,
-          SizedBox(
-            width: 5.w,
+          InkWell(
+            onTap: (){
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.fade,
+                      duration: const Duration(milliseconds: 400),
+                      child: ProfileScreen()));
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  arrowIcon,
+                  SizedBox(
+                    width: 5.w,
+                  ),
+                  moreText,
+                ],
+              ),
+            ),
           ),
-          moreText,
           SizedBox(
-            width: 240.w,
+            width: 228.w,
           ),
           activitiesText,
         ],
@@ -626,11 +644,11 @@ class _MainPageState extends State<MainPage> {
             children: [
               details,
               SizedBox(
-                height: 20.h,
+                height: 16.h,
               ),
               activitiesAndMore,
               SizedBox(
-                height: 17.h,
+                height: 9.h,
               ),
               cards,
             ],
