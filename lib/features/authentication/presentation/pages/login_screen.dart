@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:life_makers/core/utils/extensions.dart';
+import 'package:life_makers/core/widgets/custom_snack_bar.dart';
 import 'package:life_makers/features/authentication/domain/login_cubit/login_states.dart';
 import 'package:life_makers/features/authentication/presentation/pages/enter_phone_screen.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/createAccountText.dart';
@@ -54,10 +55,11 @@ class _LoginScreenState extends State<LoginScreen> {
         if (state is LoginSuccess) {
           LoginSuccessful(context, usernameController.text);
         } else if (state is LoginFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(state.error),
-            duration: Duration(seconds: 2),
-          ));
+          // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          //   content: Text(state.error),
+          //   duration: Duration(seconds: 2)
+          // ));
+          CustomSnackBars.showErrorToast(title: state.error);
         }
       },
       child: BlocBuilder<LoginCubit, LoginState>(

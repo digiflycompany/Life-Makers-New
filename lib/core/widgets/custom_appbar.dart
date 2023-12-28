@@ -27,7 +27,7 @@ class CustomAppBar extends StatelessWidget {
                 width: 30.w,
                 height: 30.h,
                 child: Transform.scale(
-                    scale: 0.35,
+                    scale: 0.4,
                     child: SvgPicture.asset(AppAssets.popUpIcon,))),
           ),
         ),
