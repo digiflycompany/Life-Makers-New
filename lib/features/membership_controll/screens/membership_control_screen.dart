@@ -3,8 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:life_makers/core/utils/app_fonts.dart';
 import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/core/widgets/custom_snack_bar.dart';
-import 'package:life_makers/features/edit_account/screens/complete_edit_account_screen.dart';
- import 'package:page_transition/page_transition.dart';
 import '../../../core/utils/app-assets.dart';
 import '../../../core/utils/app-color.dart';
 
@@ -133,7 +131,7 @@ class _MembershipControlState extends State<MembershipControl> {
                 ),
               ),
               const SizedBox(width: 10),
-              SvgPicture.asset('assets/svg/infoIcon.svg'),
+              Icon(Icons.info_outline),
             ],
           ),
           Center(

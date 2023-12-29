@@ -46,7 +46,6 @@ class NewsButton extends StatelessWidget {
   }
 }
 
-
 class NewsButton2 extends StatelessWidget {
   final Function()? onTap;
   final String? text;
@@ -87,10 +86,10 @@ class NewsButton2 extends StatelessWidget {
   }
 }
 
-class pendingButton extends StatelessWidget {
+class PendingButton extends StatelessWidget {
   final Function()? onTap;
   final String? text;
-  const pendingButton({super.key, required this.onTap, required this.text});
+  const PendingButton({super.key, required this.onTap, required this.text});
 
   @override
   Widget build(BuildContext context) {

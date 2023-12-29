@@ -43,7 +43,6 @@ class _MenuScreenState extends State<MenuScreen> {
   // }
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     menuCubit = context.read<MenuCubit>();
     menuCubit.fetchDateAndTime();
@@ -51,8 +50,8 @@ class _MenuScreenState extends State<MenuScreen> {
     String? apiEndDateString = menuCubit.appSettingsModel?.data?.electionsStartDate;
      startTime= DateTime.parse(apiStartDateString!);
      endTime= DateTime.parse(apiEndDateString!);
-     print(startTime);
-     print(endTime);
+     debugPrint('$startTime');
+    debugPrint('$endTime');
   }
   @override
   Widget build(BuildContext context) {
@@ -64,7 +63,7 @@ class _MenuScreenState extends State<MenuScreen> {
               context,
               PageTransition(
                   type: PageTransitionType.fade,
-                  duration: const Duration(milliseconds: 100),
+                  duration: const Duration(milliseconds: 300),
                   child: LoginScreen()),
               (value) => true);
         } else if (state is DeleteAccountFailure) {

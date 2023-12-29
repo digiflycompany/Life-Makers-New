@@ -86,15 +86,15 @@ class _ChooseRolePageState extends State<ChooseRolePage> {
                       onChanged: (val) {
                         setState(() {
                           selectedId =
-                              widget.campaignDetails?.tasks![index].id!;
+                          widget.campaignDetails?.tasks![index].id!;
                           if (kDebugMode) {
                             print(selectedId);
                           }
                         });
                       },
                       child: Text(
-                          '${widget.campaignDetails?.tasks?[index].task?.name}',style: TextStyle(
-                        fontFamily: 'Alexandria'
+                        '${widget.campaignDetails?.tasks?[index].task?.name}',style: TextStyle(
+                          fontFamily: 'Alexandria'
                       ),));
                 },
                 itemCount: widget.campaignDetails?.tasks?.length,
@@ -107,9 +107,9 @@ class _ChooseRolePageState extends State<ChooseRolePage> {
             child: ChooseButton(
                 onTap: () {
                   if(selectedId==null)
-                    {
-                      CustomSnackBars.showInfoSnackBar(title: 'قم باختيار مهمة للحملة');
-                    }
+                  {
+                    CustomSnackBars.showInfoSnackBar(title: 'قم باختيار مهمة للحملة');
+                  }
                   else {
                     Navigator.pushReplacement(
                       context,

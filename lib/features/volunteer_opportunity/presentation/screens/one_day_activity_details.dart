@@ -160,7 +160,7 @@ class _OneDayActivityDetailsState extends State<OneDayActivityDetails> {
                                 ),
                               ),
                             )
-                                : pendingButton(
+                                : PendingButton(
                                 onTap: () {
                                   CustomSnackBars.showInfoSnackBar(title: AppStrings.pendingText);
                                 },

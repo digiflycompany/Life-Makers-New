@@ -263,12 +263,15 @@ class SignUpCubit extends Cubit<SignUpState> {
           'password': password,
           'password_confirmation': password_confirmation,
         },
-      ).catchError((e) {
-        emit(changePasswordAfterLoginFailure('كلمة المرور القديمة غير صحيحة'));
-      });
+      );
       if (response.statusCode == 200 && response.data['status'] == true) {
         emit(changePasswordAfterLoginSuccess());
       }
+      else
+        {
+          emit(changePasswordAfterLoginFailure('كلمة المرور القديمة غير صحيحة'));
+
+        }
   }
 
   Future<void> fetchCityData() async {

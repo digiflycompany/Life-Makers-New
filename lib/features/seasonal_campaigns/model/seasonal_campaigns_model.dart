@@ -71,6 +71,8 @@ class Campains {
   String? city;
   String? photo;
   int? isActive;
+  int? followBy;
+  String? userJoined;
   List<Tasks>? tasks;
 
   Campains(
@@ -85,6 +87,8 @@ class Campains {
         this.city,
         this.photo,
         this.isActive,
+        this.followBy,
+        this.userJoined,
         this.tasks});
 
   Campains.fromJson(Map<String, dynamic> json) {
@@ -99,6 +103,8 @@ class Campains {
     city = json['city'];
     photo = json['photo'];
     isActive = json['is_active'];
+    followBy = json['follow_by'];
+    userJoined = json['user_joined'];
     if (json['tasks'] != null) {
       tasks = <Tasks>[];
       json['tasks'].forEach((v) {
@@ -120,6 +126,8 @@ class Campains {
     data['city'] = this.city;
     data['photo'] = this.photo;
     data['is_active'] = this.isActive;
+    data['follow_by'] = this.followBy;
+    data['user_joined'] = this.userJoined;
     if (this.tasks != null) {
       data['tasks'] = this.tasks!.map((v) => v.toJson()).toList();
     }
