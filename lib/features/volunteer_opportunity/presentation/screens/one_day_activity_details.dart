@@ -129,67 +129,127 @@ class _OneDayActivityDetailsState extends State<OneDayActivityDetails> {
                         ),
                       ),
                       Spacer(),
-                      if(!PreferencesHelper.getIsVisitor)...[
-                        if( oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].userJoined=='true')
-                          Padding(
-                            padding: EdgeInsets.only(bottom: 20.h),
-                            child: state is leftOneDayActivityLoading
-                                ? Center(
-                              child: Transform.scale(
-                                scale: 0.5,
-                                child: CircularProgressIndicator(
-                                  color: AppColors.orangeBorderColor,
-                                ),
-                              ),
-                            )
-                                : NewsButton2(
-                                onTap: () {
-                                  oneDayActivityCubit.leftOneDayActivity('${oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].id}');
-                                },
-                                text: AppStrings.leave),
-                          ),
-                        if( oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].userJoined=='pending')
-                          Padding(
-                            padding: EdgeInsets.only(bottom: 20.h),
-                            child: state is leftOneDayActivityLoading
-                                ? Center(
-                              child: Transform.scale(
-                                scale: 0.5,
-                                child: CircularProgressIndicator(
-                                  color: AppColors.orangeBorderColor,
-                                ),
-                              ),
-                            )
-                                : PendingButton(
-                                onTap: () {
-                                  CustomSnackBars.showInfoSnackBar(title: AppStrings.pendingText);
-                                },
-                                text:AppStrings.pendingText),
-                          ),
-                        if( oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].userJoined=='false')
-                          Padding(
-                            padding: EdgeInsets.only(bottom: 20.h),
-                            child: state is JoinOneDayActivityLoading
-                                ? Center(
-                              child: Transform.scale(
-                                scale: 0.5,
-                                child: CircularProgressIndicator(
-                                  color: AppColors.orangeBorderColor,
-                                ),
-                              ),
-                            )
-                                : NewsButton2(
-                                onTap: () {
-                                  oneDayActivityCubit.JoinOneDayActivity('${oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].id}');
-                                },
-                                text: AppStrings.join),
-                          ),
-                      ],
+                      // if(!PreferencesHelper.getIsVisitor)...[
+                      //   if( oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].userJoined=='true')
+                      //     Padding(
+                      //       padding: EdgeInsets.only(bottom: 20.h),
+                      //       child: state is leftOneDayActivityLoading
+                      //           ? Center(
+                      //         child: Transform.scale(
+                      //           scale: 0.5,
+                      //           child: CircularProgressIndicator(
+                      //             color: AppColors.orangeBorderColor,
+                      //           ),
+                      //         ),
+                      //       )
+                      //           : NewsButton2(
+                      //           onTap: () {
+                      //             oneDayActivityCubit.leftOneDayActivity('${oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].id}');
+                      //           },
+                      //           text: AppStrings.leave),
+                      //     ),
+                      //   if( oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].userJoined=='pending')
+                      //     Padding(
+                      //       padding: EdgeInsets.only(bottom: 20.h),
+                      //       child: state is leftOneDayActivityLoading
+                      //           ? Center(
+                      //         child: Transform.scale(
+                      //           scale: 0.5,
+                      //           child: CircularProgressIndicator(
+                      //             color: AppColors.orangeBorderColor,
+                      //           ),
+                      //         ),
+                      //       )
+                      //           : PendingButton(
+                      //           onTap: () {
+                      //             CustomSnackBars.showInfoSnackBar(title: AppStrings.pendingText);
+                      //           },
+                      //           text:AppStrings.pendingText),
+                      //     ),
+                      //   if( oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].userJoined=='false')
+                      //     Padding(
+                      //       padding: EdgeInsets.only(bottom: 20.h),
+                      //       child: state is JoinOneDayActivityLoading
+                      //           ? Center(
+                      //         child: Transform.scale(
+                      //           scale: 0.5,
+                      //           child: CircularProgressIndicator(
+                      //             color: AppColors.orangeBorderColor,
+                      //           ),
+                      //         ),
+                      //       )
+                      //           : NewsButton2(
+                      //           onTap: () {
+                      //             oneDayActivityCubit.JoinOneDayActivity('${oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].id}');
+                      //           },
+                      //           text: AppStrings.join),
+                      //     ),
+                      // ],
                     ],
                   ),
                 ),
               ),
             ),
+            bottomNavigationBar: !PreferencesHelper.getIsVisitor
+                ? Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if( oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].userJoined=='true')
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 20.h),
+                    child: state is leftOneDayActivityLoading
+                        ? Center(
+                      child: Transform.scale(
+                        scale: 0.5,
+                        child: CircularProgressIndicator(
+                          color: AppColors.orangeBorderColor,
+                        ),
+                      ),
+                    )
+                        : NewsButton2(
+                        onTap: () {
+                          oneDayActivityCubit.leftOneDayActivity('${oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].id}');
+                        },
+                        text: AppStrings.leave),
+                  ),
+                if( oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].userJoined=='pending')
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 20.h),
+                    child: state is leftOneDayActivityLoading
+                        ? Center(
+                      child: Transform.scale(
+                        scale: 0.5,
+                        child: CircularProgressIndicator(
+                          color: AppColors.orangeBorderColor,
+                        ),
+                      ),
+                    )
+                        : PendingButton(
+                        onTap: () {
+                          CustomSnackBars.showInfoSnackBar(title: AppStrings.pendingText);
+                        },
+                        text:AppStrings.pendingText),
+                  ),
+                if( oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].userJoined=='false')
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 20.h),
+                    child: state is JoinOneDayActivityLoading
+                        ? Center(
+                      child: Transform.scale(
+                        scale: 0.5,
+                        child: CircularProgressIndicator(
+                          color: AppColors.orangeBorderColor,
+                        ),
+                      ),
+                    )
+                        : NewsButton2(
+                        onTap: () {
+                          oneDayActivityCubit.JoinOneDayActivity('${oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].id}');
+                        },
+                        text: AppStrings.join),
+                  ),
+              ],
+            ):SizedBox.shrink(),
           );
         }
     );

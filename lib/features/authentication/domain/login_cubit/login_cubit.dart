@@ -39,10 +39,11 @@ class LoginCubit extends Cubit<LoginState> {
         data: {
           'email': username,
           'password': password,
+          'device_token':'btkjgrfenjgr',
         },
       );
 
-      debugPrint(response.requestOptions.data);
+    //  debugPrint(response.requestOptions.data);
       if
       (response.statusCode == 200) {
         UserModel userModel = UserModel.fromJson(response.data);
