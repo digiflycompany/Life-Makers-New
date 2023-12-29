@@ -123,7 +123,7 @@ class _CampaignDetailsScreenState extends State<CampaignDetailsScreen> {
                             },
                             text: AppStrings.joinCampaign)
                         : PendingButton(
-                            text: 'انت مشترك بالفعل',
+                            text: AppStrings.pendingText,
                             onTap: () {},
                           ),
                   )
