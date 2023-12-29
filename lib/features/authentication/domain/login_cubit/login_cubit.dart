@@ -31,7 +31,6 @@ class LoginCubit extends Cubit<LoginState> {
       username = 'mostafahamdi235@gmail.com';
       password = '1465666338';
     }
-
     emit(LoginLoading());
     try {
 
