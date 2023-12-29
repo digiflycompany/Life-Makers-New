@@ -13,13 +13,13 @@ import 'package:life_makers/features/authentication/presentation/widgets/auth_bu
 import 'package:life_makers/features/authentication/presentation/widgets/email_textfield.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/login_to_account_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/password_textfield.dart';
-import 'package:life_makers/features/authentication/presentation/widgets/small_text_feild.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/username_text_feild.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app-string.dart';
 import '../../../../core/utils/app_fonts.dart';
+import '../../../../services/firebase/notifications/firebase_notification.dart';
 import '../../../home_page/presentation/pages/drawer_page.dart';
 import '../../data/models/area_model.dart';
 import '../../data/models/city_model.dart';
@@ -63,29 +63,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   final TextEditingController addressController = TextEditingController();
 
-  final TextEditingController governorateController = TextEditingController();
-
-  final TextEditingController cityCenterController = TextEditingController();
-
   final TextEditingController previousExperienceController =
       TextEditingController();
 
   bool isConfirmed = false;
 
-  bool showOtpField = false;
-
   bool otpSent = false;
-
-  bool phoneLength = true;
 
   bool resend = false;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     signUpCubit = context.read<SignUpCubit>();
     signUpCubit.fetchCityData();
+    FirebaseCustomNotification.setUpFirebase();
   }
 
   @override
@@ -515,13 +507,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   height: 23.h,
                 ),
                 experienceTextField,
-                SizedBox(
-                  height: 23.h,
-                ),
+                SizedBox(height: 23.h),
                 phoneTextField,
-                SizedBox(
-                  height: 11.h,
-                ),
+                SizedBox(height: 11.h),
                 if (otpSent == false)
                   GestureDetector(
                     onTap: () {
@@ -767,12 +755,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         text: AppStrings.createAccount,
                         onTap: () {
                           // if (_formKey.currentState!.validate()) {
-                            if (isConfirmed == true && otpSent == true) {
-                              _handleSignUp();
-                            } else if (isConfirmed == false ||
-                                otpSent == false) {
-                              CustomSnackBars.showErrorToast(
-                                  title: 'برجاء تأكيد رقم الهاتف');
+                          if (isConfirmed == true && otpSent == true) {
+                            _handleSignUp();
+                          } else if (isConfirmed == false || otpSent == false) {
+                            CustomSnackBars.showErrorToast(
+                                title: 'برجاء تأكيد رقم الهاتف');
                             // }
                           }
                         },
@@ -970,40 +957,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
           }
           return null;
         },
-      );
-
-  get centerTextField => SmallTextField(
-        controller: cityCenterController,
-        hintText: '',
-        obscureText: false,
-        img: AppAssets.locationIcon,
-        validator: (value) {
-          if (areaDropdownController.text.isEmpty) {
-            return AppStrings.pleaseEnterCityCenter;
-          }
-          return null;
-        },
-      );
-
-  get cityTextField => SmallTextField(
-        controller: governorateController,
-        hintText: '',
-        obscureText: false,
-        img: AppAssets.locationIcon,
-        validator: (value) {
-          if (cityDropdownController.text.isEmpty) {
-            return AppStrings.pleaseEnterGovernorate;
-          }
-          return null;
-        },
-      );
-
-  get cityAndCenterFields => Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          centerTextField,
-          cityTextField,
-        ],
       );
 
   get signUpButton => AuthButton(

@@ -5,6 +5,7 @@ import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/features/home_page/presentation/pages/profile_screen.dart';
 import 'package:life_makers/features/notification/presentation/pages/notification_page.dart';
 import '../../../../core/utils/app-color.dart';
+import '../../../../services/firebase/notifications/firebase_notification.dart';
 import '../../data/models/nav_bar_model.dart';
 import '../widgets/custom_paint.dart';
 import 'main_page.dart';
@@ -24,6 +25,8 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: selectBtn);
+    FirebaseCustomNotification.setUpFirebase();
+
   }
 
   @override
