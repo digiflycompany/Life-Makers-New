@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:life_makers/core/utils/app_fonts.dart';
 import 'package:life_makers/core/utils/extensions.dart';
+import 'package:life_makers/core/widgets/custom_snack_bar.dart';
 import 'package:life_makers/features/edit_account/screens/complete_edit_account_screen.dart';
  import 'package:page_transition/page_transition.dart';
 import '../../../core/utils/app-assets.dart';
@@ -139,17 +141,10 @@ class _MembershipControlState extends State<MembershipControl> {
               padding: const EdgeInsets.only(top: 22),
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    PageTransition(
-                      type: PageTransitionType.fade,
-                      duration: const Duration(milliseconds: 500),
-                      child: const CompleteEditAccountScreen(),
-                    ),
-                  );
+                 CustomSnackBars.showErrorToast(title: 'لم يتم تحقيق الشروط');
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.orangeBorderColor,
+                  backgroundColor: Colors.grey,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5)),
                   minimumSize: const Size(95, 35),
@@ -159,7 +154,7 @@ class _MembershipControlState extends State<MembershipControl> {
                   'كن عضوا',
                   style: TextStyle(
                     fontSize: 11,
-                    fontFamily: 'Alexandria',
+                    fontFamily: FontFamilies.alexandria,
                     fontWeight: FontWeight.w500,
                     color: Colors.white,
                   ),

@@ -21,9 +21,10 @@ import '../../../../services/shared_preferences/preferences_helper.dart';
 import '../../domain/sign_up_cubit/sign_up_cubit.dart';
 
 class OtpScreen extends StatelessWidget {
-
+  final _formKey = GlobalKey<FormState>();
   bool loading =false;
   int? idNumber;
+  String code ='';
   final TextEditingController controller =TextEditingController();
   String id ='';
   @override
@@ -55,126 +56,131 @@ class OtpScreen extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           backgroundColor: Colors.white,
-          body: SafeArea(
-            child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Center(child: SvgPicture.asset(AppAssets.forgotPassword)),
-                  SizedBox(height: 30.h),
-                  confirmationCodeText,
-                  SizedBox(height: 22.h),
-                  enterConfirmationCodeText,
-                  SizedBox(height: 45.h),
-                  Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 20.w),
-                    child: OTPTextField(
-                      length: 4,
-                      width: MediaQuery.of(context).size.width,
-                      fieldWidth: 55.w,
-                      style: TextStyle(
-                          fontSize: 17,
-                          color: AppColors.orangeBorderColor,
-                          fontWeight: FontWeight.w700
-                      ),
-                      textFieldAlignment: MainAxisAlignment.spaceAround,
-                      fieldStyle: FieldStyle.underline,
-                      otpFieldStyle: OtpFieldStyle(
-                          focusBorderColor: Colors.orange,
-                          borderColor: Colors.black
-                      ),
-                      onCompleted: (pin) {
-                        controller.text=pin;
-                      },
-                    ),
-                  ),
-                  SizedBox(height: 55.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    textDirection: TextDirection.rtl,
-                    children: [
-                      didNotReceiveOtp,
-                      SizedBox(width: 3.w,),
-                      GestureDetector(
-                        onTap: (){
-                          Navigator.pushReplacement(context, PageTransition(
-                            type: PageTransitionType.fade,
-                            duration: const Duration(milliseconds: 400),
-                            child:  BlocProvider.value(
-                              value: context.read<SignUpCubit>(),
-                              child:EnterPhoneScreen(),
-                            ),
-                          ),
-                          );
-                        },
-                        child: Text(
-                          AppStrings.resendOtp2,
-                          textDirection: TextDirection.rtl,
-                          style: TextStyle(
-                              color: AppColors.gradientColor1,
-                              fontWeight: FontWeight.w600,
-                              fontFamily: FontFamilies.alexandria,
-                              fontSize: 10.8
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 30.h),
-                  Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: 25.w),
-                      child:GestureDetector(
-                        onTap: (){
-                          if(controller.isNull){
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text('من فضلك أدخل ال otp'),
-                              duration: Duration(seconds: 2),
-                            ));
-                          }else {
-                            PhoneUserModel? phoneUserModel;
-                            phoneUserModel = PreferencesHelper.getPhoneUserModel;
-                            idNumber= phoneUserModel?.user?.id;
-                            if (kDebugMode) {
-                              print (idNumber);
-                            }
-                            id = idNumber.toString();
-                            if (kDebugMode) {
-                              print(controller.text);
-                            }
-                            otpCubit.OtpRestPasswordSubmit(controller.text,id);
-                            if (kDebugMode) {
-                              print(id);
-                            }
-                          }
-                        },
-                        child: Container(
-                          width: 420.w,
-                          height: 63.h,
-                          decoration: BoxDecoration(
+          body: Form(
+            key: _formKey,
+            child: SafeArea(
+              child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Center(child: SvgPicture.asset(AppAssets.forgotPassword)),
+                    SizedBox(height: 30.h),
+                    confirmationCodeText,
+                    SizedBox(height: 22.h),
+                    enterConfirmationCodeText,
+                    SizedBox(height: 45.h),
+                    Padding(
+                      padding:  EdgeInsets.symmetric(horizontal: 20.w),
+                      child: OTPTextField(
+                        length: 4,
+                        width: MediaQuery.of(context).size.width,
+                        fieldWidth: 55.w,
+                        style: TextStyle(
+                            fontSize: 17,
                             color: AppColors.orangeBorderColor,
-                            borderRadius: BorderRadius.circular(8.r),
-                          ),
-                          child:  Center(
-                            child: loading == true ?Transform.scale(
-                              scale: 0.4,
-                              child: CircularProgressIndicator(
-                                color: AppColors.white,
+                            fontWeight: FontWeight.w700
+                        ),
+                        textFieldAlignment: MainAxisAlignment.spaceAround,
+                        fieldStyle: FieldStyle.underline,
+                        otpFieldStyle: OtpFieldStyle(
+                            focusBorderColor: Colors.orange,
+                            borderColor: Colors.black
+                        ),
+                        onCompleted: (pin) {
+                          controller.text=pin;
+
+                        },
+                      ),
+                    ),
+                    SizedBox(height: 55.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      textDirection: TextDirection.rtl,
+                      children: [
+                        didNotReceiveOtp,
+                        SizedBox(width: 3.w,),
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.pushReplacement(context, PageTransition(
+                              type: PageTransitionType.fade,
+                              duration: const Duration(milliseconds: 400),
+                              child:  BlocProvider.value(
+                                value: context.read<SignUpCubit>(),
+                                child:EnterPhoneScreen(),
                               ),
-                            ):Text(
-                              AppStrings.confirm,
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: FontFamilies.alexandria,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 12
-                              ),
+                            ),
+                            );
+                          },
+                          child: Text(
+                            AppStrings.resendOtp2,
+                            textDirection: TextDirection.rtl,
+                            style: TextStyle(
+                                color: AppColors.gradientColor1,
+                                fontWeight: FontWeight.w600,
+                                fontFamily: FontFamilies.alexandria,
+                                fontSize: 10.8
                             ),
                           ),
                         ),
-                      )
-                  ),
-                ],
+                      ],
+                    ),
+                    SizedBox(height: 30.h),
+                    Padding(
+                        padding:  EdgeInsets.symmetric(horizontal: 25.w),
+                        child:GestureDetector(
+                          onTap: (){
+                            if(controller.isNull
+                            ){
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text('من فضلك أدخل ال otp'),
+                                duration: Duration(seconds: 2),
+                              ));
+                            }else {
+                              PhoneUserModel? phoneUserModel;
+                              phoneUserModel = PreferencesHelper.getPhoneUserModel;
+                              idNumber= phoneUserModel?.user?.id;
+                              if (kDebugMode) {
+                                print (idNumber);
+                              }
+                              id = idNumber.toString();
+                              if (kDebugMode) {
+                                print(controller.text);
+                              }
+                              otpCubit.OtpRestPasswordSubmit(controller.text,id);
+                              if (kDebugMode) {
+                                print(id);
+                              }
+                            }
+                          },
+                          child: Container(
+                            width: 420.w,
+                            height: 63.h,
+                            decoration: BoxDecoration(
+                              color: AppColors.orangeBorderColor,
+                              borderRadius: BorderRadius.circular(8.r),
+                            ),
+                            child:  Center(
+                              child: loading == true ?Transform.scale(
+                                scale: 0.4,
+                                child: CircularProgressIndicator(
+                                  color: AppColors.white,
+                                ),
+                              ):Text(
+                                AppStrings.confirm,
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: FontFamilies.alexandria,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 12
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

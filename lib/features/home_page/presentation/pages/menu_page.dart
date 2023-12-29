@@ -29,13 +29,31 @@ class MenuScreen extends StatefulWidget {
 }
 
 class _MenuScreenState extends State<MenuScreen> {
-  bool campaignDetails = false;
-  void eye() {
-    setState(() {
-      campaignDetails = !campaignDetails;
-    });
-  }
+  late final DateTime apiStartDate;
+  late final DateTime apiEndDate;
+  DateTime? startTime;
+  DateTime? endTime;
 
+  // bool campaignDetails = false;
+  late MenuCubit menuCubit;
+  // void eye() {
+  //   setState(() {
+  //     campaignDetails = !campaignDetails;
+  //   });
+  // }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    menuCubit = context.read<MenuCubit>();
+    menuCubit.fetchDateAndTime();
+    String? apiStartDateString = menuCubit.appSettingsModel?.data?.electionsStartDate;
+    String? apiEndDateString = menuCubit.appSettingsModel?.data?.electionsStartDate;
+     startTime= DateTime.parse(apiStartDateString!);
+     endTime= DateTime.parse(apiEndDateString!);
+     print(startTime);
+     print(endTime);
+  }
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MenuCubit, MenuState>(
@@ -124,7 +142,9 @@ class _MenuScreenState extends State<MenuScreen> {
                         children: [
                           InkWell(
                             splashColor: Colors.transparent,
-                            onTap: eye,
+                            onTap: (){
+                              menuCubit.toggleCampaigns();
+                            },
                             child: Padding(
                               padding:  EdgeInsets.symmetric(vertical: 22.h),
                               child: Row(
@@ -146,10 +166,12 @@ class _MenuScreenState extends State<MenuScreen> {
                                   SizedBox(
                                     width: 5.w,
                                   ),
-                                  campaignDetails == false
+                                  menuCubit.isVisible == false
                                       ? InkWell(
                                     splashColor: Colors.transparent,
-                                    onTap: eye,
+                                    onTap: (){
+                                      menuCubit.toggleCampaigns();
+                                    },
                                           child: Padding(
                                             padding: EdgeInsets.only(top: 2.h),
                                             child: SvgPicture.asset(
@@ -158,7 +180,9 @@ class _MenuScreenState extends State<MenuScreen> {
                                         )
                                       : InkWell(
                                     splashColor: Colors.transparent,
-                                    onTap: eye,
+                                    onTap: (){
+                                      menuCubit.toggleCampaigns();
+                                    },
                                           child: Padding(
                                             padding: EdgeInsets.only(top: 2.h),
                                             child: SvgPicture.asset(
@@ -169,14 +193,14 @@ class _MenuScreenState extends State<MenuScreen> {
                               ),
                             ),
                           ),
-                          campaignDetails == true
+                          menuCubit.isVisible == true
                               ? SizedBox(
                                   height: 0.h,
                                 )
                               : SizedBox(
                                   height: 0.h,
                                 ),
-                          if (campaignDetails == true)
+                          if (menuCubit.isVisible == true)
                             Padding(
                               padding: EdgeInsets.only(right: 43.w,),
                               child: Column(
@@ -295,26 +319,46 @@ class _MenuScreenState extends State<MenuScreen> {
                     // ),
                     // if (PreferencesHelper.getUserModel?.user?.voted == false)
                     if (!PreferencesHelper.getIsVisitor)
-                      InkWell(
-                          splashColor: Colors.transparent,
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                PageTransition(
-                                    type: PageTransitionType.fade,
-                                    duration: const Duration(milliseconds: 280),
-                                    child: const TermsPage()));
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 22.h),
-                            child: const DrawerText(
-                                text:
-                                    AppStrings.volunteerBoardOfDirectorsElections,
-                                img: AppAssets
-                                    .volunteerBoardOfDirectorsElectionsIcon,
-                                font: 11),
-                          )),
-                    SizedBox(height:campaignDetails==false? 145.h:80.h),
+                        DateTime.now().isAfter(startTime!) && DateTime.now().isBefore(endTime!)?
+                        InkWell(
+                            splashColor: Colors.transparent,
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  PageTransition(
+                                      type: PageTransitionType.fade,
+                                      duration: const Duration(milliseconds: 280),
+                                      child: const TermsPage()));
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(vertical: 22.h),
+                              child: const DrawerText(
+                                  text:
+                                  AppStrings.volunteerBoardOfDirectorsElections,
+                                  img: AppAssets
+                                      .volunteerBoardOfDirectorsElectionsIcon,
+                                  font: 11),
+                            )):SizedBox(),
+                      // InkWell(
+                      //     splashColor: Colors.transparent,
+                      //     onTap: () {
+                      //       Navigator.push(
+                      //           context,
+                      //           PageTransition(
+                      //               type: PageTransitionType.fade,
+                      //               duration: const Duration(milliseconds: 280),
+                      //               child: const TermsPage()));
+                      //     },
+                      //     child: Padding(
+                      //       padding: EdgeInsets.symmetric(vertical: 22.h),
+                      //       child: const DrawerText(
+                      //           text:
+                      //               AppStrings.volunteerBoardOfDirectorsElections,
+                      //           img: AppAssets
+                      //               .volunteerBoardOfDirectorsElectionsIcon,
+                      //           font: 11),
+                      //     )),
+                    SizedBox(height:menuCubit.isVisible==false? 145.h:80.h),
                     if (!PreferencesHelper.getIsVisitor)
                       InkWell(
                         splashColor: Colors.transparent,

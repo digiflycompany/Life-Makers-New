@@ -9,12 +9,9 @@ import 'package:life_makers/features/edit_account/cubit/edit_account_cubit.dart'
 import 'package:life_makers/services/cubit/global_cubit_state.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 import 'package:page_transition/page_transition.dart';
-
 import '../../../../core/utils/app-assets.dart';
 import '../../../core/utils/app-string.dart';
 import '../../../core/utils/app_fonts.dart';
-import '../../../core/widgets/format_name.dart';
-import '../../authentication/domain/sign_up_cubit/sign_up_cubit.dart';
 import '../../authentication/presentation/pages/login_screen.dart';
 import '../../home_page/domain/menu_page_cubit/menu_page_cubit.dart';
 import '../../home_page/domain/menu_page_cubit/menu_page_states.dart';
@@ -27,15 +24,7 @@ class EditAccountScreen extends StatefulWidget {
 }
 
 class _EditAccountScreenState extends State<EditAccountScreen> {
-  late SignUpCubit signUpCubit;
-
-  String? selectedCityName;
-  String? selectedAreaName;
   UserModel userModel = PreferencesHelper.getUserModel!;
-  final TextEditingController cityDropdownController = TextEditingController();
-
-  final TextEditingController areaDropdownController = TextEditingController();
-
   final TextEditingController nameController = TextEditingController();
   final TextEditingController userNameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -80,8 +69,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
   @override
   void initState() {
     super.initState();
-    signUpCubit = context.read<SignUpCubit>();
-    signUpCubit.fetchCityData();
+
     nameController.text = userModel.user?.name ?? '';
     userNameController.text = userModel.user?.username ?? '';
     emailController.text = userModel.user?.email ?? '';
@@ -100,9 +88,9 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
   Widget build(BuildContext context) {
     final menuCubit = context.read<MenuCubit>();
     return BlocConsumer<MenuCubit, MenuState>(
-        listener: (context, state) async {
+        listener: (context, state) {
           if (state is DeleteAccountSuccess) {
-           await  PreferencesHelper.logOut;
+            PreferencesHelper.logOut();
             Navigator.pushReplacement(
                 context,
                 PageTransition(
@@ -272,14 +260,26 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                           ),
                         ),
                       ),
-                      Container(
-                        height: 80,
-                        width: 80,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.grey)),
-                        child: Center(
-                            child: Text(formatName(PreferencesHelper.getName))),
+                      Stack(
+                        children: [
+                          Container(
+                            height: 80,
+                            width: 80,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(color: Colors.grey)),
+                            child: SvgPicture.asset(AppAssets.circleAvatar2),
+                          ),
+                          Positioned(
+                              top: 63.h,
+                              left: 60.w,
+                              child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  onTap: (){
+
+                                  },
+                                  child: Icon(Icons.camera_alt,color: AppColors.gradientColor1,))),
+                        ],
                       ),
                     ],
                   )
@@ -362,6 +362,8 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                 ),
                                 Flexible(
                                     child: TextField(
+                                        enabled: false,
+
                                         controller: whatsappController,
                                         cursorColor: AppColors.blueColor,
                                         textInputAction: TextInputAction.next,
@@ -449,14 +451,12 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 15),
-                            child:
-                            Row(
+                            child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
 
                                 Flexible(
                                     child: TextField(
-                                      enabled: false,
                                         controller: governorateController,
                                         cursorColor: AppColors.blueColor,
                                         textInputAction: TextInputAction.next,
@@ -472,7 +472,6 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                 ),
                                 Flexible(
                                     child: TextField(
-                                      enabled: false,
                                         controller: centerController,
                                         keyboardType: TextInputType.name,
                                         textInputAction: TextInputAction.next,

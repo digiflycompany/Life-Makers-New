@@ -7,7 +7,9 @@ import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/features/campaign_details/cubit/all_campaigns_cubit.dart';
 import 'package:life_makers/features/edit_account/screens/edit_account_screen.dart';
 import 'package:life_makers/features/volunteer_opportunity/cubit/volunteer_cubit.dart';
+import 'package:life_makers/features/volunteer_opportunity/presentation/widgets/user_joined_one_day_activity.dart';
 import 'package:life_makers/features/volunteer_opportunity/presentation/widgets/user_joined_programs_card.dart';
+import 'package:life_makers/features/volunteer_opportunity/presentation/widgets/user_joined_remote_tasks_card.dart';
 import 'package:life_makers/services/cubit/global_cubit_state.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 import 'package:page_transition/page_transition.dart';
@@ -15,10 +17,8 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app-string.dart';
 import '../../../../core/utils/app_fonts.dart';
-import '../../../../core/widgets/format_name.dart';
 import '../../../../core/widgets/title_text.dart';
 import '../../../seasonal_campaigns/presentation/build_seasonal_widget.dart';
-import '../../../volunteer_opportunity/presentation/screens/training_program_details.dart';
 import 'news_details.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -104,16 +104,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 right: 25,
                 child: Row(
                   children: [
-                    Container(
-                      height: 60,
-                      width: 60,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.grey)),
-                      child: Center(
-                          child: Text(PreferencesHelper.getIsVisitor
-                              ? 'زائر'
-                              : formatName(PreferencesHelper.getName))),
+                    InkWell(
+                      onTap: (){
+                        Navigator.push(
+                            context,
+                            PageTransition(
+                                type: PageTransitionType.fade,
+                                duration: const Duration(milliseconds: 400),
+                                child: EditAccountScreen()));
+                      },
+                      splashColor: Colors.transparent,
+                      child: Container(
+                        height: 60,
+                        width: 60,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.grey)),
+                        child: SvgPicture.asset(AppAssets.circleAvatar2),
+                      ),
                     ),
                     const SizedBox(width: 10),
                     Column(
@@ -162,14 +170,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               width: 190,
                               backgroundColor: const Color(0xffF1F1F1),
                               progressColor: const Color(0xffF7936F),
-                              percent: 0.5,
+                              percent: 0,
                               isRTL: true,
                               lineHeight: 8,
                               padding: EdgeInsets.zero,
                               barRadius: const Radius.circular(5),
                             ),
                             SizedBox(width: 10),
-                            Image.asset(AppAssets.crownPng),
+                           // Image.asset(AppAssets.crownPng),
                           ],
                         )
                       ],
@@ -249,6 +257,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         body: SafeArea(
           child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -378,7 +387,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 SizedBox(
                   height: 11.h,
                 ),
-            
+
               ],
             ),
           ),
@@ -497,52 +506,66 @@ class _ProfileScreenState extends State<ProfileScreen> {
     ),
   );
   get previousText => InkWell(
+    splashColor: Colors.transparent,
     onTap: () {
       _changePage(0);
     },
-    child: Text(
-      AppStrings.past,
-      style: TextStyle(
-          color: _currentPage == 0
-              ? AppColors.orangeBorderColor
-              : AppColors.greyTabColor,
-          fontFamily: FontFamilies.alexandria,
-          fontWeight: _currentPage == 0 ? FontWeight.w600 : FontWeight.w400,
-          fontSize: 11.5),
+    child: Padding(
+      padding: const EdgeInsets.only(top: 12,left: 2,bottom: 12,right: 2),
+      child: Center(
+        child: Text(
+          AppStrings.past,
+          style: TextStyle(
+              color: _currentPage == 0
+                  ? AppColors.orangeBorderColor
+                  : AppColors.greyTabColor,
+              fontFamily: FontFamilies.alexandria,
+              fontWeight: _currentPage == 0 ? FontWeight.w600 : FontWeight.w400,
+              fontSize: 11.5),
+        ),
+      ),
     ),
   );
   get currentText => InkWell(
+    splashColor: Colors.transparent,
     onTap: () {
       _changePage(1);
     },
-    child: Text(
-      AppStrings.current,
-      style: TextStyle(
-          color: _currentPage == 1
-              ? AppColors.greenTextColor
-              : AppColors.greyTabColor,
-          fontFamily: FontFamilies.alexandria,
-          fontWeight: _currentPage == 1 ? FontWeight.w600 : FontWeight.w400,
-          fontSize: 11.5),
+    child: Padding(
+      padding: const EdgeInsets.only(top: 12,left: 12,bottom: 12,right: 17),
+      child: Text(
+        AppStrings.current,
+        style: TextStyle(
+            color: _currentPage == 1
+                ? AppColors.greenTextColor
+                : AppColors.greyTabColor,
+            fontFamily: FontFamilies.alexandria,
+            fontWeight: _currentPage == 1 ? FontWeight.w600 : FontWeight.w400,
+            fontSize: 11.5),
+      ),
     ),
   );
   get upcomingText => InkWell(
+    splashColor: Colors.transparent,
     onTap: () {
       _changePage(2);
     },
-    child: Text(
-      AppStrings.upcoming,
-      style: TextStyle(
-          color: _currentPage == 2
-              ? AppColors.blueTextColor
-              : AppColors.greyTabColor,
-          fontFamily: FontFamilies.alexandria,
-          fontWeight: _currentPage == 2 ? FontWeight.w600 : FontWeight.w400,
-          fontSize: 11.5),
+    child: Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: Text(
+        AppStrings.upcoming,
+        style: TextStyle(
+            color: _currentPage == 2
+                ? AppColors.blueTextColor
+                : AppColors.greyTabColor,
+            fontFamily: FontFamilies.alexandria,
+            fontWeight: _currentPage == 2 ? FontWeight.w600 : FontWeight.w400,
+            fontSize: 11.5),
+      ),
     ),
   );
   get texts => Padding(
-    padding: EdgeInsets.only(left: 25.w, right: 25.w, top: 13.h),
+    padding: EdgeInsets.only(left: 12.w, right: 25.w, top: 2.h),
     child: Row(
       textDirection: TextDirection.rtl,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -571,7 +594,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     ],
   );
   get texts2 => Padding(
-    padding: EdgeInsets.only(left: 25.w, right: 25.w, top: 13.h),
+    padding: EdgeInsets.only(left: 12.w, right: 25.w, top: 2.h),
     child: Row(
       textDirection: TextDirection.rtl,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -583,48 +606,60 @@ class _ProfileScreenState extends State<ProfileScreen> {
     ),
   );
   get previousText2 => InkWell(
+    splashColor: Colors.transparent,
     onTap: () {
       _changePage2(0);
     },
-    child: Text(
-      'برامجك',
-      style: TextStyle(
-          color: _currentPage2 == 0
-              ? AppColors.blueTextColor
-              : AppColors.greyTabColor,
-          fontFamily: FontFamilies.alexandria,
-          fontWeight: _currentPage2 == 0 ? FontWeight.w600 : FontWeight.w400,
-          fontSize: 11.5),
+    child: Padding(
+      padding: const EdgeInsets.only(top: 12,left: 2,bottom: 12,right: 0),
+      child: Text(
+        'برامجك',
+        style: TextStyle(
+            color: _currentPage2 == 0
+                ? AppColors.blueTextColor
+                : AppColors.greyTabColor,
+            fontFamily: FontFamilies.alexandria,
+            fontWeight: _currentPage2 == 0 ? FontWeight.w600 : FontWeight.w400,
+            fontSize: 11.5),
+      ),
     ),
   );
   get currentText2 => InkWell(
+    splashColor: Colors.transparent,
     onTap: () {
       _changePage2(1);
     },
-    child: Text(
-      'أنشطتك',
-      style: TextStyle(
-          color: _currentPage2 == 1
-              ? AppColors.blueTextColor
-              : AppColors.greyTabColor,
-          fontFamily: FontFamilies.alexandria,
-          fontWeight: _currentPage2 == 1 ? FontWeight.w600 : FontWeight.w400,
-          fontSize: 11.5),
+    child: Padding(
+      padding: const EdgeInsets.only(top: 12,left: 12,bottom: 12,right: 24),
+      child: Text(
+        'أنشطتك',
+        style: TextStyle(
+            color: _currentPage2 == 1
+                ? AppColors.blueTextColor
+                : AppColors.greyTabColor,
+            fontFamily: FontFamilies.alexandria,
+            fontWeight: _currentPage2 == 1 ? FontWeight.w600 : FontWeight.w400,
+            fontSize: 11.5),
+      ),
     ),
   );
   get upcomingText2 => InkWell(
+    splashColor: Colors.transparent,
     onTap: () {
       _changePage2(2);
     },
-    child: Text(
-      'مهامك',
-      style: TextStyle(
-          color: _currentPage2 == 2
-              ? AppColors.blueTextColor
-              : AppColors.greyTabColor,
-          fontFamily: FontFamilies.alexandria,
-          fontWeight: _currentPage2 == 2 ? FontWeight.w600 : FontWeight.w400,
-          fontSize: 11.5),
+    child: Padding(
+      padding: const EdgeInsets.only(top: 12,left: 10,bottom: 12,right: 17),
+      child: Text(
+        'مهامك',
+        style: TextStyle(
+            color: _currentPage2 == 2
+                ? AppColors.blueTextColor
+                : AppColors.greyTabColor,
+            fontFamily: FontFamilies.alexandria,
+            fontWeight: _currentPage2 == 2 ? FontWeight.w600 : FontWeight.w400,
+            fontSize: 11.5),
+      ),
     ),
   );
   get divider2 => Padding(
@@ -716,7 +751,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
   get pages2 => SizedBox(
-    height: 320,
+    height: 420,
     width: double.infinity,
     child: PageView(
       controller: _pageController2,
@@ -727,8 +762,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       },
       children: [
         JoinedProgramCard(),
-        JoinedProgramCard(),
-        JoinedProgramCard(),
+        JoinedOneDayActivity(),
+        JoinedRemoteTasks(),
       ],
     ),
   );
@@ -736,10 +771,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   get pages => SizedBox(
-    height: 400,
+    height: 420,
     child: PageView(
       //physics:const ClampingScrollPhysics(),
-      //reverse: true,
+      reverse: true,
       controller: _pageController,
       onPageChanged: (int page) {
         setState(() {
@@ -1133,11 +1168,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           SizedBox(
             width: 6.w,
           ),
-          previousOrphanCard,
-          SizedBox(
-            width: 6.w,
-          ),
-          previousOrphanCard,
         ],
       ),
     ),

@@ -16,7 +16,9 @@ class LoginCircular extends StatelessWidget {
         borderRadius: BorderRadius.circular(8.r),
       ),
       child:  Center(
-        child: CircularProgressIndicator(color: Colors.white,)
+        child: Transform.scale(
+            scale: 0.5,
+            child: CircularProgressIndicator(color: Colors.white,))
       ),
     );
   }

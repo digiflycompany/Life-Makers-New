@@ -8,6 +8,7 @@ import 'package:life_makers/core/widgets/title_text.dart';
 import 'package:life_makers/features/home_page/cubit/home_calender_cubit.dart';
 import 'package:life_makers/features/home_page/presentation/pages/home_calender_details_screen.dart';
 import 'package:life_makers/features/home_page/presentation/pages/news_details.dart';
+import 'package:life_makers/features/home_page/presentation/pages/profile_screen.dart';
 import 'package:life_makers/services/cubit/global_cubit_state.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 import 'package:page_transition/page_transition.dart';
@@ -16,7 +17,6 @@ import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app-string.dart';
 import '../../../../core/utils/app_fonts.dart';
-import '../../../../core/widgets/format_name.dart';
 import '../../../seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import '../../cubit/emergency_campaigns_cubit.dart';
 import '../../data/models/home_calender_model.dart';
@@ -141,7 +141,7 @@ class _MainPageState extends State<MainPage> {
                             );
                         } else if (state == CubitBaseState.loading) {
                           return Center(
-                              child: CircularProgressIndicator.adaptive());
+                              child: CircularProgressIndicator(color: AppColors.orangeBorderColor,));
                         }
                         return SizedBox.shrink();
                       },
@@ -163,7 +163,7 @@ class _MainPageState extends State<MainPage> {
                                   .homeCalenderModel?.calender?[index]);
                         });
                   } else if (state == CubitBaseState.loading) {
-                    return Center(child: CircularProgressIndicator.adaptive());
+                    return Center(child: CircularProgressIndicator(color: AppColors.orangeBorderColor,));
                   }
                   return SizedBox.shrink();
                 }),
@@ -248,7 +248,7 @@ class _MainPageState extends State<MainPage> {
     width: 190,
     backgroundColor: const Color(0xffF1F1F1),
     progressColor: const Color(0xffF7936F),
-    percent: 0.5,
+    percent: 0,
     isRTL: true,
     lineHeight: 8,
     padding: EdgeInsets.zero,
@@ -274,11 +274,22 @@ class _MainPageState extends State<MainPage> {
           child: CircleAvatar(
               radius: 40.r,
               backgroundColor: Colors.white,
-              child: Text(
-                  PreferencesHelper.getIsVisitor?'':
-                  formatName(PreferencesHelper.getName))),
+              child:SvgPicture.asset(AppAssets.circleAvatar2)),
         ),
       );
+
+  // get circleAvatar => Align(
+  //   alignment: AlignmentDirectional.topEnd,
+  //   child: Padding(
+  //     padding: EdgeInsets.only(top: 19.h),
+  //     child: CircleAvatar(
+  //         radius: 40.r,
+  //         backgroundColor: Colors.white,
+  //         child: Text(
+  //             PreferencesHelper.getIsVisitor?'':
+  //             formatName(PreferencesHelper.getName))),
+  //   ),
+  // );
   get details => Row(
         textDirection: TextDirection.rtl,
         children: [
@@ -291,9 +302,9 @@ class _MainPageState extends State<MainPage> {
           SizedBox(
             width: 10.w,
           ),
-          crownIcon,
-          SizedBox(width: 5.w),
-          dropDownIcon,
+          //crownIcon,
+         // SizedBox(width: 5.w),
+          //dropDownIcon,
         ],
       );
   get arrowIcon => Padding(
@@ -323,15 +334,32 @@ class _MainPageState extends State<MainPage> {
   get activitiesAndMore => Row(
         children: [
           SizedBox(
-            width: 20.w,
+            width: 12.w,
           ),
-          arrowIcon,
-          SizedBox(
-            width: 5.w,
+          InkWell(
+            onTap: (){
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.fade,
+                      duration: const Duration(milliseconds: 400),
+                      child: ProfileScreen(hasBackButton: true,)));
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  arrowIcon,
+                  SizedBox(
+                    width: 5.w,
+                  ),
+                  moreText,
+                ],
+              ),
+            ),
           ),
-          moreText,
           SizedBox(
-            width: 240.w,
+            width: 228.w,
           ),
           activitiesText,
         ],
@@ -626,11 +654,11 @@ class _MainPageState extends State<MainPage> {
             children: [
               details,
               SizedBox(
-                height: 20.h,
+                height: 16.h,
               ),
               activitiesAndMore,
               SizedBox(
-                height: 17.h,
+                height: 9.h,
               ),
               cards,
             ],
@@ -662,6 +690,73 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
             ),
+          Positioned(
+            top: 17,
+            left:17,
+            child: InkWell(
+                onTap: () {
+                  if (!PreferencesHelper.getIsVisitor)
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            content: Container(
+                              decoration: BoxDecoration(
+                                color: const Color(0xff0E395E),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              padding: const EdgeInsets.only(top: 30),
+                              // margin: const EdgeInsets.only(bottom: 22),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment:
+                                CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    width: 150,
+                                    height: 150,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:
+                                        BorderRadius.circular(10)),
+                                    child: SvgPicture.network(
+                                        '${PreferencesHelper.getUserModel?.user?.qrCode}'),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.center,
+                                    children: [
+                                      const Text(
+                                        'امسح هنا',
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontFamily: 'Alexandria',
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                      SvgPicture.asset(
+                                          'assets/svg/tie.svg'),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 14),
+                                ],
+                              ),
+                            ),
+                          );
+                        });
+                },
+                child: SvgPicture.asset(
+                  AppAssets.qrCode2,
+                )),
+          )
         ],
       ));
   newsText({required String text}) {
@@ -714,10 +809,12 @@ class _MainPageState extends State<MainPage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Flexible(
+              SizedBox(
+                width: 250.w,
                 child: Text(
                   '${calender?.name}',
                   textDirection: TextDirection.rtl,
+                  maxLines: 2,
                   style: TextStyle(
                       height: 2.h,
                       color: Colors.black,
