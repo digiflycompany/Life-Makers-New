@@ -15,14 +15,16 @@ class NewsDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            getheader(context),
-            SizedBox(height: 20.h),
-            getbody(context),
-          ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              getheader(context),
+              SizedBox(height: 20.h),
+              getbody(context),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: Padding(
