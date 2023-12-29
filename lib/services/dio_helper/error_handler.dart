@@ -20,7 +20,7 @@ void errorHandler(
   } else if (response?.statusCode == 500) {
     CustomSnackBars.showErrorToast(title: 'خطأ في السيرفر');
   } else if (response?.statusCode == 401) {
-    PreferencesHelper.preferences?.remove('token');
+    PreferencesHelper.logOut();
     AwesomeDialog(
             context: context,
             title: "Authentiation Error",

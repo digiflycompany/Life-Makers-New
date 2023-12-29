@@ -23,23 +23,23 @@ class PreferencesHelper {
   static String? getToken() {
     return preferences?.getString("token");
   }
+
   static Future<void> saveIsVisitor({required bool isVisitor}) async {
     await preferences?.setBool("isVisitor", isVisitor);
   }
 
   static bool get getIsVisitor {
-    return preferences?.getBool("isVisitor")??false;
+    return preferences?.getBool("isVisitor") ?? false;
   }
 
-
-
-  static Future<void> saveUserModel(UserModel  userModel) async {
+  static Future<void> saveUserModel(UserModel userModel) async {
     await preferences?.setString('userModel', json.encode(userModel));
   }
 
-  static Future<void> savePhoneUserModel(PhoneUserModel  phoneUserModel) async {
+  static Future<void> savePhoneUserModel(PhoneUserModel phoneUserModel) async {
     await preferences?.setString('phoneUserModel', json.encode(phoneUserModel));
   }
+
   static UserModel? get getUserModel {
     if (preferences?.getString('userModel') != null) {
       return UserModel.fromJson(
@@ -47,6 +47,7 @@ class PreferencesHelper {
     }
     return null;
   }
+
   static PhoneUserModel? get getPhoneUserModel {
     if (preferences?.getString('phoneUserModel') != null) {
       return PhoneUserModel.fromJson(
@@ -56,13 +57,10 @@ class PreferencesHelper {
   }
 
   static String get getName {
-
-
     UserModel? userModel = UserModel.fromJson(
         json.decode('${preferences?.getString('userModel')}'));
-    return userModel.user?.name?? '';
+    return userModel.user?.name ?? '';
   }
-
 
   static void logOut() {
     preferences?.remove('token');
@@ -70,9 +68,6 @@ class PreferencesHelper {
   }
 
   static Widget get applicationFirstPage {
-    return PreferencesHelper.getToken() != null
-        ?  DrawerPage()
-        :  LoginScreen();
+    return PreferencesHelper.getToken() != null ? DrawerPage() : LoginScreen();
   }
 }
-

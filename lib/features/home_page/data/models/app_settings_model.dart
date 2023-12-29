@@ -31,7 +31,7 @@ class Data {
   String? vonageSecret;
   String? smsMessage;
   String? smsTitle;
-  dynamic? createdAt;
+  dynamic createdAt;
   String? updatedAt;
   String? logo;
   String? title;

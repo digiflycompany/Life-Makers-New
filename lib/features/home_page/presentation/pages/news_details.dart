@@ -5,6 +5,8 @@ import 'package:life_makers/core/utils/app_fonts.dart';
 import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/features/home_page/presentation/widgets/news_button.dart';
 import '../../../../core/utils/app-assets.dart';
+import '../../../../core/widgets/custom_snack_bar.dart';
+import '../../../campaign_details/presentation/pages/campaign_details_screen.dart';
 import '../../../seasonal_campaigns/model/seasonal_campaigns_model.dart';
 
 class NewsDetails extends StatelessWidget {
@@ -13,27 +15,28 @@ class NewsDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            children: [
-              getheader(context),
-              SizedBox(height: 20.h),
-              getbody(context),
-            ],
-          ),
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            getheader(context),
+            SizedBox(height: 20.h),
+            getbody(context),
+          ],
         ),
       ),
-      bottomNavigationBar: getButton(context),
+      bottomNavigationBar: Padding(
+          padding: const EdgeInsets.only(bottom: 20,right: 20,left: 20),
+
+          child:getButton(context)),
     );
   }
 
   get campaignImage => AspectRatio(
-      aspectRatio: 16 / 9,
+      aspectRatio: 16 / 10,
       child: Image.network(
         campains!.photo!,
-        fit: BoxFit.cover,
+        fit: BoxFit.fill,
       ));
 
   greyCircle(BuildContext context) => GestureDetector(
@@ -66,25 +69,22 @@ class NewsDetails extends StatelessWidget {
           greyCircle(context),
           newsArrow(context),
           SizedBox(
-            height: 10.h,
+            height: 10.h
           ),
         ],
       );
 
-  get title => Padding(
-        padding: EdgeInsets.only(left: 38.w),
-        child: Text(
-          '${campains?.name}',
-          style: TextStyle(
-              color: Colors.black,
-              fontFamily: FontFamilies.alexandria,
-              fontWeight: FontWeight.w600,
-              fontSize: 12,
-              height: 2.h),
-          textDirection: TextDirection.rtl,
-          maxLines: 2,
+  get title => Text(
+    '${campains?.name}',
+    style: TextStyle(
+        color: Colors.black,
+        fontFamily: FontFamilies.alexandria,
+        fontWeight: FontWeight.w600,
+        fontSize: 12,
         ),
-      );
+    textDirection: TextDirection.rtl,
+    maxLines: 2,
+  );
 
   get detailsText1 => Text(
         '${campains?.details}',
@@ -97,28 +97,30 @@ class NewsDetails extends StatelessWidget {
         textDirection: TextDirection.rtl,
       );
 
-  getButton(BuildContext context) => NewsButton(
+  getButton(BuildContext context) {
+    if(campains?.userJoined=='false')
+    return NewsButton(
       onTap: () {
-        // _showPopup(context);
+        showJoinCampaignPopUp(
+            context: context,
+            campaignDetails: campains);
       },
       text: AppStrings.joinCampaign);
+    else return PendingButton(onTap: (){
+      CustomSnackBars.showInfoSnackBar(title: AppStrings.pendingText);
+
+    }, text: AppStrings.pendingText);
+  }
 
   getbody(BuildContext context) => Padding(
         padding: EdgeInsets.symmetric(horizontal: 19.w),
         child: Column(
           children: [
             title,
-            SizedBox(
-              height: 22.h,
-            ),
+            SizedBox(height: 22.h),
             detailsText1,
-            SizedBox(
-              height: 141.h,
-            ),
-            SizedBox(
-              height: 25.h,
-            ),
           ],
         ),
       );
 }
+

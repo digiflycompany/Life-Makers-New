@@ -59,26 +59,29 @@ class _ChooseRoleSecondPageState extends State<ChooseRoleSecondPage> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.end,
-                      children: widget.campaignDetails!.tasks!.where((element) =>
-                      element.id==widget.selectedRoleId)
-                          .map(
-                            (e) => Column(
-                              children: e.details!.map((e) => CheckboxMenuButton(
-                                value: true,
-                                onChanged: (v) {},
-                                child: SizedBox(
-                                  width: 240.w,
-                                  child: Text(
-                                    e,
-                                    style: TextStyle(
-                                      fontFamily: 'Alexandria',
-                                      fontSize: 10,
-                                    ),
-                                  ),
-                                ),
-                              ),).toList(),
-                            )
-                          )
+                      children: widget.campaignDetails!.tasks!
+                          .where(
+                              (element) => element.id == widget.selectedRoleId)
+                          .map((e) => Column(
+                                children: e.details!
+                                    .map(
+                                      (e) => CheckboxMenuButton(
+                                        value: true,
+                                        onChanged: (v) {},
+                                        child: SizedBox(
+                                          width: 240.w,
+                                          child: Text(
+                                            e,
+                                            style: TextStyle(
+                                              fontFamily: 'Alexandria',
+                                              fontSize: 10,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                    .toList(),
+                              ))
                           .toList(),
                     ),
                   ),
@@ -147,15 +150,19 @@ class _ChooseRoleSecondPageState extends State<ChooseRoleSecondPage> {
             }
           },
           builder: (_, state) {
+            bool userJoined = widget.campaignDetails?.userJoined == 'true';
             if (state == CubitBaseState.loading) {
               return Center(child: CircularProgressIndicator.adaptive());
             }
-            return NewsButton2(
-                onTap: () {
-                  joinCampaignCubit.joinCampaign(
-                      taskId: widget.selectedRoleId, context: context);
-                },
-                text: AppStrings.joinCampaign);
+            return userJoined
+                ? PendingButton(onTap: () {}, text: 'قيد الانتظار')
+                : NewsButton2(
+                    onTap: () {
+                      print(userJoined);
+                      joinCampaignCubit.joinCampaign(
+                          taskId: widget.selectedRoleId, context: context);
+                    },
+                    text: AppStrings.joinCampaign);
           },
         ),
       ));
@@ -216,12 +223,11 @@ class _ChooseRoleSecondPageState extends State<ChooseRoleSecondPage> {
       // Navigate to another screen
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) =>
-            JoinCampaignDetails(taskId: widget.selectedRoleId,
-
-            campaignDetails: widget.campaignDetails)),
+        MaterialPageRoute(
+            builder: (context) => JoinCampaignDetails(
+                taskId: widget.selectedRoleId,
+                campaignDetails: widget.campaignDetails)),
       );
     });
   }
-
 }

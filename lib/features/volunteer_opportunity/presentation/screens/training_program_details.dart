@@ -159,7 +159,7 @@ class _TrainingProgramDetailsState extends State<TrainingProgramDetails> {
                                 ),
                               ),
                             )
-                                :  pendingButton(
+                                :  PendingButton(
                                 onTap: () {
                                  // volunteerCubit.leftProgram('${volunteerCubit.volunteerPracticalTrainingModel?.volunteerOpportunities![widget.index].id}');
                                  CustomSnackBars.showInfoSnackBar(title: AppStrings.pendingText);
