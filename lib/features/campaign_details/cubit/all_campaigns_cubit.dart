@@ -12,16 +12,13 @@ class AllCampaignsCubit extends Cubit<CubitBaseState> {
 
   AllCampainsModel? campaignsModel;
   Future<void> getAllCampaigns() async {
-    if(campaignsModel==null)
-      {
-        emit(CubitBaseState.loading);
-        Response? response = await campaignRepository.getAllCampaigns();
-        if (response?.statusCode == 200) {
-          campaignsModel = AllCampainsModel.fromJson(response?.data);
-          emit(CubitBaseState.done);
-        } else {
-          emit(CubitBaseState.error);
-        }
-      }
+    emit(CubitBaseState.loading);
+    Response? response = await campaignRepository.getAllCampaigns();
+    if (response?.statusCode == 200) {
+      campaignsModel = AllCampainsModel.fromJson(response?.data);
+      emit(CubitBaseState.done);
+    } else {
+      emit(CubitBaseState.error);
+    }
   }
 }

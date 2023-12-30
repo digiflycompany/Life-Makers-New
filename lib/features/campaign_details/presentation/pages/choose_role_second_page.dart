@@ -158,7 +158,7 @@ class _ChooseRoleSecondPageState extends State<ChooseRoleSecondPage> {
                 ? PendingButton(onTap: () {}, text: AppStrings.pendingText)
                 : NewsButton2(
                     onTap: () {
-                      print(userJoined);
+                      debugPrint('$userJoined');
                       joinCampaignCubit.joinCampaign(
                           taskId: widget.selectedRoleId, context: context);
                     },

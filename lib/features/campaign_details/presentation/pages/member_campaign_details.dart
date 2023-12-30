@@ -17,7 +17,7 @@ class JoinCampaignDetails extends StatefulWidget {
   JoinCampaignDetails(
       {super.key, required this.taskId, required this.campaignDetails});
 
- final int taskId;
+  final int taskId;
   final Campains? campaignDetails;
 
   @override
@@ -46,10 +46,10 @@ class _JoinCampaignDetailsState extends State<JoinCampaignDetails> {
           children: [
             SizedBox(height: 20.h),
             AspectRatio(
-                aspectRatio: 16 / 9,
+                aspectRatio: 16 / 10,
                 child: Image.network(
                   '${widget.campaignDetails?.photo}',
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                 )),
             SizedBox(
               height: 17.h,
@@ -67,21 +67,15 @@ class _JoinCampaignDetailsState extends State<JoinCampaignDetails> {
                         fontWeight: FontWeight.w500,
                         fontSize: 17),
                   ),
-                  SizedBox(
-                    height: 6.h,
-                  ),
+                  SizedBox(height: 6.h),
                   date,
-                  SizedBox(
-                    height: 15.h,
-                  ),
+                  SizedBox(height: 15.h),
                   campaignContent,
-                  SizedBox(
-                    height: 11.h,
-                  ),
-                  // campaignButton,
+                  SizedBox(height: 11.h),
                   SizedBox(height: 19.h),
                   campaignMissionsText,
                   SizedBox(height: 20.h),
+                  if(widget.campaignDetails?.userJoined=='false')
                   Container(
                     padding:
                         EdgeInsets.only(top: 10.h, right: 10, bottom: 30.h),
@@ -133,133 +127,9 @@ class _JoinCampaignDetailsState extends State<JoinCampaignDetails> {
                     ),
                   ),
                   SizedBox(
-                    height: 30.h,
+                    height: 30.h
                   ),
-                  Container(
-                    width: 390.w,
-                    height: 63.h,
-                    decoration: BoxDecoration(
-                      color: AppColors.orangeBorderColor,
-                      borderRadius: BorderRadius.circular(5.r),
-                    ),
-                    child: Center(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10.w),
-                        child: Row(
-                          textDirection: TextDirection.rtl,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                _showSuggestionPopup(
-                                    context: context, taskId: widget.taskId);
-                              },
-                              child: Row(
-                                textDirection: TextDirection.rtl,
-                                children: [
-                                  SvgPicture.asset(
-                                    AppAssets.suggestionIcon,
-                                    width: 18.w,
-                                  ),
-                                  SizedBox(
-                                    width: 7.w,
-                                  ),
-                                  const Text(
-                                    AppStrings.suggestion,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: FontFamilies.alexandria,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 10.5),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              width: 4.w,
-                            ),
-                            SizedBox(
-                              height: 40.h,
-                              child: const VerticalDivider(
-                                color: Colors.white,
-                                thickness: 1,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 4.w,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                _showComplainPopup(
-                                    taskId: widget.taskId, context: context);
-                              },
-                              child: Row(
-                                textDirection: TextDirection.rtl,
-                                children: [
-                                  SvgPicture.asset(
-                                    AppAssets.complainIcon,
-                                    width: 18.w,
-                                  ),
-                                  SizedBox(
-                                    width: 7.w,
-                                  ),
-                                  const Text(
-                                    AppStrings.complain,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: FontFamilies.alexandria,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 10.5),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              width: 4.w,
-                            ),
-                            SizedBox(
-                              height: 40.h,
-                              child: const VerticalDivider(
-                                color: Colors.white,
-                                thickness: 1,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 4.w,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                _showLeavingPopup(context);
-                              },
-                              child: Row(
-                                textDirection: TextDirection.rtl,
-                                children: [
-                                  SvgPicture.asset(
-                                    AppAssets.joinCampaignIcon,
-                                    width: 18.w,
-                                  ),
-                                  SizedBox(
-                                    width: 7.w,
-                                  ),
-                                  const Text(
-                                    AppStrings.leaveCampaign,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: FontFamilies.alexandria,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 10.5),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30.h,
-                  ),
+
                 ],
               ),
             ),
@@ -269,130 +139,130 @@ class _JoinCampaignDetailsState extends State<JoinCampaignDetails> {
       bottomNavigationBar: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          if(widget.campaignDetails?.userJoined == 'true')
-             Container(
-            width: 390.w,
-            height: 63.h,
-            decoration: BoxDecoration(
-              color: AppColors.orangeBorderColor,
-              borderRadius: BorderRadius.circular(5.r),
-            ),
-            child: Center(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.w),
-                child: Row(
-                  textDirection: TextDirection.rtl,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        _showSuggestionPopup(
-                            context: context, taskId: widget.taskId);
-                      },
-                      child: Row(
-                        textDirection: TextDirection.rtl,
-                        children: [
-                          SvgPicture.asset(
-                            AppAssets.suggestionIcon,
-                            width: 18.w,
-                          ),
-                          SizedBox(
-                            width: 7.w,
-                          ),
-                          const Text(
-                            AppStrings.suggestion,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: FontFamilies.alexandria,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 10.5),
-                          ),
-                        ],
+          if (widget.campaignDetails?.userJoined == 'true')
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 10,vertical: 20),
+              width: 390.w,
+              height: 63.h,
+              decoration: BoxDecoration(
+                color: AppColors.orangeBorderColor,
+                borderRadius: BorderRadius.circular(5.r),
+              ),
+              child: Center(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10.w),
+                  child: Row(
+                    textDirection: TextDirection.rtl,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          _showSuggestionPopup(
+                              context: context, taskId: widget.taskId);
+                        },
+                        child: Row(
+                          textDirection: TextDirection.rtl,
+                          children: [
+                            SvgPicture.asset(
+                              AppAssets.suggestionIcon,
+                              width: 18.w,
+                            ),
+                            SizedBox(
+                              width: 7.w,
+                            ),
+                            const Text(
+                              AppStrings.suggestion,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: FontFamilies.alexandria,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 10.5),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 4.w,
-                    ),
-                    SizedBox(
-                      height: 40.h,
-                      child: const VerticalDivider(
-                        color: Colors.white,
-                        thickness: 1,
+                      SizedBox(
+                        width: 4.w,
                       ),
-                    ),
-                    SizedBox(
-                      width: 4.w,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        _showComplainPopup(
-                            taskId: widget.taskId, context: context);
-                      },
-                      child: Row(
-                        textDirection: TextDirection.rtl,
-                        children: [
-                          SvgPicture.asset(
-                            AppAssets.complainIcon,
-                            width: 18.w,
-                          ),
-                          SizedBox(
-                            width: 7.w,
-                          ),
-                          const Text(
-                            AppStrings.complain,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: FontFamilies.alexandria,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 10.5),
-                          ),
-                        ],
+                      SizedBox(
+                        height: 40.h,
+                        child: const VerticalDivider(
+                          color: Colors.white,
+                          thickness: 1,
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 4.w,
-                    ),
-                    SizedBox(
-                      height: 40.h,
-                      child: const VerticalDivider(
-                        color: Colors.white,
-                        thickness: 1,
+                      SizedBox(
+                        width: 4.w,
                       ),
-                    ),
-                    SizedBox(
-                      width: 4.w,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        _showLeavingPopup(context);
-                      },
-                      child: Row(
-                        textDirection: TextDirection.rtl,
-                        children: [
-                          SvgPicture.asset(
-                            AppAssets.joinCampaignIcon,
-                            width: 18.w,
-                          ),
-                          SizedBox(
-                            width: 7.w,
-                          ),
-                          const Text(
-                            AppStrings.leaveCampaign,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: FontFamilies.alexandria,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 10.5),
-                          ),
-                        ],
+                      GestureDetector(
+                        onTap: () {
+                          _showComplainPopup(
+                              taskId: widget.taskId, context: context);
+                        },
+                        child: Row(
+                          textDirection: TextDirection.rtl,
+                          children: [
+                            SvgPicture.asset(
+                              AppAssets.complainIcon,
+                              width: 18.w,
+                            ),
+                            SizedBox(
+                              width: 7.w,
+                            ),
+                            const Text(
+                              AppStrings.complain,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: FontFamilies.alexandria,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 10.5),
+                            ),
+                          ],
+                        ),
                       ),
-                    )
-                  ],
+                      SizedBox(
+                        width: 4.w,
+                      ),
+                      SizedBox(
+                        height: 40.h,
+                        child: const VerticalDivider(
+                          color: Colors.white,
+                          thickness: 1,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 4.w,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          _showLeavingPopup(context);
+                        },
+                        child: Row(
+                          textDirection: TextDirection.rtl,
+                          children: [
+                            SvgPicture.asset(
+                              AppAssets.joinCampaignIcon,
+                              width: 18.w,
+                            ),
+                            SizedBox(
+                              width: 7.w,
+                            ),
+                            const Text(
+                              AppStrings.leaveCampaign,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: FontFamilies.alexandria,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 10.5),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-
         ],
       ),
     );
@@ -445,7 +315,7 @@ class _JoinCampaignDetailsState extends State<JoinCampaignDetails> {
   get dateText => Padding(
         padding: EdgeInsets.only(top: 2.h),
         child: Text(
-          '${widget.campaignDetails?.startAt}',
+          '${widget.campaignDetails?.startAt}'.split((' ')).first,
           style: TextStyle(
               color: Colors.grey,
               fontFamily: FontFamilies.alexandria,
@@ -480,17 +350,6 @@ class _JoinCampaignDetailsState extends State<JoinCampaignDetails> {
                 fontWeight: FontWeight.w500,
                 fontSize: 14),
           ),
-        ),
-      );
-  get palestineText => const Align(
-        alignment: AlignmentDirectional.centerEnd,
-        child: Text(
-          AppStrings.palestine2,
-          style: TextStyle(
-              color: Colors.black,
-              fontFamily: FontFamilies.alexandria,
-              fontWeight: FontWeight.w500,
-              fontSize: 17),
         ),
       );
 
@@ -777,7 +636,9 @@ class _JoinCampaignDetailsState extends State<JoinCampaignDetails> {
                   ),
                   SendButton(onTap: () async {
                     joinCampaignCubit.leaveCampaign(
-                        campaignId: 0, context: context, leaveReason: leaveReason);
+                        campaignId: 0,
+                        context: context,
+                        leaveReason: leaveReason);
                   })
                 ],
               ),

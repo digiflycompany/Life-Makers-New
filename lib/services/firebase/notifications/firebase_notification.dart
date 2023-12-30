@@ -11,7 +11,6 @@ class FirebaseCustomNotification {
   static Future<void> firebaseMessagingAppOpen() async {
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
       debugPrint('Notification data: ${message.data}');
-      debugPrint('Token ${await FirebaseMessaging.instance.getToken()}');
     });
   }
 

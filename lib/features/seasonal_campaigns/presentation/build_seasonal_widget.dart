@@ -12,17 +12,15 @@ Widget buildCampaignGridView(
     textDirection: TextDirection.rtl,
     child: campaigns?.isNotEmpty == true
         ? Container(
-          height: MediaQuery.of(context).size.height*0.5,
-          child: GridView.builder(
-            padding: EdgeInsets.only(bottom: 100),
+            height: MediaQuery.of(context).size.height * 0.5,
+            child: GridView.builder(
+              padding: EdgeInsets.only(bottom: 100),
               physics: const BouncingScrollPhysics(),
               shrinkWrap: true,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                crossAxisSpacing:
-                    18.h,
-                mainAxisSpacing:
-                    18.w,
+                crossAxisSpacing: 18.h,
+                mainAxisSpacing: 18.w,
               ),
               itemCount: campaigns?.length,
               itemBuilder: (context, index) {
@@ -33,7 +31,7 @@ Widget buildCampaignGridView(
                     borderColor: AppColors.greenBorderColor);
               },
             ),
-        )
+          )
         : buildEmptySeasonWidget(),
   );
 }
@@ -44,25 +42,23 @@ Widget buildAllCampaignGridView(
     textDirection: TextDirection.rtl,
     child: campaigns?.isNotEmpty == true
         ? GridView.builder(
-      physics: const BouncingScrollPhysics(),
-      shrinkWrap: true,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: (1 / .9),
-        crossAxisSpacing:
-        18.h,
-        mainAxisSpacing:
-        18.w,
-      ),
-      itemCount: campaigns?.length,
-      itemBuilder: (context, index) {
-        return CampaignDetailsWidget(
-            campaignDetails: campaigns?[index],
-            color: AppColors.greenBackgroundColor,
-            context: context,
-            borderColor: AppColors.greenBorderColor);
-      },
-    )
+            physics: const BouncingScrollPhysics(),
+            shrinkWrap: true,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: (1 / .9),
+              crossAxisSpacing: 18.h,
+              mainAxisSpacing: 18.w,
+            ),
+            itemCount: campaigns?.length,
+            itemBuilder: (context, index) {
+              return CampaignDetailsWidget(
+                  campaignDetails: campaigns?[index],
+                  color: AppColors.greenBackgroundColor,
+                  context: context,
+                  borderColor: AppColors.greenBorderColor);
+            },
+          )
         : buildEmptySeasonWidget(),
   );
 }
