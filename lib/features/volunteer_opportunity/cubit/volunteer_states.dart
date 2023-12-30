@@ -51,3 +51,14 @@ class JoinedProgramFailure extends VolunteerState {
 
   JoinedProgramFailure(this.error);
 }
+
+class JoinedCampaignsSuccess extends VolunteerState {}
+
+class JoinedCampaignsLoading extends VolunteerState {}
+
+class JoinedCampaignsFailure extends VolunteerState {
+  final String error;
+
+  JoinedCampaignsFailure(this.error);
+}
+
