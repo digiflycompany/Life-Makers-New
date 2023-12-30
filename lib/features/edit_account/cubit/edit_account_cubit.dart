@@ -1,8 +1,10 @@
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:life_makers/features/edit_account/repo/edit_account_repository.dart';
 import 'package:life_makers/features/home_page/presentation/pages/drawer_page.dart';
 import 'package:life_makers/services/cubit/global_cubit_state.dart';
@@ -19,6 +21,7 @@ class EditAccountCubit extends Cubit<CubitBaseState> {
   Future<void> editAccountData({
     required String name,
     required String email,
+    required XFile? file,
     required String password,
     required String phone,
     required String gender,
@@ -34,6 +37,7 @@ class EditAccountCubit extends Cubit<CubitBaseState> {
     emit(CubitBaseState.loading);
     Response? response = await editAccountRepository?.editAccountData(
       address: address,
+      file: file,
       cityCenter: cityCenter,
       email: email,
       governorate: governorate,
@@ -48,10 +52,10 @@ class EditAccountCubit extends Cubit<CubitBaseState> {
     if (kDebugMode) {
       print('Edit profile response $response');
     }
-    if (response?.statusCode == 200) {
+    if (response?.statusCode == 200 && response?.data['status'] == true) {
       emit(CubitBaseState.done);
 
-      Fluttertoast.showToast(msg: 'تم تعديل الحساب بنجاح');
+      Fluttertoast.showToast(msg: '${response?.data['message']}');
 
       PreferencesHelper.saveUserModel(UserModel.fromJson(response?.data));
 

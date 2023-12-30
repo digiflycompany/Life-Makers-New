@@ -79,31 +79,26 @@ class PreviousSeasonalCampaignsScreen extends StatelessWidget {
   get calendarIcon => SvgPicture.asset(
     AppAssets.calendarIcon,
     width: 12.w,
+
   );
-  Widget dateText({required String date}) => Padding(
-    padding: EdgeInsets.only(top: 2.h),
-    child: Text(
-      date,
-      style: TextStyle(
-          color: Colors.grey,
-          fontFamily: FontFamilies.alexandria,
-          fontWeight: FontWeight.w400,
-          fontSize: 9.5),
-    ),
-  );
-  Widget date({required String date}) => Padding(
-    padding: EdgeInsets.only(right: 4.5.w),
-    child: Row(
-      textDirection: TextDirection.rtl,
-      children: [
-        calendarIcon,
-        SizedBox(
-          width: 4.w,
+  Widget dateText({required String date}) => Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      calendarIcon,
+       Padding(
+        padding:   EdgeInsets.only(right: 5.w,left: 30.w),
+        child: Text(
+          date,
+          style: TextStyle(
+              color: Colors.grey,
+              fontFamily: FontFamilies.alexandria,
+              fontWeight: FontWeight.w400,
+              fontSize: 10),
         ),
-        dateText(date: date),
-      ],
-    ),
+      ),
+     ],
   );
+
   Widget content({
     required String title,
     required String desc,
@@ -153,7 +148,7 @@ required Color borderColor,
           content(
               title: '${campaignDetails?.name}',
               desc: '${campaignDetails?.details}',
-              date: '${campaignDetails?.startAt}'),
+              date: '${campaignDetails?.startAt}'.split(' ').first),
         ],
       ),
     ),
