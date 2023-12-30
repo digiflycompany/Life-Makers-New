@@ -107,36 +107,38 @@ class _MainPageState extends State<MainPage> {
                               ],
                             );
                           else
-                            return Container(
-
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: AppColors.greyContainerColor,
-                                borderRadius: BorderRadius.circular(7.r),
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Text(
-                                    'لا يوجد حملات طارئة',
-                                    maxLines: 2,
-                                    textDirection: TextDirection.rtl,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontFamily: FontFamilies.alexandria,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 10.4,
+                            return Padding(
+                              padding:  EdgeInsets.symmetric(horizontal: 8.w),
+                              child: Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: AppColors.greyContainerColor,
+                                  borderRadius: BorderRadius.circular(7.r),
+                                ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      'لا يوجد حملات طارئة',
+                                      maxLines: 2,
+                                      textDirection: TextDirection.rtl,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: FontFamilies.alexandria,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 10.4,
+                                      ),
                                     ),
-                                  ),
 
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 15,left: 5),
-                                    child: SvgPicture.asset('assets/svg/empty5.svg'),
-                                  ),
-                                ],
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 15,left: 5),
+                                      child: SvgPicture.asset('assets/svg/empty5.svg'),
+                                    ),
+                                  ],
+                                ),
                               ),
                             );
                         } else if (state == CubitBaseState.loading) {
@@ -147,6 +149,7 @@ class _MainPageState extends State<MainPage> {
                       },
                     )),
               ),
+              SizedBox(height: 10.h,),
 
               Expanded(
                 child: BlocBuilder<HomeCalenderCubit, CubitBaseState>(
