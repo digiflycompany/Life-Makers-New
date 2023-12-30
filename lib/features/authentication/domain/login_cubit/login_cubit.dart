@@ -44,7 +44,7 @@ class LoginCubit extends Cubit<LoginState> {
         },
       );
 
-      debugPrint(response.requestOptions.data);
+      //debugPrint(response.requestOptions.data);
       if
       (response.statusCode == 200) {
         UserModel userModel = UserModel.fromJson(response.data);
