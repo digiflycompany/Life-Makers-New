@@ -395,37 +395,36 @@ class _MainPageState extends State<MainPage> {
           ),
         ),
       );
-  get upcomingCard => InkWell(
-        onTap: () {
-          setState(() {
-            rankPopup = false;
-          });
-          // Navigator.push(
-          //     context,
-          //     PageTransition(
-          //         type: PageTransitionType.fade,
-          //         duration: const Duration(milliseconds: 400),
-          //         child: CampaignDetailsScreen()));
-        },
-        child: Container(
-          width: 117.w,
-          height: 49.h,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(23.r),
-            color: Colors.white70,
-            border: Border.all(
-              color: AppColors.blueTextColor,
-              width: 2.0, // Adjust the border width as needed
+  get upcomingCard => Container(
+    width: 117.w,
+    height: 49.h,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(23.r),
+      color: Colors.white70,
+      border: Border.all(
+        color: AppColors.blueTextColor,
+        width: 2.0, // Adjust the border width as needed
+      ),
+    ),
+    child: Column(
+      children: [
+        Align(
+          alignment: AlignmentDirectional.centerEnd,
+          child: Padding(
+            padding: EdgeInsets.only(right: 5.w),
+            child: const Text(
+              AppStrings.education,
+              style: TextStyle(
+                  color: AppColors.blueTextColor,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: FontFamilies.alexandria),
             ),
           ),
-          child: Column(
-            children: [
-              upcomingText,
-              educationText,
-            ],
-          ),
         ),
-      );
+      ],
+    ),
+  );
   get currentText => Align(
         alignment: AlignmentDirectional.topStart,
         child: Padding(
@@ -542,37 +541,36 @@ class _MainPageState extends State<MainPage> {
           ),
         ),
       );
-  get currentOrphanCard => InkWell(
-        onTap: () {
-          setState(() {
-            rankPopup = false;
-          });
-          // Navigator.push(
-          //     context,
-          //     PageTransition(
-          //         type: PageTransitionType.fade,
-          //         duration: const Duration(milliseconds: 400),
-          //         child: CampaignDetailsScreen()));
-        },
-        child: Container(
-          width: 117.w,
-          height: 49.h,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(23.r),
-            color: Colors.white70,
-            border: Border.all(
-              color: AppColors.greenBorderColor,
-              width: 2.0, // Adjust the border width as needed
+  get currentOrphanCard => Container(
+    width: 117.w,
+    height: 49.h,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(23.r),
+      color: Colors.white70,
+      border: Border.all(
+        color: AppColors.greenBorderColor,
+        width: 2.0, // Adjust the border width as needed
+      ),
+    ),
+    child: Column(
+      children: [
+        Align(
+          alignment: AlignmentDirectional.centerEnd,
+          child: Padding(
+            padding: EdgeInsets.only(right: 5.w),
+            child: const Text(
+              AppStrings.orphan,
+              style: TextStyle(
+                  color: AppColors.greenTextColor,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: FontFamilies.alexandria),
             ),
           ),
-          child: Column(
-            children: [
-              currentText2,
-              orphanText,
-            ],
-          ),
         ),
-      );
+      ],
+    ),
+  );
   get previousOrphanCard => InkWell(
         onTap: () {
           setState(() {
@@ -612,27 +610,61 @@ class _MainPageState extends State<MainPage> {
             scrollDirection: Axis.horizontal,
             reverse: true,
             children: [
-              currentOrphanCard,
+              Container(
+                width: 117.w,
+                height: 49.h,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(23.r),
+                  color: Colors.white70,
+                  border: Border.all(
+                    color: AppColors.greenBorderColor,
+                    width: 2.0, // Adjust the border width as needed
+                  ),
+                ),
+                child: Align(
+                  alignment: AlignmentDirectional.center,
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 5.w),
+                    child: const Text(
+                      AppStrings.orphan,
+                      style: TextStyle(
+                          color: AppColors.greenTextColor,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: FontFamilies.alexandria),
+                    ),
+                  ),
+                ),
+              ),
               SizedBox(
                 width: 6.w,
               ),
-              currentPalestineCard,
-              SizedBox(
-                width: 6.w,
+              Container(
+                width: 117.w,
+                height: 49.h,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(23.r),
+                  color: Colors.white70,
+                  border: Border.all(
+                    color: AppColors.blueTextColor,
+                    width: 2.0, // Adjust the border width as needed
+                  ),
+                ),
+                child: Align(
+                  alignment: AlignmentDirectional.center,
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 5.w),
+                    child: const Text(
+                      AppStrings.education,
+                      style: TextStyle(
+                          color: AppColors.blueTextColor,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: FontFamilies.alexandria),
+                    ),
+                  ),
+                ),
               ),
-              upcomingCard,
-              SizedBox(
-                width: 6.w,
-              ),
-              upcomingCard,
-              SizedBox(
-                width: 6.w,
-              ),
-              previousOrphanCard,
-              SizedBox(
-                width: 6.w,
-              ),
-              previousOrphanCard,
             ],
           ),
         ),
