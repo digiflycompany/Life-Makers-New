@@ -10,11 +10,12 @@ import '../../../home_page/presentation/widgets/news_button.dart';
 import '../../../seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import '../widgets/button.dart';
 import 'choose_role_page.dart';
+import 'member_campaign_details.dart';
 
 class CampaignDetailsScreen extends StatefulWidget {
-  CampaignDetailsScreen({super.key, this.campaignDetails});
+  CampaignDetailsScreen({super.key, this.campaignDetails, this.tasks});
   final Campains? campaignDetails;
-
+  final Tasks? tasks;
   @override
   State<CampaignDetailsScreen> createState() => _CampaignDetailsScreenState();
 }
@@ -111,23 +112,56 @@ class _CampaignDetailsScreenState extends State<CampaignDetailsScreen> {
               ),
             ),
             bottomNavigationBar: !PreferencesHelper.getIsVisitor
-                ? Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 20),
-                    child: widget.campaignDetails?.userJoined == 'false'
-                        ? NewsButton2(
-                            onTap: () {
-                              showJoinCampaignPopUp(
-                                  context: context,
-                                  campaignDetails: widget.campaignDetails);
-                            },
-                            text: AppStrings.joinCampaign)
-                        : PendingButton(
-                            text: AppStrings.pendingText,
-                            onTap: () {},
-                          ),
-                  )
-                : SizedBox.shrink()));
+                ? Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if(widget.campaignDetails?.userJoined=='false')
+                   NewsButton2(
+                    onTap: () {
+                      showJoinCampaignPopUp(
+                          context: context,
+                          campaignDetails: widget.campaignDetails);
+                              },
+                              text: AppStrings.joinCampaign),
+                if(widget.campaignDetails?.userJoined=='pending')
+                  PendingButton(
+                      onTap: (){},
+                      text: AppStrings.pendingText),
+                // if(widget.campaignDetails?.userJoined=='true')
+                //   NewsButton3(
+                //       onTap: () {
+                //         Navigator.pushReplacement(
+                //           context,
+                //           MaterialPageRoute(
+                //               builder: (context) => JoinCampaignDetails(
+                //                   taskId: widget.campaignDetails.tasks.id,
+                //                   campaignDetails: widget.campaignDetails)),
+                //         );
+                //       },
+                //       text: 'مشاهدة الحملة'),
+              ],
+            )
+                : SizedBox.shrink()
+            // bottomNavigationBar: !PreferencesHelper.getIsVisitor
+            //     ? Padding(
+            //         padding: const EdgeInsets.symmetric(
+            //             horizontal: 20, vertical: 20),
+            //         child: widget.campaignDetails?.userJoined == 'false'
+            //             ? NewsButton2(
+            //                 onTap: () {
+            //                   showJoinCampaignPopUp(
+            //                       context: context,
+            //                       campaignDetails: widget.campaignDetails);
+            //                 },
+            //                 text: AppStrings.joinCampaign)
+            //             : PendingButton(
+            //                 text: AppStrings.pendingText,
+            //                 onTap: () {},
+            //               ),
+            //       )
+            //     : SizedBox.shrink()
+        )
+    );
   }
 
   get date => Row(

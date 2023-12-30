@@ -10,7 +10,7 @@ class EndPoints {
   static const String allNonSeasonalCampaigns = 'campaign/non-seasonal';
   static const String getAllCandidates = 'Voters';
   static const String getUserVotes = 'my_vote';
-   static const String getEmergenyCampaigns = 'campaign/current-non-seasonal';
+   static const String getEmergenyCampaigns = 'campaign/emergency';
   static const String joinCampaign = 'campaign/user-join';
   static const String getAllCampaigns = 'campaign/all-campaigns';
   static const String campaignSuggestion = 'campaign/user-suggestion';
