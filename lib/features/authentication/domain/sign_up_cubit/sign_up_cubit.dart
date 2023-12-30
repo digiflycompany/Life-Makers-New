@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_makers/features/authentication/data/models/city_model.dart';
+import 'package:life_makers/features/authentication/data/models/notification_model.dart';
 import 'package:life_makers/features/authentication/data/models/phone_user_mode.dart';
 import 'package:life_makers/features/authentication/data/models/register_error_model.dart';
 import 'package:life_makers/features/authentication/domain/sign_up_cubit/sign_up_states.dart';
@@ -28,6 +29,7 @@ class SignUpCubit extends Cubit<SignUpState> {
   List<Cities> citiesList = [];
   List<Areas> areasList = [];
   int? cityId;
+  NotificationModel? notificationModel;
 
   void resendOtp() {
     emit(OtpResend());
@@ -121,6 +123,39 @@ class SignUpCubit extends Cubit<SignUpState> {
           title: '${errorModel.errors?.first ?? "خطأ في تسجيل الدخول"}');
     }
   }
+
+  Future<void> GetUserNotifications() async {
+    emit(NotificationsLoading());
+    try {
+      Response? response = await dio.get(
+        EndPoints.notificationList,
+        options: Options(headers: {
+          'Authorization': 'Bearer ${PreferencesHelper.getToken()}'
+        }),
+      );
+      if (response.statusCode == 200) {
+         notificationModel = NotificationModel.fromJson(response.data);
+        emit(NotificationSuccessfully());
+      } else {
+        NotificationFailure('حدث خطأ حاول مجددا');
+      }
+    } on DioException catch (dioException) {
+      if (dioException.response != null) {
+        if (kDebugMode) {
+          print(
+              'Server responded with status code: ${dioException.response!.statusCode}');
+        }
+        emit(NotificationFailure('حدث خطأ حاول مجددا'));
+      } else {
+        if (kDebugMode) {
+          print('Dio exception: ${dioException.message}');
+        }
+        emit(
+            NotificationFailure("Dio exception: ${dioException.message}"));
+      }
+    }
+  }
+
 
   Future<void> OtpCheck(String phone) async {
     emit(OtpSendLoading());
@@ -278,6 +313,8 @@ class SignUpCubit extends Cubit<SignUpState> {
 
         }
   }
+
+
 
   Future<void> fetchCityData() async {
     emit(cityListLoading());

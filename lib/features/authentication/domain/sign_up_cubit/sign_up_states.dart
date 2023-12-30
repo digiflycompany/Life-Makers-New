@@ -92,3 +92,12 @@ class areaListFailure extends SignUpState {
   final String error;
   areaListFailure(this.error);
 }
+
+class NotificationsLoading extends SignUpState {}
+
+class NotificationSuccessfully extends SignUpState {}
+
+class NotificationFailure extends SignUpState {
+  final String error;
+  NotificationFailure(this.error);
+}
