@@ -33,7 +33,7 @@ class _NotificationPageState extends State<NotificationPage> {
     try {
       await Future.delayed(const Duration(seconds: 1));
       await signUpCubit.GetUserNotifications();
-      setState(() {}); // Force a rebuild
+      //setState(() {}); // Force a rebuild
     } catch (error) {
       if (kDebugMode) {
         print('Error refreshing data: $error');
@@ -62,20 +62,25 @@ class _NotificationPageState extends State<NotificationPage> {
                        child: Center(child: CircularProgressIndicator(color: AppColors.orangeBorderColor))),
                 if (state is NotificationSuccessfully)
                    Expanded(
-                    child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: signUpCubit.notificationModel?.notifications?.length,
-                      itemBuilder: (BuildContext context, int index) {
+                    child: RefreshIndicator(
+                      onRefresh: _refresh,
+                      color: Colors.white,
+                      backgroundColor: AppColors.orangeBorderColor,
+                      child: ListView.builder(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        itemCount: signUpCubit.notificationModel?.notifications?.length,
+                        itemBuilder: (BuildContext context, int index) {
 
-                        return Padding(
-                          padding: EdgeInsets.symmetric(vertical: 7.h),
-                          child: NotificationWidget(
-                            img: AppAssets.notificationImg,
-                            description: "${signUpCubit.notificationModel?.notifications![index].title}",
-                            time: "${signUpCubit.notificationModel?.notifications![index].updatedAt}",
-                          ),
-                        );
-                      },
+                          return Padding(
+                            padding: EdgeInsets.symmetric(vertical: 7.h),
+                            child: NotificationWidget(
+                              img: AppAssets.notificationImg,
+                              description: "${signUpCubit.notificationModel?.notifications![index].title}",
+                              time: "${signUpCubit.notificationModel?.notifications![index].updatedAt}",
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 if(state is NotificationSuccessfully && signUpCubit.notificationModel?.notifications?.length==0)
