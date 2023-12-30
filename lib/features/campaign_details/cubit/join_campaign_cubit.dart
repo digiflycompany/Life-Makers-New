@@ -29,7 +29,7 @@ class JoinCampaignCubit extends Cubit<CubitBaseState> {
     }
 
     if (response?.statusCode == 200 && response?.data['status']==true) {
-      CustomSnackBars.showSuccessToast(title: '${response?.data['msg']}');
+     // CustomSnackBars.showSuccessToast(title: '${response?.data['msg']}');
       emit(CubitBaseState.doneJoinCampaign);
     } else {
       emit(CubitBaseState.error);

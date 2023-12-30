@@ -266,6 +266,135 @@ class _JoinCampaignDetailsState extends State<JoinCampaignDetails> {
           ],
         ),
       ),
+      bottomNavigationBar: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if(widget.campaignDetails?.userJoined == 'true')
+             Container(
+            width: 390.w,
+            height: 63.h,
+            decoration: BoxDecoration(
+              color: AppColors.orangeBorderColor,
+              borderRadius: BorderRadius.circular(5.r),
+            ),
+            child: Center(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.w),
+                child: Row(
+                  textDirection: TextDirection.rtl,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        _showSuggestionPopup(
+                            context: context, taskId: widget.taskId);
+                      },
+                      child: Row(
+                        textDirection: TextDirection.rtl,
+                        children: [
+                          SvgPicture.asset(
+                            AppAssets.suggestionIcon,
+                            width: 18.w,
+                          ),
+                          SizedBox(
+                            width: 7.w,
+                          ),
+                          const Text(
+                            AppStrings.suggestion,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: FontFamilies.alexandria,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 10.5),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: 4.w,
+                    ),
+                    SizedBox(
+                      height: 40.h,
+                      child: const VerticalDivider(
+                        color: Colors.white,
+                        thickness: 1,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 4.w,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        _showComplainPopup(
+                            taskId: widget.taskId, context: context);
+                      },
+                      child: Row(
+                        textDirection: TextDirection.rtl,
+                        children: [
+                          SvgPicture.asset(
+                            AppAssets.complainIcon,
+                            width: 18.w,
+                          ),
+                          SizedBox(
+                            width: 7.w,
+                          ),
+                          const Text(
+                            AppStrings.complain,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: FontFamilies.alexandria,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 10.5),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: 4.w,
+                    ),
+                    SizedBox(
+                      height: 40.h,
+                      child: const VerticalDivider(
+                        color: Colors.white,
+                        thickness: 1,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 4.w,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        _showLeavingPopup(context);
+                      },
+                      child: Row(
+                        textDirection: TextDirection.rtl,
+                        children: [
+                          SvgPicture.asset(
+                            AppAssets.joinCampaignIcon,
+                            width: 18.w,
+                          ),
+                          SizedBox(
+                            width: 7.w,
+                          ),
+                          const Text(
+                            AppStrings.leaveCampaign,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: FontFamilies.alexandria,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 10.5),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+
+        ],
+      ),
     );
   }
 

@@ -101,7 +101,7 @@ class NewsDetails extends StatelessWidget {
 
   getButton(BuildContext context) {
     if(campains?.userJoined=='false')
-    return NewsButton(
+    return NewsButton2(
       onTap: () {
         showJoinCampaignPopUp(
             context: context,

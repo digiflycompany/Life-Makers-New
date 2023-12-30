@@ -93,7 +93,7 @@ class _ChooseRoleSecondPageState extends State<ChooseRoleSecondPage> {
           ),
         ),
       ),
-      bottomNavigationBar: button,
+      bottomNavigationBar: button2,
     );
   }
 
@@ -155,7 +155,7 @@ class _ChooseRoleSecondPageState extends State<ChooseRoleSecondPage> {
               return Center(child: CircularProgressIndicator.adaptive());
             }
             return userJoined
-                ? PendingButton(onTap: () {}, text: 'قيد الانتظار')
+                ? PendingButton(onTap: () {}, text: AppStrings.pendingText)
                 : NewsButton2(
                     onTap: () {
                       print(userJoined);
@@ -166,6 +166,26 @@ class _ChooseRoleSecondPageState extends State<ChooseRoleSecondPage> {
           },
         ),
       ));
+  get button2 => Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+       if(widget.campaignDetails?.userJoined == 'false')
+         Padding(
+           padding:  EdgeInsets.only(bottom: 10.h),
+           child: NewsButton2(
+               onTap: () {
+                 joinCampaignCubit.joinCampaign(
+                     taskId: widget.selectedRoleId, context: context);
+               },
+               text: AppStrings.joinCampaign),
+         ),
+      if(widget.campaignDetails?.userJoined == 'pending')
+         Padding(
+          padding:  EdgeInsets.only(bottom: 10.h),
+          child: PendingButton(onTap: () {}, text: AppStrings.pendingText),
+        ),
+    ],
+  );
   void showJoinCampaignSuccessPoUp(BuildContext context) {
     showDialog(
       context: context,
