@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:life_makers/core/utils/app-color.dart';
 import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/features/authentication/data/models/user_model.dart';
@@ -24,6 +27,7 @@ class EditAccountScreen extends StatefulWidget {
 }
 
 class _EditAccountScreenState extends State<EditAccountScreen> {
+  XFile? _image;
   UserModel userModel = PreferencesHelper.getUserModel!;
   final TextEditingController nameController = TextEditingController();
   final TextEditingController userNameController = TextEditingController();
@@ -45,7 +49,6 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
 
   String? selectedGender;
   String? selectedEducationStatus;
-
   @override
   void dispose() {
     // TODO: implement dispose
@@ -87,602 +90,618 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
   @override
   Widget build(BuildContext context) {
     final menuCubit = context.read<MenuCubit>();
-    return BlocConsumer<MenuCubit, MenuState>(
-        listener: (context, state) {
-          if (state is DeleteAccountSuccess) {
-            PreferencesHelper.logOut();
-            Navigator.pushReplacement(
-                context,
-                PageTransition(
-                  type: PageTransitionType.fade,
-                  duration: const Duration(milliseconds: 400),
-                  child: LoginScreen(),
-                ));
-          } else if (state is DeleteAccountFailure) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text(state.error),
-              duration: Duration(seconds: 2),
+    return BlocConsumer<MenuCubit, MenuState>(listener: (context, state) {
+      if (state is DeleteAccountSuccess) {
+        PreferencesHelper.logOut();
+        Navigator.pushReplacement(
+            context,
+            PageTransition(
+              type: PageTransitionType.fade,
+              duration: const Duration(milliseconds: 400),
+              child: LoginScreen(),
             ));
-          }
-        },
-        builder: (context, state) {
-          void _showBottomSheetDeleteAccount() {
-            showModalBottomSheet(
-                backgroundColor: AppColors.transparent,
-                isScrollControlled: true,
-                context: context,
-                builder: (context) =>
-                    BlocBuilder<MenuCubit, MenuState>(
-                      builder: (context, state) {
-                        return Container(
-                          height: 170.h,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(
-                                  40.0), // Adjust the radius as needed
-                              topRight: Radius.circular(
-                                  40.0), // Adjust the radius as needed
-                            ),
-                            color: Colors.white,
-                          ),
-                          child: state is DeleteAccountInProgress
-                              ? Center(
-                            child: SizedBox(
-                              height: 50.h,
-                              child: CircularProgressIndicator(
-                                color: AppColors.orangeBorderColor,
-                              ),
-                            ),
-                          )
-                              : Column(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(top: 20.h),
-                                child: Text(
-                                  AppStrings
-                                      .areYouSureYouWantToDeleteAccount,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14.5,
-                                    fontWeight: FontWeight.w600,
-                                    fontFamily: FontFamilies.alexandria,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 47.h,
-                              ),
-                              Row(
-                                textDirection: TextDirection.rtl,
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  InkWell(
-                                    splashColor: Colors.transparent,
-                                    onTap: () {
-                                      menuCubit.deleteAccount();
-                                    },
-                                    child: Container(
-                                      height: 56.h,
-                                      width: 107.w,
-                                      decoration: BoxDecoration(
-                                        color: Colors.red,
-                                        borderRadius:
-                                        BorderRadius.circular(16.r),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          AppStrings.yes,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontFamily:
-                                              FontFamilies.alexandria,
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 16),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  InkWell(
-                                    splashColor: Colors.transparent,
-                                    onTap: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Container(
-                                      height: 56.h,
-                                      width: 107.w,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color:
-                                            Colors.red,
-                                            width: 2.w),
-                                        color: Colors.white,
-                                        borderRadius:
-                                        BorderRadius.circular(16.r),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          AppStrings.cancel,
-                                          style: TextStyle(
-                                              color: Colors.red,
-                                              fontFamily:
-                                              FontFamilies.alexandria,
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 16),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        );
-                      },
-                    ));
-          }
-          return Scaffold(
-            backgroundColor: Colors.white,
-            appBar: PreferredSize(
-              preferredSize: const Size(double.infinity, 300),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Image.asset(AppAssets.unionGreyImg,
-                      width: double.infinity, fit: BoxFit.fill),
-                  Positioned(
-                    top: 30,
-                    right: 6,
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child:  Container(
-                          width: 40.w,
-                          height: 40.h,
-                          child: Transform.scale(
-                              scale: 0.45,
-                              child: SvgPicture.asset(AppAssets.popUpIcon,))),
-                    ),
-                  ),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.only(top: 40, bottom: 10),
-                        child: Text(
-                          'تعديل الحساب',
-                          style: TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: 'Alexandria',
-                          ),
+      } else if (state is DeleteAccountFailure) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(state.error),
+          duration: Duration(seconds: 2),
+        ));
+      }
+    }, builder: (context, state) {
+      void _showBottomSheetDeleteAccount() {
+        showModalBottomSheet(
+            backgroundColor: AppColors.transparent,
+            isScrollControlled: true,
+            context: context,
+            builder: (context) => BlocBuilder<MenuCubit, MenuState>(
+                  builder: (context, state) {
+                    return Container(
+                      height: 170.h,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(
+                              40.0), // Adjust the radius as needed
+                          topRight: Radius.circular(
+                              40.0), // Adjust the radius as needed
                         ),
+                        color: Colors.white,
                       ),
-                      Stack(
-                        children: [
-                          Container(
-                            height: 80,
-                            width: 80,
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(color: Colors.grey)),
-                            child: SvgPicture.asset(AppAssets.circleAvatar2),
-                          ),
-                          Positioned(
-                              top: 63.h,
-                              left: 60.w,
-                              child: InkWell(
-                                  splashColor: Colors.transparent,
-                                  onTap: (){
-
-                                  },
-                                  child: Icon(Icons.camera_alt,color: AppColors.gradientColor1,))),
-                        ],
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-            body: Directionality(
-              textDirection: TextDirection.rtl,
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
-                      child: Column(
-                        children: [
-                          TextField(
-                            enabled: false,
-                              controller: emailController,
-                              cursorColor: AppColors.blueColor,
-                              textInputAction: TextInputAction.next,
-                              keyboardType: TextInputType.phone,
-                              cursorWidth: 1,
-                              decoration: InputDecoration(
-                                labelText: 'البريد الالكتروني * ',
-                                labelStyle: buildLabelStyle(),
-                                focusedBorder: buildUnderlineInputBorder(),
-                              )),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-
-                              Flexible(
-                                  child: TextField(
-                                      controller: nameController,
-                                      cursorColor: AppColors.blueColor,
-                                      cursorWidth: 1,
-                                      textInputAction: TextInputAction.next,
-                                      keyboardType: TextInputType.name,
-                                      decoration: InputDecoration(
-                                        labelText: 'الاسم * ',
-                                        labelStyle: buildLabelStyle(),
-                                        focusedBorder: buildUnderlineInputBorder(),
-                                      ))),
-                              const SizedBox(width: 34),
-                              Flexible(
-                                  child: TextField(
-                                      textInputAction: TextInputAction.next,
-                                      keyboardType: TextInputType.emailAddress,
-                                      controller: userNameController,
-                                      cursorColor: AppColors.blueColor,
-                                      cursorWidth: 1,
-                                      decoration: InputDecoration(
-                                        labelText: 'اسم المستخدم * ',
-                                        labelStyle: buildLabelStyle(),
-                                        focusedBorder: buildUnderlineInputBorder(),
-                                      ))),
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 15),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Flexible(
-                                    child: TextField(
-                                        controller: phoneController,
-                                           enabled: false,
-                                        keyboardType: TextInputType.phone,
-                                        textInputAction: TextInputAction.next,
-                                        cursorColor: AppColors.blueColor,
-                                        cursorWidth: 1,
-                                        decoration: InputDecoration(
-                                          labelText: 'رقم الهاتف * ',
-                                          labelStyle: buildLabelStyle(),
-                                          focusedBorder: buildUnderlineInputBorder(),
-                                        ))),
-                                const SizedBox(
-                                  width: 34,
+                      child: state is DeleteAccountInProgress
+                          ? Center(
+                              child: SizedBox(
+                                height: 50.h,
+                                child: CircularProgressIndicator(
+                                  color: AppColors.orangeBorderColor,
                                 ),
-                                Flexible(
-                                    child: TextField(
-                                        enabled: false,
-
-                                        controller: whatsappController,
-                                        cursorColor: AppColors.blueColor,
-                                        textInputAction: TextInputAction.next,
-                                        keyboardType: TextInputType.name,
-                                        cursorWidth: 1,
-                                        decoration: InputDecoration(
-                                          labelText: 'رقم الواتساب * ',
-                                          labelStyle: buildLabelStyle(),
-                                          focusedBorder: buildUnderlineInputBorder(),
-                                        ))),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 15),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Flexible(
-                                    child: TextField(
-                                       enabled: false,
-                                        controller: nationalIDController,
-                                        keyboardType: TextInputType.number,
-                                        textInputAction: TextInputAction.next,
-                                        cursorColor: AppColors.blueColor,
-                                        cursorWidth: 1,
-                                        decoration: InputDecoration(
-                                          labelText: 'الرقم القومي * ',
-                                          labelStyle: buildLabelStyle(),
-                                          focusedBorder: buildUnderlineInputBorder(),
-                                        ))),
-                                const SizedBox(
-                                  width: 34,
-                                ),
-                                Flexible(
-                                    child: TextField(
-                                        controller: JobController,
-                                        cursorColor: AppColors.blueColor,
-                                        textInputAction: TextInputAction.next,
-                                        keyboardType: TextInputType.name,
-                                        cursorWidth: 1,
-                                        decoration: InputDecoration(
-                                          labelText: 'العمل * ',
-                                          labelStyle: buildLabelStyle(),
-                                          focusedBorder: buildUnderlineInputBorder(),
-                                        ))),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 15),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Flexible(
-                                    child: TextField(
-                                        controller: addressController,
-                                        keyboardType: TextInputType.name,
-                                        textInputAction: TextInputAction.next,
-                                        cursorColor: AppColors.blueColor,
-                                        cursorWidth: 1,
-                                        decoration: InputDecoration(
-                                          labelText: 'العنوان * ',
-                                          labelStyle: buildLabelStyle(),
-                                          focusedBorder: buildUnderlineInputBorder(),
-                                        ))),
-                                const SizedBox(
-                                  width: 34,
-                                ),
-                                Flexible(
-                                    child: TextField(
-                                        controller: previousExperienceController,
-                                        cursorColor: AppColors.blueColor,
-                                        textInputAction: TextInputAction.next,
-                                        keyboardType: TextInputType.name,
-                                        cursorWidth: 1,
-                                        decoration: InputDecoration(
-                                          labelText: 'الخبرة السابقة * ',
-                                          labelStyle: buildLabelStyle(),
-                                          focusedBorder: buildUnderlineInputBorder(),
-                                        ))),
-
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 15),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-
-                                Flexible(
-                                    child: TextField(
-                                        controller: governorateController,
-                                        cursorColor: AppColors.blueColor,
-                                        textInputAction: TextInputAction.next,
-                                        keyboardType: TextInputType.name,
-                                        cursorWidth: 1,
-                                        decoration: InputDecoration(
-                                          labelText: 'المحافظة * ',
-                                          labelStyle: buildLabelStyle(),
-                                          focusedBorder: buildUnderlineInputBorder(),
-                                        ))),
-                                const SizedBox(
-                                  width: 34,
-                                ),
-                                Flexible(
-                                    child: TextField(
-                                        controller: centerController,
-                                        keyboardType: TextInputType.name,
-                                        textInputAction: TextInputAction.next,
-                                        cursorColor: AppColors.blueColor,
-                                        cursorWidth: 1,
-                                        decoration: InputDecoration(
-                                          labelText: 'مركز * ',
-                                          labelStyle: buildLabelStyle(),
-                                          focusedBorder: buildUnderlineInputBorder(),
-                                        ))),
-
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 12.h),
-                            child: Center(
-                              child: BlocBuilder<EditAccountCubit, CubitBaseState>(
-                                builder: (context, state) {
-                                  return ElevatedButton(
-                                    onPressed: () {
-                                      context.read<EditAccountCubit>()
-                                          .editAccountData(
-                                          name: nameController.text,
-                                          email: emailController.text,
-                                          password: passwordController.text,
-                                          context: context,
-                                          phone: phoneController.text,
-                                          gender:
-                                          '${PreferencesHelper.getUserModel?.user
-                                              ?.gender}',
-                                          address: addressController.text,
-                                          job: JobController.text,
-                                          governorate: governorateController.text,
-                                          whatsAppNumber: whatsappController.text,
-                                          cityCenter: centerController.text,
-                                          previousExperience: previousExperienceController
-                                              .text,
-                                          education: 'education');
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                        elevation: 0,
-                                        backgroundColor: AppColors.orangeBorderColor,
-                                        fixedSize: Size(95.w, 48.h),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                                8.r))),
-                                    child: state == CubitBaseState.loading
-                                        ? CircularProgressIndicator.adaptive(
-                                      backgroundColor: Colors.white,
-                                    )
-                                        : Text(
-                                      'حفظ',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: FontFamilies.alexandria,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  );
-                                },
                               ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            _showBottomSheetDeleteAccount();
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.only(top: 30.h),
-                            child: Align(
-                              alignment: AlignmentDirectional.centerStart,
-                              child: Container(
-                                width: 115.w,
-                                height: 41.h,
-                                decoration: BoxDecoration(
-                                    color: Colors.red,
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(6.r),
-                                      bottomLeft: Radius.circular(6.r),
-                                    )),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                            )
+                          : Column(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(top: 20.h),
+                                  child: Text(
+                                    AppStrings.areYouSureYouWantToDeleteAccount,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 14.5,
+                                      fontWeight: FontWeight.w600,
+                                      fontFamily: FontFamilies.alexandria,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 47.h,
+                                ),
+                                Row(
+                                  textDirection: TextDirection.rtl,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    settingsIcon,
-                                    SizedBox(width: 11.w),
-                                    mentorshipText,
+                                    InkWell(
+                                      splashColor: Colors.transparent,
+                                      onTap: () {
+                                        menuCubit.deleteAccount();
+                                      },
+                                      child: Container(
+                                        height: 56.h,
+                                        width: 107.w,
+                                        decoration: BoxDecoration(
+                                          color: Colors.red,
+                                          borderRadius:
+                                              BorderRadius.circular(16.r),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            AppStrings.yes,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily:
+                                                    FontFamilies.alexandria,
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 16),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    InkWell(
+                                      splashColor: Colors.transparent,
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Container(
+                                        height: 56.h,
+                                        width: 107.w,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.red, width: 2.w),
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(16.r),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            AppStrings.cancel,
+                                            style: TextStyle(
+                                                color: Colors.red,
+                                                fontFamily:
+                                                    FontFamilies.alexandria,
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 16),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ],
-                                ),
-                              ),
+                                )
+                              ],
                             ),
-                          ),
-                        ),
-                        Spacer(),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                PageTransition(
-                                    type: PageTransitionType.fade,
-                                    duration: const Duration(milliseconds: 400),
-                                    child: ChangePasswordAfterLoginScreen()));
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.only(top: 30.h),
-                            child: Align(
-                              alignment: AlignmentDirectional.centerStart,
-                              child: Container(
-                                width: 115.w,
-                                height: 41.h,
-                                decoration: BoxDecoration(
-                                    color: AppColors.orangeBorderColor,
-                                    borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(6.r),
-                                      bottomRight: Radius.circular(6.r),
-                                    )),
-                                child: Center(
-                                  child: changePasswordText,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 50.h,),
-                  ],
+                    );
+                  },
+                ));
+      }
+
+      return Scaffold(
+        backgroundColor: Colors.white,
+        appBar: PreferredSize(
+          preferredSize: const Size(double.infinity, 300),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Image.asset(AppAssets.unionGreyImg,
+                  width: double.infinity, fit: BoxFit.fill),
+              Positioned(
+                top: 30,
+                right: 6,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                      width: 40.w,
+                      height: 40.h,
+                      child: Transform.scale(
+                          scale: 0.45,
+                          child: SvgPicture.asset(
+                            AppAssets.popUpIcon,
+                          ))),
                 ),
               ),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(top: 40, bottom: 10),
+                    child: Text(
+                      'تعديل الحساب',
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'Alexandria',
+                      ),
+                    ),
+                  ),
+                  Stack(
+                    children: [
+                      Container(
+                        height: 80,
+                        width: 80,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.grey)),
+                        child:
+                        userModel.user?.photo!=null?Image.network(userModel.user!.photo!):
+                        _image!=null?Image.file(File(_image!.path)):SvgPicture.asset(AppAssets.circleAvatar2),
+                      ),
+                      Positioned(
+                        top: 63.h,
+                        left: 60.w,
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          onTap: () async {
+                            final picker = ImagePicker();
+                            XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+                            if (pickedFile != null) {
+                              setState(() {
+                                _image = XFile(pickedFile.path);
+                              });
+                            }
+
+                          },
+                          child: Icon(
+                            Icons.camera_alt,
+                            color: AppColors.gradientColor1,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+        body: Directionality(
+          textDirection: TextDirection.rtl,
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: Column(
+                    children: [
+                      TextField(
+                          enabled: false,
+                          controller: emailController,
+                          cursorColor: AppColors.blueColor,
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.phone,
+                          cursorWidth: 1,
+                          decoration: InputDecoration(
+                            labelText: 'البريد الالكتروني * ',
+                            labelStyle: buildLabelStyle(),
+                            focusedBorder: buildUnderlineInputBorder(),
+                          )),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Flexible(
+                              child: TextField(
+                                  controller: nameController,
+                                  cursorColor: AppColors.blueColor,
+                                  cursorWidth: 1,
+                                  textInputAction: TextInputAction.next,
+                                  keyboardType: TextInputType.name,
+                                  decoration: InputDecoration(
+                                    labelText: 'الاسم * ',
+                                    labelStyle: buildLabelStyle(),
+                                    focusedBorder: buildUnderlineInputBorder(),
+                                  ))),
+                          const SizedBox(width: 34),
+                          Flexible(
+                              child: TextField(
+                                  textInputAction: TextInputAction.next,
+                                  keyboardType: TextInputType.emailAddress,
+                                  controller: userNameController,
+                                  cursorColor: AppColors.blueColor,
+                                  cursorWidth: 1,
+                                  decoration: InputDecoration(
+                                    labelText: 'اسم المستخدم * ',
+                                    labelStyle: buildLabelStyle(),
+                                    focusedBorder: buildUnderlineInputBorder(),
+                                  ))),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 15),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Flexible(
+                                child: TextField(
+                                    controller: phoneController,
+                                    enabled: false,
+                                    keyboardType: TextInputType.phone,
+                                    textInputAction: TextInputAction.next,
+                                    cursorColor: AppColors.blueColor,
+                                    cursorWidth: 1,
+                                    decoration: InputDecoration(
+                                      labelText: 'رقم الهاتف * ',
+                                      labelStyle: buildLabelStyle(),
+                                      focusedBorder:
+                                          buildUnderlineInputBorder(),
+                                    ))),
+                            const SizedBox(
+                              width: 34,
+                            ),
+                            Flexible(
+                                child: TextField(
+                                    enabled: false,
+                                    controller: whatsappController,
+                                    cursorColor: AppColors.blueColor,
+                                    textInputAction: TextInputAction.next,
+                                    keyboardType: TextInputType.name,
+                                    cursorWidth: 1,
+                                    decoration: InputDecoration(
+                                      labelText: 'رقم الواتساب * ',
+                                      labelStyle: buildLabelStyle(),
+                                      focusedBorder:
+                                          buildUnderlineInputBorder(),
+                                    ))),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 15),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Flexible(
+                                child: TextField(
+                                    enabled: false,
+                                    controller: nationalIDController,
+                                    keyboardType: TextInputType.number,
+                                    textInputAction: TextInputAction.next,
+                                    cursorColor: AppColors.blueColor,
+                                    cursorWidth: 1,
+                                    decoration: InputDecoration(
+                                      labelText: 'الرقم القومي * ',
+                                      labelStyle: buildLabelStyle(),
+                                      focusedBorder:
+                                          buildUnderlineInputBorder(),
+                                    ))),
+                            const SizedBox(
+                              width: 34,
+                            ),
+                            Flexible(
+                                child: TextField(
+                                    controller: JobController,
+                                    cursorColor: AppColors.blueColor,
+                                    textInputAction: TextInputAction.next,
+                                    keyboardType: TextInputType.name,
+                                    cursorWidth: 1,
+                                    decoration: InputDecoration(
+                                      labelText: 'العمل * ',
+                                      labelStyle: buildLabelStyle(),
+                                      focusedBorder:
+                                          buildUnderlineInputBorder(),
+                                    ))),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 15),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Flexible(
+                                child: TextField(
+                                    controller: addressController,
+                                    keyboardType: TextInputType.name,
+                                    textInputAction: TextInputAction.next,
+                                    cursorColor: AppColors.blueColor,
+                                    cursorWidth: 1,
+                                    decoration: InputDecoration(
+                                      labelText: 'العنوان * ',
+                                      labelStyle: buildLabelStyle(),
+                                      focusedBorder:
+                                          buildUnderlineInputBorder(),
+                                    ))),
+                            const SizedBox(
+                              width: 34,
+                            ),
+                            Flexible(
+                                child: TextField(
+                                    controller: previousExperienceController,
+                                    cursorColor: AppColors.blueColor,
+                                    textInputAction: TextInputAction.next,
+                                    keyboardType: TextInputType.name,
+                                    cursorWidth: 1,
+                                    decoration: InputDecoration(
+                                      labelText: 'الخبرة السابقة * ',
+                                      labelStyle: buildLabelStyle(),
+                                      focusedBorder:
+                                          buildUnderlineInputBorder(),
+                                    ))),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 15),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Flexible(
+                                child: TextField(
+                                    controller: governorateController,
+                                    cursorColor: AppColors.blueColor,
+                                    textInputAction: TextInputAction.next,
+                                    keyboardType: TextInputType.name,
+                                    cursorWidth: 1,
+                                    decoration: InputDecoration(
+                                      labelText: 'المحافظة * ',
+                                      labelStyle: buildLabelStyle(),
+                                      focusedBorder:
+                                          buildUnderlineInputBorder(),
+                                    ))),
+                            const SizedBox(
+                              width: 34,
+                            ),
+                            Flexible(
+                                child: TextField(
+                                    controller: centerController,
+                                    keyboardType: TextInputType.name,
+                                    textInputAction: TextInputAction.next,
+                                    cursorColor: AppColors.blueColor,
+                                    cursorWidth: 1,
+                                    decoration: InputDecoration(
+                                      labelText: 'مركز * ',
+                                      labelStyle: buildLabelStyle(),
+                                      focusedBorder:
+                                          buildUnderlineInputBorder(),
+                                    ))),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 12.h),
+                        child: Center(
+                          child: BlocBuilder<EditAccountCubit, CubitBaseState>(
+                            builder: (context, state) {
+                              return ElevatedButton(
+                                onPressed: () {
+                                  context.read<EditAccountCubit>().editAccountData(
+                                      file: _image,
+                                      name: nameController.text,
+                                      email: emailController.text,
+                                      password: passwordController.text,
+                                      context: context,
+                                      phone: phoneController.text,
+                                      gender:
+                                          '${PreferencesHelper.getUserModel?.user?.gender}',
+                                      address: addressController.text,
+                                      job: JobController.text,
+                                      governorate: governorateController.text,
+                                      whatsAppNumber: whatsappController.text,
+                                      cityCenter: centerController.text,
+                                      previousExperience:
+                                          previousExperienceController.text,
+                                      education: 'education');
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    elevation: 0,
+                                    backgroundColor:
+                                        AppColors.orangeBorderColor,
+                                    fixedSize: Size(95.w, 48.h),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8.r))),
+                                child: state == CubitBaseState.loading
+                                    ? CircularProgressIndicator.adaptive(
+                                        backgroundColor: Colors.white,
+                                      )
+                                    : Text(
+                                        'حفظ',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: FontFamilies.alexandria,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        _showBottomSheetDeleteAccount();
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 30.h),
+                        child: Align(
+                          alignment: AlignmentDirectional.centerStart,
+                          child: Container(
+                            width: 115.w,
+                            height: 41.h,
+                            decoration: BoxDecoration(
+                                color: Colors.red,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(6.r),
+                                  bottomLeft: Radius.circular(6.r),
+                                )),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                settingsIcon,
+                                SizedBox(width: 11.w),
+                                mentorshipText,
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Spacer(),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            PageTransition(
+                                type: PageTransitionType.fade,
+                                duration: const Duration(milliseconds: 400),
+                                child: ChangePasswordAfterLoginScreen()));
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 30.h),
+                        child: Align(
+                          alignment: AlignmentDirectional.centerStart,
+                          child: Container(
+                            width: 115.w,
+                            height: 41.h,
+                            decoration: BoxDecoration(
+                                color: AppColors.orangeBorderColor,
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(6.r),
+                                  bottomRight: Radius.circular(6.r),
+                                )),
+                            child: Center(
+                              child: changePasswordText,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 50.h,
+                ),
+              ],
             ),
-            // bottomNavigationBar: Padding(
-            //   padding: EdgeInsets.only(left: 25, right: 25, bottom: 20),
-            //   child: Row(
-            //     children: [
-            //       InkWell(
-            //         onTap: () {
-            //           Navigator.push(
-            //               context,
-            //               PageTransition(
-            //                   type: PageTransitionType.leftToRight,
-            //                   duration: const Duration(milliseconds: 530),
-            //                   child: const CompleteEditAccountScreen()));
-            //         },
-            //         child: const CircleAvatar(
-            //           backgroundColor: AppColors.greyContainerColor,
-            //           radius: 17,
-            //           child: Icon(
-            //             Icons.arrow_left,
-            //             color: Colors.white,
-            //           ),
-            //         ),
-            //       ),
-            //       Spacer(),
-            //       Padding(
-            //         padding: EdgeInsets.only(right: 15.w),
-            //         child: BlocBuilder<EditAccountCubit, CubitBaseState>(
-            //           builder: (context, state) {
-            //             return ElevatedButton(
-            //               onPressed: () {
-            //                 context.read<EditAccountCubit>().editAccountData(
-            //                     name: nameController.text,
-            //                     email: emailController.text,
-            //                     password: passwordController.text,
-            //                     context: context,
-            //                     phone: phoneController.text,
-            //                     gender:
-            //                         '${PreferencesHelper.getUserModel?.user?.gender}',
-            //                     address: addressController.text,
-            //                     job: JobController.text,
-            //                     governorate: governorateController.text,
-            //                     whatsAppNumber: whatsappController.text,
-            //                     cityCenter: centerController.text,
-            //                     previousExperience: previousExperienceController.text,
-            //                     education: 'education');
-            //               },
-            //               style: ElevatedButton.styleFrom(
-            //                   elevation: 0,
-            //                   backgroundColor: AppColors.orangeBorderColor,
-            //                   fixedSize: Size(230.w, 50.h),
-            //                   shape: RoundedRectangleBorder(
-            //                       borderRadius: BorderRadius.circular(5))),
-            //               child: state == CubitBaseState.loading
-            //                   ? CircularProgressIndicator.adaptive(
-            //                       backgroundColor: Colors.white,
-            //                     )
-            //                   : Text(
-            //                       'حفظ',
-            //                       style: TextStyle(
-            //                         color: Colors.white,
-            //                         fontFamily: 'Alexandria',
-            //                         fontSize: 11,
-            //                         fontWeight: FontWeight.w500,
-            //                       ),
-            //                     ),
-            //             );
-            //           },
-            //         ),
-            //       ),
-            //       Spacer(),
-            //     ],
-            //   ),
-            // ),
-          );
-        }
-          );
+          ),
+        ),
+        // bottomNavigationBar: Padding(
+        //   padding: EdgeInsets.only(left: 25, right: 25, bottom: 20),
+        //   child: Row(
+        //     children: [
+        //       InkWell(
+        //         onTap: () {
+        //           Navigator.push(
+        //               context,
+        //               PageTransition(
+        //                   type: PageTransitionType.leftToRight,
+        //                   duration: const Duration(milliseconds: 530),
+        //                   child: const CompleteEditAccountScreen()));
+        //         },
+        //         child: const CircleAvatar(
+        //           backgroundColor: AppColors.greyContainerColor,
+        //           radius: 17,
+        //           child: Icon(
+        //             Icons.arrow_left,
+        //             color: Colors.white,
+        //           ),
+        //         ),
+        //       ),
+        //       Spacer(),
+        //       Padding(
+        //         padding: EdgeInsets.only(right: 15.w),
+        //         child: BlocBuilder<EditAccountCubit, CubitBaseState>(
+        //           builder: (context, state) {
+        //             return ElevatedButton(
+        //               onPressed: () {
+        //                 context.read<EditAccountCubit>().editAccountData(
+        //                     name: nameController.text,
+        //                     email: emailController.text,
+        //                     password: passwordController.text,
+        //                     context: context,
+        //                     phone: phoneController.text,
+        //                     gender:
+        //                         '${PreferencesHelper.getUserModel?.user?.gender}',
+        //                     address: addressController.text,
+        //                     job: JobController.text,
+        //                     governorate: governorateController.text,
+        //                     whatsAppNumber: whatsappController.text,
+        //                     cityCenter: centerController.text,
+        //                     previousExperience: previousExperienceController.text,
+        //                     education: 'education');
+        //               },
+        //               style: ElevatedButton.styleFrom(
+        //                   elevation: 0,
+        //                   backgroundColor: AppColors.orangeBorderColor,
+        //                   fixedSize: Size(230.w, 50.h),
+        //                   shape: RoundedRectangleBorder(
+        //                       borderRadius: BorderRadius.circular(5))),
+        //               child: state == CubitBaseState.loading
+        //                   ? CircularProgressIndicator.adaptive(
+        //                       backgroundColor: Colors.white,
+        //                     )
+        //                   : Text(
+        //                       'حفظ',
+        //                       style: TextStyle(
+        //                         color: Colors.white,
+        //                         fontFamily: 'Alexandria',
+        //                         fontSize: 11,
+        //                         fontWeight: FontWeight.w500,
+        //                       ),
+        //                     ),
+        //             );
+        //           },
+        //         ),
+        //       ),
+        //       Spacer(),
+        //     ],
+        //   ),
+        // ),
+      );
+    });
   }
 
   UnderlineInputBorder buildUnderlineInputBorder() {
@@ -699,22 +718,25 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
       fontFamily: 'Alexandria',
     );
   }
-  get mentorshipText => Text(
-    AppStrings.deleteAccount,
-    style: TextStyle(
-        fontFamily: FontFamilies.alexandria,
-        fontWeight: FontWeight.w600,
-        color: Colors.white,
-        fontSize: 10),
-  );
-  get changePasswordText => Text(
-    AppStrings.changePasswordText,
-    style: TextStyle(
-        fontFamily: FontFamilies.alexandria,
-        fontWeight: FontWeight.w600,
-        color: Colors.white,
-        fontSize: 10),
-  );
-  get settingsIcon => SvgPicture.asset(AppAssets.deleteAccIcon,width: 14.w,);
 
+  get mentorshipText => Text(
+        AppStrings.deleteAccount,
+        style: TextStyle(
+            fontFamily: FontFamilies.alexandria,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+            fontSize: 10),
+      );
+  get changePasswordText => Text(
+        AppStrings.changePasswordText,
+        style: TextStyle(
+            fontFamily: FontFamilies.alexandria,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+            fontSize: 10),
+      );
+  get settingsIcon => SvgPicture.asset(
+        AppAssets.deleteAccIcon,
+        width: 14.w,
+      );
 }

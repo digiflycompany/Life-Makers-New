@@ -22,6 +22,7 @@ class CustomLocalNotification {
       importance: Importance.high,
       playSound: true,
       enableVibration: true,
+
     );
 
     flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
@@ -57,7 +58,7 @@ class CustomLocalNotification {
             channel.id,
             channel.name,
             channelDescription: channel.description,
-            icon: '@mipmap/launcher_icon',
+            icon: '@mipmap/ic_launcher',
           ),
         ),
       );

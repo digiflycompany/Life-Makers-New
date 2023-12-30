@@ -5,7 +5,6 @@ import 'package:life_makers/core/utils/extensions.dart';
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-string.dart';
 import '../../../../core/widgets/custom_appbar.dart';
-import '../../../../services/shared_preferences/preferences_helper.dart';
 import '../../../home_page/presentation/widgets/news_button.dart';
 import '../../../seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import '../widgets/button.dart';
@@ -37,9 +36,9 @@ class _CampaignDetailsScreenState extends State<CampaignDetailsScreen> {
                         widget.campaignDetails!.photo!,
                         fit: BoxFit.fill,
                       )),
-                  SizedBox(height: 17.h),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.w),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
@@ -58,9 +57,7 @@ class _CampaignDetailsScreenState extends State<CampaignDetailsScreen> {
                         date,
                         SizedBox(height: 15.h),
                         campaignContent,
-                        SizedBox(height: 31.h),
-                        // campaignButton,
-                        SizedBox(height: 19.h),
+                        SizedBox(height: 50.h),
                         campaignMissionsText,
                         SizedBox(height: 20.h),
                         Column(
@@ -110,76 +107,49 @@ class _CampaignDetailsScreenState extends State<CampaignDetailsScreen> {
                 ],
               ),
             ),
-            bottomNavigationBar: !PreferencesHelper.getIsVisitor
-                ? Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if(widget.campaignDetails?.userJoined=='false')
-                   NewsButton2(
-                    onTap: () {
-                      showJoinCampaignPopUp(
-                          context: context,
-                          campaignDetails: widget.campaignDetails);
-                              },
-                              text: AppStrings.joinCampaign),
-                if(widget.campaignDetails?.userJoined=='pending')
-                  PendingButton(
-                      onTap: (){},
-                      text: AppStrings.pendingText),
-                // if(widget.campaignDetails?.userJoined=='true')
-                //   NewsButton3(
-                //       onTap: () {
-                //         Navigator.pushReplacement(
-                //           context,
-                //           MaterialPageRoute(
-                //               builder: (context) => JoinCampaignDetails(
-                //                   taskId: widget.campaignDetails.tasks.id,
-                //                   campaignDetails: widget.campaignDetails)),
-                //         );
-                //       },
-                //       text: 'مشاهدة الحملة'),
-              ],
-            )
-                : SizedBox.shrink()
-            // bottomNavigationBar: !PreferencesHelper.getIsVisitor
-            //     ? Padding(
-            //         padding: const EdgeInsets.symmetric(
-            //             horizontal: 20, vertical: 20),
-            //         child: widget.campaignDetails?.userJoined == 'false'
-            //             ? NewsButton2(
-            //                 onTap: () {
-            //                   showJoinCampaignPopUp(
-            //                       context: context,
-            //                       campaignDetails: widget.campaignDetails);
-            //                 },
-            //                 text: AppStrings.joinCampaign)
-            //             : PendingButton(
-            //                 text: AppStrings.pendingText,
-            //                 onTap: () {},
-            //               ),
-            //       )
-            //     : SizedBox.shrink()
-        )
-    );
+            bottomNavigationBar: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                child: widget.campaignDetails?.userJoined == 'false'
+                    ? NewsButton2(
+                        onTap: () {
+                          showJoinCampaignPopUp(
+                              context: context,
+                              campaignDetails: widget.campaignDetails);
+                        },
+                        text: AppStrings.joinCampaign)
+                    : widget.campaignDetails?.userJoined == 'pending'
+                        ? PendingButton(
+                            onTap: () {}, text: AppStrings.pendingText)
+                        : widget.campaignDetails?.userJoined == 'true'
+                            ? NewsButton3(
+                                onTap: () {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            JoinCampaignDetails(
+                                                taskId: 0,
+                                                campaignDetails:
+                                                    widget.campaignDetails)),
+                                  );
+                                },
+                                text: 'مشاهدة الحملة')
+                            : SizedBox.shrink())));
   }
 
   get date => Row(
         textDirection: TextDirection.rtl,
         children: [
-          SvgPicture.asset(
-            AppAssets.calendarIcon,
-            width: 10.w,
-          ),
-          SizedBox(width: 4.w),
+          SvgPicture.asset(AppAssets.calendarIcon, width: 14),
           Padding(
-            padding: EdgeInsets.only(top: 2.h),
+            padding: EdgeInsets.symmetric(horizontal: 8),
             child: Text(
-              '${widget.campaignDetails?.startAt}',
+              '${widget.campaignDetails?.startAt}'.split(' ').first,
               style: TextStyle(
                   color: Colors.grey,
                   fontFamily: FontFamilies.alexandria,
                   fontWeight: FontWeight.w400,
-                  fontSize: 8),
+                  fontSize: 10),
             ),
           ),
         ],
@@ -214,8 +184,8 @@ class _CampaignDetailsScreenState extends State<CampaignDetailsScreen> {
           ),
         ),
       );
-
 }
+
 void showJoinCampaignPopUp(
     {required BuildContext context, required Campains? campaignDetails}) {
   showDialog(

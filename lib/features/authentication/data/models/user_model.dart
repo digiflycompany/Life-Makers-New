@@ -30,6 +30,7 @@ class User {
   String? email;
   String? name;
   String? phone;
+  String? photo;
   String? whatsappNumber;
   String? idCardNumber;
   String? theJob;
@@ -58,6 +59,7 @@ class User {
         this.whatsappNumber,
         this.idCardNumber,
         this.theJob,
+        this.photo,
         this.theAddress,
         this.governorate,
         this.cityCenter,
@@ -77,6 +79,7 @@ class User {
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    photo = json['photo'];
     email = json['email'];
     name = json['name'];
     phone = json['phone'];
@@ -115,6 +118,7 @@ class User {
     data['whatsapp_number'] = this.whatsappNumber;
     data['id_card_number'] = this.idCardNumber;
     data['the_job'] = this.theJob;
+    data['photo'] = this.photo;
     data['the_address'] = this.theAddress;
     data['governorate'] = this.governorate;
     data['city_center'] = this.cityCenter;

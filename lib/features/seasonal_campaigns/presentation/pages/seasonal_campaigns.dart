@@ -81,8 +81,7 @@ class _SeasonalCampaignsScreenState extends State<SeasonalCampaignsScreen>
   }
 
   void _changePage(int page) {
-
-    if(_pageController.hasClients){
+    if (_pageController.hasClients) {
       _pageController.animateToPage(
         page,
         duration: const Duration(milliseconds: 500),
