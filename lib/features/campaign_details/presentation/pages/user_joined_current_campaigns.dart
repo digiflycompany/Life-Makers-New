@@ -13,14 +13,14 @@ import '../../../../core/utils/app_fonts.dart';
 import '../../../seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import '../../../volunteer_opportunity/cubit/volunteer_cubit.dart';
 
-class JoinedPreviousCampaigns extends StatefulWidget {
-  const JoinedPreviousCampaigns({super.key});
+class JoinedCurrentCampaigns extends StatefulWidget {
+  const JoinedCurrentCampaigns({super.key});
 
   @override
-  State<JoinedPreviousCampaigns> createState() => _JoinedPreviousCampaignsState();
+  State<JoinedCurrentCampaigns> createState() => _JoinedCurrentCampaignsState();
 }
 
-class _JoinedPreviousCampaignsState extends State<JoinedPreviousCampaigns> {
+class _JoinedCurrentCampaignsState extends State<JoinedCurrentCampaigns> {
   late VolunteerCubit volunteerCubit;
   Campains? campaignDetails;
   @override
@@ -77,10 +77,10 @@ class _JoinedPreviousCampaignsState extends State<JoinedPreviousCampaigns> {
                   crossAxisSpacing: 18.h, // Adjust the spacing between items horizontally
                   mainAxisSpacing: 18.w,  // Adjust the spacing between items vertically
                 ),
-                itemCount: volunteerCubit.joinedCampaignsModel?.pastCampaigns?.length, // Number of items in the grid
+                itemCount: volunteerCubit.joinedCampaignsModel?.currentCampaigns?.length, // Number of items in the grid
                 itemBuilder: (context, index) {
                   // Replace the following with your actual components/widgets
-                  final   currentItem = volunteerCubit.joinedCampaignsModel!.pastCampaigns![index];
+                  final   currentItem = volunteerCubit.joinedCampaignsModel!.currentCampaigns![index];
                   if (kDebugMode) {
                     print(currentItem);
                   }
@@ -93,8 +93,8 @@ class _JoinedPreviousCampaignsState extends State<JoinedPreviousCampaigns> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        color: AppColors.orangeBackgroundColor,
-                        border: Border.all(color: AppColors.orangeBorderColor,width:1.6.w),
+                        color: AppColors.greenBackgroundColor,
+                        border: Border.all(color: AppColors.greenBorderColor,width:1.6.w),
                         borderRadius: BorderRadius.circular(20.r),
                       ),
                       child: Padding(
@@ -111,9 +111,9 @@ class _JoinedPreviousCampaignsState extends State<JoinedPreviousCampaigns> {
                                   child: Padding(
                                     padding: EdgeInsets.only(right: 0.w),
                                     child:  Text(
-                                      '${volunteerCubit.joinedCampaignsModel?.pastCampaigns?[index].name}',
+                                      '${volunteerCubit.joinedCampaignsModel?.currentCampaigns?[index].name}',
                                       style: TextStyle(
-                                          color: AppColors.orangeBorderColor,
+                                          color: AppColors.greenBorderColor,
                                           fontFamily: FontFamilies.alexandria,
                                           fontWeight: FontWeight.w500,
                                           fontSize: 13.5
@@ -127,7 +127,7 @@ class _JoinedPreviousCampaignsState extends State<JoinedPreviousCampaigns> {
                                   child: Padding(
                                     padding: EdgeInsets.only(right: 0.w),
                                     child:  Text(
-                                      '${volunteerCubit.joinedCampaignsModel?.pastCampaigns?[index].shortDetails}',
+                                      '${volunteerCubit.joinedCampaignsModel?.currentCampaigns?[index].shortDetails}',
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontFamily: FontFamilies.alexandria,
@@ -159,7 +159,7 @@ class _JoinedPreviousCampaignsState extends State<JoinedPreviousCampaigns> {
                     SvgPicture.asset(AppAssets.noCampaignsImg),
                     SizedBox(height: 30.h,),
                     const Text(
-                      'لا يوجد حملات سابقة',
+                      'لا يوجد حملات حالية',
                       style: TextStyle(
                           color:AppColors.greyNoCampaignsTextColor,
                           fontFamily: FontFamilies.alexandria,
@@ -182,7 +182,7 @@ class _JoinedPreviousCampaignsState extends State<JoinedPreviousCampaigns> {
       alignment: AlignmentDirectional.bottomEnd,
       child: Padding(
           padding:  EdgeInsets.only(left: 9.w,bottom: 6.h),
-          child: SvgPicture.asset(AppAssets.orangeLifeMakerLogo,)
+          child: SvgPicture.asset(AppAssets.greenLifeMakerLogo,)
       ));
   get dotsIcon => Align(
       alignment: AlignmentDirectional.centerEnd,
