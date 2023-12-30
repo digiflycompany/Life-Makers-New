@@ -10,7 +10,6 @@ import '../../../home_page/presentation/widgets/news_button.dart';
 import '../../../seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import '../widgets/button.dart';
 import 'choose_role_page.dart';
-import 'member_campaign_details.dart';
 
 class CampaignDetailsScreen extends StatefulWidget {
   CampaignDetailsScreen({super.key, this.campaignDetails, this.tasks});

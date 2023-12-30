@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "981883022053",
+    "project_id": "life-makers-c167a",
+    "storage_bucket": "life-makers-c167a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:981883022053:android:9bac89ceb69a38e4f6820c",
+        "android_client_info": {
+          "package_name": "com.digifly.lifemakers"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVYRWsHL2zxj8or_kUZY84ib-XWluUZ-0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

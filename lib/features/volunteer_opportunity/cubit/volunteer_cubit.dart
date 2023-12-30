@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:life_makers/features/campaign_details/model/user_joined_campaigns_model.dart';
 import 'package:life_makers/features/volunteer_opportunity/cubit/volunteer_states.dart';
 import 'package:life_makers/features/volunteer_opportunity/models/one_day_activity_model.dart';
 import 'package:life_makers/features/volunteer_opportunity/models/volunteer_repo.dart';
@@ -15,6 +16,7 @@ class VolunteerCubit extends Cubit<VolunteerState> {
   Dio dio = Dio();
   VolunteerPracticalTrainingModel? volunteerPracticalTrainingModel;
   UserJoinedVolunteerOpportunities? userJoinedVolunteerOpportunities;
+  JoinedCampaignsModel? joinedCampaignsModel;
   OneDayActivityModel? oneDayActivityModel;
 
   VolunteerRepo? volunteerRepo = VolunteerRepoImp();
@@ -138,4 +140,21 @@ class VolunteerCubit extends Cubit<VolunteerState> {
       emit(JoinedProgramFailure('Failed to load program volunteer opportunities: $error'));
     }
   }
+
+  Future<void> getJoinedCampaigns() async {
+    emit(JoinedCampaignsLoading());
+    try {
+      Response response =
+      await dio.get(EndPoints.userJoinedCampaigns);
+      if (response.statusCode == 200) {
+        joinedCampaignsModel= JoinedCampaignsModel.fromJson(response.data);
+        emit(JoinedCampaignsSuccess());
+      } else {
+        throw Exception('Failed to load campaigns');
+      }
+    } catch (error) {
+      emit(JoinedCampaignsFailure('Failed to load campaigns: $error'));
+    }
+  }
+
 }
