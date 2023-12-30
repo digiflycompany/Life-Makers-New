@@ -101,3 +101,12 @@ class NotificationFailure extends SignUpState {
   final String error;
   NotificationFailure(this.error);
 }
+
+class CurrCampAndOppLoading extends SignUpState {}
+
+class CurrCampAndOppSuccess extends SignUpState {}
+
+class CurrCampAndOppFailure extends SignUpState {
+  final String error;
+  CurrCampAndOppFailure(this.error);
+}

@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_makers/features/authentication/data/models/city_model.dart';
+import 'package:life_makers/features/authentication/data/models/current_joined_campaigns_and_opp.dart';
 import 'package:life_makers/features/authentication/data/models/notification_model.dart';
 import 'package:life_makers/features/authentication/data/models/phone_user_mode.dart';
 import 'package:life_makers/features/authentication/data/models/register_error_model.dart';
@@ -30,6 +31,7 @@ class SignUpCubit extends Cubit<SignUpState> {
   List<Areas> areasList = [];
   int? cityId;
   NotificationModel? notificationModel;
+  CurrentJoinedCampaignsAndOpp? currentJoinedCampaignsAndOpp;
 
   void resendOtp() {
     emit(OtpResend());
@@ -155,6 +157,39 @@ class SignUpCubit extends Cubit<SignUpState> {
       }
     }
   }
+
+  Future<void> GetCurrentJoinedCampaignsAndOpp() async {
+    emit(CurrCampAndOppLoading());
+    try {
+      Response? response = await dio.get(
+        EndPoints.currentCampaignsAndOpportunities,
+        options: Options(headers: {
+          'Authorization': 'Bearer ${PreferencesHelper.getToken()}'
+        }),
+      );
+      if (response.statusCode == 200) {
+        currentJoinedCampaignsAndOpp = CurrentJoinedCampaignsAndOpp.fromJson(response.data);
+        emit(CurrCampAndOppSuccess());
+      } else {
+        CurrCampAndOppFailure('حدث خطأ حاول مجددا');
+      }
+    } on DioException catch (dioException) {
+      if (dioException.response != null) {
+        if (kDebugMode) {
+          print(
+              'Server responded with status code: ${dioException.response!.statusCode}');
+        }
+        emit(CurrCampAndOppFailure('حدث خطأ حاول مجددا'));
+      } else {
+        if (kDebugMode) {
+          print('Dio exception: ${dioException.message}');
+        }
+        emit(
+            CurrCampAndOppFailure("Dio exception: ${dioException.message}"));
+      }
+    }
+  }
+
 
 
   Future<void> OtpCheck(String phone) async {
