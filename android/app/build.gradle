@@ -3,6 +3,7 @@ plugins {
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
 
+
 }
 
 def localProperties = new Properties()
@@ -73,4 +74,4 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+apply plugin: 'com.google.gms.google-services'

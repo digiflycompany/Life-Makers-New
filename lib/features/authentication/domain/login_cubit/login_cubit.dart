@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,17 +34,17 @@ class LoginCubit extends Cubit<LoginState> {
     }
     emit(LoginLoading());
     try {
-
+      String? deviceToken=await FirebaseMessaging.instance.getToken();
       Response? response = await dio.post(
         EndPoints.loginApi,
         data: {
           'email': username,
           'password': password,
-          'device_token':'btkjgrfenjgr',
+          'device_token':deviceToken,
         },
       );
 
-    //  debugPrint(response.requestOptions.data);
+      debugPrint(response.requestOptions.data);
       if
       (response.statusCode == 200) {
         UserModel userModel = UserModel.fromJson(response.data);

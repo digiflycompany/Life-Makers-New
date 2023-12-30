@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -75,6 +76,8 @@ class SignUpCubit extends Cubit<SignUpState> {
     String city_center,
     String previous_experience,
   ) async {
+    String? deviceToken=await FirebaseMessaging.instance.getToken();
+
     emit(SignUpLoading());
     Response? response = await dio.post(
       EndPoints.registerApi,
@@ -91,6 +94,8 @@ class SignUpCubit extends Cubit<SignUpState> {
         'governorate': governorate,
         'city_center': city_center,
         'previous_experience': previous_experience,
+        'device_token':deviceToken,
+
       },
     // ignore: body_might_complete_normally_catch_error
     ).catchError((e) {

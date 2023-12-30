@@ -12,8 +12,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final splashCubit = context.read<SplashCubit>();
     splashCubit.performInitialization(context);
-    return BlocConsumer<SplashCubit, SplashState>(
-      listener: (context, state) {},
+    return BlocBuilder<SplashCubit, SplashState>(
       builder: (context, state) {
         return Scaffold(body: splashImage);
       },
