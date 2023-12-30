@@ -1,10 +1,13 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/core/widgets/title_text.dart';
+import 'package:life_makers/features/authentication/domain/sign_up_cubit/sign_up_cubit.dart';
+import 'package:life_makers/features/authentication/domain/sign_up_cubit/sign_up_states.dart';
 import 'package:life_makers/features/home_page/cubit/home_calender_cubit.dart';
 import 'package:life_makers/features/home_page/presentation/pages/home_calender_details_screen.dart';
 import 'package:life_makers/features/home_page/presentation/pages/news_details.dart';
@@ -35,12 +38,14 @@ class _MainPageState extends State<MainPage> {
   bool rankPopup = false;
   late EmergencyCampaignsCubit emergencyCampaignsCubit;
   late HomeCalenderCubit homeCalenderCubit;
-
+  late SignUpCubit signUpCubit;
   @override
   void initState() {
     super.initState();
     emergencyCampaignsCubit = context.read<EmergencyCampaignsCubit>();
     homeCalenderCubit = context.read<HomeCalenderCubit>();
+    signUpCubit=context.read<SignUpCubit>();
+    signUpCubit.GetCurrentJoinedCampaignsAndOpp();
     emergencyCampaignsCubit.getEmergencyCampaignsData();
     homeCalenderCubit.getHomeCalender();
   }
@@ -629,7 +634,7 @@ class _MainPageState extends State<MainPage> {
                       AppStrings.orphan,
                       style: TextStyle(
                           color: AppColors.greenTextColor,
-                          fontSize: 12,
+                          fontSize: 10,
                           fontWeight: FontWeight.w500,
                           fontFamily: FontFamilies.alexandria),
                     ),
@@ -658,7 +663,7 @@ class _MainPageState extends State<MainPage> {
                       AppStrings.education,
                       style: TextStyle(
                           color: AppColors.blueTextColor,
-                          fontSize: 12,
+                          fontSize: 10,
                           fontWeight: FontWeight.w500,
                           fontFamily: FontFamilies.alexandria),
                     ),
@@ -695,7 +700,124 @@ class _MainPageState extends State<MainPage> {
               SizedBox(
                 height: 9.h,
               ),
-              cards,
+              BlocConsumer<SignUpCubit, SignUpState>(
+              listener: (context, state) {},
+               builder: (context, state) {
+               return Row(
+                children: [
+                  ListView.builder(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: signUpCubit.currentJoinedCampaignsAndOpp?.currentCampaigns?.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 5.w),
+                        child: Container(
+                          width: 117.w,
+                          height: 49.h,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(23.r),
+                            color: Colors.white70,
+                            border: Border.all(
+                              color: AppColors.greenBorderColor,
+                              width: 2.0, // Adjust the border width as needed
+                            ),
+                          ),
+                          child: Align(
+                            alignment: AlignmentDirectional.center,
+                            child: Padding(
+                              padding: EdgeInsets.only(right: 5.w),
+                              child:  Text(
+                                "${signUpCubit.currentJoinedCampaignsAndOpp?.currentCampaigns![index].name}",
+                                style: TextStyle(
+                                    color: AppColors.greenTextColor,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: FontFamilies.alexandria),
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                  ListView.builder(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    itemCount: signUpCubit.currentJoinedCampaignsAndOpp?.currentCampaigns?.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 5.w),
+                        child: SizedBox(
+                          height: 49.h,
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            reverse: true,
+                            children: [
+                              Container(
+                                width: 117.w,
+                                height: 49.h,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(23.r),
+                                  color: Colors.white70,
+                                  border: Border.all(
+                                    color: AppColors.greenBorderColor,
+                                    width: 2.0, // Adjust the border width as needed
+                                  ),
+                                ),
+                                child: Align(
+                                  alignment: AlignmentDirectional.center,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(right: 5.w),
+                                    child: const Text(
+                                      AppStrings.orphan,
+                                      style: TextStyle(
+                                          color: AppColors.greenTextColor,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: FontFamilies.alexandria),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 6.w,
+                              ),
+                              Container(
+                                width: 117.w,
+                                height: 49.h,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(23.r),
+                                  color: Colors.white70,
+                                  border: Border.all(
+                                    color: AppColors.blueTextColor,
+                                    width: 2.0, // Adjust the border width as needed
+                                  ),
+                                ),
+                                child: Align(
+                                  alignment: AlignmentDirectional.center,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(right: 5.w),
+                                    child: const Text(
+                                      AppStrings.education,
+                                      style: TextStyle(
+                                          color: AppColors.blueTextColor,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: FontFamilies.alexandria),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  )
+                ],
+              );
+  },
+),
             ],
           ),
           if (rankPopup == true)
