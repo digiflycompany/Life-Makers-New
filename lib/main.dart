@@ -115,7 +115,7 @@ class MyApp extends StatelessWidget {
           title: AppStrings.lifeMaker,
           debugShowCheckedModeBanner: false,
           navigatorKey: AppService().navigatorKey,
-          home: SplashScreen(),
+          home: BeforeElectionsScreen(),
          // home: EditAccountScreen(),
         ),
       ),
