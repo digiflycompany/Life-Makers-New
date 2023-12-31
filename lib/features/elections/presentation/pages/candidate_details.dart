@@ -6,28 +6,31 @@ import 'package:life_makers/core/utils/app_fonts.dart';
 import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/features/volunteer_opportunity/cubit/one_day_activity_cubit.dart';
 import 'package:life_makers/features/volunteer_opportunity/cubit/one_day_activity_states.dart';
+import 'package:life_makers/services/cubit/global_cubit_state.dart';
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/widgets/custom_appbar.dart';
+import '../../cubit/all_candidates_cubit.dart';
 
 
 class CandidateDetails extends StatefulWidget {
- // final int index;
-  //CandidateDetails({required this.index});
-  CandidateDetails();
+  final int index;
+  CandidateDetails({required this.index});
   @override
   State<CandidateDetails> createState() => _CandidateDetailsState();
 }
 
 class _CandidateDetailsState extends State<CandidateDetails> {
-  late OneDayActivityCubit oneDayActivityCubit;
+  late AllCandidatesCubit allCandidatesCubit;
+
   @override
   void initState() {
-    oneDayActivityCubit = context.read<OneDayActivityCubit>();
+    allCandidatesCubit = context.read<AllCandidatesCubit>();
+    allCandidatesCubit.getAllCandidates(context: context);
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<OneDayActivityCubit, OneDayActivityState>(
+    return BlocConsumer<AllCandidatesCubit, CubitBaseState>(
         listener: (context, state) {
           // if(state is JoinOneDayActivitySuccess){
           //   oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].userJoined='pending';
@@ -73,9 +76,8 @@ class _CandidateDetailsState extends State<CandidateDetails> {
                                       height: 300.h,
                                     ),
                                   ),
-                                  // Image.network('${oneDayActivityCubit.oneDayActivityModel
-                                  //     ?.volunteerOpportunities![widget.index].photo}',
-                                  //   width: double.infinity, fit: BoxFit.fill,height: 300.h,),
+                                  Image.network('${allCandidatesCubit.allCandidatesModel?.voters?[widget.index].imageUrl}',
+                                    width: double.infinity, fit: BoxFit.fill,height: 300.h,),
                                 ]
                             ),
                           ),
@@ -119,7 +121,7 @@ class _CandidateDetailsState extends State<CandidateDetails> {
                             Padding(
                               padding:  EdgeInsets.only(bottom: 3.0),
                               child: Text(
-                                'يوسف حنفي',
+                                '${allCandidatesCubit.allCandidatesModel?.voters?[widget.index].name}',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Colors.black,

@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/core/widgets/custom_appbar.dart';
-import 'package:life_makers/core/widgets/custom_snack_bar.dart';
 import 'package:life_makers/features/elections/cubit/all_candidates_cubit.dart';
 import 'package:life_makers/features/elections/cubit/vote_candidate_cubit.dart';
-import 'package:life_makers/features/elections/presentation/widgets/elections_button.dart';
+import 'package:life_makers/features/elections/presentation/pages/candidate_details.dart';
 import 'package:life_makers/services/cubit/global_cubit_state.dart';
+import 'package:page_transition/page_transition.dart';
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app-string.dart';
@@ -109,80 +109,88 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
             ),
            itemCount: allCandidatesCubit.allCandidatesModel?.voters?.length ?? 0,
            itemBuilder:(context,index){
-              return Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black26,
-                      spreadRadius: 1,
-                      blurRadius: 1,
-                    )
-                  ],
-                  color: AppColors.white,
-                ),
-                child: Stack(
-                  children: [
-                    Align(
-                        alignment: AlignmentDirectional.bottomEnd,
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 15.w),
-                          child: Image.asset(
-                              AppAssets.electionsCardBackgroundImage),
-                        )),
-                    Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                              bottom: 7.h, right: 4, left: 4, top: 4),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10.r),
-                                topRight: Radius.circular(10.r)),
-                            child: Image.network(
-                              '${allCandidatesCubit.allCandidatesModel?.voters?[index].imageUrl}',
-                              height: 100.h,
-                              fit: BoxFit.cover,
-                              width: double.infinity,
-                            ),
-                          ),
-                        ),
-                        Align(
-                          alignment: AlignmentDirectional.centerStart,
+              return GestureDetector(
+                onTap: (){
+                  Navigator.push(context, PageTransition(
+                      type: PageTransitionType.fade,
+                      duration: const Duration(milliseconds: 600),
+                      child:  CandidateDetails(index: index,)));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.r),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black26,
+                        spreadRadius: 1,
+                        blurRadius: 1,
+                      )
+                    ],
+                    color: AppColors.white,
+                  ),
+                  child: Stack(
+                    children: [
+                      Align(
+                          alignment: AlignmentDirectional.bottomEnd,
                           child: Padding(
+                            padding: EdgeInsets.only(left: 15.w),
+                            child: Image.asset(
+                                AppAssets.electionsCardBackgroundImage),
+                          )),
+                      Column(
+                        children: [
+                          Padding(
                             padding: EdgeInsets.only(
-                                right: 10.w, bottom: 6.h, left: 10.w),
-                            child: Text(
-                              '${allCandidatesCubit.allCandidatesModel?.voters![index].details}',
-                              textDirection: TextDirection.rtl,
-                              style: TextStyle(
-                                color: AppColors.black,
-                                fontFamily: FontFamilies.alexandria,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 8.5,
+                                bottom: 7.h, right: 4, left: 4, top: 4),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(10.r),
+                                  topRight: Radius.circular(10.r)),
+                              child: Image.network(
+                                '${allCandidatesCubit.allCandidatesModel?.voters?[index].imageUrl}',
+                                height: 100.h,
+                                fit: BoxFit.cover,
+                                width: double.infinity,
                               ),
                             ),
                           ),
-                        ),
-                        Align(
-                          alignment: AlignmentDirectional.centerStart,
-                          child: Padding(
-                            padding: EdgeInsets.only(right: 10.w),
-                            child: Text(
-                              '${allCandidatesCubit.allCandidatesModel?.voters![index].name}',
-                              textDirection: TextDirection.rtl,
-                              style: TextStyle(
-                                color: AppColors.black,
-                                fontFamily: FontFamilies.alexandria,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 12,
+                          Align(
+                            alignment: AlignmentDirectional.centerStart,
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                  right: 10.w, bottom: 6.h, left: 10.w),
+                              child: Text(
+                                '${allCandidatesCubit.allCandidatesModel?.voters![index].details}',
+                                textDirection: TextDirection.rtl,
+                                style: TextStyle(
+                                  color: AppColors.black,
+                                  fontFamily: FontFamilies.alexandria,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 8.5,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                          Align(
+                            alignment: AlignmentDirectional.centerStart,
+                            child: Padding(
+                              padding: EdgeInsets.only(right: 10.w),
+                              child: Text(
+                                '${allCandidatesCubit.allCandidatesModel?.voters![index].name}',
+                                textDirection: TextDirection.rtl,
+                                style: TextStyle(
+                                  color: AppColors.black,
+                                  fontFamily: FontFamilies.alexandria,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               );
            }
