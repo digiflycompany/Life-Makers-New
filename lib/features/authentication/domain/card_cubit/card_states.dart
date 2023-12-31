@@ -11,3 +11,23 @@ class CardFailure extends CardStates {
 
   CardFailure(this.error);
 }
+
+class JoinedVolunteerLoading extends CardStates {}
+
+class JoinedVolunteerSuccess extends CardStates {}
+
+class JoinedVolunteerFailure extends CardStates {
+  final String error;
+
+  JoinedVolunteerFailure(this.error);
+}
+
+class leftVolunteerLoading extends CardStates {}
+
+class leftVolunteerSuccess extends CardStates {}
+
+class leftVolunteerFailure extends CardStates {
+  final String error;
+
+  leftVolunteerFailure(this.error);
+}

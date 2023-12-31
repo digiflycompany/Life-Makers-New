@@ -36,7 +36,7 @@ class OtpScreen extends StatelessWidget {
         if (state is otpResetPasswordSubmitLoading) {
           loading =true;
         } else if (state is otpResetPasswordSubmitSuccess) {
-          Navigator.push(context, PageTransition(
+          Navigator.pushReplacement(context, PageTransition(
             type: PageTransitionType.fade,
             duration: const Duration(milliseconds: 400),
             child:  BlocProvider.value(
