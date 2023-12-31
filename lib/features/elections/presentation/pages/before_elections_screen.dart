@@ -44,6 +44,7 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: Directionality(
             textDirection: TextDirection.rtl,
@@ -51,94 +52,42 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 15, bottom: 8),
-                  child: Text(
-                    'انتخابات رئيس مجلس ادارة المتطوعين',
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.black,
-                      fontFamily: 'Alexandria',
+                  padding: const EdgeInsets.only(top: 15, bottom: 16),
+                  child: Center(
+                    child: Text(
+                      'انتخابات رئيس مجلس ادارة المتطوعين',
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.black,
+                        fontFamily: 'Alexandria',
+                      ),
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
-                  child: Text(
-                    'قم باختيار رئيس واحد للمجلس من بين هذه المجموعة المرشحة لرئاسة مجلس إدارة المتطوعين',
-                    style: TextStyle(
-                      fontSize: 9,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.black,
-                      fontFamily: 'Alexandria',
-                    ),
-                    textAlign: TextAlign.right,
                   ),
                 ),
                 buildLeaderGridView(),
                 Padding(
-                  padding: const EdgeInsets.only(top: 15, bottom: 8),
-                  child: Text(
-                    'انتخابات أعضاء مجلس ادارة المتطوعين',
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.black,
-                      fontFamily: 'Alexandria',
+                  padding: const EdgeInsets.only(top: 40, bottom: 16),
+                  child: Center(
+                    child: Text(
+                      'مرشحين أعضاء مجلس ادارة المتطوعين',
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.black,
+                        fontFamily: 'Alexandria',
+                      ),
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
-                  child: Text(
-                    'قم باختيار 10 أعضاء للمجلس من بين هذه المجموعة المرشحة لعضوية مجلس إدارة المتطوعين',
-                    style: TextStyle(
-                      fontSize: 9,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.black,
-                      fontFamily: 'Alexandria',
-                    ),
-                    textAlign: TextAlign.right,
                   ),
                 ),
                 buildGridView(),
+                SizedBox(height: 25.h,),
               ],
             ),
           ),
         ),
       ),
-      bottomNavigationBar: button,
     );
-  }
-
-  get button {
-    return BlocBuilder<VoteCandidateCubit, CubitBaseState>(
-        builder: (context, state) {
-          if (state == CubitBaseState.loading) {
-            return SizedBox(
-                height: 50.h,
-                child: Center(child: CircularProgressIndicator.adaptive()));
-          }
-          return ElectionsButton(
-              onTap: () {
-                if (selectedVotedSet.length != 10) {
-                  CustomSnackBars.showInfoSnackBar(
-                      title: 'يجب عليك اختيار 10 اعضاء');
-                }
-                if (selectedManagerId == null) {
-                  CustomSnackBars.showInfoSnackBar(
-                      title: 'يجب عليك اختيار رئيس الانتخاب');
-                }
-                if (selectedVotedSet.length == 10 && selectedManagerId != null) {
-                  voteCandidateCubit.voteForCandidates(
-                    managerId: selectedManagerId!,
-                    votedList: selectedVotedSet.toList(),
-                    context: context,
-                  );
-                }
-              },
-              text: AppStrings.done);
-        });
   }
 
   Widget buildGridView() {
