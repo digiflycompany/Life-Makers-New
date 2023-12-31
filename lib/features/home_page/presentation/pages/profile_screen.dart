@@ -734,7 +734,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         height: 420,
         width: double.infinity,
         child: PageView(
-          reverse: true,
           controller: _pageController2,
           onPageChanged: (int page) {
             setState(() {
