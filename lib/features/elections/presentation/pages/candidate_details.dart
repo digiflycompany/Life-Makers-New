@@ -12,20 +12,20 @@ import 'package:life_makers/features/volunteer_opportunity/presentation/screens/
 import 'package:page_transition/page_transition.dart';
 
 import '../../../../core/utils/app-assets.dart';
+import '../../../../core/widgets/custom_appbar.dart';
 import '../../../../core/widgets/custom_snack_bar.dart';
 import '../../../../services/shared_preferences/preferences_helper.dart';
 
 
-class OneDayActivityDetails extends StatefulWidget {
-  final int index;
-
-  OneDayActivityDetails({required this.index});
-
+class CandidateDetails extends StatefulWidget {
+ // final int index;
+  //CandidateDetails({required this.index});
+  CandidateDetails();
   @override
-  State<OneDayActivityDetails> createState() => _OneDayActivityDetailsState();
+  State<CandidateDetails> createState() => _CandidateDetailsState();
 }
 
-class _OneDayActivityDetailsState extends State<OneDayActivityDetails> {
+class _CandidateDetailsState extends State<CandidateDetails> {
   late OneDayActivityCubit oneDayActivityCubit;
   @override
   void initState() {
@@ -36,52 +36,24 @@ class _OneDayActivityDetailsState extends State<OneDayActivityDetails> {
   Widget build(BuildContext context) {
     return BlocConsumer<OneDayActivityCubit, OneDayActivityState>(
         listener: (context, state) {
-          if(state is JoinOneDayActivitySuccess){
-            oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].userJoined='pending';
-            Navigator.push(context, PageTransition(
-                type: PageTransitionType.fade,
-                duration: const Duration(milliseconds: 450),
-                child:  VolunteerThanksScreen()));
-          }
-          if(state is leftOneDayActivitySuccess){
-            oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].userJoined='false';
-            CustomSnackBars.showSuccessToast(title: AppStrings.volunteerHasBeenLeftSuccessfully,);
-          }
+          // if(state is JoinOneDayActivitySuccess){
+          //   oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].userJoined='pending';
+          //   Navigator.push(context, PageTransition(
+          //       type: PageTransitionType.fade,
+          //       duration: const Duration(milliseconds: 450),
+          //       child:  VolunteerThanksScreen()));
+          // }
+          // if(state is leftOneDayActivitySuccess){
+          //   oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].userJoined='false';
+          //   CustomSnackBars.showSuccessToast(title: AppStrings.volunteerHasBeenLeftSuccessfully,);
+          // }
         },
         builder: (context, state) {
           return Scaffold(
+            backgroundColor: Colors.white,
             appBar: PreferredSize(
-              preferredSize: Size(double.infinity, 372),
-              child: SafeArea(
-                child: Stack(
-                    children: [
-                      Image.asset(
-                        AppAssets.loadingImg,
-                        width: double.infinity,
-                        fit: BoxFit.fill,
-                        height: 300.h,
-                      ),
-                      Image.network('${oneDayActivityCubit.oneDayActivityModel
-                          ?.volunteerOpportunities![widget.index].photo}',
-                        width: double.infinity, fit: BoxFit.fill,height: 300.h,),
-                      Positioned(
-                        right: 13,
-                        top: 16,
-                        child: CircleAvatar(
-                          radius: 20,
-                          child: IconButton(
-                            icon: Icon(
-                              Icons.arrow_forward, color: AppColors.gradientColor1,),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                          ),
-                          backgroundColor: Color(0xffD9D9D9),
-                        ),
-                      )
-                    ]
-                ),
-              ),
+              child: CustomAppBar('مرشحي مجلس ادارة المتطوعين'),
+              preferredSize: Size(double.infinity, 50.h),
             ),
             body: SafeArea(
               child: Padding(
@@ -93,36 +65,57 @@ class _OneDayActivityDetailsState extends State<OneDayActivityDetails> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20, bottom: 5),
-                          child: Text(
-                            '${oneDayActivityCubit.oneDayActivityModel
-                                ?.volunteerOpportunities![widget.index].name}',
-                            style: TextStyle(
-                              fontFamily: FontFamilies.alexandria,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
+                        SizedBox(height: 8.h),
+                        PreferredSize(
+                          preferredSize: Size(double.infinity, 372),
+                          child: SafeArea(
+                            child: Stack(
+                                children: [
+                                  Padding(
+                                    padding:  EdgeInsets.symmetric(horizontal: 0.w),
+                                    child: Image.asset(
+                                      AppAssets.yousefImage,
+                                      width: double.infinity,
+                                      fit: BoxFit.fill,
+                                      height: 300.h,
+                                    ),
+                                  ),
+                                  // Image.network('${oneDayActivityCubit.oneDayActivityModel
+                                  //     ?.volunteerOpportunities![widget.index].photo}',
+                                  //   width: double.infinity, fit: BoxFit.fill,height: 300.h,),
+                                ]
                             ),
                           ),
                         ),
-                        Row(
-                          children: [
-                            SvgPicture.asset('assets/svg/calender.svg'),
-                            SizedBox(width: 5),
-                            Text(
-                              '22-10-2023',
-                              style: TextStyle(
-                                  fontFamily: 'Alexandria',
-                                  fontSize: 7,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.black.withOpacity(0.5)),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10, bottom: 5),
+                          child: Container(
+                            width: 90,
+                            height: 25,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: AppColors.orangeBackgroundColor,
                             ),
-                          ],
+                            child: Center(
+                              child: Text(
+                                // '${oneDayActivityCubit.oneDayActivityModel
+                                //     ?.volunteerOpportunities![widget.index].name}',
+                                'بيانات شخصية',
+                                style: TextStyle(
+                                  fontFamily: FontFamilies.alexandria,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.orangeBorderColor
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                         SizedBox(height: 7),
                         Text(
-                          '${oneDayActivityCubit.oneDayActivityModel
-                              ?.volunteerOpportunities![widget.index].details}',
+                          // '${oneDayActivityCubit.oneDayActivityModel
+                          //     ?.volunteerOpportunities![widget.index].details}',
+                          '',
                           style: TextStyle(
                             fontWeight: FontWeight.w400,
                             fontSize: 10,
@@ -137,66 +130,6 @@ class _OneDayActivityDetailsState extends State<OneDayActivityDetails> {
                 ),
               ),
             ),
-            bottomNavigationBar: !PreferencesHelper.getIsVisitor
-                ? Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if( oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].userJoined=='true')
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 10.h),
-                    child: state is leftOneDayActivityLoading
-                        ? Center(
-                      child: Transform.scale(
-                        scale: 0.5,
-                        child: CircularProgressIndicator(
-                          color: AppColors.orangeBorderColor,
-                        ),
-                      ),
-                    )
-                        : NewsButton2(
-                        onTap: () {
-                          oneDayActivityCubit.leftOneDayActivity('${oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].id}');
-                        },
-                        text: AppStrings.leave),
-                  ),
-                if( oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].userJoined=='pending')
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 10.h),
-                    child: state is leftOneDayActivityLoading
-                        ? Center(
-                      child: Transform.scale(
-                        scale: 0.5,
-                        child: CircularProgressIndicator(
-                          color: AppColors.orangeBorderColor,
-                        ),
-                      ),
-                    )
-                        : PendingButton(
-                        onTap: () {
-                          CustomSnackBars.showInfoSnackBar(title: AppStrings.pendingText);
-                        },
-                        text:AppStrings.pendingText),
-                  ),
-                if( oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].userJoined=='false')
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 10.h),
-                    child: state is JoinOneDayActivityLoading
-                        ? Center(
-                      child: Transform.scale(
-                        scale: 0.5,
-                        child: CircularProgressIndicator(
-                          color: AppColors.orangeBorderColor,
-                        ),
-                      ),
-                    )
-                        : NewsButton2(
-                        onTap: () {
-                          oneDayActivityCubit.JoinOneDayActivity('${oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities![widget.index].id}');
-                        },
-                        text: AppStrings.join),
-                  ),
-              ],
-            ):SizedBox.shrink(),
           );
         }
     );
