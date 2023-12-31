@@ -16,7 +16,7 @@ class NotificationWidget extends StatelessWidget {
        child: Container(
          height: 88.h,
          decoration: BoxDecoration(
-           color: AppColors.greyBackgroundColor,
+           color: AppColors.greyTabColor,
            borderRadius: BorderRadius.circular(8.r),
          ),
          child: Row(
@@ -42,22 +42,25 @@ class NotificationWidget extends StatelessWidget {
     style: TextStyle(
         color: Colors.black,
         fontFamily: FontFamilies.alexandria,
-        fontWeight: FontWeight.w400,
-        fontSize: 9.2,
+        fontWeight: FontWeight.w600,
+        fontSize: 12.5,
         height: 2.h
     ),
     textDirection: TextDirection.rtl,
   );
   get timeText => Padding(
     padding:  EdgeInsets.only(left: 5.w),
-    child:  Text(time!,
-      style: const TextStyle(
-        color: AppColors.greyNotificationText,
-        fontFamily: FontFamilies.alexandria,
-        fontWeight: FontWeight.w600,
-        fontSize: 8,
+    child:  SizedBox(
+      width: 70,
+      child: Text(time!,
+        style:  TextStyle(
+          color: Colors.grey.shade600,
+          fontFamily: FontFamilies.alexandria,
+          fontWeight: FontWeight.w600,
+          fontSize: 8,
+        ),
+        textDirection: TextDirection.rtl,
       ),
-      textDirection: TextDirection.rtl,
     ),
   );
 }

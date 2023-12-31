@@ -66,4 +66,8 @@ class EndPoints {
       'https://life-makers.digifly-eg.com/api/app-settings';
   static const String userJoinedCampaigns =
       'https://life-makers.digifly-eg.com/api/all-user-campaigns';
+  static const String notificationList =
+      'https://life-makers.digifly-eg.com/api/user-notifications';
+  static const String currentCampaignsAndOpportunities =
+      'https://life-makers.digifly-eg.com/api/user-current-campaigns-opportunities';
 }

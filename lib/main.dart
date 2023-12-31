@@ -5,6 +5,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:life_makers/features/authentication/domain/card_cubit/cards_cubit.dart';
 import 'package:life_makers/features/authentication/domain/login_cubit/login_cubit.dart';
 import 'package:life_makers/features/authentication/domain/sign_up_cubit/sign_up_cubit.dart';
 import 'package:life_makers/features/edit_account/cubit/edit_account_cubit.dart';
@@ -117,6 +118,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<SplashCubit>(
           create: (BuildContext context) => SplashCubit(),
+        ),
+        BlocProvider<CardCubit>(
+          create: (BuildContext context) => CardCubit(),
         ),
       ],
       child: GestureDetector(

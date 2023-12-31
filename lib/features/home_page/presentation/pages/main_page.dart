@@ -5,6 +5,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/core/widgets/title_text.dart';
+import 'package:life_makers/features/authentication/domain/card_cubit/card_states.dart';
+import 'package:life_makers/features/authentication/domain/card_cubit/cards_cubit.dart';
+import 'package:life_makers/features/authentication/domain/card_cubit/volunteer_card_details.dart';
+import 'package:life_makers/features/authentication/domain/sign_up_cubit/sign_up_cubit.dart';
+import 'package:life_makers/features/authentication/domain/sign_up_cubit/sign_up_states.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/volunteers_card.dart';
 import 'package:life_makers/features/home_page/cubit/home_calender_cubit.dart';
 import 'package:life_makers/features/home_page/presentation/pages/home_calender_details_screen.dart';
 import 'package:life_makers/features/home_page/presentation/pages/news_details.dart';
@@ -29,20 +35,20 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  bool isOpen = false;
   final PageController _pageController = PageController();
   int _currentPage = 0;
-  bool rankPopup = false;
   late EmergencyCampaignsCubit emergencyCampaignsCubit;
   late HomeCalenderCubit homeCalenderCubit;
-
+  late CardCubit cardCubit;
   @override
   void initState() {
-    super.initState();
     emergencyCampaignsCubit = context.read<EmergencyCampaignsCubit>();
     homeCalenderCubit = context.read<HomeCalenderCubit>();
     emergencyCampaignsCubit.getEmergencyCampaignsData();
     homeCalenderCubit.getHomeCalender();
+    cardCubit =context.read<CardCubit>();
+    cardCubit.GetCurrentJoinedCampaignsAndOpp();
+    super.initState();
   }
 
   @override
@@ -50,138 +56,281 @@ class _MainPageState extends State<MainPage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.backgroundColor,
-        body: GestureDetector(
-          onTap: () {
-            setState(() {
-              rankPopup = false;
-            });
-          },
-          child: Column(
-            children: [
-              header,
-              SizedBox(height: 8.h),
-              detailsCard,
-              SizedBox(height: 15.h),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 14.w),
-                child: SizedBox(
-                    height: 81.h,
-                    child: BlocBuilder<EmergencyCampaignsCubit, CubitBaseState>(
-                      builder: (context, state) {
-                        if (state == CubitBaseState.done) {
-                          if (emergencyCampaignsCubit.emergencyCampaignModel
-                                  ?.campaigns?.isNotEmpty ==
-                              true)
-                            return Column(
-                              children: [
-                                Flexible(
-                                  child: PageView.builder(
-                                    reverse: true,
-                                    controller: _pageController,
-                                    itemCount: emergencyCampaignsCubit
-                                            .emergencyCampaignModel
-                                            ?.campaigns
-                                            ?.length ??
-                                        0, // Adjust the number of items based on your ListView
-                                    onPageChanged: (int page) {
-                                      setState(() {
-                                        _currentPage = page;
-                                      });
-                                    },
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return newsSample(
-                                          campains: emergencyCampaignsCubit
-                                              .emergencyCampaignModel
-                                              ?.campaigns?[index]);
-                                    },
+        body: BlocBuilder<CardCubit, CardStates>(
+        //listener: (context, state) {},
+            builder: (context, state) {
+       return Column(
+          children: [
+            header,
+            SizedBox(height: 8.h),
+            Container(
+                width: 376.w,
+                height: 231.h,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.r),
+                  gradient: const LinearGradient(
+                    colors: [
+                      AppColors.gradientColor1,
+                      AppColors.gradientColor2,
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                ),
+                child: Stack(
+                  children: [
+                    Column(
+                      children: [
+                        details,
+                        SizedBox(
+                          height: 16.h,
+                        ),
+                        activitiesAndMore,
+                        SizedBox(
+                          height: 9.h,
+                        ),
+                        if(state is CardLoading)...[
+                          Container(
+                            width: 50,
+                            height: 50,
+                            child: Transform.scale(
+                              scale: 0.6,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                        if(state is CardSuccess)...[Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: 7.w),
+                          child: Container(
+                            height: 52.h,
+                            child: ListView.builder(
+                              physics: BouncingScrollPhysics(),
+                              scrollDirection:Axis.horizontal ,
+                              reverse: true,
+                              itemCount: cardCubit.currentJoinedCampaignsAndOpp?.currentVolunteerOpportunities?.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return InkWell(
+                                  splashColor: Colors.transparent,
+                                  onTap: (){
+                                    Navigator.push(context, PageTransition(
+                                        type: PageTransitionType.fade,
+                                        duration: const Duration(milliseconds: 600),
+                                        child:  VolunteerCardDetails(index: index)));
+                                  },
+                                  child: Padding(
+                                    padding: EdgeInsets.only(right: 5.w),
+                                    child: VolunteerContainer(itemName: "${cardCubit.currentJoinedCampaignsAndOpp?.currentVolunteerOpportunities![index].name}"),
                                   ),
-                                ),
-                                SizedBox(height: 10),
-                                dotsIndicator(
-                                    length: emergencyCampaignsCubit
-                                            .emergencyCampaignModel
-                                            ?.campaigns
-                                            ?.length ??
-                                        0),
-                              ],
-                            );
-                          else
-                            return Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 8.w),
-                              child: Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  color: AppColors.greyContainerColor,
-                                  borderRadius: BorderRadius.circular(7.r),
-                                ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      'لا يوجد حملات طارئة',
-                                      maxLines: 2,
-                                      textDirection: TextDirection.rtl,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: FontFamilies.alexandria,
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 10.4,
+                                );
+                              },
+                            ),
+                          ),
+                        ),],
+                      ],
+                    ),
+                    Positioned(
+                      top: 17,
+                      left:17,
+                      child: InkWell(
+                          onTap: () {
+                            if (!PreferencesHelper.getIsVisitor)
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      elevation: 0,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
                                       ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          right: 15, left: 5),
-                                      child: SvgPicture.asset(
-                                          'assets/svg/empty5.svg'),
-                                    ),
-                                  ],
+                                      content: Container(
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xff0E395E),
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                        padding: const EdgeInsets.only(top: 30),
+                                        // margin: const EdgeInsets.only(bottom: 22),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                              width: 150,
+                                              height: 150,
+                                              decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                  BorderRadius.circular(10)),
+                                              child: SvgPicture.network(
+                                                  '${PreferencesHelper.getUserModel?.user?.qrCode}'),
+                                            ),
+                                            const SizedBox(height: 8),
+                                            Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                              children: [
+                                                const Text(
+                                                  'امسح هنا',
+                                                  style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontFamily: 'Alexandria',
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.w400,
+                                                  ),
+                                                ),
+                                                SvgPicture.asset(
+                                                    'assets/svg/tie.svg'),
+                                              ],
+                                            ),
+                                            const SizedBox(height: 14),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  });
+                          },
+                          child: SvgPicture.asset(
+                            AppAssets.qrCode2,
+                          )),
+                    ),
+                    if(state is CardSuccess && cardCubit.currentJoinedCampaignsAndOpp?.currentVolunteerOpportunities?.length==0)...[
+                      Align(
+                        alignment: AlignmentDirectional.center,
+                        child: Padding(
+                          padding:  EdgeInsets.only(top: 130.h),
+                          child: Text(
+                            'لا توجد أنشطة حالية',
+                            style: TextStyle(
+                              color: AppColors.white,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: FontFamilies.alexandria,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ]
+                  ],
+                )),
+            SizedBox(height: 15.h),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 14.w),
+              child: SizedBox(
+                  height: 81.h,
+                  child: BlocBuilder<EmergencyCampaignsCubit, CubitBaseState>(
+                    builder: (context, state) {
+                      if (state == CubitBaseState.done) {
+                        if (emergencyCampaignsCubit.emergencyCampaignModel
+                                ?.campaigns?.isNotEmpty ==
+                            true)
+                          return Column(
+                            children: [
+                              Flexible(
+                                child: PageView.builder(
+                                  reverse: true,
+                                  controller: _pageController,
+                                  itemCount: emergencyCampaignsCubit
+                                          .emergencyCampaignModel
+                                          ?.campaigns
+                                          ?.length ??
+                                      0, // Adjust the number of items based on your ListView
+                                  onPageChanged: (int page) {
+                                    setState(() {
+                                      _currentPage = page;
+                                    });
+                                  },
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return newsSample(
+                                        campains: emergencyCampaignsCubit
+                                            .emergencyCampaignModel
+                                            ?.campaigns?[index]);
+                                  },
                                 ),
                               ),
-                            );
-                        } else if (state == CubitBaseState.loading) {
-                          return Center(
-                              child: CircularProgressIndicator(
-                            color: AppColors.orangeBorderColor,
-                          ));
-                        }
-                        return SizedBox.shrink();
-                      },
-                    )),
-              ),
-              SizedBox(
-                height: 10.h,
-              ),
-              Expanded(
-                child: BlocBuilder<HomeCalenderCubit, CubitBaseState>(
-                    builder: (context, state) {
-                  if (state == CubitBaseState.done) {
-                    return ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: homeCalenderCubit
-                            .homeCalenderModel?.calender?.length,
-                        shrinkWrap: true,
-                        itemBuilder: (BuildContext context, int index) {
-                          return buildHomeCalenderItem(
-                              calender: homeCalenderCubit
-                                  .homeCalenderModel?.calender?[index]);
-                        });
-                  } else if (state == CubitBaseState.loading) {
-                    return Center(
-                        child: CircularProgressIndicator(
-                      color: AppColors.orangeBorderColor,
-                    ));
-                  }
-                  return SizedBox.shrink();
-                }),
-              ),
-              SizedBox(height: 96.h),
-            ],
-          ),
-        ),
+                              SizedBox(height: 10),
+                              dotsIndicator(
+                                  length: emergencyCampaignsCubit
+                                          .emergencyCampaignModel
+                                          ?.campaigns
+                                          ?.length ??
+                                      0),
+                            ],
+                          );
+                        else
+                          return Padding(
+                            padding:  EdgeInsets.symmetric(horizontal: 8.w),
+                            child: Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: AppColors.greyContainerColor,
+                                borderRadius: BorderRadius.circular(7.r),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    'لا يوجد حملات طارئة',
+                                    maxLines: 2,
+                                    textDirection: TextDirection.rtl,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: FontFamilies.alexandria,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 10.4,
+                                    ),
+                                  ),
+
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 15,left: 5),
+                                    child: SvgPicture.asset('assets/svg/empty5.svg'),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                      } else if (state == CubitBaseState.loading) {
+                        return Center(
+                            child: CircularProgressIndicator(color: AppColors.orangeBorderColor,));
+                      }
+                      return SizedBox.shrink();
+                    },
+                  )),
+            ),
+            SizedBox(height: 10.h,),
+
+            Expanded(
+              child: BlocBuilder<HomeCalenderCubit, CubitBaseState>(
+                  builder: (context, state) {
+                if (state == CubitBaseState.done) {
+                  return ListView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: homeCalenderCubit
+                          .homeCalenderModel?.calender?.length,
+                      shrinkWrap: true,
+                      itemBuilder: (BuildContext context, int index) {
+                        return buildHomeCalenderItem(
+                            calender: homeCalenderCubit
+                                .homeCalenderModel?.calender?[index]);
+                      });
+                } else if (state == CubitBaseState.loading) {
+                  return Center(child: CircularProgressIndicator(color: AppColors.orangeBorderColor,));
+                }
+                return SizedBox.shrink();
+              }),
+            ),
+            SizedBox(height: 96.h),
+          ],
+        );
+  },
+),
       ),
     );
   }
@@ -189,9 +338,6 @@ class _MainPageState extends State<MainPage> {
   get title => TitleText(text: AppStrings.mainPage);
   get menuIcon => InkWell(
         onTap: () {
-          setState(() {
-            rankPopup = false;
-          });
           if (ZoomDrawer.of(context)!.isOpen()) {
             ZoomDrawer.of(context)!.close();
           } else {
@@ -218,11 +364,11 @@ class _MainPageState extends State<MainPage> {
         ],
       );
   get dropDownIcon => GestureDetector(
-        onTap: () {
-          setState(() {
-            rankPopup = true;
-          });
-        },
+        // onTap: () {
+        //   setState(() {
+        //     rankPopup = true;
+        //   });
+        // },
         child: Padding(
           padding: EdgeInsets.only(top: 70.h),
           child: SvgPicture.asset(
@@ -233,11 +379,11 @@ class _MainPageState extends State<MainPage> {
         ),
       );
   get crownIcon => GestureDetector(
-        onTap: () {
-          setState(() {
-            rankPopup = true;
-          });
-        },
+        // onTap: () {
+        //   setState(() {
+        //     rankPopup = true;
+        //   });
+        // },
         child: Padding(
           padding: EdgeInsets.only(top: 64.h),
           child: Image.asset(AppAssets.crownPng),
@@ -246,9 +392,7 @@ class _MainPageState extends State<MainPage> {
   get name => Padding(
         padding: EdgeInsets.only(left: 114.w, top: 20.h),
         child: Text(
-          PreferencesHelper.getIsVisitor
-              ? 'زائر'
-              : '${PreferencesHelper.getName}',
+          PreferencesHelper.getIsVisitor?'زائر':'${PreferencesHelper.getName}',
           style: TextStyle(
               color: Colors.white,
               fontFamily: FontFamilies.alexandria,
@@ -257,43 +401,37 @@ class _MainPageState extends State<MainPage> {
         ),
       );
   get progressLine => LinearPercentIndicator(
-        width: 190,
-        backgroundColor: const Color(0xffF1F1F1),
-        progressColor: const Color(0xffF7936F),
-        percent: 0,
-        isRTL: true,
-        lineHeight: 8,
-        padding: EdgeInsets.zero,
-        barRadius: const Radius.circular(5),
-      );
+    width: 190,
+    backgroundColor: const Color(0xffF1F1F1),
+    progressColor: const Color(0xffF7936F),
+    percent: 0,
+    isRTL: true,
+    lineHeight: 8,
+    padding: EdgeInsets.zero,
+    barRadius: const Radius.circular(5),
+  );
   get nameAndProgress => Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+    crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          SizedBox(height: 10.h),
+          SizedBox(
+            height: 10.h
+          ),
           name,
-          SizedBox(height: 20.h),
+          SizedBox(
+            height: 20.h
+          ),
           progressLine,
         ],
       );
-  get circleAvatar => Padding(
-        padding: EdgeInsets.only(top: 19.h),
-        child: PreferencesHelper.getUserModel?.user?.photo == null
-            ? Container(
-                width: 70,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(40),
-                    color: Colors.white),
-                height: 70,
-                child: SvgPicture.asset(AppAssets.circleAvatar2),
-              )
-            : ClipRRect(
-                borderRadius: BorderRadius.circular(40),
-                child: Image.network(
-                  '${PreferencesHelper.getUserModel?.user?.photo}',
-                  fit: BoxFit.fill,
-                  width: 70,
-                  height: 70,
-                )),
+  get circleAvatar => Align(
+        alignment: AlignmentDirectional.topEnd,
+        child: Padding(
+          padding: EdgeInsets.only(top: 19.h),
+          child: CircleAvatar(
+              radius: 40.r,
+              backgroundColor: Colors.white,
+              child:SvgPicture.asset(AppAssets.circleAvatar2)),
+        ),
       );
 
   // get circleAvatar => Align(
@@ -321,7 +459,7 @@ class _MainPageState extends State<MainPage> {
             width: 10.w,
           ),
           //crownIcon,
-          // SizedBox(width: 5.w),
+         // SizedBox(width: 5.w),
           //dropDownIcon,
         ],
       );
@@ -355,15 +493,13 @@ class _MainPageState extends State<MainPage> {
             width: 12.w,
           ),
           InkWell(
-            onTap: () {
+            onTap: (){
               Navigator.push(
                   context,
                   PageTransition(
                       type: PageTransitionType.fade,
                       duration: const Duration(milliseconds: 400),
-                      child: ProfileScreen(
-                        hasBackButton: true,
-                      )));
+                      child: ProfileScreen(hasBackButton: true,)));
             },
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -412,37 +548,36 @@ class _MainPageState extends State<MainPage> {
           ),
         ),
       );
-  get upcomingCard => InkWell(
-        onTap: () {
-          setState(() {
-            rankPopup = false;
-          });
-          // Navigator.push(
-          //     context,
-          //     PageTransition(
-          //         type: PageTransitionType.fade,
-          //         duration: const Duration(milliseconds: 400),
-          //         child: CampaignDetailsScreen()));
-        },
-        child: Container(
-          width: 117.w,
-          height: 49.h,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(23.r),
-            color: Colors.white70,
-            border: Border.all(
-              color: AppColors.blueTextColor,
-              width: 2.0, // Adjust the border width as needed
+  get upcomingCard => Container(
+    width: 117.w,
+    height: 49.h,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(23.r),
+      color: Colors.white70,
+      border: Border.all(
+        color: AppColors.blueTextColor,
+        width: 2.0, // Adjust the border width as needed
+      ),
+    ),
+    child: Column(
+      children: [
+        Align(
+          alignment: AlignmentDirectional.centerEnd,
+          child: Padding(
+            padding: EdgeInsets.only(right: 5.w),
+            child: const Text(
+              AppStrings.education,
+              style: TextStyle(
+                  color: AppColors.blueTextColor,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: FontFamilies.alexandria),
             ),
           ),
-          child: Column(
-            children: [
-              upcomingText,
-              educationText,
-            ],
-          ),
         ),
-      );
+      ],
+    ),
+  );
   get currentText => Align(
         alignment: AlignmentDirectional.topStart,
         child: Padding(
@@ -473,17 +608,17 @@ class _MainPageState extends State<MainPage> {
         ),
       );
   get currentPalestineCard => InkWell(
-        onTap: () {
-          setState(() {
-            rankPopup = false;
-          });
-          // Navigator.push(
-          //     context,
-          //     PageTransition(
-          //         type: PageTransitionType.fade,
-          //         duration: const Duration(milliseconds: 400),
-          //         child: CampaignDetailsScreen()));
-        },
+        // onTap: () {
+        //   setState(() {
+        //     rankPopup = false;
+        //   });
+        //   // Navigator.push(
+        //   //     context,
+        //   //     PageTransition(
+        //   //         type: PageTransitionType.fade,
+        //   //         duration: const Duration(milliseconds: 400),
+        //   //         child: CampaignDetailsScreen()));
+        // },
         child: Container(
           width: 117.w,
           height: 49.h,
@@ -559,49 +694,48 @@ class _MainPageState extends State<MainPage> {
           ),
         ),
       );
-  get currentOrphanCard => InkWell(
-        onTap: () {
-          setState(() {
-            rankPopup = false;
-          });
-          // Navigator.push(
-          //     context,
-          //     PageTransition(
-          //         type: PageTransitionType.fade,
-          //         duration: const Duration(milliseconds: 400),
-          //         child: CampaignDetailsScreen()));
-        },
-        child: Container(
-          width: 117.w,
-          height: 49.h,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(23.r),
-            color: Colors.white70,
-            border: Border.all(
-              color: AppColors.greenBorderColor,
-              width: 2.0, // Adjust the border width as needed
+  get currentOrphanCard => Container(
+    width: 117.w,
+    height: 49.h,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(23.r),
+      color: Colors.white70,
+      border: Border.all(
+        color: AppColors.greenBorderColor,
+        width: 2.0, // Adjust the border width as needed
+      ),
+    ),
+    child: Column(
+      children: [
+        Align(
+          alignment: AlignmentDirectional.centerEnd,
+          child: Padding(
+            padding: EdgeInsets.only(right: 5.w),
+            child: const Text(
+              AppStrings.orphan,
+              style: TextStyle(
+                  color: AppColors.greenTextColor,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: FontFamilies.alexandria),
             ),
           ),
-          child: Column(
-            children: [
-              currentText2,
-              orphanText,
-            ],
-          ),
         ),
-      );
+      ],
+    ),
+  );
   get previousOrphanCard => InkWell(
-        onTap: () {
-          setState(() {
-            rankPopup = false;
-          });
-          // Navigator.push(
-          //     context,
-          //     PageTransition(
-          //         type: PageTransitionType.fade,
-          //         duration: const Duration(milliseconds: 400),
-          //         child: CampaignDetailsScreen()));
-        },
+        // onTap: () {
+        //   setState(() {
+        //     rankPopup = false;
+        //   });
+        //   // Navigator.push(
+        //   //     context,
+        //   //     PageTransition(
+        //   //         type: PageTransitionType.fade,
+        //   //         duration: const Duration(milliseconds: 400),
+        //   //         child: CampaignDetailsScreen()));
+        // },
         child: Container(
           width: 117.w,
           height: 49.h,
@@ -629,27 +763,61 @@ class _MainPageState extends State<MainPage> {
             scrollDirection: Axis.horizontal,
             reverse: true,
             children: [
-              currentOrphanCard,
+              Container(
+                width: 117.w,
+                height: 49.h,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(23.r),
+                  color: Colors.white70,
+                  border: Border.all(
+                    color: AppColors.greenBorderColor,
+                    width: 2.0, // Adjust the border width as needed
+                  ),
+                ),
+                child: Align(
+                  alignment: AlignmentDirectional.center,
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 5.w),
+                    child: const Text(
+                      AppStrings.orphan,
+                      style: TextStyle(
+                          color: AppColors.greenTextColor,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: FontFamilies.alexandria),
+                    ),
+                  ),
+                ),
+              ),
               SizedBox(
                 width: 6.w,
               ),
-              currentPalestineCard,
-              SizedBox(
-                width: 6.w,
+              Container(
+                width: 117.w,
+                height: 49.h,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(23.r),
+                  color: Colors.white70,
+                  border: Border.all(
+                    color: AppColors.blueTextColor,
+                    width: 2.0, // Adjust the border width as needed
+                  ),
+                ),
+                child: Align(
+                  alignment: AlignmentDirectional.center,
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 5.w),
+                    child: const Text(
+                      AppStrings.education,
+                      style: TextStyle(
+                          color: AppColors.blueTextColor,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: FontFamilies.alexandria),
+                    ),
+                  ),
+                ),
               ),
-              upcomingCard,
-              SizedBox(
-                width: 6.w,
-              ),
-              upcomingCard,
-              SizedBox(
-                width: 6.w,
-              ),
-              previousOrphanCard,
-              SizedBox(
-                width: 6.w,
-              ),
-              previousOrphanCard,
             ],
           ),
         ),
@@ -680,39 +848,177 @@ class _MainPageState extends State<MainPage> {
               SizedBox(
                 height: 9.h,
               ),
-              cards,
+              SizedBox(
+                height: 50.h,
+                child: BlocBuilder<SignUpCubit, SignUpState>(
+                 builder: (context, state) {
+                  if(state is CurrCampAndOppLoading){
+                    print("Loading state");
+                    Container(
+                      width: 100,
+                      height: 100,
+                      child: Transform.scale(
+                        scale: 0.6,
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                        ),
+                      ),
+                    );
+                  }
+                  else if (state is CurrCampAndOppSuccess){
+                    print("Success state");
+                    return Padding(
+                      padding:  EdgeInsets.symmetric(horizontal: 5.w),
+                      child: Container(
+                        width: 80.w,
+                        child: ListView.builder(
+                          //  physics: const AlwaysScrollableScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          reverse: true,
+                          itemCount: cardCubit.currentJoinedCampaignsAndOpp?.currentVolunteerOpportunities?.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Padding(
+                              padding: EdgeInsets.only(right: 5.w),
+                              child: Container(
+                                width: 117.w,
+                                height: 49.h,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(23.r),
+                                  color: Colors.white70,
+                                  border: Border.all(
+                                    color: AppColors.blueTextColor,
+                                    width: 2.0, // Adjust the border width as needed
+                                  ),
+                                ),
+                                child: Align(
+                                  alignment: AlignmentDirectional.center,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(right: 5.w),
+                                    child:  Text(
+                                      "${cardCubit.currentJoinedCampaignsAndOpp?.currentVolunteerOpportunities![index].name}",
+                                      style: TextStyle(
+                                          color: AppColors.blueTextColor,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: FontFamilies.alexandria),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    );
+                  } else {
+                    return SizedBox();
+                  }
+                  return SizedBox();
+                   },
+                 ),
+              ),
+              // SizedBox(
+              //   height: 50.h,
+              //   child: BlocConsumer<SignUpCubit, SignUpState>(
+              //     listener: (context, state) {},
+              //     builder: (context, state) {
+              //       if(state is CurrCampAndOppLoading){
+              //         return Transform.scale(
+              //             scale: 0.5,
+              //             child: CircularProgressIndicator(color: AppColors.white,));
+              //       }
+              //       if(state is CurrCampAndOppSuccess){
+              //         return Padding(
+              //           padding:  EdgeInsets.symmetric(horizontal: 5.w),
+              //           child: Container(
+              //             width: 100,
+              //             child: ListView.builder(
+              //               //  physics: const AlwaysScrollableScrollPhysics(),
+              //               scrollDirection: Axis.horizontal,
+              //               itemCount: signUpCubit.currentJoinedCampaignsAndOpp?.currentCampaigns?.length,
+              //               itemBuilder: (BuildContext context, int index) {
+              //                 return Padding(
+              //                   padding: EdgeInsets.only(right: 5.w),
+              //                   child: Container(
+              //                     width: 117.w,
+              //                     height: 49.h,
+              //                     decoration: BoxDecoration(
+              //                       borderRadius: BorderRadius.circular(23.r),
+              //                       color: Colors.white70,
+              //                       border: Border.all(
+              //                         color: AppColors.greenBorderColor,
+              //                         width: 2.0, // Adjust the border width as needed
+              //                       ),
+              //                     ),
+              //                     child: Align(
+              //                       alignment: AlignmentDirectional.center,
+              //                       child: Padding(
+              //                         padding: EdgeInsets.only(right: 5.w),
+              //                         child:  Text(
+              //                           "${signUpCubit.currentJoinedCampaignsAndOpp?.currentCampaigns![index].name}",
+              //                           style: TextStyle(
+              //                               color: AppColors.greenTextColor,
+              //                               fontSize: 10,
+              //                               fontWeight: FontWeight.w500,
+              //                               fontFamily: FontFamilies.alexandria),
+              //                         ),
+              //                       ),
+              //                     ),
+              //                   ),
+              //                 );
+              //               },
+              //             ),
+              //           ),
+              //         );
+              //       }
+              //       if(state is CurrCampAndOppSuccess && signUpCubit.currentJoinedCampaignsAndOpp?.currentCampaigns?.length==0 && signUpCubit.currentJoinedCampaignsAndOpp?.currentVolunteerOpportunities?.length==0){
+              //         return Text(
+              //           "لا توجد أنشطة حالية",
+              //           style: TextStyle(
+              //               color: Colors.white,
+              //               fontSize: 12,
+              //               fontWeight: FontWeight.w700,
+              //               fontFamily: FontFamilies.alexandria),
+              //         );
+              //       }
+              //       else {
+              //         return SizedBox();
+              //       }
+              //     },
+              //   ),
+              // ),
             ],
           ),
-          if (rankPopup == true)
-            Align(
-              alignment: AlignmentDirectional.topStart,
-              child: Padding(
-                padding: EdgeInsets.only(left: 35.5.w, top: 18.h),
-                child: Container(
-                  height: 124.h,
-                  width: 38.w,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.85),
-                    borderRadius: BorderRadius.circular(20.r),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Image.asset(AppAssets.kingIcon),
-                      CircleAvatar(
-                          backgroundColor: AppColors.darkBlueColor,
-                          radius: 16.r,
-                          child: Image.asset(AppAssets.crownPng)),
-                      Image.asset(AppAssets.diamondIcon),
-                      Image.asset(AppAssets.lowLevelIcon),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+          //if (rankPopup == true)
+          //   Align(
+          //     alignment: AlignmentDirectional.topStart,
+          //     child: Padding(
+          //       padding: EdgeInsets.only(left: 35.5.w, top: 18.h),
+          //       child: Container(
+          //         height: 124.h,
+          //         width: 38.w,
+          //         decoration: BoxDecoration(
+          //           color: Colors.white.withOpacity(0.85),
+          //           borderRadius: BorderRadius.circular(20.r),
+          //         ),
+          //         child: Column(
+          //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //           children: [
+          //             Image.asset(AppAssets.kingIcon),
+          //             CircleAvatar(
+          //                 backgroundColor: AppColors.darkBlueColor,
+          //                 radius: 16.r,
+          //                 child: Image.asset(AppAssets.crownPng)),
+          //             Image.asset(AppAssets.diamondIcon),
+          //             Image.asset(AppAssets.lowLevelIcon),
+          //           ],
+          //         ),
+          //       ),
+          //     ),
+          //   ),
           Positioned(
             top: 17,
-            left: 17,
+            left:17,
             child: InkWell(
                 onTap: () {
                   if (!PreferencesHelper.getIsVisitor)
@@ -733,7 +1039,8 @@ class _MainPageState extends State<MainPage> {
                               // margin: const EdgeInsets.only(bottom: 22),
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.center,
+                                crossAxisAlignment:
+                                CrossAxisAlignment.center,
                                 children: [
                                   Container(
                                     width: 150,
@@ -741,15 +1048,16 @@ class _MainPageState extends State<MainPage> {
                                     decoration: BoxDecoration(
                                         color: Colors.white,
                                         borderRadius:
-                                            BorderRadius.circular(10)),
+                                        BorderRadius.circular(10)),
                                     child: SvgPicture.network(
                                         '${PreferencesHelper.getUserModel?.user?.qrCode}'),
                                   ),
                                   const SizedBox(height: 8),
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.center,
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                    CrossAxisAlignment.center,
                                     children: [
                                       const Text(
                                         'امسح هنا',
@@ -760,7 +1068,8 @@ class _MainPageState extends State<MainPage> {
                                           fontWeight: FontWeight.w400,
                                         ),
                                       ),
-                                      SvgPicture.asset('assets/svg/tie.svg'),
+                                      SvgPicture.asset(
+                                          'assets/svg/tie.svg'),
                                     ],
                                   ),
                                   const SizedBox(height: 14),
@@ -805,7 +1114,7 @@ class _MainPageState extends State<MainPage> {
       );
 
   buildHomeCalenderItem({required Calender? calender}) => InkWell(
-        splashColor: AppColors.transparent,
+    splashColor: AppColors.transparent,
         highlightColor: AppColors.transparent,
         onTap: () {
           Navigator.push(
@@ -814,6 +1123,7 @@ class _MainPageState extends State<MainPage> {
                   type: PageTransitionType.fade,
                   duration: const Duration(milliseconds: 400),
                   child: HomeCalenderDetailsScreen(calender: calender)));
+
         },
         child: Container(
           margin: EdgeInsets.symmetric(vertical: 4),
@@ -863,9 +1173,9 @@ class _MainPageState extends State<MainPage> {
   newsSample({required Campains? campains}) {
     return GestureDetector(
       onTap: () {
-        setState(() {
-          rankPopup = false;
-        });
+        // setState(() {
+        //   rankPopup = false;
+        // });
         Navigator.push(
             context,
             PageTransition(
