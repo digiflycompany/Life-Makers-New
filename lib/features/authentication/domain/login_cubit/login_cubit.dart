@@ -44,7 +44,6 @@ class LoginCubit extends Cubit<LoginState> {
         },
       );
 
-      debugPrint(response.requestOptions.data.toString());
       if
       (response.statusCode == 200) {
         UserModel userModel = UserModel.fromJson(response.data);
@@ -58,17 +57,9 @@ class LoginCubit extends Cubit<LoginState> {
     } on DioException catch (dioException) {
       // Handle Dio errors
       if (dioException.response != null) {
-        // The request was made and the server responded with a status code
-        if (kDebugMode) {
-          print(
-              'Server responded with status code: ${dioException.response!.statusCode}');
-        }
+
         emit(LoginFailure('اسم مستخدم خاطيء أو رقم سري خاطيء'));
       } else {
-        // Something went wrong with the request
-        if (kDebugMode) {
-          print('Dio exception: ${dioException.message}');
-        }
         emit(LoginFailure("تأكد من شبكة الانترنت"));
       }
     }
