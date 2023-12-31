@@ -700,60 +700,28 @@ class _MainPageState extends State<MainPage> {
               SizedBox(
                 height: 9.h,
               ),
-              BlocConsumer<SignUpCubit, SignUpState>(
-              listener: (context, state) {},
-               builder: (context, state) {
-               return Row(
-                children: [
-                  ListView.builder(
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    itemCount: signUpCubit.currentJoinedCampaignsAndOpp?.currentCampaigns?.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 5.w),
-                        child: Container(
-                          width: 117.w,
-                          height: 49.h,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(23.r),
-                            color: Colors.white70,
-                            border: Border.all(
-                              color: AppColors.greenBorderColor,
-                              width: 2.0, // Adjust the border width as needed
-                            ),
-                          ),
-                          child: Align(
-                            alignment: AlignmentDirectional.center,
-                            child: Padding(
+              SizedBox(
+                height: 50.h,
+                child: BlocConsumer<SignUpCubit, SignUpState>(
+                listener: (context, state) {},
+                 builder: (context, state) {
+                 return Padding(
+                   padding:  EdgeInsets.symmetric(horizontal: 5.w),
+                   child: Row(
+                     textDirection: TextDirection.rtl,
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children
+                        : [
+                      Container(
+                        width: 117,
+                        child: ListView.builder(
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          itemCount: signUpCubit.currentJoinedCampaignsAndOpp?.currentCampaigns?.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Padding(
                               padding: EdgeInsets.only(right: 5.w),
-                              child:  Text(
-                                "${signUpCubit.currentJoinedCampaignsAndOpp?.currentCampaigns![index].name}",
-                                style: TextStyle(
-                                    color: AppColors.greenTextColor,
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: FontFamilies.alexandria),
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                  ListView.builder(
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    itemCount: signUpCubit.currentJoinedCampaignsAndOpp?.currentCampaigns?.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 5.w),
-                        child: SizedBox(
-                          height: 49.h,
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            reverse: true,
-                            children: [
-                              Container(
+                              child: Container(
                                 width: 117.w,
                                 height: 49.h,
                                 decoration: BoxDecoration(
@@ -768,8 +736,8 @@ class _MainPageState extends State<MainPage> {
                                   alignment: AlignmentDirectional.center,
                                   child: Padding(
                                     padding: EdgeInsets.only(right: 5.w),
-                                    child: const Text(
-                                      AppStrings.orphan,
+                                    child:  Text(
+                                      "${signUpCubit.currentJoinedCampaignsAndOpp?.currentCampaigns![index].name}",
                                       style: TextStyle(
                                           color: AppColors.greenTextColor,
                                           fontSize: 10,
@@ -779,45 +747,92 @@ class _MainPageState extends State<MainPage> {
                                   ),
                                 ),
                               ),
-                              SizedBox(
-                                width: 6.w,
-                              ),
-                              Container(
-                                width: 117.w,
-                                height: 49.h,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(23.r),
-                                  color: Colors.white70,
-                                  border: Border.all(
-                                    color: AppColors.blueTextColor,
-                                    width: 2.0, // Adjust the border width as needed
-                                  ),
-                                ),
-                                child: Align(
-                                  alignment: AlignmentDirectional.center,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(right: 5.w),
-                                    child: const Text(
-                                      AppStrings.education,
-                                      style: TextStyle(
-                                          color: AppColors.blueTextColor,
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: FontFamilies.alexandria),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                            );
+                          },
                         ),
-                      );
-                    },
-                  )
-                ],
-              );
+                      ),
+                      Container(
+                        width: 200.w,
+                        child: ListView.builder(
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          itemCount: signUpCubit.currentJoinedCampaignsAndOpp?.currentCampaigns?.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 5.w),
+                              child: SizedBox(
+                                height: 49.h,
+                                child: ListView(
+                                  scrollDirection: Axis.horizontal,
+                                  reverse: true,
+                                  children: [
+                                    Container(
+                                      width: 117.w,
+                                      height: 49.h,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(23.r),
+                                        color: Colors.white70,
+                                        border: Border.all(
+                                          color: AppColors.greenBorderColor,
+                                          width: 2.0, // Adjust the border width as needed
+                                        ),
+                                      ),
+                                      child: Align(
+                                        alignment: AlignmentDirectional.center,
+                                        child: Padding(
+                                          padding: EdgeInsets.only(right: 5.w),
+                                          child: const Text(
+                                            AppStrings.orphan,
+                                            style: TextStyle(
+                                                color: AppColors.greenTextColor,
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: FontFamilies.alexandria),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 6.w,
+                                    ),
+                                    Container(
+                                      width: 117.w,
+                                      height: 49.h,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(23.r),
+                                        color: Colors.white70,
+                                        border: Border.all(
+                                          color: AppColors.blueTextColor,
+                                          width: 2.0, // Adjust the border width as needed
+                                        ),
+                                      ),
+                                      child: Align(
+                                        alignment: AlignmentDirectional.center,
+                                        child: Padding(
+                                          padding: EdgeInsets.only(right: 5.w),
+                                          child: const Text(
+                                            AppStrings.education,
+                                            style: TextStyle(
+                                                color: AppColors.blueTextColor,
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: FontFamilies.alexandria),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      )
+                    ],
+                ),
+                 );
   },
 ),
+              ),
             ],
           ),
           if (rankPopup == true)
