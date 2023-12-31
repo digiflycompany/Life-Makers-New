@@ -14,6 +14,7 @@ class AppAssets {
   static const String changePassword = "$svgPath/changePassword.svg";
   static const String circleAvatar2 = "$svgPath/maleAvatar2.svg";
   static const String homeIcon = "$imagesPath/homeIcon.png";
+  static const String yousefImage = "$imagesPath/yousef.png";
   static const String homeWhiteIcon = "$svgPath/homeWhiteIcon.svg";
   static const String logoFinalSvg = "$svgPath/loginFinalSvg.svg";
   static const String signupFinalSvg = "$svgPath/signupFinalSvg.svg";

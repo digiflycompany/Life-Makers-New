@@ -6,6 +6,8 @@ import 'package:life_makers/features/authentication/domain/card_cubit/cards_cubi
 import 'package:life_makers/features/authentication/domain/login_cubit/login_cubit.dart';
 import 'package:life_makers/features/authentication/domain/sign_up_cubit/sign_up_cubit.dart';
 import 'package:life_makers/features/edit_account/cubit/edit_account_cubit.dart';
+import 'package:life_makers/features/elections/presentation/pages/before_elections_screen.dart';
+import 'package:life_makers/features/elections/presentation/pages/candidate_details.dart';
 import 'package:life_makers/features/home_page/domain/menu_page_cubit/menu_page_cubit.dart';
 import 'package:life_makers/features/splash_screen/presentation/cubit/splash_cubit.dart';
 import 'package:life_makers/features/splash_screen/presentation/widgets/splash_screen.dart';
