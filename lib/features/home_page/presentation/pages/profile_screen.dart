@@ -5,12 +5,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:life_makers/core/utils/app-assets.dart';
 import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/features/campaign_details/cubit/all_campaigns_cubit.dart';
+import 'package:life_makers/features/campaign_details/presentation/pages/user_joined_current_campaigns.dart';
+import 'package:life_makers/features/campaign_details/presentation/pages/user_joined_previous_campaigns.dart';
+import 'package:life_makers/features/campaign_details/presentation/pages/user_joined_upcaoming_campaigns.dart';
 import 'package:life_makers/features/edit_account/screens/edit_account_screen.dart';
 import 'package:life_makers/features/volunteer_opportunity/cubit/volunteer_cubit.dart';
 import 'package:life_makers/features/volunteer_opportunity/presentation/widgets/user_joined_one_day_activity.dart';
 import 'package:life_makers/features/volunteer_opportunity/presentation/widgets/user_joined_programs_card.dart';
 import 'package:life_makers/features/volunteer_opportunity/presentation/widgets/user_joined_remote_tasks_card.dart';
-import 'package:life_makers/services/cubit/global_cubit_state.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -18,7 +20,6 @@ import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app-string.dart';
 import '../../../../core/utils/app_fonts.dart';
 import '../../../../core/widgets/title_text.dart';
-import '../../../seasonal_campaigns/presentation/build_seasonal_widget.dart';
 import 'news_details.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -32,7 +33,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   late PageController _pageController;
   late PageController _pageController2;
-  int _currentPage = 0;
+  int _currentPage = 1;
   int _currentPage2 = 0;
   late VolunteerCubit volunteerCubit;
 
@@ -345,45 +346,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       SizedBox(height: 7.h),
                       if (selectedActivityType == 0) tabBar,
-                      if (selectedActivityType == 0)
-                        BlocBuilder<AllCampaignsCubit, CubitBaseState>(
-                            builder: (context, state) {
-                          if (state == CubitBaseState.done) {
-                            return Directionality(
-                              textDirection: TextDirection.rtl,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    if (_currentPage == 0)
-                                      buildCampaignGridView(
-                                          context: context,
-                                          campaigns: allCampaignsCubit
-                                              .campaignsModel
-                                              ?.allPastCampaigns),
-                                    if (_currentPage == 1)
-                                      buildCampaignGridView(
-                                          context: context,
-                                          campaigns: allCampaignsCubit
-                                              .campaignsModel
-                                              ?.allCurrentCampaigns),
-                                    if (_currentPage == 2)
-                                      buildCampaignGridView(
-                                          context: context,
-                                          campaigns: allCampaignsCubit
-                                              .campaignsModel
-                                              ?.allNextCampaigns),
-                                  ],
-                                ),
-                              ),
-                            );
-                          } else if (state == CubitBaseState.loading)
-                            return Center(child: CircularProgressIndicator());
-                          else
-                            return SizedBox.shrink();
-                        }),
                       if (selectedActivityType == 1) tabBar2,
                       if (selectedActivityType == 1) pages2,
                       if (selectedActivityType == 0) pages,
@@ -800,9 +762,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             });
           },
           children: [
-            Text(''),
-            Text(''),
-            Text(''),
+            JoinedPreviousCampaigns(),
+            JoinedCurrentCampaigns(),
+            JoinedUpcomingCampaigns(),
             // PreviousSeasonalCampaignsScreen(),
             // CurrentSeasonalCampaignsScreen(),
             // UpcomingSeasonalCampaigns(),

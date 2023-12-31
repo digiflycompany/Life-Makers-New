@@ -47,12 +47,19 @@ class _MenuScreenState extends State<MenuScreen> {
     menuCubit = context.read<MenuCubit>();
     menuCubit.fetchDateAndTime();
     String? apiStartDateString = menuCubit.appSettingsModel?.data?.electionsStartDate;
-    String? apiEndDateString = menuCubit.appSettingsModel?.data?.electionsStartDate;
+    String? apiEndDateString = menuCubit.appSettingsModel?.data?.electionsEndDate;
      startTime= DateTime.parse(apiStartDateString!);
      endTime= DateTime.parse(apiEndDateString!);
      debugPrint('$startTime');
-    debugPrint('$endTime');
+     debugPrint('$endTime');
   }
+  @override
+  void dispose() {
+    startTime =DateTime.now();
+    endTime =DateTime.now();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MenuCubit, MenuState>(

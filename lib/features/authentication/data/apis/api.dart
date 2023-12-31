@@ -64,4 +64,6 @@ class EndPoints {
       'https://life-makers.digifly-eg.com/api/all-user-volunteer-opportunities';
   static const String appSettings =
       'https://life-makers.digifly-eg.com/api/app-settings';
+  static const String userJoinedCampaigns =
+      'https://life-makers.digifly-eg.com/api/all-user-campaigns';
 }
