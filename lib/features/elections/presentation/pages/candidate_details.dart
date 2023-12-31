@@ -88,7 +88,7 @@ class _CandidateDetailsState extends State<CandidateDetails> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 10, bottom: 5),
+                          padding: const EdgeInsets.only(top: 10, bottom: 1),
                           child: Container(
                             width: 90,
                             height: 25,
@@ -98,30 +98,45 @@ class _CandidateDetailsState extends State<CandidateDetails> {
                             ),
                             child: Center(
                               child: Text(
-                                // '${oneDayActivityCubit.oneDayActivityModel
-                                //     ?.volunteerOpportunities![widget.index].name}',
                                 'بيانات شخصية',
                                 style: TextStyle(
                                   fontFamily: FontFamilies.alexandria,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w500,
+                                  fontSize: 11.2,
+                                  fontWeight: FontWeight.w600,
                                   color: AppColors.orangeBorderColor
                                 ),
                               ),
                             ),
                           ),
                         ),
-                        SizedBox(height: 7),
-                        Text(
-                          // '${oneDayActivityCubit.oneDayActivityModel
-                          //     ?.volunteerOpportunities![widget.index].details}',
-                          '',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 10,
-                            fontFamily: FontFamilies.alexandria,
-                            height: 2.5,
-                          ),
+                        Row(
+                          textDirection: TextDirection.rtl,
+                          children: [
+                            Text(
+                              'الاسم:',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.blueGrey,
+                                fontSize: 10.5,
+                                fontFamily: FontFamilies.alexandria,
+                                height: 2.5,
+                              ),
+                            ),
+                            SizedBox(width: 9.w,),
+                            Padding(
+                              padding:  EdgeInsets.only(bottom: 4.0),
+                              child: Text(
+                                'يوسف حنفي',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black,
+                                  fontSize: 12,
+                                  fontFamily: FontFamilies.alexandria,
+                                  height: 2.5,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                         SizedBox(height: 20.h),
                       ],
