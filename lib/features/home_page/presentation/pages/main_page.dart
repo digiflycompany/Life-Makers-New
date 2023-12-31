@@ -7,6 +7,7 @@ import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/core/widgets/title_text.dart';
 import 'package:life_makers/features/authentication/domain/card_cubit/card_states.dart';
 import 'package:life_makers/features/authentication/domain/card_cubit/cards_cubit.dart';
+import 'package:life_makers/features/authentication/domain/card_cubit/volunteer_card_details.dart';
 import 'package:life_makers/features/authentication/domain/sign_up_cubit/sign_up_cubit.dart';
 import 'package:life_makers/features/authentication/domain/sign_up_cubit/sign_up_states.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/volunteers_card.dart';
@@ -110,9 +111,18 @@ class _MainPageState extends State<MainPage> {
                               reverse: true,
                               itemCount: cardCubit.currentJoinedCampaignsAndOpp?.currentVolunteerOpportunities?.length,
                               itemBuilder: (BuildContext context, int index) {
-                                return Padding(
-                                  padding: EdgeInsets.only(right: 5.w),
-                                  child: VolunteerContainer(itemName: "${cardCubit.currentJoinedCampaignsAndOpp?.currentVolunteerOpportunities![index].name}"),
+                                return InkWell(
+                                  splashColor: Colors.transparent,
+                                  onTap: (){
+                                    Navigator.push(context, PageTransition(
+                                        type: PageTransitionType.fade,
+                                        duration: const Duration(milliseconds: 600),
+                                        child:  VolunteerCardDetails(index: index)));
+                                  },
+                                  child: Padding(
+                                    padding: EdgeInsets.only(right: 5.w),
+                                    child: VolunteerContainer(itemName: "${cardCubit.currentJoinedCampaignsAndOpp?.currentVolunteerOpportunities![index].name}"),
+                                  ),
                                 );
                               },
                             ),
