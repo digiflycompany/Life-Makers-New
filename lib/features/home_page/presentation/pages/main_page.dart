@@ -186,7 +186,24 @@ class _MainPageState extends State<MainPage> {
                           child: SvgPicture.asset(
                             AppAssets.qrCode2,
                           )),
-                    )
+                    ),
+                    if(state is CardSuccess && cardCubit.currentJoinedCampaignsAndOpp?.currentVolunteerOpportunities?.length==0)...[
+                      Align(
+                        alignment: AlignmentDirectional.center,
+                        child: Padding(
+                          padding:  EdgeInsets.only(top: 130.h),
+                          child: Text(
+                            'لا توجد أنشطة حالية',
+                            style: TextStyle(
+                              color: AppColors.white,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: FontFamilies.alexandria,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ]
                   ],
                 )),
             SizedBox(height: 15.h),
