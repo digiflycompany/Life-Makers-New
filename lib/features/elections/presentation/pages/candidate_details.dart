@@ -113,10 +113,10 @@ class _CandidateDetailsState extends State<CandidateDetails> {
                           textDirection: TextDirection.rtl,
                           children: [
                             Text(
-                              'الاسم:',
+                              'الاسم :',
                               style: TextStyle(
                                 fontWeight: FontWeight.w500,
-                                color: Colors.blueGrey,
+                                color: Colors.blue.shade900,
                                 fontSize: 10.5,
                                 fontFamily: FontFamilies.alexandria,
                                 height: 2.5,
@@ -124,7 +124,7 @@ class _CandidateDetailsState extends State<CandidateDetails> {
                             ),
                             SizedBox(width: 9.w,),
                             Padding(
-                              padding:  EdgeInsets.only(bottom: 4.0),
+                              padding:  EdgeInsets.only(bottom: 3.0),
                               child: Text(
                                 'يوسف حنفي',
                                 style: TextStyle(
@@ -138,7 +138,150 @@ class _CandidateDetailsState extends State<CandidateDetails> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 20.h),
+                        SizedBox(height: 2.h),
+                        Row(
+                          textDirection: TextDirection.rtl,
+                          children: [
+                            Text(
+                              'تاريخ الميلاد :',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.blue.shade900,
+                                fontSize: 10.5,
+                                fontFamily: FontFamilies.alexandria,
+                                height: 2.5,
+                              ),
+                            ),
+                            SizedBox(width: 9.w,),
+                            Padding(
+                              padding:  EdgeInsets.only(bottom: 3.0),
+                              child: Text(
+                                '25-10-1980',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black,
+                                  fontSize: 12,
+                                  fontFamily: FontFamilies.alexandria,
+                                  height: 2.5,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 46.w,),
+                            Text(
+                              'المحافظة :',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.blue.shade900,
+                                fontSize: 10.5,
+                                fontFamily: FontFamilies.alexandria,
+                                height: 2.5,
+                              ),
+                            ),
+                            SizedBox(width: 9.w,),
+                            Padding(
+                              padding:  EdgeInsets.only(bottom: 3.0),
+                              child: Text(
+                                'القاهرة',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black,
+                                  fontSize: 12,
+                                  fontFamily: FontFamilies.alexandria,
+                                  height: 2.5,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10, bottom: 1),
+                          child: Container(
+                            width: 52,
+                            height: 25,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: AppColors.orangeBackgroundColor,
+                            ),
+                            child: Center(
+                              child: Text(
+                                'المقعد',
+                                style: TextStyle(
+                                    fontFamily: FontFamilies.alexandria,
+                                    fontSize: 11.2,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColors.orangeBorderColor
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Row(
+                          textDirection: TextDirection.rtl,
+                          children: [
+                            Text(
+                              'مترشح لمقعد :',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.blue.shade900,
+                                fontSize: 10.5,
+                                fontFamily: FontFamilies.alexandria,
+                                height: 2.5,
+                              ),
+                            ),
+                            SizedBox(width: 9.w,),
+                            Padding(
+                              padding:  EdgeInsets.only(bottom: 3.0),
+                              child: Text(
+                                'عضو مجلس',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black,
+                                  fontSize: 12,
+                                  fontFamily: FontFamilies.alexandria,
+                                  height: 2.5,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10, bottom: 1),
+                          child: Container(
+                            width: 42,
+                            height: 25,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: AppColors.orangeBackgroundColor,
+                            ),
+                            child: Center(
+                              child: Text(
+                                'وصف',
+                                style: TextStyle(
+                                    fontFamily: FontFamilies.alexandria,
+                                    fontSize: 11.2,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColors.orangeBorderColor
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding:  EdgeInsets.only(bottom:40.0),
+                          child: Center(
+                            child: Text(
+                              AppStrings.longDescription,
+                              textDirection: TextDirection.rtl,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black,
+                                fontSize: 12,
+                                fontFamily: FontFamilies.alexandria,
+                                height: 2.5,
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
