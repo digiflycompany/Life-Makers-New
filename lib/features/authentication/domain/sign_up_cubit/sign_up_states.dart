@@ -1,4 +1,3 @@
-
 abstract class SignUpState {}
 
 class SignUpInitial extends SignUpState {}
@@ -91,4 +90,22 @@ class areaListSuccessfully extends SignUpState {}
 class areaListFailure extends SignUpState {
   final String error;
   areaListFailure(this.error);
+}
+
+class NotificationsLoading extends SignUpState {}
+
+class NotificationSuccessfully extends SignUpState {}
+
+class NotificationFailure extends SignUpState {
+  final String error;
+  NotificationFailure(this.error);
+}
+
+class CurrCampAndOppLoading extends SignUpState {}
+
+class CurrCampAndOppSuccess extends SignUpState {}
+
+class CurrCampAndOppFailure extends SignUpState {
+  final String error;
+  CurrCampAndOppFailure(this.error);
 }

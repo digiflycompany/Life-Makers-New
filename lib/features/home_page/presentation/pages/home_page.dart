@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: selectBtn);
-    FirebaseCustomNotification.setUpFirebase();
+     FirebaseCustomNotification.setUpFirebase();
   }
 
   @override

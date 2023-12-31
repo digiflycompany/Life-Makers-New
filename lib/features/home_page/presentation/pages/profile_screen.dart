@@ -754,7 +754,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         height: 420,
         child: PageView(
           //physics:const ClampingScrollPhysics(),
-          reverse: true,
           controller: _pageController,
           onPageChanged: (int page) {
             setState(() {
