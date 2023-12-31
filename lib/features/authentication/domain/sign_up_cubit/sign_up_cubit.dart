@@ -160,7 +160,7 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   Future<void> GetCurrentJoinedCampaignsAndOpp() async {
     emit(CurrCampAndOppLoading());
-    try {
+
       Response? response = await dio.get(
         EndPoints.currentCampaignsAndOpportunities,
         options: Options(headers: {
@@ -173,21 +173,7 @@ class SignUpCubit extends Cubit<SignUpState> {
       } else {
         CurrCampAndOppFailure('حدث خطأ حاول مجددا');
       }
-    } on DioException catch (dioException) {
-      if (dioException.response != null) {
-        if (kDebugMode) {
-          print(
-              'Server responded with status code: ${dioException.response!.statusCode}');
-        }
-        emit(CurrCampAndOppFailure('حدث خطأ حاول مجددا'));
-      } else {
-        if (kDebugMode) {
-          print('Dio exception: ${dioException.message}');
-        }
-        emit(
-            CurrCampAndOppFailure("Dio exception: ${dioException.message}"));
-      }
-    }
+
   }
 
 
