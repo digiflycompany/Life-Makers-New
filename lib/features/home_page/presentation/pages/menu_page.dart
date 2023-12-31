@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -50,8 +51,11 @@ class _MenuScreenState extends State<MenuScreen> {
     String? apiEndDateString = menuCubit.appSettingsModel?.data?.electionsEndDate;
      startTime= DateTime.parse(apiStartDateString!);
      endTime= DateTime.parse(apiEndDateString!);
-     debugPrint('$startTime');
-     debugPrint('$endTime');
+     if (kDebugMode) {
+       print('$startTime');
+       print('$endTime');
+
+     }
   }
   @override
   void dispose() {

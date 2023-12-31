@@ -50,7 +50,8 @@ class EditAccountCubit extends Cubit<CubitBaseState> {
     );
 
     if (kDebugMode) {
-      print('Edit profile response $response');
+      print('Edit profile response ${response?.data}');
+      print('Edit profile data request ${response?.requestOptions.data}');
     }
     if (response?.statusCode == 200 && response?.data['status'] == true) {
       emit(CubitBaseState.done);

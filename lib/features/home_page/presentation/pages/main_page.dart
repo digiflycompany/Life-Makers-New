@@ -108,7 +108,7 @@ class _MainPageState extends State<MainPage> {
                             );
                           else
                             return Padding(
-                              padding:  EdgeInsets.symmetric(horizontal: 8.w),
+                              padding: EdgeInsets.symmetric(horizontal: 8.w),
                               child: Container(
                                 width: double.infinity,
                                 decoration: BoxDecoration(
@@ -132,10 +132,11 @@ class _MainPageState extends State<MainPage> {
                                         fontSize: 10.4,
                                       ),
                                     ),
-
                                     Padding(
-                                      padding: const EdgeInsets.only(right: 15,left: 5),
-                                      child: SvgPicture.asset('assets/svg/empty5.svg'),
+                                      padding: const EdgeInsets.only(
+                                          right: 15, left: 5),
+                                      child: SvgPicture.asset(
+                                          'assets/svg/empty5.svg'),
                                     ),
                                   ],
                                 ),
@@ -143,14 +144,17 @@ class _MainPageState extends State<MainPage> {
                             );
                         } else if (state == CubitBaseState.loading) {
                           return Center(
-                              child: CircularProgressIndicator(color: AppColors.orangeBorderColor,));
+                              child: CircularProgressIndicator(
+                            color: AppColors.orangeBorderColor,
+                          ));
                         }
                         return SizedBox.shrink();
                       },
                     )),
               ),
-              SizedBox(height: 10.h,),
-
+              SizedBox(
+                height: 10.h,
+              ),
               Expanded(
                 child: BlocBuilder<HomeCalenderCubit, CubitBaseState>(
                     builder: (context, state) {
@@ -166,7 +170,10 @@ class _MainPageState extends State<MainPage> {
                                   .homeCalenderModel?.calender?[index]);
                         });
                   } else if (state == CubitBaseState.loading) {
-                    return Center(child: CircularProgressIndicator(color: AppColors.orangeBorderColor,));
+                    return Center(
+                        child: CircularProgressIndicator(
+                      color: AppColors.orangeBorderColor,
+                    ));
                   }
                   return SizedBox.shrink();
                 }),
@@ -239,7 +246,9 @@ class _MainPageState extends State<MainPage> {
   get name => Padding(
         padding: EdgeInsets.only(left: 114.w, top: 20.h),
         child: Text(
-          PreferencesHelper.getIsVisitor?'زائر':'${PreferencesHelper.getName}',
+          PreferencesHelper.getIsVisitor
+              ? 'زائر'
+              : '${PreferencesHelper.getName}',
           style: TextStyle(
               color: Colors.white,
               fontFamily: FontFamilies.alexandria,
@@ -248,37 +257,43 @@ class _MainPageState extends State<MainPage> {
         ),
       );
   get progressLine => LinearPercentIndicator(
-    width: 190,
-    backgroundColor: const Color(0xffF1F1F1),
-    progressColor: const Color(0xffF7936F),
-    percent: 0,
-    isRTL: true,
-    lineHeight: 8,
-    padding: EdgeInsets.zero,
-    barRadius: const Radius.circular(5),
-  );
+        width: 190,
+        backgroundColor: const Color(0xffF1F1F1),
+        progressColor: const Color(0xffF7936F),
+        percent: 0,
+        isRTL: true,
+        lineHeight: 8,
+        padding: EdgeInsets.zero,
+        barRadius: const Radius.circular(5),
+      );
   get nameAndProgress => Column(
-    crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          SizedBox(
-            height: 10.h
-          ),
+          SizedBox(height: 10.h),
           name,
-          SizedBox(
-            height: 20.h
-          ),
+          SizedBox(height: 20.h),
           progressLine,
         ],
       );
-  get circleAvatar => Align(
-        alignment: AlignmentDirectional.topEnd,
-        child: Padding(
-          padding: EdgeInsets.only(top: 19.h),
-          child: CircleAvatar(
-              radius: 40.r,
-              backgroundColor: Colors.white,
-              child:SvgPicture.asset(AppAssets.circleAvatar2)),
-        ),
+  get circleAvatar => Padding(
+        padding: EdgeInsets.only(top: 19.h),
+        child: PreferencesHelper.getUserModel?.user?.photo == null
+            ? Container(
+                width: 70,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(40),
+                    color: Colors.white),
+                height: 70,
+                child: SvgPicture.asset(AppAssets.circleAvatar2),
+              )
+            : ClipRRect(
+                borderRadius: BorderRadius.circular(40),
+                child: Image.network(
+                  '${PreferencesHelper.getUserModel?.user?.photo}',
+                  fit: BoxFit.fill,
+                  width: 70,
+                  height: 70,
+                )),
       );
 
   // get circleAvatar => Align(
@@ -306,7 +321,7 @@ class _MainPageState extends State<MainPage> {
             width: 10.w,
           ),
           //crownIcon,
-         // SizedBox(width: 5.w),
+          // SizedBox(width: 5.w),
           //dropDownIcon,
         ],
       );
@@ -340,13 +355,15 @@ class _MainPageState extends State<MainPage> {
             width: 12.w,
           ),
           InkWell(
-            onTap: (){
+            onTap: () {
               Navigator.push(
                   context,
                   PageTransition(
                       type: PageTransitionType.fade,
                       duration: const Duration(milliseconds: 400),
-                      child: ProfileScreen(hasBackButton: true,)));
+                      child: ProfileScreen(
+                        hasBackButton: true,
+                      )));
             },
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -695,7 +712,7 @@ class _MainPageState extends State<MainPage> {
             ),
           Positioned(
             top: 17,
-            left:17,
+            left: 17,
             child: InkWell(
                 onTap: () {
                   if (!PreferencesHelper.getIsVisitor)
@@ -716,8 +733,7 @@ class _MainPageState extends State<MainPage> {
                               // margin: const EdgeInsets.only(bottom: 22),
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment:
-                                CrossAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Container(
                                     width: 150,
@@ -725,16 +741,15 @@ class _MainPageState extends State<MainPage> {
                                     decoration: BoxDecoration(
                                         color: Colors.white,
                                         borderRadius:
-                                        BorderRadius.circular(10)),
+                                            BorderRadius.circular(10)),
                                     child: SvgPicture.network(
                                         '${PreferencesHelper.getUserModel?.user?.qrCode}'),
                                   ),
                                   const SizedBox(height: 8),
                                   Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.center,
+                                        CrossAxisAlignment.center,
                                     children: [
                                       const Text(
                                         'امسح هنا',
@@ -745,8 +760,7 @@ class _MainPageState extends State<MainPage> {
                                           fontWeight: FontWeight.w400,
                                         ),
                                       ),
-                                      SvgPicture.asset(
-                                          'assets/svg/tie.svg'),
+                                      SvgPicture.asset('assets/svg/tie.svg'),
                                     ],
                                   ),
                                   const SizedBox(height: 14),
@@ -791,7 +805,7 @@ class _MainPageState extends State<MainPage> {
       );
 
   buildHomeCalenderItem({required Calender? calender}) => InkWell(
-    splashColor: AppColors.transparent,
+        splashColor: AppColors.transparent,
         highlightColor: AppColors.transparent,
         onTap: () {
           Navigator.push(
@@ -800,7 +814,6 @@ class _MainPageState extends State<MainPage> {
                   type: PageTransitionType.fade,
                   duration: const Duration(milliseconds: 400),
                   child: HomeCalenderDetailsScreen(calender: calender)));
-
         },
         child: Container(
           margin: EdgeInsets.symmetric(vertical: 4),

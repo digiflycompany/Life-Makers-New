@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_makers/features/authentication/domain/login_cubit/login_cubit.dart';
@@ -32,7 +33,9 @@ void main() async {
 
   PreferencesHelper.init();
   await Firebase.initializeApp();
-  debugPrint('Firebase token ${await FirebaseMessaging.instance.getToken()}');
+  if (kDebugMode) {
+    print('Firebase token ${await FirebaseMessaging.instance.getToken()}');
+  }
   runApp(MyApp());
 }
 

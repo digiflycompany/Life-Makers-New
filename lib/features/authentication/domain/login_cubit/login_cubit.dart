@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
@@ -44,9 +43,7 @@ class LoginCubit extends Cubit<LoginState> {
         },
       );
 
-      debugPrint(response.requestOptions.data.toString());
-      if
-      (response.statusCode == 200) {
+      if (response.statusCode == 200) {
         UserModel userModel = UserModel.fromJson(response.data);
         await PreferencesHelper.saveToken(token: response.data['token']);
         await PreferencesHelper.saveUserModel(userModel);
@@ -56,19 +53,11 @@ class LoginCubit extends Cubit<LoginState> {
         LoginFailure('اسم مستخدم خاطيء أو رقم سري خاطيء');
       }
     } on DioException catch (dioException) {
-      // Handle Dio errors
       if (dioException.response != null) {
-        // The request was made and the server responded with a status code
-        if (kDebugMode) {
-          print(
-              'Server responded with status code: ${dioException.response!.statusCode}');
-        }
+
         emit(LoginFailure('اسم مستخدم خاطيء أو رقم سري خاطيء'));
       } else {
-        // Something went wrong with the request
-        if (kDebugMode) {
-          print('Dio exception: ${dioException.message}');
-        }
+
         emit(LoginFailure("تأكد من شبكة الانترنت"));
       }
     }

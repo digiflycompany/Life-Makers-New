@@ -1,5 +1,5 @@
-
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 
@@ -19,8 +19,11 @@ class EditAccountRepository {
     required String previousExperience,
     required String education,
   }) async {
-
-
+    String? fileName;
+    if(file!=null)
+      {
+         fileName = file.path.split('/').last;
+      }
     FormData formData = FormData.fromMap({
       'name': name,
       'phone': phone,
@@ -33,20 +36,21 @@ class EditAccountRepository {
       'gender': PreferencesHelper.getUserModel?.user?.gender,
       'education': PreferencesHelper.getUserModel?.user?.education,
       'email': email,
+      "photo": file!=null?await MultipartFile.fromFile(file.path, filename:fileName):null,
+
     });
 
-    if(file!=null) {
-      String fileName = file.path.split('/').last;
-      formData.fields.add(MapEntry('phto', fileName));
-    }
-    Response response = await dio.post('https://life-makers.digifly-eg.com/api/user-edit',
-        options: Options(headers: {
-          'Authorization': 'Bearer ${PreferencesHelper.getToken()}'
-        }),
-        data: formData,
+
+    Response response = await dio.post(
+      'https://life-makers.digifly-eg.com/api/user-edit',
+      options: Options(
+          headers: {'Authorization': 'Bearer ${PreferencesHelper.getToken()}'}),
+      data: formData,
     );
 
-    print('edit profile response $response');
+    if (kDebugMode) {
+      print('Edit profile response $response');
+    }
     return response;
   }
 }

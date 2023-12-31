@@ -62,7 +62,9 @@ class CustomLocalNotification {
           ),
         ),
       );
-      debugPrint('local notification ${message.notification?.title}');
+      if (kDebugMode) {
+        print('local notification ${message.notification?.title}');
+      }
     }
   }
 

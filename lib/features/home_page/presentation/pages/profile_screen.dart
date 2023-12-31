@@ -38,7 +38,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   late VolunteerCubit volunteerCubit;
 
   late AllCampaignsCubit allCampaignsCubit;
-
   @override
   void initState() {
     super.initState();
@@ -49,13 +48,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     volunteerCubit.getJoinedVolunteerOpportunities();
     allCampaignsCubit.getAllCampaigns();
   }
-  //
-  // @override
-  // void dispose() {
-  //   _pageController.dispose();
-  //   _pageController2.dispose();
-  //   super.dispose();
-  // }
 
   int selectedActivityType = 0;
 
@@ -116,16 +108,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       },
                       splashColor: Colors.transparent,
                       child: Container(
-                        height: 60,
-                        width: 60,
+                        height: 70,
+                        width: 70,
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(color: Colors.grey)),
-                        child: PreferencesHelper.getUserModel?.user?.photo !=
-                                null
-                            ? Image.network(
-                                '${PreferencesHelper.getUserModel?.user?.photo}')
-                            : SvgPicture.asset(AppAssets.circleAvatar2),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(40),
+                          child: PreferencesHelper.getUserModel?.user?.photo !=
+                                  null
+                              ? Image.network(
+                                  '${PreferencesHelper.getUserModel?.user?.photo}',
+                            fit: BoxFit.fill,
+                            width: 70,
+                            height: 70,
+
+                                )
+                              : SvgPicture.asset(AppAssets.circleAvatar2,  fit: BoxFit.fill,
+                            width: 70,
+                            height: 70,),
+                        ),
                       ),
                     ),
                     const SizedBox(width: 10),
@@ -254,7 +256,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             });
                     },
                     child: SvgPicture.asset(
-                      AppAssets.qrCode,
+                      'AppAssets.qrCode',
                     )),
               )
             ],
@@ -353,7 +355,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   );
                 }),
                 SizedBox(
-                  height: 11.h,
+                  height: 11.h
                 ),
               ],
             ),
