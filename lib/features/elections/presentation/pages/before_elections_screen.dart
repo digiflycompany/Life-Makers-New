@@ -52,10 +52,10 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 15, bottom: 16),
+                  padding: const EdgeInsets.only(top: 15, bottom: 17),
                   child: Center(
                     child: Text(
-                      'انتخابات رئيس مجلس ادارة المتطوعين',
+                      'مرشحين رئيس مجلس ادارة المتطوعين',
                       style: TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.w700,
@@ -67,7 +67,7 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
                 ),
                 buildLeaderGridView(),
                 Padding(
-                  padding: const EdgeInsets.only(top: 40, bottom: 16),
+                  padding: const EdgeInsets.only(top: 40, bottom: 17),
                   child: Center(
                     child: Text(
                       'مرشحين أعضاء مجلس ادارة المتطوعين',
@@ -98,46 +98,28 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
             child: CircularProgressIndicator.adaptive(),
           );
         } else if (state == CubitBaseState.done) {
-          return GridView(
+          return GridView.builder(
             physics: const BouncingScrollPhysics(),
             shrinkWrap: true,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               // childAspectRatio: (1 / .94),
-              crossAxisSpacing: 21.w,
-              mainAxisSpacing: 21.w,
+              crossAxisSpacing: 18.w,
+              mainAxisSpacing: 18.w,
             ),
-            children: allCandidatesCubit.allCandidatesModel!.voters!
-                .where((element) => element.candidate == 2)
-                .map((e) => InkWell(
-              onTap: () {
-                if (selectedVotedSet.length < 10 &&
-                    selectedVotedSet.contains(e.id!) == false) {
-                  selectedVotedSet.add(e.id!);
-                } else if (selectedVotedSet.length == 10 &&
-                    selectedVotedSet.contains(e.id!) == false) {
-                  CustomSnackBars.showInfoSnackBar(
-                      title: 'الحد الأقصي لأنتخاب الاعضاء هو 10 اعضاء');
-                } else {
-                  selectedVotedSet.remove(e.id!);
-                }
-                setState(() {});
-              },
-              child: Container(
+           itemCount: allCandidatesCubit.allCandidatesModel?.voters?.length ?? 0,
+           itemBuilder:(context,index){
+              return Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.r),
                   boxShadow: [
                     BoxShadow(
-                      color: selectedVotedSet.contains(e.id!)
-                          ? AppColors.white
-                          : Colors.black26,
+                      color: Colors.black26,
                       spreadRadius: 1,
                       blurRadius: 1,
                     )
                   ],
-                  color: selectedVotedSet.contains(e.id!)
-                      ? AppColors.darkBlueColor
-                      : AppColors.white,
+                  color: AppColors.white,
                 ),
                 child: Stack(
                   children: [
@@ -158,7 +140,7 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
                                 topLeft: Radius.circular(10.r),
                                 topRight: Radius.circular(10.r)),
                             child: Image.network(
-                              '${e.imageUrl}',
+                              '${allCandidatesCubit.allCandidatesModel?.voters?[index].imageUrl}',
                               height: 100.h,
                               fit: BoxFit.cover,
                               width: double.infinity,
@@ -171,12 +153,10 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
                             padding: EdgeInsets.only(
                                 right: 10.w, bottom: 6.h, left: 10.w),
                             child: Text(
-                              '${e.details}',
+                              '${allCandidatesCubit.allCandidatesModel?.voters![index].details}',
                               textDirection: TextDirection.rtl,
                               style: TextStyle(
-                                color: selectedVotedSet.contains(e.id!)
-                                    ? AppColors.white
-                                    : AppColors.black,
+                                color: AppColors.black,
                                 fontFamily: FontFamilies.alexandria,
                                 fontWeight: FontWeight.w400,
                                 fontSize: 8.5,
@@ -189,12 +169,10 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
                           child: Padding(
                             padding: EdgeInsets.only(right: 10.w),
                             child: Text(
-                              '${e.name}',
+                              '${allCandidatesCubit.allCandidatesModel?.voters![index].name}',
                               textDirection: TextDirection.rtl,
                               style: TextStyle(
-                                color: selectedVotedSet.contains(e.id!)
-                                    ? AppColors.white
-                                    : AppColors.black,
+                                color: AppColors.black,
                                 fontFamily: FontFamilies.alexandria,
                                 fontWeight: FontWeight.w400,
                                 fontSize: 12,
@@ -206,10 +184,9 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
                     ),
                   ],
                 ),
-              ),
-            ))
-                .toList(),
-          );
+              );
+           }
+            );
         }
         return const SizedBox.shrink();
       },
