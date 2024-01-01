@@ -16,6 +16,7 @@ class AppAssets {
   static const String homeIcon = "$imagesPath/homeIcon.png";
   static const String yousefImage = "$imagesPath/yousef.png";
   static const String homeWhiteIcon = "$svgPath/homeWhiteIcon.svg";
+  static const String notificationIcon1 = "$svgPath/notificationIcon.svg";
   static const String logoFinalSvg = "$svgPath/loginFinalSvg.svg";
   static const String signupFinalSvg = "$svgPath/signupFinalSvg.svg";
   static const String profileWhiteIcon = "$svgPath/profileWhiteIcon.svg";

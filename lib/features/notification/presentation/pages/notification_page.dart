@@ -33,7 +33,6 @@ class _NotificationPageState extends State<NotificationPage> {
     try {
       await Future.delayed(const Duration(seconds: 1));
       await signUpCubit.GetUserNotifications();
-      //setState(() {}); // Force a rebuild
     } catch (error) {
       if (kDebugMode) {
         print('Error refreshing data: $error');
@@ -74,7 +73,7 @@ class _NotificationPageState extends State<NotificationPage> {
                           return Padding(
                             padding: EdgeInsets.symmetric(vertical: 7.h),
                             child: NotificationWidget(
-                              img: AppAssets.notificationImg,
+                              img: AppAssets.notificationIcon1,
                               description: "${signUpCubit.notificationModel?.notifications![index].title}",
                               time: "${signUpCubit.notificationModel?.notifications![index].updatedAt}",
                             ),
