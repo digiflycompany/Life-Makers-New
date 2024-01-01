@@ -57,7 +57,6 @@ class _MainPageState extends State<MainPage> {
       child: Scaffold(
         backgroundColor: AppColors.backgroundColor,
         body: BlocBuilder<CardCubit, CardStates>(
-        //listener: (context, state) {},
             builder: (context, state) {
        return Column(
           children: [
@@ -101,7 +100,8 @@ class _MainPageState extends State<MainPage> {
                             ),
                           ),
                         ],
-                        if(state is CardSuccess)...[Padding(
+                        if(state is CardSuccess)...[
+                          Padding(
                           padding:  EdgeInsets.symmetric(horizontal: 7.w),
                           child: Container(
                             height: 52.h,

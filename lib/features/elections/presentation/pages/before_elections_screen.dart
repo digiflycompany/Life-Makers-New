@@ -9,7 +9,6 @@ import 'package:life_makers/services/cubit/global_cubit_state.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-color.dart';
-import '../../../../core/utils/app-string.dart';
 import '../../../../core/utils/app_fonts.dart';
 
 class BeforeElectionsScreen extends StatefulWidget {
@@ -39,7 +38,7 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: Size(double.infinity, 50.h),
-          child: CustomAppBar(AppStrings.volunteerBoardOfDirectorsElections)),
+          child: CustomAppBar("مرشحين مجلس ادارة المتطوعين")),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -235,7 +234,6 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
                         type: PageTransitionType.fade,
                         duration: const Duration(milliseconds: 600),
                         child: CandidateDetails(
-                          // Pass the index of the filtered list
                           index: allCandidatesCubit.allCandidatesModel!.voters!
                               .indexWhere((element) => element.candidate == 1 && element == e),
                         ),
