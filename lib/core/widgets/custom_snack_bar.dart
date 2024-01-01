@@ -15,7 +15,19 @@ class CustomSnackBars {
       fontSize: 16.0,
     );
   }
+  static void showRegularToast({required String title}) {
+    Fluttertoast.cancel();
 
+    Fluttertoast.showToast(
+      msg: title,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.white,
+      textColor: Colors.black,
+      fontSize: 16.0,
+    );
+  }
   static void showErrorToast({required String title}) {
     Fluttertoast.cancel();
 

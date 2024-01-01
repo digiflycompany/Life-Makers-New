@@ -70,6 +70,7 @@ class AppStrings {
   static const String volunteerOpportunities = 'فرص تطوعية';
   static const String volunteerBoardOfDirectors = 'مجلس ادارة المتطوعين';
   static const String volunteerBoardOfDirectorsElections = 'انتخابات مجلس ادارة المتطوعين';
+  static const String volunteerBoardOfDirectorsElections2 = 'مرشحين مجلس ادارة المتطوعين';
   static const String signOut = 'تسجيل الخروج';
   static const String seasonalCampaigns = 'حملات موسمية';
   static const String noSeasonalCampaigns = 'حملات غير موسمية';
