@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:life_makers/core/utils/extensions.dart';
-import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app_fonts.dart';
 
 class NotificationWidget extends StatelessWidget {
@@ -16,7 +15,7 @@ class NotificationWidget extends StatelessWidget {
        child: Container(
          height: 88.h,
          decoration: BoxDecoration(
-           color: AppColors.greyTabColor,
+           color:Colors.grey.shade300,
            borderRadius: BorderRadius.circular(8.r),
          ),
          child: Row(
@@ -34,8 +33,9 @@ class NotificationWidget extends StatelessWidget {
   get image => Padding(
     padding:  EdgeInsets.only(right: 8.w),
     child: CircleAvatar(
-      radius: 30.r,
       backgroundImage: AssetImage(img!),
+      radius: 30.r,
+      //child: SvgPicture.asset(img!),
     ),
   );
   get descriptionText => Text(description!,
