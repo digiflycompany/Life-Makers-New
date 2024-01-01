@@ -9,8 +9,6 @@ import 'package:life_makers/features/authentication/domain/card_cubit/cards_cubi
 import 'package:life_makers/features/authentication/domain/login_cubit/login_cubit.dart';
 import 'package:life_makers/features/authentication/domain/sign_up_cubit/sign_up_cubit.dart';
 import 'package:life_makers/features/edit_account/cubit/edit_account_cubit.dart';
-import 'package:life_makers/features/elections/presentation/pages/before_elections_screen.dart';
-import 'package:life_makers/features/elections/presentation/pages/candidate_details.dart';
 import 'package:life_makers/features/home_page/domain/menu_page_cubit/menu_page_cubit.dart';
 import 'package:life_makers/features/splash_screen/presentation/cubit/splash_cubit.dart';
 import 'package:life_makers/features/splash_screen/presentation/widgets/splash_screen.dart';
@@ -45,8 +43,9 @@ void main() async {
 
   runZonedGuarded(() async {
     await SentryFlutter.init(
-          (options) {
-        options.dsn = 'https://example@sentry.io/650cb00a9b4a6cb9629977442fd2eeba8fec6bdf3228e4ac81ec9e29e367c0d9';
+      (options) {
+        options.dsn =
+            'https://example@sentry.io/650cb00a9b4a6cb9629977442fd2eeba8fec6bdf3228e4ac81ec9e29e367c0d9';
       },
     );
 
@@ -54,17 +53,12 @@ void main() async {
   }, (exception, stackTrace) async {
     await Sentry.captureException(exception, stackTrace: stackTrace);
   });
-
-
-
 }
 
 class MyApp extends StatelessWidget {
-
   MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-
     return MultiBlocProvider(
       providers: [
         BlocProvider<LoginCubit>(
@@ -137,7 +131,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           navigatorKey: AppService().navigatorKey,
           home: SplashScreen(),
-         // home: EditAccountScreen(),
+          // home: EditAccountScreen(),
         ),
       ),
     );

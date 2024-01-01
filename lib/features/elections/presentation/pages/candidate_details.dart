@@ -4,8 +4,6 @@ import 'package:life_makers/core/utils/app-color.dart';
 import 'package:life_makers/core/utils/app-string.dart';
 import 'package:life_makers/core/utils/app_fonts.dart';
 import 'package:life_makers/core/utils/extensions.dart';
-import 'package:life_makers/features/volunteer_opportunity/cubit/one_day_activity_cubit.dart';
-import 'package:life_makers/features/volunteer_opportunity/cubit/one_day_activity_states.dart';
 import 'package:life_makers/services/cubit/global_cubit_state.dart';
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/widgets/custom_appbar.dart';
