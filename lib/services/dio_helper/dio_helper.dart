@@ -63,7 +63,6 @@ class DioHelper {
         print('STATUS CODE IS ${response?.statusCode}');
         print('SENT DATA IS ${response?.requestOptions.data}');
         print('STATUS MESSAGE IS ${response?.statusMessage}');
-
         print('RESPONSE IS ${response}');
       }
       return response;

@@ -111,9 +111,7 @@ class SignUpCubit extends Cubit<SignUpState> {
       UserModel userModel = UserModel.fromJson(response.data);
       await PreferencesHelper.saveToken(token: response.data['token']);
       await PreferencesHelper.saveUserModel(userModel);
-      if (kDebugMode) {
-        print(response);
-      }
+
       await _prefs.then((prefs) => prefs.setBool('isAuthenticated', true));
       emit(SignUpSuccess());
     } else {

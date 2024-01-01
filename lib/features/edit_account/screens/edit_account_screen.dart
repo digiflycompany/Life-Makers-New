@@ -261,37 +261,50 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                     ),
                   ),
                   Stack(
+                    alignment: Alignment.bottomRight,
                     children: [
                       Container(
-                        height: 80,
-                        width: 80,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.grey)),
-                        child:
-                        userModel.user?.photo!=null?Image.network(userModel.user!.photo!):
-                        _image!=null?Image.file(File(_image!.path)):SvgPicture.asset(AppAssets.circleAvatar2),
-                      ),
-                      Positioned(
-                        top: 63.h,
-                        left: 60.w,
-                        child: InkWell(
-                          splashColor: Colors.transparent,
-                          onTap: () async {
-                            final picker = ImagePicker();
-                            XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
-
-                            if (pickedFile != null) {
-                              setState(() {
-                                _image = XFile(pickedFile.path);
-                              });
-                            }
-
-                          },
-                          child: Icon(
-                            Icons.camera_alt,
-                            color: AppColors.gradientColor1,
-                          ),
+                          height: 70,
+                          width: 70,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(color: Colors.grey)),
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(40),
+                              child: _image != null
+                                  ? Image.file(
+                                      File(_image!.path),
+                                      fit: BoxFit.fill,
+                                      width: 70,
+                                      height: 70,
+                                    )
+                                  : userModel.user?.photo != null
+                                      ? Image.network(
+                                          '${PreferencesHelper.getUserModel?.user?.photo}',
+                                          fit: BoxFit.fill,
+                                          width: 70,
+                                          height: 70,
+                                        )
+                                      : SvgPicture.asset(
+                                          AppAssets.circleAvatar2,
+                                          fit: BoxFit.fill,
+                                          width: 70,
+                                          height: 70,
+                                        ))),
+                      InkWell(
+                        onTap: () async {
+                          final picker = ImagePicker();
+                          XFile? pickedFile = await picker.pickImage(
+                              source: ImageSource.gallery);
+                          if (pickedFile != null) {
+                            setState(() {
+                              _image = XFile(pickedFile.path);
+                            });
+                          }
+                        },
+                        child: Icon(
+                          Icons.camera_alt,
+                          color: AppColors.black,
                         ),
                       ),
                     ],
@@ -372,9 +385,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                       focusedBorder:
                                           buildUnderlineInputBorder(),
                                     ))),
-                            const SizedBox(
-                              width: 34,
-                            ),
+                            const SizedBox(width: 34),
                             Flexible(
                                 child: TextField(
                                     enabled: false,

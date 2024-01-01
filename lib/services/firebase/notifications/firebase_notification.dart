@@ -10,7 +10,9 @@ class FirebaseCustomNotification {
 
   static Future<void> firebaseMessagingAppOpen() async {
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
-      debugPrint('Notification data: ${message.data}');
+      if (kDebugMode) {
+        print('Notification data: ${message.data}');
+      }
     });
   }
 
@@ -33,8 +35,10 @@ class FirebaseCustomNotification {
           .listen(CustomLocalNotification.showFlutterNotification);
       FirebaseMessaging.onMessageOpenedApp
           .listen((CustomLocalNotification.onMessageOpenedApp));
-      debugPrint(
+      if (kDebugMode) {
+        print(
           'FIREBASE TOKEN: ${await FirebaseMessaging.instance.getToken()}');
+      }
     }
   }
 }

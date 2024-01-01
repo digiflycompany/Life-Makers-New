@@ -75,8 +75,7 @@ class AppAssets {
   static const String newsDetailsImg = "$imagesPath/newsDetailsPage.png";
   static const String calenderIcon = "$svgPath/calender.svg";
   static const String uploadIcon = "$svgPath/upload.svg";
-  static const String lifeMakersProfileIcon =
-      "$svgPath/lifeMakersProfileIcon.svg";
+  static const String lifeMakersProfileIcon = "$svgPath/lifeMakersProfileIcon.svg";
   static const String qrCode = "$svgPath/qrCode.svg";
   static const String qrCode2 = "$svgPath/qrCode1.svg";
   static const String newsPopUp = "$svgPath/newsPopUp.svg";

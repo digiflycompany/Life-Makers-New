@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -158,7 +159,9 @@ class _ChooseRoleSecondPageState extends State<ChooseRoleSecondPage> {
                 ? PendingButton(onTap: () {}, text: AppStrings.pendingText)
                 : NewsButton2(
                     onTap: () {
-                      debugPrint('$userJoined');
+                      if (kDebugMode) {
+                        print('$userJoined');
+                      }
                       joinCampaignCubit.joinCampaign(
                           taskId: widget.selectedRoleId, context: context);
                     },

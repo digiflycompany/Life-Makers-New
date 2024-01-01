@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_makers/features/authentication/domain/card_cubit/cards_cubit.dart';
@@ -17,6 +20,7 @@ import 'package:life_makers/features/volunteer_opportunity/cubit/volunteer_thank
 import 'package:life_makers/services/app.service.dart';
 import 'package:life_makers/services/dio_helper/dio_helper.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'core/utils/app-string.dart';
 import 'features/campaign_details/cubit/all_campaigns_cubit.dart';
 import 'features/campaign_details/cubit/join_campaign_cubit.dart';
@@ -33,18 +37,28 @@ void main() async {
 
   PreferencesHelper.init();
   await Firebase.initializeApp();
-  debugPrint('Firebase token ${await FirebaseMessaging.instance.getToken()}');
-  runApp(MyApp());
+  if (kDebugMode) {
+    print('Firebase token ${await FirebaseMessaging.instance.getToken()}');
+  }
+
+  runZonedGuarded(() async {
+    await SentryFlutter.init(
+      (options) {
+        options.dsn =
+            'https://example@sentry.io/650cb00a9b4a6cb9629977442fd2eeba8fec6bdf3228e4ac81ec9e29e367c0d9';
+      },
+    );
+
+    runApp(MyApp());
+  }, (exception, stackTrace) async {
+    await Sentry.captureException(exception, stackTrace: stackTrace);
+  });
 }
 
 class MyApp extends StatelessWidget {
-
   MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-
-
-
     return MultiBlocProvider(
       providers: [
         BlocProvider<LoginCubit>(
@@ -110,11 +124,14 @@ class MyApp extends StatelessWidget {
           FocusManager.instance.primaryFocus?.unfocus();
         },
         child: MaterialApp(
+          navigatorObservers: [
+            SentryNavigatorObserver(),
+          ],
           title: AppStrings.lifeMaker,
           debugShowCheckedModeBanner: false,
           navigatorKey: AppService().navigatorKey,
           home: SplashScreen(),
-         // home: EditAccountScreen(),
+          // home: EditAccountScreen(),
         ),
       ),
     );
