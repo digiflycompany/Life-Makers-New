@@ -47,11 +47,20 @@ class _MenuScreenState extends State<MenuScreen> {
   void initState() {
     super.initState();
     menuCubit = context.read<MenuCubit>();
-    menuCubit.fetchDateAndTime();
-    String? apiStartDateString = menuCubit.appSettingsModel?.data?.electionsStartDate;
-    String? apiEndDateString = menuCubit.appSettingsModel?.data?.electionsEndDate;
-     startTime= DateTime.parse(apiStartDateString!);
-     endTime= DateTime.parse(apiEndDateString!);
+    menuCubit.fetchDateAndTime().then((value) {
+      String? apiStartDateString = menuCubit.appSettingsModel?.data?.electionsStartDate;
+      String? apiEndDateString = menuCubit.appSettingsModel?.data?.electionsEndDate;
+
+      print('***** DATE *****');
+      print(apiEndDateString);
+      print(apiEndDateString);
+      if(apiStartDateString!=null && apiEndDateString!=null)
+      {
+        startTime= DateTime.parse(apiStartDateString);
+        endTime= DateTime.parse(apiEndDateString);
+      }
+    });
+
      if (kDebugMode) {
        print('$startTime');
        print('$endTime');
