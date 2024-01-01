@@ -14,16 +14,17 @@ class AppAssets {
   static const String changePassword = "$svgPath/changePassword.svg";
   static const String circleAvatar2 = "$svgPath/maleAvatar2.svg";
   static const String homeIcon = "$imagesPath/homeIcon.png";
+  static const String messageImage = "$imagesPath/MessageImage.png";
   static const String yousefImage = "$imagesPath/yousef.png";
   static const String homeWhiteIcon = "$svgPath/homeWhiteIcon.svg";
-  static const String notificationIcon1 = "$svgPath/notificationIcon.svg";
+  static const String notificationIcon2 = "$svgPath/notificationIcon2.svg";
   static const String logoFinalSvg = "$svgPath/loginFinalSvg.svg";
   static const String signupFinalSvg = "$svgPath/signupFinalSvg.svg";
   static const String profileWhiteIcon = "$svgPath/profileWhiteIcon.svg";
   static const String notificationWhiteIcon =
       '$svgPath/notificationWhiteSvg.svg';
   static const String profileIcon = "$svgPath/profileIcon.svg";
-  static const String notificationIcon = "$svgPath/notificationIcon.svg";
+  static const String notificationIcon = "$svgPath/notificationIcon2.svg";
   static const String menuIcon = "$svgPath/menuIcon.svg";
   static const String crown = "$svgPath/crown.svg";
   static const String circleAvatar = "$imagesPath/circleAvatarPng.png";

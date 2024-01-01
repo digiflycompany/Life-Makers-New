@@ -73,7 +73,7 @@ class _NotificationPageState extends State<NotificationPage> {
                           return Padding(
                             padding: EdgeInsets.symmetric(vertical: 7.h),
                             child: NotificationWidget(
-                              img: AppAssets.notificationIcon1,
+                              img: AppAssets.messageImage,
                               description: "${signUpCubit.notificationModel?.notifications![index].title}",
                               time: "${signUpCubit.notificationModel?.notifications![index].updatedAt}",
                             ),

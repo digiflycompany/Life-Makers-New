@@ -67,7 +67,28 @@ class _MenuScreenState extends State<MenuScreen> {
     endTime =DateTime.now();
     super.dispose();
   }
+  Future<void> _refresh() async {
+    try {
+      await Future.delayed(const Duration(seconds: 1));
+      await  menuCubit.fetchDateAndTime().then((value) {
+        String? apiStartDateString = menuCubit.appSettingsModel?.data?.electionsStartDate;
+        String? apiEndDateString = menuCubit.appSettingsModel?.data?.electionsEndDate;
 
+        print('***** DATE *****');
+        print(apiEndDateString);
+        print(apiEndDateString);
+        if(apiStartDateString!=null && apiEndDateString!=null)
+        {
+          startTime= DateTime.parse(apiStartDateString);
+          endTime= DateTime.parse(apiEndDateString);
+        }
+      });
+    } catch (error) {
+      if (kDebugMode) {
+        print('Error refreshing data: $error');
+      }
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MenuCubit, MenuState>(
@@ -92,187 +113,154 @@ class _MenuScreenState extends State<MenuScreen> {
         return Scaffold(
             backgroundColor: AppColors.drawerColor,
             body: SafeArea(
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 4.h,
-                    ),
-                    closeDrawerIcon,
-                    if(!PreferencesHelper.getIsVisitor)...[
+              child: RefreshIndicator(
+                onRefresh: _refresh,
+                color: Colors.white,
+                backgroundColor: AppColors.orangeBorderColor,
+                child: SingleChildScrollView(
+                  physics:const  AlwaysScrollableScrollPhysics(),
+                  child: Column(
+                    children: [
                       SizedBox(
-                      height: 20.h,
-                    ),
-                    ],
-                    if(!PreferencesHelper.getIsVisitor)...[
-                      mentorshipEdit,
-                    ],
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    if(!PreferencesHelper.getIsVisitor)...[
-                      InkWell(
-                          splashColor: Colors.transparent,
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              PageTransition(
-                                type: PageTransitionType.fade,
-                                duration: const Duration(milliseconds: 280),
-                                child: const ProfileScreen(hasBackButton: true),
-                              ),
-                            );
-                          },
-                          child: Padding(
-                            padding:  EdgeInsets.symmetric(vertical: 22.h),
-                            child: const DrawerText(
-                              text: AppStrings.personalFile,
-                              img: AppAssets.profileWhiteIcon2,
-                              font: 11.5,
-                            ),
-                          )),
-                      InkWell(
-                          splashColor: Colors.transparent,
-                          onTap: () {
-                            Navigator.push(
+                        height: 4.h,
+                      ),
+                      closeDrawerIcon,
+                      if(!PreferencesHelper.getIsVisitor)...[
+                        SizedBox(
+                        height: 20.h,
+                      ),
+                      ],
+                      if(!PreferencesHelper.getIsVisitor)...[
+                        mentorshipEdit,
+                      ],
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      if(!PreferencesHelper.getIsVisitor)...[
+                        InkWell(
+                            splashColor: Colors.transparent,
+                            onTap: () {
+                              Navigator.push(
                                 context,
                                 PageTransition(
-                                    type: PageTransitionType.fade,
-                                    duration: const Duration(milliseconds: 280),
-                                    child: const EditAccountScreen()));
-                          },
-                          child: Padding(
-                            padding:  EdgeInsets.symmetric(vertical: 22.h),
-                            child: const DrawerText(
-                                text: AppStrings.editProfile,
-                                img: AppAssets.editProfileIcon,
-                                font: 11.5),
-                          )),
-                    ],
-                    Padding(
-                      padding: EdgeInsets.only(right: 15.7.w),
-                      child: Column(
-                        children: [
-                          InkWell(
-                            splashColor: Colors.transparent,
-                            onTap: (){
-                              menuCubit.toggleCampaigns();
+                                  type: PageTransitionType.fade,
+                                  duration: const Duration(milliseconds: 280),
+                                  child: const ProfileScreen(hasBackButton: true),
+                                ),
+                              );
                             },
                             child: Padding(
                               padding:  EdgeInsets.symmetric(vertical: 22.h),
-                              child: Row(
-                                textDirection: TextDirection.rtl,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  SvgPicture.asset(AppAssets.campaignsIcon),
-                                  SizedBox(
-                                    width: 11.w,
-                                  ),
-                                  const Text(
-                                    AppStrings.campaigns,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: FontFamilies.alexandria,
-                                        fontSize: 11.5,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                  SizedBox(
-                                    width: 5.w,
-                                  ),
-                                  menuCubit.isVisible == false
-                                      ? InkWell(
-                                    splashColor: Colors.transparent,
-                                    onTap: (){
-                                      menuCubit.toggleCampaigns();
-                                    },
-                                          child: Padding(
-                                            padding: EdgeInsets.only(top: 2.h),
-                                            child: SvgPicture.asset(
-                                                AppAssets.dropDownWhiteIcon),
+                              child: const DrawerText(
+                                text: AppStrings.personalFile,
+                                img: AppAssets.profileWhiteIcon2,
+                                font: 11.5,
+                              ),
+                            )),
+                        InkWell(
+                            splashColor: Colors.transparent,
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  PageTransition(
+                                      type: PageTransitionType.fade,
+                                      duration: const Duration(milliseconds: 280),
+                                      child: const EditAccountScreen()));
+                            },
+                            child: Padding(
+                              padding:  EdgeInsets.symmetric(vertical: 22.h),
+                              child: const DrawerText(
+                                  text: AppStrings.editProfile,
+                                  img: AppAssets.editProfileIcon,
+                                  font: 11.5),
+                            )),
+                      ],
+                      Padding(
+                        padding: EdgeInsets.only(right: 15.7.w),
+                        child: Column(
+                          children: [
+                            InkWell(
+                              splashColor: Colors.transparent,
+                              onTap: (){
+                                menuCubit.toggleCampaigns();
+                              },
+                              child: Padding(
+                                padding:  EdgeInsets.symmetric(vertical: 22.h),
+                                child: Row(
+                                  textDirection: TextDirection.rtl,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    SvgPicture.asset(AppAssets.campaignsIcon),
+                                    SizedBox(
+                                      width: 11.w,
+                                    ),
+                                    const Text(
+                                      AppStrings.campaigns,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: FontFamilies.alexandria,
+                                          fontSize: 11.5,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    SizedBox(
+                                      width: 5.w,
+                                    ),
+                                    menuCubit.isVisible == false
+                                        ? InkWell(
+                                      splashColor: Colors.transparent,
+                                      onTap: (){
+                                        menuCubit.toggleCampaigns();
+                                      },
+                                            child: Padding(
+                                              padding: EdgeInsets.only(top: 2.h),
+                                              child: SvgPicture.asset(
+                                                  AppAssets.dropDownWhiteIcon),
+                                            ),
+                                          )
+                                        : InkWell(
+                                      splashColor: Colors.transparent,
+                                      onTap: (){
+                                        menuCubit.toggleCampaigns();
+                                      },
+                                            child: Padding(
+                                              padding: EdgeInsets.only(top: 2.h),
+                                              child: SvgPicture.asset(
+                                                  AppAssets.upArrowIcon),
+                                            ),
                                           ),
-                                        )
-                                      : InkWell(
-                                    splashColor: Colors.transparent,
-                                    onTap: (){
-                                      menuCubit.toggleCampaigns();
-                                    },
-                                          child: Padding(
-                                            padding: EdgeInsets.only(top: 2.h),
-                                            child: SvgPicture.asset(
-                                                AppAssets.upArrowIcon),
-                                          ),
-                                        ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                          menuCubit.isVisible == true
-                              ? SizedBox(
-                                  height: 0.h,
-                                )
-                              : SizedBox(
-                                  height: 0.h,
-                                ),
-                          if (menuCubit.isVisible == true)
-                            Padding(
-                              padding: EdgeInsets.only(right: 43.w,),
-                              child: Column(
-                                children: [
-                                  InkWell(
-                                    splashColor: Colors.transparent,
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          PageTransition(
-                                              type: PageTransitionType.fade,
-                                              duration: const Duration(
-                                                  milliseconds: 280),
-                                              child:
-                                                  const SeasonalCampaignsScreen()));
-                                    },
-                                    child: Row(
-                                      textDirection: TextDirection.rtl,
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.symmetric(vertical: 14.h),
-                                          child: SvgPicture.asset(
-                                              AppAssets.whitePoint),
-                                        ),
-                                        SizedBox(
-                                          width: 5.w,
-                                        ),
-                                        const Text(
-                                          AppStrings.seasonalCampaigns,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontFamily:
-                                                  FontFamilies.alexandria,
-                                              fontSize: 11.5,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      ],
-                                    ),
+                            menuCubit.isVisible == true
+                                ? SizedBox(
+                                    height: 0.h,
+                                  )
+                                : SizedBox(
+                                    height: 0.h,
                                   ),
-                                  InkWell(
-                                    splashColor: Colors.transparent,
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          PageTransition(
-                                              type: PageTransitionType.fade,
-                                              duration: const Duration(
-                                                  milliseconds: 280),
-                                              child:
-                                                  const NonSeasonalCampaignsScreen()));
-                                    },
-                                    child: Padding(
-                                      padding: EdgeInsets.symmetric(vertical: 14.h),
+                            if (menuCubit.isVisible == true)
+                              Padding(
+                                padding: EdgeInsets.only(right: 43.w,),
+                                child: Column(
+                                  children: [
+                                    InkWell(
+                                      splashColor: Colors.transparent,
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            PageTransition(
+                                                type: PageTransitionType.fade,
+                                                duration: const Duration(
+                                                    milliseconds: 280),
+                                                child:
+                                                    const SeasonalCampaignsScreen()));
+                                      },
                                       child: Row(
                                         textDirection: TextDirection.rtl,
                                         children: [
                                           Padding(
-                                            padding: EdgeInsets.only(top: 3.h),
+                                            padding: EdgeInsets.symmetric(vertical: 14.h),
                                             child: SvgPicture.asset(
                                                 AppAssets.whitePoint),
                                           ),
@@ -280,7 +268,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                             width: 5.w,
                                           ),
                                           const Text(
-                                            AppStrings.noSeasonalCampaigns,
+                                            AppStrings.seasonalCampaigns,
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontFamily:
@@ -291,134 +279,172 @@ class _MenuScreenState extends State<MenuScreen> {
                                         ],
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            )
-                        ],
+                                    InkWell(
+                                      splashColor: Colors.transparent,
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            PageTransition(
+                                                type: PageTransitionType.fade,
+                                                duration: const Duration(
+                                                    milliseconds: 280),
+                                                child:
+                                                    const NonSeasonalCampaignsScreen()));
+                                      },
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(vertical: 14.h),
+                                        child: Row(
+                                          textDirection: TextDirection.rtl,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsets.only(top: 3.h),
+                                              child: SvgPicture.asset(
+                                                  AppAssets.whitePoint),
+                                            ),
+                                            SizedBox(
+                                              width: 5.w,
+                                            ),
+                                            const Text(
+                                              AppStrings.noSeasonalCampaigns,
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontFamily:
+                                                      FontFamilies.alexandria,
+                                                  fontSize: 11.5,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 0.h,
-                    ),
-                    InkWell(
-                        splashColor: Colors.transparent,
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              PageTransition(
+                      SizedBox(
+                        height: 0.h,
+                      ),
+                      InkWell(
+                          splashColor: Colors.transparent,
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                    type: PageTransitionType.fade,
+                                    duration: const Duration(milliseconds: 280),
+                                    child: const VolunteerOpportunityScreen()));
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: 22.h),
+                            child: const DrawerText(
+                                text: AppStrings.volunteerOpportunities,
+                                img: AppAssets.volunteerIcon,
+                                font: 11.5),
+                          )),
+                      if (!PreferencesHelper.getIsVisitor)
+                          InkWell(
+                              splashColor: Colors.transparent,
+                              onTap: () {
+                                if( DateTime.now().isAfter(startTime!) && DateTime.now().isBefore(endTime!)){
+                                  Navigator.push(
+                                      context,
+                                      PageTransition(
+                                          type: PageTransitionType.fade,
+                                          duration: const Duration(milliseconds: 280),
+                                          child: const TermsPage()));
+                                } else{
+                                  Navigator.push(
+                                      context,
+                                      PageTransition(
+                                          type: PageTransitionType.fade,
+                                          duration: const Duration(milliseconds: 280),
+                                          child: const BeforeElectionsScreen()));
+                                }
+                              },
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(vertical: 22.h),
+                                child: const DrawerText(
+                                    text:
+                                    AppStrings.volunteerBoardOfDirectorsElections,
+                                    img: AppAssets
+                                        .volunteerBoardOfDirectorsElectionsIcon,
+                                    font: 11),
+                              )),
+                      SizedBox(height:menuCubit.isVisible==false? 145.h:80.h),
+                      if (!PreferencesHelper.getIsVisitor)
+                        InkWell(
+                          splashColor: Colors.transparent,
+                          onTap: () {
+                            PreferencesHelper.logOut();
+                            Navigator.pushReplacement(
+                                context,
+                                PageTransition(
                                   type: PageTransitionType.fade,
                                   duration: const Duration(milliseconds: 280),
-                                  child: const VolunteerOpportunityScreen()));
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 22.h),
-                          child: const DrawerText(
-                              text: AppStrings.volunteerOpportunities,
-                              img: AppAssets.volunteerIcon,
-                              font: 11.5),
-                        )),
-                    if (!PreferencesHelper.getIsVisitor)
+                                  child: LoginScreen(),
+                                ));
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 22.h,bottom: 22.h,right: 15.7.w),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                const Text(
+                                  AppStrings.signOut,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: FontFamilies.alexandria,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                                SizedBox(
+                                  width: 11.w,
+                                ),
+                                SvgPicture.asset(AppAssets.signOutIcon),
+                              ],
+                            ),
+                          ),
+                        )
+                      else
                         InkWell(
-                            splashColor: Colors.transparent,
-                            onTap: () {
-                              if( DateTime.now().isAfter(startTime!) && DateTime.now().isBefore(endTime!)){
-                                Navigator.push(
-                                    context,
-                                    PageTransition(
-                                        type: PageTransitionType.fade,
-                                        duration: const Duration(milliseconds: 280),
-                                        child: const TermsPage()));
-                              } else{
-                                Navigator.push(
-                                    context,
-                                    PageTransition(
-                                        type: PageTransitionType.fade,
-                                        duration: const Duration(milliseconds: 280),
-                                        child: const BeforeElectionsScreen()));
-                              }
-                            },
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(vertical: 22.h),
-                              child: const DrawerText(
-                                  text:
-                                  AppStrings.volunteerBoardOfDirectorsElections,
-                                  img: AppAssets
-                                      .volunteerBoardOfDirectorsElectionsIcon,
-                                  font: 11),
-                            )),
-                    SizedBox(height:menuCubit.isVisible==false? 145.h:80.h),
-                    if (!PreferencesHelper.getIsVisitor)
-                      InkWell(
-                        splashColor: Colors.transparent,
-                        onTap: () {
-                          PreferencesHelper.logOut();
-                          Navigator.pushReplacement(
-                              context,
-                              PageTransition(
-                                type: PageTransitionType.fade,
-                                duration: const Duration(milliseconds: 280),
-                                child: LoginScreen(),
-                              ));
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 22.h,bottom: 22.h,right: 15.7.w),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              const Text(
-                                AppStrings.signOut,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: FontFamilies.alexandria,
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                              SizedBox(
-                                width: 11.w,
-                              ),
-                              SvgPicture.asset(AppAssets.signOutIcon),
-                            ],
+                          splashColor: Colors.transparent,
+                          onTap: () {
+                            Navigator.pushReplacement(
+                                context,
+                                PageTransition(
+                                  type: PageTransitionType.fade,
+                                  duration: const Duration(milliseconds: 400),
+                                  child: LoginScreen(),
+                                ));
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.only(right: 15.7.w,bottom: 22.h,top: 22.h),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                const Text(
+                                  'تسجيل الدخول',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: FontFamilies.alexandria,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                                SizedBox(
+                                  width: 11.w,
+                                ),
+                                Icon(Icons.login,color: Colors.white,)
+                              ],
+                            ),
                           ),
                         ),
-                      )
-                    else
-                      InkWell(
-                        splashColor: Colors.transparent,
-                        onTap: () {
-                          Navigator.pushReplacement(
-                              context,
-                              PageTransition(
-                                type: PageTransitionType.fade,
-                                duration: const Duration(milliseconds: 400),
-                                child: LoginScreen(),
-                              ));
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.only(right: 15.7.w,bottom: 22.h,top: 22.h),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              const Text(
-                                'تسجيل الدخول',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: FontFamilies.alexandria,
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                              SizedBox(
-                                width: 11.w,
-                              ),
-                              Icon(Icons.login,color: Colors.white,)
-                            ],
-                          ),
-                        ),
-                      ),
-                    SizedBox(height: 50.h,),
+                      SizedBox(height: 50.h,),
 
 
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ));
