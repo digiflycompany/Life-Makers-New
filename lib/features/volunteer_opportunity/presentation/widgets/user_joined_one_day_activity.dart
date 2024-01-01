@@ -150,22 +150,25 @@ class _JoinedOneDayActivityState extends State<JoinedOneDayActivity> {
               );
             } else{
               return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset(AppAssets.noCampaignsImg),
-                    SizedBox(height: 30.h,),
-                    const Text(
-                      'لا يوجد أنشطة',
-                      style: TextStyle(
-                          color:AppColors.greyNoCampaignsTextColor,
-                          fontFamily: FontFamilies.alexandria,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 13
-                      ),
-                    )
-                  ],
+                child: Padding(
+                  padding:  EdgeInsets.only(bottom: 135.h),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(AppAssets.noCampaignsImg),
+                      SizedBox(height: 30.h,),
+                      const Text(
+                        'لا يوجد أنشطة',
+                        style: TextStyle(
+                            color:AppColors.greyNoCampaignsTextColor,
+                            fontFamily: FontFamilies.alexandria,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 13
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               );
             }
