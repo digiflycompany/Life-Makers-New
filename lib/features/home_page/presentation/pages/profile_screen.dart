@@ -274,140 +274,161 @@ class _ProfileScreenState extends State<ProfileScreen> {
             physics: BouncingScrollPhysics(),
             child: BlocBuilder<CardCubit, CardStates>(
               builder: (context, state) {
-                return Column(
+                return Stack(
+                  children: [
+                    Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-                  child: Text(
-                    'الأنشطة',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: 'Alexandria',
-                    ),
-                  ),
-                ),
-                if(state is CardLoading)...[
-                  Container(
-                    width: 50,
-                    height: 50,
-                    child: Transform.scale(
-                      scale: 0.6,
-                      child: CircularProgressIndicator(
-                        color: Colors.white,
+                    const Padding(
+                      padding: EdgeInsets.only(left: 25,right: 25, top: 15,bottom: 13),
+                      child: Text(
+                        'الأنشطة',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: 'Alexandria',
+                        ),
                       ),
                     ),
-                  ),
-                ],
-                if(state is CardSuccess)...[
-                  Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 7.w),
-                    child: Container(
-                      height: 52.h,
-                      child: ListView.builder(
-                        physics: BouncingScrollPhysics(),
-                        scrollDirection:Axis.horizontal ,
-                        reverse: true,
-                        itemCount: cardCubit.currentJoinedCampaignsAndOpp?.currentVolunteerOpportunities?.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return InkWell(
-                            splashColor: Colors.transparent,
-                            onTap: (){
-                              Navigator.push(context, PageTransition(
-                                  type: PageTransitionType.fade,
-                                  duration: const Duration(milliseconds: 600),
-                                  child:  VolunteerCardDetails(index: index)));
+                    if(state is CardLoading)...[
+                      Container(
+                        width: 50,
+                        height: 50,
+                        child: Transform.scale(
+                          scale: 0.6,
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
+                    if(state is CardSuccess)...[
+                      Padding(
+                        padding:  EdgeInsets.symmetric(horizontal: 7.w),
+                        child: Container(
+                          height: 52.h,
+                          child: ListView.builder(
+                            physics: BouncingScrollPhysics(),
+                            scrollDirection:Axis.horizontal ,
+                            reverse: true,
+                            itemCount: cardCubit.currentJoinedCampaignsAndOpp?.currentVolunteerOpportunities?.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return InkWell(
+                                splashColor: Colors.transparent,
+                                onTap: (){
+                                  Navigator.push(context, PageTransition(
+                                      type: PageTransitionType.fade,
+                                      duration: const Duration(milliseconds: 600),
+                                      child:  VolunteerCardDetails(index: index)));
+                                },
+                                child: Padding(
+                                  padding: EdgeInsets.only(right: 5.w),
+                                  child: VolunteerContainer(itemName: "${cardCubit.currentJoinedCampaignsAndOpp?.currentVolunteerOpportunities![index].name}"),
+                                ),
+                              );
                             },
-                            child: Padding(
-                              padding: EdgeInsets.only(right: 5.w),
-                              child: VolunteerContainer(itemName: "${cardCubit.currentJoinedCampaignsAndOpp?.currentVolunteerOpportunities![index].name}"),
-                            ),
-                          );
-                        },
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ],
-                const SizedBox(height: 20),
-                StatefulBuilder(builder: (context, setState) {
-                  return Column(
-                    children: [
-                      Row(
+                    ],
+                    SizedBox(height: state is CardSuccess && cardCubit.currentJoinedCampaignsAndOpp?.currentVolunteerOpportunities?.length==0?5.h:20.h,),
+                    StatefulBuilder(builder: (context, setState) {
+                      return Column(
                         children: [
-                          Expanded(
-                              child: ElevatedButton(
+                          Row(
+                            children: [
+                              Expanded(
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        elevation: 0,
+                                        backgroundColor: selectedActivityType == 0
+                                            ? AppColors.orangeBorderColor
+                                            : Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(2)),
+                                        minimumSize: const Size.fromHeight(40),
+                                      ),
+                                      onPressed: () {
+                                        selectedActivityType = 0;
+                                        setState(() {});
+                                      },
+                                      child: Text(
+                                        'الحملات',
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                          color: selectedActivityType == 0
+                                              ? Colors.white
+                                              : const Color(0xFF878787),
+                                          fontWeight: selectedActivityType == 0
+                                              ? FontWeight.w600
+                                              : FontWeight.w400,
+                                          fontFamily: 'Alexandria',
+                                        ),
+                                      ))),
+                              Expanded(
+                                child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                     elevation: 0,
-                                    backgroundColor: selectedActivityType == 0
-                                        ? AppColors.orangeBorderColor
-                                        : Colors.white,
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(2)),
-                                    minimumSize: const Size.fromHeight(40),
+                                    backgroundColor: selectedActivityType == 1
+                                        ? AppColors.orangeBorderColor
+                                        : Colors.white,
                                   ),
                                   onPressed: () {
-                                    selectedActivityType = 0;
-                                    setState(() {});
+                                    setState(() {
+                                      selectedActivityType = 1;
+                                    });
                                   },
                                   child: Text(
-                                    'الحملات',
+                                    'فرصة تطوعية',
                                     style: TextStyle(
                                       fontSize: 10,
-                                      color: selectedActivityType == 0
+                                      color: selectedActivityType == 1
                                           ? Colors.white
                                           : const Color(0xFF878787),
-                                      fontWeight: selectedActivityType == 0
+                                      fontWeight: selectedActivityType == 1
                                           ? FontWeight.w600
                                           : FontWeight.w400,
                                       fontFamily: 'Alexandria',
                                     ),
-                                  ))),
-                          Expanded(
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                elevation: 0,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(2)),
-                                backgroundColor: selectedActivityType == 1
-                                    ? AppColors.orangeBorderColor
-                                    : Colors.white,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  selectedActivityType = 1;
-                                });
-                              },
-                              child: Text(
-                                'فرصة تطوعية',
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: selectedActivityType == 1
-                                      ? Colors.white
-                                      : const Color(0xFF878787),
-                                  fontWeight: selectedActivityType == 1
-                                      ? FontWeight.w600
-                                      : FontWeight.w400,
-                                  fontFamily: 'Alexandria',
+                                  ),
                                 ),
                               ),
+                            ],
+                          ),
+                          SizedBox(height: 7.h),
+                          if (selectedActivityType == 0) tabBar,
+                          if (selectedActivityType == 1) tabBar2,
+                          if (selectedActivityType == 1) pages2,
+                          if (selectedActivityType == 0) pages,
+                        ],
+                      );
+                    }),
+                    SizedBox(
+                      height: 11.h
+                    ),
+              ],
+            ),
+                    if(state is CardSuccess && cardCubit.currentJoinedCampaignsAndOpp?.currentVolunteerOpportunities?.length==0)...[
+                      Align(
+                        alignment: AlignmentDirectional.center,
+                        child: Padding(
+                          padding:  EdgeInsets.only(top: 53.h),
+                          child: Text(
+                            'لا توجد أنشطة حالية',
+                            style: TextStyle(
+                              color: AppColors.black,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: FontFamilies.alexandria,
                             ),
                           ),
-                        ],
+                        ),
                       ),
-                      SizedBox(height: 7.h),
-                      if (selectedActivityType == 0) tabBar,
-                      if (selectedActivityType == 1) tabBar2,
-                      if (selectedActivityType == 1) pages2,
-                      if (selectedActivityType == 0) pages,
                     ],
-                  );
-                }),
-                SizedBox(
-                  height: 11.h
-                ),
-              ],
-            );
+                  ],
+                );
   },
 ),
           ),
