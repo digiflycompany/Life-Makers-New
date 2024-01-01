@@ -427,10 +427,27 @@ class _MainPageState extends State<MainPage> {
         alignment: AlignmentDirectional.topEnd,
         child: Padding(
           padding: EdgeInsets.only(top: 19.h),
-          child: CircleAvatar(
-              radius: 40.r,
-              backgroundColor: Colors.white,
-              child:SvgPicture.asset(AppAssets.circleAvatar2)),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(50),
+            child: Container(
+                height: 70,
+                width: 70,
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                    border: Border.all(color: Colors.grey)),
+                child:
+                PreferencesHelper.getUserModel?.user?.photo==null?
+                SvgPicture.asset(AppAssets.circleAvatar2,
+                fit: BoxFit.fill,
+                  width: 70,
+                  height: 70,
+                ):Image.network(
+                    width: 70,
+                    height: 70,
+                    fit: BoxFit.fill,
+                    PreferencesHelper.getUserModel!.user!.photo!)),
+          ),
         ),
       );
 

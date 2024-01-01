@@ -13,7 +13,6 @@ class DrawerPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ZoomDrawer(
       controller: _drawerController,
-      //duration: ,
       style: DrawerStyle.defaultStyle,
       menuScreen: const MenuScreen(),
       mainScreen:  HomePage(),
