@@ -65,7 +65,6 @@ class Voters {
     candidateFor = json['candidate_for'];
     city = json['city'];
     birthDate = json['birth_date'];
-    achievements = json['achievements'].cast<String>();
     candidate = json['candidate'];
     if (json['users'] != null) {
       users = <Users>[];

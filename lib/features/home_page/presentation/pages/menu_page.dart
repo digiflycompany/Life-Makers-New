@@ -4,7 +4,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/features/authentication/presentation/pages/login_screen.dart';
-import 'package:life_makers/features/elections/presentation/pages/before_elections_screen.dart';
 import 'package:life_makers/features/elections/presentation/pages/terms_page.dart';
 import 'package:life_makers/features/home_page/domain/menu_page_cubit/menu_page_cubit.dart';
 import 'package:life_makers/features/membership_controll/screens/membership_control_screen.dart';
@@ -337,12 +336,12 @@ class _MenuScreenState extends State<MenuScreen> {
                                         duration: const Duration(milliseconds: 280),
                                         child: const TermsPage()));
                               } else{
-                                Navigator.push(
-                                    context,
-                                    PageTransition(
-                                        type: PageTransitionType.fade,
-                                        duration: const Duration(milliseconds: 280),
-                                        child: const BeforeElectionsScreen()));
+                                // Navigator.push(
+                                //     context,
+                                //     PageTransition(
+                                //         type: PageTransitionType.fade,
+                                //         duration: const Duration(milliseconds: 280),
+                                //         child: const BeforeElectionsScreen()));
                               }
                             },
                             child: Padding(
