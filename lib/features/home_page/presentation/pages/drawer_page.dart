@@ -15,6 +15,7 @@ class DrawerPage extends StatelessWidget {
       controller: _drawerController,
       style: DrawerStyle.defaultStyle,
       menuScreen: const MenuScreen(),
+      mainScreenTapClose: true,
       mainScreen:  HomePage(),
       borderRadius: 24.0,
       shadowLayer1Color: AppColors.drawerColor,
