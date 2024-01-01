@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_makers/core/utils/app-color.dart';
-import 'package:life_makers/core/utils/app-string.dart';
 import 'package:life_makers/core/utils/app_fonts.dart';
 import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/services/cubit/global_cubit_state.dart';
@@ -68,7 +67,7 @@ class _CandidateDetailsState extends State<CandidateDetails> {
                                   Padding(
                                     padding:  EdgeInsets.symmetric(horizontal: 0.w),
                                     child: Image.asset(
-                                      AppAssets.yousefImage,
+                                      AppAssets.loadingImg,
                                       width: double.infinity,
                                       fit: BoxFit.fill,
                                       height: 300.h,
@@ -149,7 +148,7 @@ class _CandidateDetailsState extends State<CandidateDetails> {
                             Padding(
                               padding:  EdgeInsets.only(bottom: 3.0),
                               child: Text(
-                                '25-10-1980',
+                                '${allCandidatesCubit.allCandidatesModel?.voters?[widget.index].birthDate}',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Colors.black,
@@ -174,7 +173,7 @@ class _CandidateDetailsState extends State<CandidateDetails> {
                             Padding(
                               padding:  EdgeInsets.only(bottom: 3.0),
                               child: Text(
-                                'القاهرة',
+                                '${allCandidatesCubit.allCandidatesModel?.voters?[widget.index].city}',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Colors.black,
@@ -225,7 +224,7 @@ class _CandidateDetailsState extends State<CandidateDetails> {
                             Padding(
                               padding:  EdgeInsets.only(bottom: 3.0),
                               child: Text(
-                                'عضو مجلس',
+                                '${allCandidatesCubit.allCandidatesModel?.voters?[widget.index].candidateFor}',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Colors.black,
@@ -263,7 +262,7 @@ class _CandidateDetailsState extends State<CandidateDetails> {
                           padding:  EdgeInsets.only(bottom:40.0),
                           child: Center(
                             child: Text(
-                              AppStrings.longDescription,
+                              '${allCandidatesCubit.allCandidatesModel?.voters?[widget.index].details}',
                               textDirection: TextDirection.rtl,
                               style: TextStyle(
                                 fontWeight: FontWeight.w500,

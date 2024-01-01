@@ -37,6 +37,9 @@ class Voters {
   int? vote;
   String? details;
   String? candidateFor;
+  String? city;
+  String? birthDate;
+  List<String>? achievements;
   int? candidate;
   List<Users>? users;
 
@@ -47,6 +50,9 @@ class Voters {
         this.vote,
         this.details,
         this.candidateFor,
+        this.city,
+        this.birthDate,
+        this.achievements,
         this.candidate,
         this.users});
 
@@ -57,6 +63,8 @@ class Voters {
     vote = json['vote'];
     details = json['details'];
     candidateFor = json['candidate_for'];
+    city = json['city'];
+    birthDate = json['birth_date'];
     candidate = json['candidate'];
     if (json['users'] != null) {
       users = <Users>[];
@@ -74,6 +82,9 @@ class Voters {
     data['vote'] = this.vote;
     data['details'] = this.details;
     data['candidate_for'] = this.candidateFor;
+    data['city'] = this.city;
+    data['birth_date'] = this.birthDate;
+    data['achievements'] = this.achievements;
     data['candidate'] = this.candidate;
     if (this.users != null) {
       data['users'] = this.users!.map((v) => v.toJson()).toList();
@@ -94,8 +105,8 @@ class Users {
   String? governorate;
   String? cityCenter;
   String? previousExperience;
-  dynamic code;
-  dynamic expireAt;
+  String? code;
+  String? expireAt;
   int? isAdmin;
   int? isActive;
   int? ban;
@@ -105,6 +116,8 @@ class Users {
   String? gender;
   String? education;
   String? qrCode;
+  String? photo;
+  String? deviceToken;
   Pivot? pivot;
 
   Users(
@@ -130,6 +143,8 @@ class Users {
         this.gender,
         this.education,
         this.qrCode,
+        this.photo,
+        this.deviceToken,
         this.pivot});
 
   Users.fromJson(Map<String, dynamic> json) {
@@ -155,6 +170,8 @@ class Users {
     gender = json['gender'];
     education = json['education'];
     qrCode = json['qr_code'];
+    photo = json['photo'];
+    deviceToken = json['device_token'];
     pivot = json['pivot'] != null ? new Pivot.fromJson(json['pivot']) : null;
   }
 
@@ -182,6 +199,8 @@ class Users {
     data['gender'] = this.gender;
     data['education'] = this.education;
     data['qr_code'] = this.qrCode;
+    data['photo'] = this.photo;
+    data['device_token'] = this.deviceToken;
     if (this.pivot != null) {
       data['pivot'] = this.pivot!.toJson();
     }

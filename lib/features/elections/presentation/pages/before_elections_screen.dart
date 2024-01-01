@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_makers/core/utils/extensions.dart';
@@ -211,158 +210,59 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
         }
         else if (state == CubitBaseState.done) {
           return StatefulBuilder(builder: (context, setState) {
-            return GridView(
-                padding: EdgeInsets.only(bottom: 5),
-                physics: const BouncingScrollPhysics(),
-                shrinkWrap: true,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: (1 / .94),
-                  crossAxisSpacing: 9,
-                  mainAxisSpacing: 10,
-                ),
-                // itemCount: selectedManagerId =
-                //     allCandidatesCubit.allCandidatesModel!.voters!.where((element) => element.candidate==1).length,
-                // itemBuilder: (context, index) {
-                //      return StatefulBuilder(builder: (context, setState)
-                //      {
-                //       return InkWell(
-                //         onTap: () {
-                //           selectedManagerId = allCandidatesCubit
-                //               .allCandidatesModel!.voters![index].id;
-                //         },
-                //         child: Container(
-                //           decoration: BoxDecoration(
-                //             borderRadius: BorderRadius.circular(10.r),
-                //             boxShadow: [
-                //               BoxShadow(
-                //                 color: selectedManagerId ==
-                //                         allCandidatesCubit
-                //                             .allCandidatesModel!.voters![index].id
-                //                     ? Colors.black26
-                //                     : Colors.white,
-                //                 spreadRadius: 1,
-                //                 blurRadius: 1,
-                //               )
-                //             ],
-                //             color: selectedManagerId ==
-                //                     allCandidatesCubit
-                //                         .allCandidatesModel!.voters![index].id
-                //                 ? AppColors.darkBlueColor
-                //                 : Colors.white,
-                //           ),
-                //           child: Stack(
-                //             children: [
-                //               Align(
-                //                   alignment: AlignmentDirectional.bottomEnd,
-                //                   child: Padding(
-                //                     padding: EdgeInsets.only(left: 15.w),
-                //                     child: Image.asset(
-                //                         AppAssets.electionsCardBackgroundImage),
-                //                   )),
-                //               Column(
-                //                 children: [
-                //                   Padding(
-                //                     padding: EdgeInsets.only(bottom: 7.h),
-                //                     child: ClipRRect(
-                //                       borderRadius: BorderRadius.only(
-                //                           topLeft: Radius.circular(10.r),
-                //                           topRight: Radius.circular(10.r)),
-                //                       child: Padding(
-                //                         padding: const EdgeInsets.all(8.0),
-                //                         child: Image.network(
-                //                           '${allCandidatesCubit.allCandidatesModel?.voters?[index].imageUrl}',
-                //                           height: 100.h,
-                //                           fit: BoxFit.cover,
-                //                           width: double.infinity,
-                //                         ),
-                //                       ),
-                //                     ),
-                //                   ),
-                //                   Padding(
-                //                     padding: EdgeInsets.only(right: 6, left: 6),
-                //                     child: Text(
-                //                       '${allCandidatesCubit.allCandidatesModel?.voters?[index].details}',
-                //                       textDirection: TextDirection.rtl,
-                //                       style: TextStyle(
-                //                         color: selectedManagerId ==
-                //                                 allCandidatesCubit
-                //                                     .allCandidatesModel!
-                //                                     .voters![index]
-                //                                     .id
-                //                             ? AppColors.white
-                //                             : AppColors.darkBlueColor,
-                //                         fontFamily: FontFamilies.alexandria,
-                //                         fontWeight: FontWeight.w400,
-                //                         fontSize: 8.5,
-                //                       ),
-                //                     ),
-                //                   ),
-                //                   Align(
-                //                     alignment: AlignmentDirectional.centerStart,
-                //                     child: Padding(
-                //                       padding: EdgeInsets.only(right: 10.w),
-                //                       child: Text(
-                //                         '${allCandidatesCubit.allCandidatesModel?.voters?[index].name}',
-                //                         textDirection: TextDirection.rtl,
-                //                         style: TextStyle(
-                //                           color: selectedManagerId ==
-                //                                   allCandidatesCubit
-                //                                       .allCandidatesModel!
-                //                                       .voters![index]
-                //                                       .id
-                //                               ? AppColors.white
-                //                               : AppColors.black,
-                //                           fontFamily: FontFamilies.alexandria,
-                //                           fontWeight: FontWeight.w400,
-                //                           fontSize: 12,
-                //                         ),
-                //                       ),
-                //                     ),
-                //                   ),
-                //                 ],
-                //               ),
-                //             ],
-                //           ),
-                //         ),
-                //       );
-                //     });
-
-                children: allCandidatesCubit.allCandidatesModel!.voters!
+            return GridView.builder(
+              padding: EdgeInsets.only(bottom: 5),
+              physics: const BouncingScrollPhysics(),
+              shrinkWrap: true,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: (1 / .94),
+                crossAxisSpacing: 9,
+                mainAxisSpacing: 10,
+              ),
+              itemCount: allCandidatesCubit.allCandidatesModel!.voters!
+                  .where((element) => element.candidate == 1)
+                  .length,
+              itemBuilder: (BuildContext context, int index) {
+                var e = allCandidatesCubit.allCandidatesModel!.voters!
                     .where((element) => element.candidate == 1)
-                    .map((e) => InkWell(
+                    .toList()[index];
+                return GestureDetector(
                   onTap: () {
-                    selectedManagerId = e.id;
-                    setState(() {});
-                    if (kDebugMode) {
-                      print('managere is ${e.id} ${e.name}');
-                    }
+                    Navigator.push(
+                      context,
+                      PageTransition(
+                        type: PageTransitionType.fade,
+                        duration: const Duration(milliseconds: 600),
+                        child: CandidateDetails(
+                          // Pass the index of the filtered list
+                          index: allCandidatesCubit.allCandidatesModel!.voters!
+                              .indexWhere((element) => element.candidate == 1 && element == e),
+                        ),
+                      ),
+                    );
                   },
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.r),
                       boxShadow: [
                         BoxShadow(
-                          color: selectedManagerId == e.id
-                              ? Colors.white
-                              : Colors.black26,
+                          color: Colors.black26,
                           spreadRadius: 1,
                           blurRadius: 1,
                         )
                       ],
-                      color: selectedManagerId == e.id
-                          ? AppColors.darkBlueColor
-                          : Colors.white,
+                      color: Colors.white,
                     ),
                     child: Stack(
                       children: [
                         Align(
-                            alignment: AlignmentDirectional.bottomEnd,
-                            child: Padding(
-                              padding: EdgeInsets.only(left: 15.w),
-                              child: Image.asset(AppAssets
-                                  .electionsCardBackgroundImage),
-                            )),
+                          alignment: AlignmentDirectional.bottomEnd,
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 15.w),
+                            child: Image.asset(AppAssets.electionsCardBackgroundImage),
+                          ),
+                        ),
                         Column(
                           children: [
                             Padding(
@@ -383,15 +283,12 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
                               ),
                             ),
                             Padding(
-                              padding:
-                              EdgeInsets.only(right: 6, left: 6),
+                              padding: EdgeInsets.only(right: 6, left: 6),
                               child: Text(
                                 '${e.details}',
                                 textDirection: TextDirection.rtl,
                                 style: TextStyle(
-                                  color: selectedManagerId == e.id
-                                      ? AppColors.white
-                                      : AppColors.darkBlueColor,
+                                  color: AppColors.darkBlueColor,
                                   fontFamily: FontFamilies.alexandria,
                                   fontWeight: FontWeight.w400,
                                   fontSize: 8.5,
@@ -399,17 +296,14 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
                               ),
                             ),
                             Align(
-                              alignment:
-                              AlignmentDirectional.centerStart,
+                              alignment: AlignmentDirectional.centerStart,
                               child: Padding(
                                 padding: EdgeInsets.only(right: 10.w),
                                 child: Text(
                                   '${e.name}',
                                   textDirection: TextDirection.rtl,
                                   style: TextStyle(
-                                    color: selectedManagerId == e.id
-                                        ? AppColors.white
-                                        : AppColors.darkBlueColor,
+                                    color: AppColors.darkBlueColor,
                                     fontFamily: FontFamilies.alexandria,
                                     fontWeight: FontWeight.w400,
                                     fontSize: 12,
@@ -422,8 +316,9 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
                       ],
                     ),
                   ),
-                ))
-                    .toList());
+                );
+              },
+            );
           });
         }
         return const SizedBox.shrink();
