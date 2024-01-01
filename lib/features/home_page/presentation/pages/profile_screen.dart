@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:life_makers/core/utils/app-assets.dart';
 import 'package:life_makers/core/utils/extensions.dart';
+import 'package:life_makers/features/authentication/domain/card_cubit/card_states.dart';
+import 'package:life_makers/features/authentication/domain/card_cubit/cards_cubit.dart';
 import 'package:life_makers/features/campaign_details/cubit/all_campaigns_cubit.dart';
 import 'package:life_makers/features/campaign_details/presentation/pages/user_joined_current_campaigns.dart';
 import 'package:life_makers/features/campaign_details/presentation/pages/user_joined_previous_campaigns.dart';
@@ -20,6 +22,8 @@ import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app-string.dart';
 import '../../../../core/utils/app_fonts.dart';
 import '../../../../core/widgets/title_text.dart';
+import '../../../authentication/domain/card_cubit/volunteer_card_details.dart';
+import '../../../authentication/presentation/widgets/volunteers_card.dart';
 import 'news_details.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -36,6 +40,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   int _currentPage = 1;
   int _currentPage2 = 0;
   late VolunteerCubit volunteerCubit;
+  late CardCubit cardCubit;
 
   late AllCampaignsCubit allCampaignsCubit;
   @override
@@ -47,6 +52,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     volunteerCubit = context.read<VolunteerCubit>();
     volunteerCubit.getJoinedVolunteerOpportunities();
     allCampaignsCubit.getAllCampaigns();
+    cardCubit =context.read<CardCubit>();
+    cardCubit.GetCurrentJoinedCampaignsAndOpp();
   }
 
   int selectedActivityType = 0;
@@ -265,7 +272,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         body: SafeArea(
           child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
-            child: Column(
+            child: BlocBuilder<CardCubit, CardStates>(
+              builder: (context, state) {
+                return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Padding(
@@ -279,7 +288,47 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                 ),
-                cards,
+                if(state is CardLoading)...[
+                  Container(
+                    width: 50,
+                    height: 50,
+                    child: Transform.scale(
+                      scale: 0.6,
+                      child: CircularProgressIndicator(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+                if(state is CardSuccess)...[
+                  Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: 7.w),
+                    child: Container(
+                      height: 52.h,
+                      child: ListView.builder(
+                        physics: BouncingScrollPhysics(),
+                        scrollDirection:Axis.horizontal ,
+                        reverse: true,
+                        itemCount: cardCubit.currentJoinedCampaignsAndOpp?.currentVolunteerOpportunities?.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return InkWell(
+                            splashColor: Colors.transparent,
+                            onTap: (){
+                              Navigator.push(context, PageTransition(
+                                  type: PageTransitionType.fade,
+                                  duration: const Duration(milliseconds: 600),
+                                  child:  VolunteerCardDetails(index: index)));
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.only(right: 5.w),
+                              child: VolunteerContainer(itemName: "${cardCubit.currentJoinedCampaignsAndOpp?.currentVolunteerOpportunities![index].name}"),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ],
                 const SizedBox(height: 20),
                 StatefulBuilder(builder: (context, setState) {
                   return Column(
@@ -358,7 +407,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   height: 11.h
                 ),
               ],
-            ),
+            );
+  },
+),
           ),
         ),
       ),
@@ -766,9 +817,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             JoinedPreviousCampaigns(),
             JoinedCurrentCampaigns(),
             JoinedUpcomingCampaigns(),
-            // PreviousSeasonalCampaignsScreen(),
-            // CurrentSeasonalCampaignsScreen(),
-            // UpcomingSeasonalCampaigns(),
           ],
         ),
       );

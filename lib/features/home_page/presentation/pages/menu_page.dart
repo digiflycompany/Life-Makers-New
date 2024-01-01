@@ -18,6 +18,7 @@ import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app-string.dart';
 import '../../../../core/utils/app_fonts.dart';
 import '../../../edit_account/screens/edit_account_screen.dart';
+import '../../../elections/presentation/pages/before_elections_screen.dart';
 import '../../../seasonal_campaigns/presentation/pages/seasonal_campaigns.dart';
 import '../../domain/menu_page_cubit/menu_page_states.dart';
 import '../widgets/drawer_text.dart';
@@ -35,13 +36,7 @@ class _MenuScreenState extends State<MenuScreen> {
   DateTime? startTime;
   DateTime? endTime;
 
-  // bool campaignDetails = false;
   late MenuCubit menuCubit;
-  // void eye() {
-  //   setState(() {
-  //     campaignDetails = !campaignDetails;
-  //   });
-  // }
   @override
   void initState() {
     super.initState();
@@ -323,20 +318,6 @@ class _MenuScreenState extends State<MenuScreen> {
                               img: AppAssets.volunteerIcon,
                               font: 11.5),
                         )),
-                    // SizedBox(
-                    //   height: 0.h,
-                    // ),
-                    // Padding(
-                    //   padding: EdgeInsets.symmetric(vertical: 22.h),
-                    //   child: const DrawerText(
-                    //       text: AppStrings.volunteerBoardOfDirectors,
-                    //       img: AppAssets.volunteerBoardOfDirectorsIcon,
-                    //       font: 11.5),
-                    // ),
-                    // SizedBox(
-                    //   height: 0.h,
-                    // ),
-                    // if (PreferencesHelper.getUserModel?.user?.voted == false)
                     if (!PreferencesHelper.getIsVisitor)
                         InkWell(
                             splashColor: Colors.transparent,
@@ -349,12 +330,12 @@ class _MenuScreenState extends State<MenuScreen> {
                                         duration: const Duration(milliseconds: 280),
                                         child: const TermsPage()));
                               } else{
-                                // Navigator.push(
-                                //     context,
-                                //     PageTransition(
-                                //         type: PageTransitionType.fade,
-                                //         duration: const Duration(milliseconds: 280),
-                                //         child: const BeforeElectionsScreen()));
+                                Navigator.push(
+                                    context,
+                                    PageTransition(
+                                        type: PageTransitionType.fade,
+                                        duration: const Duration(milliseconds: 280),
+                                        child: const BeforeElectionsScreen()));
                               }
                             },
                             child: Padding(
@@ -366,25 +347,6 @@ class _MenuScreenState extends State<MenuScreen> {
                                       .volunteerBoardOfDirectorsElectionsIcon,
                                   font: 11),
                             )),
-                      // InkWell(
-                      //     splashColor: Colors.transparent,
-                      //     onTap: () {
-                      //       Navigator.push(
-                      //           context,
-                      //           PageTransition(
-                      //               type: PageTransitionType.fade,
-                      //               duration: const Duration(milliseconds: 280),
-                      //               child: const TermsPage()));
-                      //     },
-                      //     child: Padding(
-                      //       padding: EdgeInsets.symmetric(vertical: 22.h),
-                      //       child: const DrawerText(
-                      //           text:
-                      //               AppStrings.volunteerBoardOfDirectorsElections,
-                      //           img: AppAssets
-                      //               .volunteerBoardOfDirectorsElectionsIcon,
-                      //           font: 11),
-                      //     )),
                     SizedBox(height:menuCubit.isVisible==false? 145.h:80.h),
                     if (!PreferencesHelper.getIsVisitor)
                       InkWell(
