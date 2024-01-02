@@ -38,7 +38,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   late PageController _pageController;
   late PageController _pageController2;
   int _currentPage = 1;
-  int _currentPage2 = 0;
+  int _currentPage2 = 1;
   late VolunteerCubit volunteerCubit;
   late CardCubit cardCubit;
 
