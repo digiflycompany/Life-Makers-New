@@ -67,7 +67,7 @@ class _JoinedPreviousCampaignsState extends State<JoinedPreviousCampaigns> {
                   color: AppColors.orangeBorderColor,
                 ),
               );
-            } else if(state is JoinedCampaignsSuccess ){
+            } else if(state is JoinedCampaignsSuccess && volunteerCubit.joinedCampaignsModel?.pastCampaigns?.length !=0 ){
               return GridView.builder(
                 physics: const AlwaysScrollableScrollPhysics(),
                 shrinkWrap: true,
@@ -79,7 +79,6 @@ class _JoinedPreviousCampaignsState extends State<JoinedPreviousCampaigns> {
                 ),
                 itemCount: volunteerCubit.joinedCampaignsModel?.pastCampaigns?.length, // Number of items in the grid
                 itemBuilder: (context, index) {
-                  // Replace the following with your actual components/widgets
                   final   currentItem = volunteerCubit.joinedCampaignsModel!.pastCampaigns![index];
                   if (kDebugMode) {
                     print(currentItem);
@@ -98,7 +97,7 @@ class _JoinedPreviousCampaignsState extends State<JoinedPreviousCampaigns> {
                         borderRadius: BorderRadius.circular(20.r),
                       ),
                       child: Padding(
-                        padding:  EdgeInsets.only(right: 13.w),
+                        padding:  EdgeInsets.only(right: 13.w,left: 5.w),
                         child: Stack(
                           children: [
                             logoImg,
@@ -127,7 +126,7 @@ class _JoinedPreviousCampaignsState extends State<JoinedPreviousCampaigns> {
                                   child: Padding(
                                     padding: EdgeInsets.only(right: 0.w),
                                     child:  Text(
-                                      '${volunteerCubit.joinedCampaignsModel?.pastCampaigns?[index].shortDetails}',
+                                      '${volunteerCubit.joinedCampaignsModel?.pastCampaigns?[index].details}',
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontFamily: FontFamilies.alexandria,

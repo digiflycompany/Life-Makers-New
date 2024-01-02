@@ -6,7 +6,6 @@ import 'package:life_makers/features/volunteer_opportunity/cubit/volunteer_state
 import 'package:life_makers/features/volunteer_opportunity/models/one_day_activity_model.dart';
 import 'package:life_makers/features/volunteer_opportunity/models/volunteer_repo.dart';
 import 'package:life_makers/features/volunteer_opportunity/models/programs_model.dart';
-
 import '../../../services/shared_preferences/preferences_helper.dart';
 import '../../authentication/data/apis/api.dart';
 import '../../home_page/data/models/user_joined_volunteers_model.dart';
@@ -130,7 +129,11 @@ class VolunteerCubit extends Cubit<VolunteerState> {
     emit(JoinedProgramLoading());
     try {
       Response response =
-          await dio.get(EndPoints.userJoinedVolunteerOpportunities);
+          await dio.get(
+              options: Options(headers: {
+                'Authorization': 'Bearer ${PreferencesHelper.getToken()}'
+              }),
+              EndPoints.userJoinedVolunteerOpportunities);
       if (response.statusCode == 200) {
         userJoinedVolunteerOpportunities= UserJoinedVolunteerOpportunities.fromJson(response.data);
         emit(JoinedProgramSuccess());
@@ -146,8 +149,13 @@ class VolunteerCubit extends Cubit<VolunteerState> {
     emit(JoinedCampaignsLoading());
     try {
       Response response =
-      await dio.get(EndPoints.userJoinedCampaigns);
+      await dio.get(
+          options: Options(headers: {
+            'Authorization': 'Bearer ${PreferencesHelper.getToken()}'
+          }),
+          EndPoints.userJoinedCampaigns);
       if (response.statusCode == 200) {
+        print(response.data);
         joinedCampaignsModel= JoinedCampaignsModel.fromJson(response.data);
         emit(JoinedCampaignsSuccess());
       } else {

@@ -51,7 +51,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     allCampaignsCubit = context.read<AllCampaignsCubit>();
     volunteerCubit = context.read<VolunteerCubit>();
     volunteerCubit.getJoinedVolunteerOpportunities();
-    allCampaignsCubit.getAllCampaigns();
     cardCubit =context.read<CardCubit>();
     cardCubit.GetCurrentJoinedCampaignsAndOpp();
   }
