@@ -63,7 +63,8 @@ class _RemoteTasksCardState extends State<RemoteTasksCard> {
                   color: AppColors.orangeBorderColor,
                 ),
               );
-            } else {
+            }
+            else if (state is RemoteTasksSuccess && remoteTasksCubit.remoteTasksModel!.volunteerOpportunities!.length!=0){
               return GridView.builder(
                 physics: const AlwaysScrollableScrollPhysics(),
                 shrinkWrap: true,
@@ -144,6 +145,25 @@ class _RemoteTasksCardState extends State<RemoteTasksCard> {
                 },
               );
             }
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(AppAssets.noCampaignsImg),
+                  SizedBox(height: 20.h,),
+                  const Text(
+                    'لا يوجد مهام حاليا',
+                    style: TextStyle(
+                        color:AppColors.greyNoCampaignsTextColor,
+                        fontFamily: FontFamilies.alexandria,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 13
+                    ),
+                  )
+                ],
+              ),
+            );
           },
         ),
         color: AppColors.orangeBorderColor,
