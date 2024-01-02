@@ -33,6 +33,7 @@ class VolunteerCubit extends Cubit<VolunteerState> {
         volunteerPracticalTrainingModel =
             VolunteerPracticalTrainingModel.fromJson(response?.data);
         emit(VolunteerProgramSuccess());
+        print('Sucessssssssssssssssssssssssssssssssss');
       } else {
         emit(VolunteerProgramFailure('Something Went Wrong'));
       }

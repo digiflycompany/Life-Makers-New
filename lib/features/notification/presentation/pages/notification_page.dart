@@ -55,30 +55,29 @@ class _NotificationPageState extends State<NotificationPage> {
                 header,
                 SizedBox(height: 20.h),
                 if (state is NotificationsLoading)
-                   SizedBox(
-                       height: 100.h,
-                       width: 200.w,
-                       child: Center(child: CircularProgressIndicator(color: AppColors.orangeBorderColor))),
+                   Expanded(child: Center(child: CircularProgressIndicator(color: AppColors.orangeBorderColor))),
                 if (state is NotificationSuccessfully)
                    Expanded(
                     child: RefreshIndicator(
                       onRefresh: _refresh,
                       color: Colors.white,
                       backgroundColor: AppColors.orangeBorderColor,
-                      child: ListView.builder(
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        itemCount: signUpCubit.notificationModel?.notifications?.length,
-                        itemBuilder: (BuildContext context, int index) {
-
-                          return Padding(
-                            padding: EdgeInsets.symmetric(vertical: 7.h),
-                            child: NotificationWidget(
-                              img: AppAssets.messageImage,
-                              description: "${signUpCubit.notificationModel?.notifications![index].title}",
-                              time: "${signUpCubit.notificationModel?.notifications![index].updatedAt}",
-                            ),
-                          );
-                        },
+                      child: Padding(
+                        padding:  EdgeInsets.only(bottom: 100.h),
+                        child: ListView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          itemCount: signUpCubit.notificationModel?.notifications?.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Padding(
+                              padding: EdgeInsets.symmetric(vertical: 7.h,),
+                              child: NotificationWidget(
+                                img: AppAssets.messageImage,
+                                description: "${signUpCubit.notificationModel?.notifications![index].title}",
+                                time: "${signUpCubit.notificationModel?.notifications![index].updatedAt}",
+                              ),
+                            );
+                          },
+                        ),
                       ),
                     ),
                   ),
