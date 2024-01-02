@@ -67,7 +67,7 @@ class _JoinedUpcomingCampaignsState extends State<JoinedUpcomingCampaigns> {
                   color: AppColors.orangeBorderColor,
                 ),
               );
-            } else if(state is JoinedCampaignsSuccess ){
+            } else if(state is JoinedCampaignsSuccess && volunteerCubit.joinedCampaignsModel?.nextCampaigns?.length!=0 ){
               return GridView.builder(
                 physics: const AlwaysScrollableScrollPhysics(),
                 shrinkWrap: true,
