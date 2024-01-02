@@ -11,7 +11,7 @@ Widget buildCampaignGridView(
   return Directionality(
     textDirection: TextDirection.rtl,
     child: campaigns?.isNotEmpty == true
-        ? Container(
+        ? SizedBox(
             height: MediaQuery.of(context).size.height * 0.5,
             child: GridView.builder(
               padding: EdgeInsets.only(bottom: 100),
@@ -42,7 +42,7 @@ Widget buildAllCampaignGridView(
     textDirection: TextDirection.rtl,
     child: campaigns?.isNotEmpty == true
         ? GridView.builder(
-            physics: const BouncingScrollPhysics(),
+            physics:  const BouncingScrollPhysics(),
             shrinkWrap: true,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,

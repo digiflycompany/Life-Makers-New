@@ -75,9 +75,12 @@ class _MenuScreenState extends State<MenuScreen> {
         String? apiStartDateString = menuCubit.appSettingsModel?.data?.electionsStartDate;
         String? apiEndDateString = menuCubit.appSettingsModel?.data?.electionsEndDate;
 
-        print('***** DATE *****');
-        print(apiEndDateString);
-        print(apiEndDateString);
+        if (kDebugMode) {
+          print('***** DATE *****');
+          print(apiEndDateString);
+          print(apiEndDateString);
+        }
+
         if(apiStartDateString!=null && apiEndDateString!=null)
         {
           startTime= DateTime.parse(apiStartDateString);

@@ -18,11 +18,10 @@ class PreviousNonSeasonalCampaignsScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 21.w),
-        child: buildCampaignGridView(context: context,campaigns: campaigns),
+        child: buildCampaignGridView(context: context, campaigns: campaigns),
       ),
     );
   }
-
 
   get logoImg => Align(
       alignment: AlignmentDirectional.bottomEnd,
@@ -91,9 +90,7 @@ class PreviousNonSeasonalCampaignsScreen extends StatelessWidget {
           textDirection: TextDirection.rtl,
           children: [
             calendarIcon,
-            SizedBox(
-              width: 4.w,
-            ),
+            SizedBox(width: 4.w),
             dateText,
           ],
         ),

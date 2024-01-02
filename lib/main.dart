@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -29,23 +30,24 @@ import 'features/home_page/cubit/home_calender_cubit.dart';
 import 'features/non_seasonal_campaigns/cubit/non_seasonal_campaigns_cubit.dart';
 import 'features/seasonal_campaigns/cubit/seasonal_campaigns_cubit.dart';
 
-void main() {
-  runZonedGuarded(() async {
+Future<void> main() async {
+  // runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
     DioHelper.init();
     PreferencesHelper.init();
 
+    if(Platform.isAndroid)
     await Firebase.initializeApp();
-    await SentryFlutter.init(
-      (options) {
-        options.dsn =
-            'https://example@sentry.io/650cb00a9b4a6cb9629977442fd2eeba8fec6bdf3228e4ac81ec9e29e367c0d9';
-      },
-      appRunner: () => runApp(MyApp()),
-    );
-  }, (exception, stackTrace) async {
-    await Sentry.captureException(exception, stackTrace: stackTrace);
-  });
+  //   await SentryFlutter.init(
+  //     (options) {
+  //       options.dsn =
+  //           'https://example@sentry.io/650cb00a9b4a6cb9629977442fd2eeba8fec6bdf3228e4ac81ec9e29e367c0d9';
+  //     },
+  //     appRunner: () => runApp(MyApp()),
+  //   );
+  // }, (exception, stackTrace) async {
+  //   await Sentry.captureException(exception, stackTrace: stackTrace);
+  // });
 }
 
 class MyApp extends StatelessWidget {

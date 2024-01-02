@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -31,13 +33,16 @@ class LoginCubit extends Cubit<LoginState> {
     }
     emit(LoginLoading());
     try {
-      String? deviceToken = await FirebaseMessaging.instance.getToken();
+      String? deviceToken;
+      if(Platform.isAndroid) {
+        deviceToken = await FirebaseMessaging.instance.getToken();
+      }
       Response? response = await dio.post(
         EndPoints.loginApi,
         data: {
           'email': username,
           'password': password,
-          'device_token': deviceToken,
+          'device_token': deviceToken??'iosPlatform',
         },
       );
 

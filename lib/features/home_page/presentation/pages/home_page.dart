@@ -1,5 +1,5 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:life_makers/core/utils/app_fonts.dart';
@@ -27,21 +27,9 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: selectBtn);
-
-     FirebaseCustomNotification.setUpFirebase();
-
-
+    if (Platform.isAndroid) FirebaseCustomNotification.setUpFirebase();
   }
 
-  @override
-  Future<void> didChangeDependencies() async {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-
-    if (kDebugMode) {
-      print('${await FirebaseMessaging.instance.getToken()}');
-  }
-  }
   @override
   void dispose() {
     super.dispose();

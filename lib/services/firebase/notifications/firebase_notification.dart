@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 
@@ -21,7 +23,6 @@ class FirebaseCustomNotification {
 
   static Future<bool> requestNotificationPermission() async {
     NotificationSettings settings = await messaging.requestPermission();
-
     return settings.authorizationStatus == AuthorizationStatus.authorized;
   }
 
@@ -35,9 +36,11 @@ class FirebaseCustomNotification {
           .listen(CustomLocalNotification.showFlutterNotification);
       FirebaseMessaging.onMessageOpenedApp
           .listen((CustomLocalNotification.onMessageOpenedApp));
-      if (kDebugMode) {
-        print(
+      if ( Platform.isAndroid) {
+        if (kDebugMode) {
+          print(
           'FIREBASE TOKEN: ${await FirebaseMessaging.instance.getToken()}');
+        }
       }
     }
   }

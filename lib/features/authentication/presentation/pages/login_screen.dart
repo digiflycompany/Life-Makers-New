@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -46,7 +48,9 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
-    FirebaseCustomNotification.setUpFirebase();
+    if(Platform.isAndroid)
+
+      FirebaseCustomNotification.setUpFirebase();
 
     loginCubit = context.read<LoginCubit>();
   }
