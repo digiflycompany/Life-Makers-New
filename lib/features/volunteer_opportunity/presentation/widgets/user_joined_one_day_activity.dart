@@ -58,14 +58,14 @@ class _JoinedOneDayActivityState extends State<JoinedOneDayActivity> {
         onRefresh: _refresh,
         child: BlocBuilder<VolunteerCubit, VolunteerState>(
           builder: (context, state) {
-            if(state is JoinedProgramLoading)  {
+            if(state is JoinedProgramLoading )  {
               return Align(
                 alignment: AlignmentDirectional.center,
                 child: CircularProgressIndicator(
                   color: AppColors.orangeBorderColor,
                 ),
               );
-            } else if(state is JoinedProgramSuccess ){
+            } else if(state is JoinedProgramSuccess && volunteerCubit.userJoinedVolunteerOpportunities?.activityVolunteerOpportunities?.length!=0 ){
               return GridView.builder(
                 physics: const AlwaysScrollableScrollPhysics(),
                 shrinkWrap: true,
