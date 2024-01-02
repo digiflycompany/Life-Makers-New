@@ -304,7 +304,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                         },
                         child: Icon(
                           Icons.camera_alt,
-                          color: AppColors.black,
+                          color: Colors.grey.shade700,
                         ),
                       ),
                     ],
