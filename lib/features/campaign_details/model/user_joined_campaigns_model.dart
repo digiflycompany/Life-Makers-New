@@ -68,7 +68,7 @@ class CurrentCampaigns {
   String? type;
   String? createdAt;
   String? updatedAt;
-  String? city;
+  dynamic city;
   String? photo;
   int? isActive;
   int? followBy;
@@ -148,7 +148,7 @@ class PastCampaigns {
   String? type;
   String? createdAt;
   String? updatedAt;
-  String? city;
+  dynamic city;
   String? photo;
   int? isActive;
   int? followBy;
@@ -228,7 +228,7 @@ class NextCampaigns {
   String? type;
   String? createdAt;
   String? updatedAt;
-  String? city;
+  dynamic city;
   String? photo;
   int? isActive;
   int? followBy;
@@ -299,7 +299,6 @@ class NextCampaigns {
   }
 }
 
-
 class Tasks {
   int? id;
   int? taskId;
@@ -308,7 +307,7 @@ class Tasks {
   String? updatedAt;
   List<String>? details;
   dynamic count;
-  Task? task;
+  dynamic task;
 
   Tasks(
       {this.id,
@@ -328,7 +327,7 @@ class Tasks {
     updatedAt = json['updated_at'];
     details = json['details'].cast<String>();
     count = json['count'];
-    task = json['task'] != null ? new Task.fromJson(json['task']) : null;
+    task = json['task'];
   }
 
   Map<String, dynamic> toJson() {
@@ -340,37 +339,7 @@ class Tasks {
     data['updated_at'] = this.updatedAt;
     data['details'] = this.details;
     data['count'] = this.count;
-    if (this.task != null) {
-      data['task'] = this.task!.toJson();
-    }
-    return data;
-  }
-}
-
-class Task {
-  int? id;
-  String? name;
-  String? details;
-  String? createdAt;
-  String? updatedAt;
-
-  Task({this.id, this.name, this.details, this.createdAt, this.updatedAt});
-
-  Task.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    details = json['details'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['details'] = this.details;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    data['task'] = this.task;
     return data;
   }
 }
