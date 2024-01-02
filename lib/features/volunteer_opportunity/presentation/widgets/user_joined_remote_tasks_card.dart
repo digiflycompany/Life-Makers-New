@@ -65,7 +65,7 @@ class _JoinedRemoteTasksState extends State<JoinedRemoteTasks> {
                   color: AppColors.orangeBorderColor,
                 ),
               );
-            } else if(state is JoinedProgramSuccess ){
+            } else if(state is JoinedProgramSuccess && volunteerCubit.userJoinedVolunteerOpportunities?.tasksVolunteerOpportunities?.length!=0){
               return GridView.builder(
                 physics: const AlwaysScrollableScrollPhysics(),
                 shrinkWrap: true,

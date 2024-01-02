@@ -85,10 +85,10 @@ class _JoinedPreviousCampaignsState extends State<JoinedPreviousCampaigns> {
                   }
                   return GestureDetector(
                     onTap: (){
-                      Navigator.push(context, PageTransition(
-                          type: PageTransitionType.fade,
-                          duration: const Duration(milliseconds: 600),
-                          child:  CampaignDetailsScreen()));
+                      // Navigator.push(context, PageTransition(
+                      //     type: PageTransitionType.fade,
+                      //     duration: const Duration(milliseconds: 600),
+                      //     child:  CampaignDetailsScreen()));
                     },
                     child: Container(
                       decoration: BoxDecoration(
