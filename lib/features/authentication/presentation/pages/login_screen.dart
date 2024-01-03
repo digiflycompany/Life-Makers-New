@@ -301,13 +301,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void LoginSuccessful(BuildContext context, String username) async {
     PreferencesHelper.saveIsVisitor(isVisitor: false);
-
-    Navigator.pushReplacement(
+    Navigator.pushAndRemoveUntil(
         context,
         PageTransition(
             type: PageTransitionType.fade,
-            duration: const Duration(milliseconds: 400),
-            child: DrawerPage()));
+            duration: const Duration(milliseconds: 100),
+            child: DrawerPage()),
+            (vale) => false);
+
   }
 
   get loginImage => Align(

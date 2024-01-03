@@ -79,12 +79,16 @@ class _TermsPageState extends State<TermsPage> {
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(
-                              horizontal: 20.w, vertical: 40.h),
+                              horizontal: 10.w, vertical: 40.h),
                           child: Column(
                             children: [
                               CustomTerm(
+                                text: 'خطوات العملية الانتخابية :',
+                                height: 1.h,
+
+                              ),  CustomTerm(
                                 text: AppStrings.term1,
-                                height: 0.h,
+                                height: 21.h,
                               ),
                               SizedBox(
                                 height: 21.h,
@@ -104,13 +108,7 @@ class _TermsPageState extends State<TermsPage> {
                                 text: AppStrings.term4,
                                 height: 35.h,
                               ),
-                              SizedBox(
-                                height: 21.h,
-                              ),
-                              CustomTerm(
-                                text: AppStrings.term5,
-                                height: 14.h,
-                              ),
+
                             ],
                           ),
                         )

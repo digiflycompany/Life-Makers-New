@@ -367,7 +367,8 @@ class _MenuScreenState extends State<MenuScreen> {
                               font: 11),
                         ),
                       ),
-                      if (!PreferencesHelper.getIsVisitor)
+
+                          if(!PreferencesHelper.getIsVisitor)
                           InkWell(
                               splashColor: Colors.transparent,
                               onTap: () {

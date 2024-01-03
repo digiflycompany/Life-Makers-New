@@ -326,7 +326,7 @@ class _CandidateDetailsState extends State<CandidateDetails> {
                                           ),
                                           Flexible(
                                             child: Text(
-                                              '$achievement', // Use the specific achievement at the current index
+                                              achievement??'لا يوجد انجازات بعد', // Use the specific achievement at the current index
                                               style: TextStyle(
                                                 height: 1.6,
                                                 fontFamily: FontFamilies.alexandria,
