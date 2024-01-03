@@ -37,10 +37,7 @@ class _ChooseRoleSecondPageState extends State<ChooseRoleSecondPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size(
-          double.infinity,
-          50.h,
-        ),
+        preferredSize: Size(double.infinity, 50.h),
         child: CustomAppBar('طلب انضمام للحملة'),
       ),
       body: SafeArea(
@@ -87,9 +84,7 @@ class _ChooseRoleSecondPageState extends State<ChooseRoleSecondPage> {
                     ),
                   ),
                 ),
-              SizedBox(
-                height: dataEntry == true ? 98.h : 0.h,
-              ),
+              SizedBox(height: dataEntry == true ? 98.h : 0.h),
             ],
           ),
         ),
@@ -170,25 +165,25 @@ class _ChooseRoleSecondPageState extends State<ChooseRoleSecondPage> {
         ),
       ));
   get button2 => Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-       if(widget.campaignDetails?.userJoined == 'false')
-         Padding(
-           padding:  EdgeInsets.only(bottom: 10.h),
-           child: NewsButton2(
-               onTap: () {
-                 joinCampaignCubit.joinCampaign(
-                     taskId: widget.selectedRoleId, context: context);
-               },
-               text: AppStrings.joinCampaign),
-         ),
-      if(widget.campaignDetails?.userJoined == 'pending')
-         Padding(
-          padding:  EdgeInsets.only(bottom: 10.h),
-          child: PendingButton(onTap: () {}, text: AppStrings.pendingText),
-        ),
-    ],
-  );
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (widget.campaignDetails?.userJoined == 'false')
+            Padding(
+              padding: EdgeInsets.only(bottom: 10.h),
+              child: NewsButton2(
+                  onTap: () {
+                    joinCampaignCubit.joinCampaign(
+                        taskId: widget.selectedRoleId, context: context);
+                  },
+                  text: AppStrings.joinCampaign),
+            ),
+          if (widget.campaignDetails?.userJoined == 'pending')
+            Padding(
+              padding: EdgeInsets.only(bottom: 10.h),
+              child: PendingButton(onTap: () {}, text: AppStrings.pendingText),
+            ),
+        ],
+      );
   void showJoinCampaignSuccessPoUp(BuildContext context) {
     showDialog(
       context: context,

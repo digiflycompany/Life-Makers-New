@@ -46,15 +46,12 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController whatsappController = TextEditingController();
-  final TextEditingController governorateController = TextEditingController();
-  final TextEditingController centerController = TextEditingController();
 
   final TextEditingController nationalIDController = TextEditingController();
   final TextEditingController previousExperienceController =
       TextEditingController();
 
-  String? selectedGender;
-  String? selectedEducationStatus;
+
   final TextEditingController textEditingController = TextEditingController();
   final TextEditingController textEditingController2 = TextEditingController();
 
@@ -72,9 +69,6 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
     emailController.dispose();
     phoneController.dispose();
     whatsappController.dispose();
-    governorateController.dispose();
-    centerController.dispose();
-
     nationalIDController.dispose();
     previousExperienceController.dispose();
   }
@@ -82,7 +76,8 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
   @override
   void initState() {
     super.initState();
-
+    selectedCityName=userModel.user?.governorate;
+    selectedAreaName=userModel.user?.cityCenter;
     nameController.text = userModel.user?.name ?? '';
     userNameController.text = userModel.user?.username ?? '';
     emailController.text = userModel.user?.email ?? '';
@@ -90,8 +85,6 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
     whatsappController.text = userModel.user?.whatsappNumber ?? '';
     nationalIDController.text = userModel.user?.idCardNumber ?? '';
     addressController.text = userModel.user?.theAddress ?? '';
-    governorateController.text = userModel.user?.governorate ?? '';
-    centerController.text = userModel.user?.cityCenter ?? '';
     previousExperienceController.text =
         userModel.user?.previousExperience ?? '';
     JobController.text = userModel.user?.theJob ?? '';
@@ -657,7 +650,6 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                           .toList(),
                                       onChanged: (String? areaName) {
                                         selectedAreaName = areaName;
-
                                         signUpCubit.fetchAreaData();
                                       },
                                       isExpanded: true,

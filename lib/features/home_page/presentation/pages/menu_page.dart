@@ -46,9 +46,12 @@ class _MenuScreenState extends State<MenuScreen> {
       String? apiStartDateString = menuCubit.appSettingsModel?.data?.electionsStartDate;
       String? apiEndDateString = menuCubit.appSettingsModel?.data?.electionsEndDate;
 
-      print('***** DATE *****');
-      print(apiEndDateString);
-      print(apiEndDateString);
+
+      if (kDebugMode) {
+        print(apiEndDateString);
+        print('***** DATE *****');
+        print(apiEndDateString);
+      }
       if(apiStartDateString!=null && apiEndDateString!=null)
       {
         startTime= DateTime.parse(apiStartDateString);
@@ -392,15 +395,15 @@ class _MenuScreenState extends State<MenuScreen> {
                       if (!PreferencesHelper.getIsVisitor)
                         InkWell(
                           splashColor: Colors.transparent,
-                          onTap: () {
-                            PreferencesHelper.logOut();
-                            Navigator.pushReplacement(
+                          onTap: ()   {
+                              PreferencesHelper.logOut();
+                            Navigator.pushAndRemoveUntil(
                                 context,
                                 PageTransition(
-                                  type: PageTransitionType.fade,
-                                  duration: const Duration(milliseconds: 280),
-                                  child: LoginScreen(),
-                                ));
+                                    type: PageTransitionType.fade,
+                                    duration: const Duration(milliseconds: 100),
+                                    child: LoginScreen()),
+                                    (vale) => true);
                           },
                           child: Padding(
                             padding: EdgeInsets.only(top: 22.h,bottom: 22.h,right: 15.7.w),

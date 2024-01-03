@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:life_makers/core/utils/app_fonts.dart';
 import 'package:life_makers/core/utils/extensions.dart';
+import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-string.dart';
 import '../../../../core/widgets/custom_appbar.dart';
@@ -65,7 +66,7 @@ class _CampaignDetailsScreenState extends State<CampaignDetailsScreen> {
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: widget.campaignDetails!.tasks!.map((e) {
-                              return Directionality(
+                              return e.details?.isNotEmpty==false?Directionality(
                                 textDirection: TextDirection.rtl,
                                 child: ExpansionTile(
                                   initiallyExpanded: false,
@@ -100,7 +101,7 @@ class _CampaignDetailsScreenState extends State<CampaignDetailsScreen> {
                                   expandedCrossAxisAlignment:
                                       CrossAxisAlignment.center,
                                 ),
-                              );
+                              ):SizedBox.shrink();
                             }).toList()),
                       ],
                     ),
@@ -108,7 +109,7 @@ class _CampaignDetailsScreenState extends State<CampaignDetailsScreen> {
                 ],
               ),
             ),
-            bottomNavigationBar: Padding(
+            bottomNavigationBar: PreferencesHelper.getIsVisitor?SizedBox.shrink():Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: widget.campaignDetails?.userJoined == 'false'
                     ? NewsButton2(
