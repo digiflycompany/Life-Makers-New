@@ -59,8 +59,7 @@ class _TrainingCardState extends State<TrainingCard> {
         if(state is VolunteerProgramLoading)  {
           return Align(
             alignment: AlignmentDirectional.center,
-            child: CircularProgressIndicator(
-              color: AppColors.orangeBorderColor,
+            child: CircularProgressIndicator.adaptive(
             ),
           );
         }

@@ -61,8 +61,7 @@ class _JoinedPreviousCampaignsState extends State<JoinedPreviousCampaigns> {
             if(state is JoinedCampaignsLoading)  {
               return Align(
                 alignment: AlignmentDirectional.center,
-                child: CircularProgressIndicator(
-                  color: AppColors.orangeBorderColor,
+                child: CircularProgressIndicator.adaptive(
                 ),
               );
             } else if(state is JoinedCampaignsSuccess && volunteerCubit.joinedCampaignsModel?.pastCampaigns?.length !=0 ){
