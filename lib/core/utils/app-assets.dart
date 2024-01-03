@@ -24,6 +24,7 @@ class AppAssets {
   static const String notificationWhiteIcon =
       '$svgPath/notificationWhiteSvg.svg';
   static const String profileIcon = "$svgPath/profileIcon.svg";
+  static const String achievementsIcon = "$svgPath/achievementIcon.svg";
   static const String notificationIcon = "$svgPath/notificationIcon2.svg";
   static const String menuIcon = "$svgPath/menuIcon.svg";
   static const String crown = "$svgPath/crown.svg";
