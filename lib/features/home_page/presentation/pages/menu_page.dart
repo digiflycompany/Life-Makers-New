@@ -120,7 +120,7 @@ class _MenuScreenState extends State<MenuScreen> {
         return Scaffold(
             backgroundColor: AppColors.drawerColor,
             body: SafeArea(
-              child: RefreshIndicator(
+              child: RefreshIndicator.adaptive(
                 onRefresh: _refresh,
                 color: Colors.white,
                 backgroundColor: AppColors.orangeBorderColor,
