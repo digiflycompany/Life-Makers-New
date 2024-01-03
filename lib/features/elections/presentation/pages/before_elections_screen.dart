@@ -131,7 +131,7 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
                       Align(
                           alignment: AlignmentDirectional.bottomEnd,
                           child: Padding(
-                            padding: EdgeInsets.only(left: 15.w),
+                            padding: EdgeInsets.only(left: 15.w,),
                             child: Image.asset(
                                 AppAssets.electionsCardBackgroundImage),
                           )),
@@ -139,7 +139,7 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
                         children: [
                           Padding(
                             padding: EdgeInsets.only(
-                                bottom: 7.h, right: 4, left: 4, top: 4),
+                                bottom: 7.h, right: 4, left: 4, top: 1),
                             child: ClipRRect(
                               borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(10.r),
@@ -155,28 +155,12 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
                           Align(
                             alignment: AlignmentDirectional.centerStart,
                             child: Padding(
-                              padding: EdgeInsets.only(
-                                  right: 10.w, bottom: 6.h, left: 10.w),
-                              child: Text(
-                                '${allCandidatesCubit.allCandidatesModel?.voters![index].details}',
-                                textDirection: TextDirection.rtl,
-                                style: TextStyle(
-                                  color: AppColors.black,
-                                  fontFamily: FontFamilies.alexandria,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 8.5,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Align(
-                            alignment: AlignmentDirectional.centerStart,
-                            child: Padding(
-                              padding: EdgeInsets.only(right: 10.w),
+                              padding: EdgeInsets.only(right: 10.w,bottom: 8.h,left: 25.w),
                               child: Text(
                                 '${allCandidatesCubit.allCandidatesModel?.voters![index].name}',
                                 textDirection: TextDirection.rtl,
                                 style: TextStyle(
+                                  height: 1.4,
                                   color: AppColors.black,
                                   fontFamily: FontFamilies.alexandria,
                                   fontWeight: FontWeight.w400,
@@ -184,7 +168,57 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
                                 ),
                               ),
                             ),
+                           ),
+                          Align(
+                            alignment: AlignmentDirectional.centerStart,
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                  right: 10.w, bottom: 2.h, left: 10.w),
+                              child: Text(
+                                'محافظة: ${allCandidatesCubit.allCandidatesModel?.voters![index].city}',
+                                textDirection: TextDirection.rtl,
+                                style: TextStyle(
+                                  color: AppColors.black,
+                                  fontFamily: FontFamilies.alexandria,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize:10,
+                                ),
+                              ),
+                            ),
                           ),
+                          // Align(
+                          //   alignment: AlignmentDirectional.centerStart,
+                          //   child: Padding(
+                          //     padding: EdgeInsets.only(
+                          //         right: 10.w, bottom: 6.h, left: 10.w),
+                          //     child: Text(
+                          //       '${allCandidatesCubit.allCandidatesModel?.voters![index].details}',
+                          //       textDirection: TextDirection.rtl,
+                          //       style: TextStyle(
+                          //         color: AppColors.black,
+                          //         fontFamily: FontFamilies.alexandria,
+                          //         fontWeight: FontWeight.w400,
+                          //         fontSize: 8.5,
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
+                          // Align(
+                          //   alignment: AlignmentDirectional.centerStart,
+                          //   child: Padding(
+                          //     padding: EdgeInsets.only(right: 10.w),
+                          //     child: Text(
+                          //       '${allCandidatesCubit.allCandidatesModel?.voters![index].name}',
+                          //       textDirection: TextDirection.rtl,
+                          //       style: TextStyle(
+                          //         color: AppColors.black,
+                          //         fontFamily: FontFamilies.alexandria,
+                          //         fontWeight: FontWeight.w400,
+                          //         fontSize: 12,
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ],

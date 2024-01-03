@@ -132,16 +132,16 @@ class _HomeCalenderDetailsScreenState extends State<HomeCalenderDetailsScreen> {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 22),
-              child: Text(
-                'حمله اغاثه فلسطين  حمله اغاثه فلسطين  حمله اغاثه فلسطين  حمله اغاثه فلسطين  حمله اغاثه فلسطين  حمله اغاثه فلسطين  حمله اغاثه فلسطين  حمله اغاثه فلسطين  حمله اغاثه فلسطين  ',
-                style: TextStyle(
-                    fontSize: 10,
-                    fontFamily: 'Alexandria',
-                    fontWeight: FontWeight.w400),
-              ),
-            )
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 22),
+            //   child: Text(
+            //     'حمله اغاثه فلسطين  حمله اغاثه فلسطين  حمله اغاثه فلسطين  حمله اغاثه فلسطين  حمله اغاثه فلسطين  حمله اغاثه فلسطين  حمله اغاثه فلسطين  حمله اغاثه فلسطين  حمله اغاثه فلسطين  ',
+            //     style: TextStyle(
+            //         fontSize: 10,
+            //         fontFamily: 'Alexandria',
+            //         fontWeight: FontWeight.w400),
+            //   ),
+            // )
           ],
         ),
       ),

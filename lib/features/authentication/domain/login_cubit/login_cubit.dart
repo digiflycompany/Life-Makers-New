@@ -1,5 +1,5 @@
+
 import 'package:dio/dio.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
@@ -31,13 +31,15 @@ class LoginCubit extends Cubit<LoginState> {
     }
     emit(LoginLoading());
     try {
-      String? deviceToken = await FirebaseMessaging.instance.getToken();
+      // if(Platform.isAndroid) {
+      //   deviceToken = await FirebaseMessaging.instance.getToken();
+      // }
       Response? response = await dio.post(
         EndPoints.loginApi,
         data: {
           'email': username,
           'password': password,
-          'device_token': deviceToken,
+          // 'device_token': 'test',
         },
       );
 

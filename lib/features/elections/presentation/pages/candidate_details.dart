@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:life_makers/core/utils/app-color.dart';
 import 'package:life_makers/core/utils/app_fonts.dart';
 import 'package:life_makers/core/utils/extensions.dart';
@@ -259,7 +260,7 @@ class _CandidateDetailsState extends State<CandidateDetails> {
                           ),
                         ),
                         Padding(
-                          padding:  EdgeInsets.only(bottom:40.0),
+                          padding:  EdgeInsets.only(bottom:20.0),
                           child: Center(
                             child: Text(
                               '${allCandidatesCubit.allCandidatesModel?.voters?[widget.index].details}',
@@ -270,6 +271,78 @@ class _CandidateDetailsState extends State<CandidateDetails> {
                                 fontSize: 12,
                                 fontFamily: FontFamilies.alexandria,
                                 height: 2.5,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding:  EdgeInsets.only(top: 3.h, bottom: 20.h),
+                          child: Container(
+                            width: 52.w,
+                            height: 25.h,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: AppColors.orangeBackgroundColor,
+                            ),
+                            child: Center(
+                              child: Text(
+                                'انجازات',
+                                style: TextStyle(
+                                    fontFamily: FontFamilies.alexandria,
+                                    fontSize: 11.2,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColors.orangeBorderColor
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding:  EdgeInsets.only(bottom:45.h),
+                          child: Center(
+                            child: Container(
+                              width: double.infinity,
+                              height: 250.h,
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                border: Border.all(color: AppColors.greyTabColor),
+                                borderRadius: BorderRadius.circular(5.r),
+                              ),
+                              child: ListView.builder(
+                                physics: const BouncingScrollPhysics(),
+                                itemCount: allCandidatesCubit.allCandidatesModel?.voters?[widget.index].achievements?.length ?? 0,
+                                itemBuilder: (BuildContext context, int index) {
+                                  if (allCandidatesCubit.allCandidatesModel?.voters?[widget.index].achievements != null &&
+                                      index < allCandidatesCubit.allCandidatesModel!.voters![widget.index].achievements!.length) {
+                                    final achievement = allCandidatesCubit.allCandidatesModel!.voters![widget.index].achievements![index];
+                                    return Padding(
+                                      padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
+                                      child: Row(
+                                        textDirection: TextDirection.rtl,
+                                        children: [
+                                          Padding(
+                                            padding:  EdgeInsets.only(left: 9.w),
+                                            child: SvgPicture.asset(AppAssets.achievementsIcon),
+                                          ),
+                                          Flexible(
+                                            child: Text(
+                                              '$achievement', // Use the specific achievement at the current index
+                                              style: TextStyle(
+                                                height: 1.6,
+                                                fontFamily: FontFamilies.alexandria,
+                                                fontSize: 10.2,
+                                                fontWeight: FontWeight.w600,
+                                                color: AppColors.orangeBorderColor,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  } else {
+                                    return Container();
+                                  }
+                                },
                               ),
                             ),
                           ),

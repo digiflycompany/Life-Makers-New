@@ -12,10 +12,10 @@ class EditAccountRepository {
     required String phone,
     required String address,
     required String job,
-    required String governorate,
+    required String ?governorate,
     required XFile? file,
     required String whatsAppNumber,
-    required String cityCenter,
+    required String? cityCenter,
     required String previousExperience,
     required String education,
   }) async {

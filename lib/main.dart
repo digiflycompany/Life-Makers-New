@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_makers/features/authentication/domain/card_cubit/cards_cubit.dart';
@@ -29,23 +28,16 @@ import 'features/home_page/cubit/home_calender_cubit.dart';
 import 'features/non_seasonal_campaigns/cubit/non_seasonal_campaigns_cubit.dart';
 import 'features/seasonal_campaigns/cubit/seasonal_campaigns_cubit.dart';
 
-void main() {
-  runZonedGuarded(() async {
+Future<void> main() async {
     WidgetsFlutterBinding.ensureInitialized();
     DioHelper.init();
     PreferencesHelper.init();
 
-    await Firebase.initializeApp();
-    await SentryFlutter.init(
-      (options) {
-        options.dsn =
-            'https://example@sentry.io/650cb00a9b4a6cb9629977442fd2eeba8fec6bdf3228e4ac81ec9e29e367c0d9';
-      },
-      appRunner: () => runApp(MyApp()),
-    );
-  }, (exception, stackTrace) async {
-    await Sentry.captureException(exception, stackTrace: stackTrace);
-  });
+  //   if(Platform.isAndroid) {
+  //   await Firebase.initializeApp();
+  // }
+  runApp(MyApp());
+
 }
 
 class MyApp extends StatelessWidget {

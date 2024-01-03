@@ -11,6 +11,7 @@ import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-string.dart';
 import '../../../../core/utils/app_fonts.dart';
 import '../../../../core/widgets/title_text.dart';
+import '../../../../services/shared_preferences/preferences_helper.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({Key? key}) : super(key: key);
@@ -54,7 +55,7 @@ class _NotificationPageState extends State<NotificationPage> {
                 SizedBox(height: 17.h),
                 header,
                 SizedBox(height: 20.h),
-                if (state is NotificationsLoading)
+                if (state is NotificationsLoading && !PreferencesHelper.getIsVisitor)
                    Expanded(child: Center(child: CircularProgressIndicator(color: AppColors.orangeBorderColor))),
                 if (state is NotificationSuccessfully)
                    Expanded(

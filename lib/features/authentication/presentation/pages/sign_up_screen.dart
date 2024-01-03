@@ -1,3 +1,4 @@
+
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,7 +20,6 @@ import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app-string.dart';
 import '../../../../core/utils/app_fonts.dart';
-import '../../../../services/firebase/notifications/firebase_notification.dart';
 import '../../../home_page/presentation/pages/drawer_page.dart';
 import '../../data/models/area_model.dart';
 import '../../data/models/city_model.dart';
@@ -77,8 +77,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.initState();
     signUpCubit = context.read<SignUpCubit>();
     signUpCubit.fetchCityData();
-    FirebaseCustomNotification.setUpFirebase();
-  }
+    // if(Platform.isAndroid)
+    //   FirebaseCustomNotification.setUpFirebase();
+   }
 
   @override
   Widget build(BuildContext context) {
