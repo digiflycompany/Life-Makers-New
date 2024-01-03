@@ -49,7 +49,7 @@ class NotificationWidget extends StatelessWidget {
     textDirection: TextDirection.rtl,
   );
   get timeText => Padding(
-    padding:  EdgeInsets.only(left: 5.w),
+    padding:  EdgeInsets.only(left: 10.w),
     child:  SizedBox(
       width: 70,
       child: Text(time!,
@@ -60,6 +60,7 @@ class NotificationWidget extends StatelessWidget {
           fontSize: 8,
         ),
         textDirection: TextDirection.rtl,
+        textAlign: TextAlign.center,
       ),
     ),
   );

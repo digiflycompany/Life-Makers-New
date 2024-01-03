@@ -23,14 +23,16 @@ class DrawerText extends StatelessWidget {
       ),
     );
   }
-  get drawerText =>  Text(
+  get drawerText =>  Flexible(child:Text(
     text,
     style:  TextStyle(
         color: Colors.white,
         fontFamily: FontFamilies.alexandria,
         fontSize: font,
-        fontWeight: FontWeight.w500
+        fontWeight: FontWeight.w500,
+
     ),
-  );
+    textDirection: TextDirection.rtl,
+  ));
   get drawerIcon => SvgPicture.asset(img);
 }

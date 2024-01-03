@@ -64,7 +64,6 @@ class _MainPageState extends State<MainPage> {
             SizedBox(height: 8.h),
             Container(
                 width: 376.w,
-                height: 231.h,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.r),
                   gradient: const LinearGradient(
@@ -82,11 +81,11 @@ class _MainPageState extends State<MainPage> {
                       children: [
                         details,
                         SizedBox(
-                          height: 16.h,
+                          height: 16.h
                         ),
                         activitiesAndMore,
                         SizedBox(
-                          height: 9.h,
+                          height: 9.h
                         ),
                         if(state is CardLoading)...[
                           Container(
@@ -1176,10 +1175,13 @@ class _MainPageState extends State<MainPage> {
                     '${calender?.date}',
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: 10,
+                        fontSize: 8,
+
                         fontWeight: FontWeight.w400,
                         fontFamily: FontFamilies.alexandria),
+                    textAlign: TextAlign.center,
                   ),
+
                 ),
               ),
             ],

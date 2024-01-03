@@ -27,10 +27,10 @@ class EditAccountCubit extends Cubit<CubitBaseState> {
     required String gender,
     required String address,
     required String job,
-    required String governorate,
+    required String ?governorate,
     required String whatsAppNumber,
     required BuildContext context,
-    required String cityCenter,
+    required String ?cityCenter,
     required String previousExperience,
     required String education,
   }) async {
