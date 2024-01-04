@@ -16,9 +16,7 @@ import 'package:life_makers/features/volunteer_opportunity/cubit/volunteer_cubit
 import 'package:life_makers/features/volunteer_opportunity/cubit/volunteer_thanks_cubit.dart';
 import 'package:life_makers/services/app.service.dart';
 import 'package:life_makers/services/dio_helper/dio_helper.dart';
-import 'package:life_makers/services/screenshot_detector/screenshot_detector.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
 import 'core/utils/app-string.dart';
 import 'features/campaign_details/cubit/all_campaigns_cubit.dart';
 import 'features/campaign_details/cubit/join_campaign_cubit.dart';
@@ -116,8 +114,7 @@ class MyApp extends StatelessWidget {
           title: AppStrings.lifeMaker,
           debugShowCheckedModeBanner: false,
           navigatorKey: AppService().navigatorKey,
-          home:
-          ScreenshotDetector(child: SplashScreen()),
+          home:SplashScreen(),
         ),
       ),
     );

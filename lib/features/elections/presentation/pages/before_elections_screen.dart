@@ -101,7 +101,7 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
             shrinkWrap: true,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-            mainAxisExtent: 220.h,
+            mainAxisExtent: 210.h,
               crossAxisSpacing: 18.w,
               mainAxisSpacing: 18.w,
             ),
@@ -216,7 +216,7 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
               shrinkWrap: true,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                mainAxisExtent: 220.h,
+                mainAxisExtent: 210.h,
                 crossAxisSpacing: 9,
                 mainAxisSpacing: 10,
               ),
