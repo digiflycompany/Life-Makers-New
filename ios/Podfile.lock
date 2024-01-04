@@ -41,6 +41,9 @@ PODS:
   - fluttertoast (0.0.2):
     - Flutter
     - Toast
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
   - image_picker_ios (0.0.1):
     - Flutter
   - package_info_plus (0.4.5):
@@ -65,6 +68,9 @@ PODS:
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
+  - sqflite (0.0.3):
+    - Flutter
+    - FMDB (>= 2.7.5)
   - SwiftyGif (5.4.4)
   - Toast (4.0.0)
 
@@ -81,11 +87,13 @@ DEPENDENCIES:
   - sentry_flutter (from `.symlinks/plugins/sentry_flutter/ios`)
   - share_plus (from `.symlinks/plugins/share_plus/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
+  - sqflite (from `.symlinks/plugins/sqflite/ios`)
 
 SPEC REPOS:
   trunk:
     - DKImagePickerController
     - DKPhotoGallery
+    - FMDB
     - SDWebImage
     - Sentry
     - SentryPrivate
@@ -117,6 +125,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/share_plus/ios"
   shared_preferences_foundation:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
+  sqflite:
+    :path: ".symlinks/plugins/sqflite/ios"
 
 SPEC CHECKSUMS:
   DKImagePickerController: b512c28220a2b8ac7419f21c491fc8534b7601ac
@@ -126,6 +136,7 @@ SPEC CHECKSUMS:
   flutter_local_notifications: 0c0b1ae97e741e1521e4c1629a459d04b9aec743
   flutter_native_splash: 52501b97d1c0a5f898d687f1646226c1f93c56ef
   fluttertoast: 31b00dabfa7fb7bacd9e7dbee580d7a2ff4bf265
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   image_picker_ios: 4a8aadfbb6dc30ad5141a2ce3832af9214a705b5
   package_info_plus: 115f4ad11e0698c8c1c5d8a689390df880f47e85
   path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
@@ -136,6 +147,7 @@ SPEC CHECKSUMS:
   SentryPrivate: 024c6fed507ac39ae98e6d087034160f942920d5
   share_plus: c3fef564749587fc939ef86ffb283ceac0baf9f5
   shared_preferences_foundation: 5b919d13b803cadd15ed2dc053125c68730e5126
+  sqflite: 31f7eba61e3074736dff8807a9b41581e4f7f15a
   SwiftyGif: 93a1cc87bf3a51916001cf8f3d63835fb64c819f
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
 

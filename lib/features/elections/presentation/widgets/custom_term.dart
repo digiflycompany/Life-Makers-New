@@ -11,24 +11,28 @@ class CustomTerm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
       textDirection: TextDirection.rtl,
       children: [
         CircleAvatar(
           backgroundColor: AppColors.orangeBorderColor,
-          radius: 8.5.r,
+          radius: 8.5.r
         ),
         SizedBox(width: 12.w,),
         Padding(
           padding:  EdgeInsets.only(top: height),
-          child: Text(
-            text,
-            textDirection: TextDirection.rtl,
-            style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.w500,
-                fontSize: 10,
-                fontFamily: FontFamilies.alexandria,
-                height: 1.9.h
+          child: SizedBox(
+            width: 280.w,
+            child: Text(
+              text,
+              textDirection: TextDirection.rtl,
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 10,
+                  fontFamily: FontFamilies.alexandria,
+              ),
+              textAlign: TextAlign.start,
             ),
           ),
         )

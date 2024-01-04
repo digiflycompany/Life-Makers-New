@@ -32,7 +32,9 @@ class VolunteerCubit extends Cubit<VolunteerState> {
         volunteerPracticalTrainingModel =
             VolunteerPracticalTrainingModel.fromJson(response?.data);
         emit(VolunteerProgramSuccess());
-        print('Sucessssssssssssssssssssssssssssssssss');
+        if (kDebugMode) {
+          print('Sucessssssssssssssssssssssssssssssssss');
+        }
       } else {
         emit(VolunteerProgramFailure('Something Went Wrong'));
       }
@@ -161,7 +163,9 @@ class VolunteerCubit extends Cubit<VolunteerState> {
           }),
           EndPoints.userJoinedCampaigns);
       if (response.statusCode == 200) {
-        print(response.data);
+        if (kDebugMode) {
+          print(response.data);
+        }
         joinedCampaignsModel= JoinedCampaignsModel.fromJson(response.data);
         emit(JoinedCampaignsSuccess());
       } else {
