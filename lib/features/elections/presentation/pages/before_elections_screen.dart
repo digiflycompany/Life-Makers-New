@@ -101,7 +101,7 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
             shrinkWrap: true,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              // childAspectRatio: (1 / .94),
+            mainAxisExtent: 210.h,
               crossAxisSpacing: 18.w,
               mainAxisSpacing: 18.w,
             ),
@@ -160,11 +160,10 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
                                 '${allCandidatesCubit.allCandidatesModel?.voters![index].name}',
                                 textDirection: TextDirection.rtl,
                                 style: TextStyle(
-                                  height: 1.4,
                                   color: AppColors.black,
                                   fontFamily: FontFamilies.alexandria,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 10,
                                 ),
                               ),
                             ),
@@ -173,7 +172,7 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
                             alignment: AlignmentDirectional.centerStart,
                             child: Padding(
                               padding: EdgeInsets.only(
-                                  right: 10.w, bottom: 2.h, left: 10.w),
+                                  right: 10.w, bottom: 2.h, left: 5.w),
                               child: Text(
                                 'محافظة: ${allCandidatesCubit.allCandidatesModel?.voters![index].city}',
                                 textDirection: TextDirection.rtl,
@@ -181,44 +180,12 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
                                   color: AppColors.black,
                                   fontFamily: FontFamilies.alexandria,
                                   fontWeight: FontWeight.w400,
-                                  fontSize:10,
+                                  fontSize:9,
                                 ),
                               ),
                             ),
                           ),
-                          // Align(
-                          //   alignment: AlignmentDirectional.centerStart,
-                          //   child: Padding(
-                          //     padding: EdgeInsets.only(
-                          //         right: 10.w, bottom: 6.h, left: 10.w),
-                          //     child: Text(
-                          //       '${allCandidatesCubit.allCandidatesModel?.voters![index].details}',
-                          //       textDirection: TextDirection.rtl,
-                          //       style: TextStyle(
-                          //         color: AppColors.black,
-                          //         fontFamily: FontFamilies.alexandria,
-                          //         fontWeight: FontWeight.w400,
-                          //         fontSize: 8.5,
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
-                          // Align(
-                          //   alignment: AlignmentDirectional.centerStart,
-                          //   child: Padding(
-                          //     padding: EdgeInsets.only(right: 10.w),
-                          //     child: Text(
-                          //       '${allCandidatesCubit.allCandidatesModel?.voters![index].name}',
-                          //       textDirection: TextDirection.rtl,
-                          //       style: TextStyle(
-                          //         color: AppColors.black,
-                          //         fontFamily: FontFamilies.alexandria,
-                          //         fontWeight: FontWeight.w400,
-                          //         fontSize: 12,
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
+
                         ],
                       ),
                     ],
@@ -249,7 +216,7 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
               shrinkWrap: true,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: (1 / .94),
+                mainAxisExtent: 210.h,
                 crossAxisSpacing: 9,
                 mainAxisSpacing: 10,
               ),
@@ -322,8 +289,8 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
                                 style: TextStyle(
                                   color: AppColors.darkBlueColor,
                                   fontFamily: FontFamilies.alexandria,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 8.5,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 10,
                                 ),
                               ),
                             ),
@@ -338,7 +305,7 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
                                     color: AppColors.darkBlueColor,
                                     fontFamily: FontFamilies.alexandria,
                                     fontWeight: FontWeight.w400,
-                                    fontSize: 12,
+                                    fontSize: 9,
                                   ),
                                 ),
                               ),

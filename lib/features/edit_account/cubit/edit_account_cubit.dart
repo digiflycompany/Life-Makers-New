@@ -66,7 +66,7 @@ class EditAccountCubit extends Cubit<CubitBaseState> {
               type: PageTransitionType.fade,
               duration: const Duration(milliseconds: 100),
               child: DrawerPage()),
-          (vale) => true);
+          (vale) => false);
     } else {
       emit(CubitBaseState.error);
       Fluttertoast.showToast(msg: 'خطأ في تعديل الحساب');
