@@ -6,6 +6,7 @@ import 'package:life_makers/core/utils/app-string.dart';
 import 'package:life_makers/core/utils/app_fonts.dart';
 import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/features/elections/presentation/widgets/save_button.dart';
+import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
@@ -21,21 +22,39 @@ class _ElectionsThanksScreenState extends State<ElectionsThanksScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Screenshot(
         controller: screenshotController,
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              thanksImage,
-              thanksText,
-              SizedBox(height: 80.h),
-              SaveButton(
-                  onTap: () {
-                    takeScreenShot();
-                  },
-                  text: AppStrings.save)
-            ],
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          body: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                thanksImage,
+                SizedBox(height: 10),
+                Text(
+                  PreferencesHelper.getName,
+                  textDirection: TextDirection.rtl,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontFamily: FontFamilies.alexandria,
+                    fontWeight: FontWeight.w400,
+                    height: 1.9.h,
+                  ),
+                ),
+                SizedBox(height: 10),
+
+                thanksText,
+                SizedBox(height: 80.h),
+                SaveButton(
+                    onTap: () {
+                      takeScreenShot();
+                    },
+                    text: AppStrings.save)
+              ],
+            ),
           ),
         ),
       ),

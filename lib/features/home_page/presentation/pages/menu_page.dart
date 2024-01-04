@@ -372,7 +372,8 @@ class _MenuScreenState extends State<MenuScreen> {
                           InkWell(
                               splashColor: Colors.transparent,
                               onTap: () {
-                                if( DateTime.now().isAfter(startTime!) && DateTime.now().isBefore(endTime!)){
+                                if( DateTime.now().isAfter(startTime!) && DateTime.now().isBefore(endTime!))
+                                {
                                   Navigator.push(
                                       context,
                                       PageTransition(
@@ -380,6 +381,8 @@ class _MenuScreenState extends State<MenuScreen> {
                                           duration: const Duration(milliseconds: 280),
                                           child: const TermsPage()));
                                 } else{
+                                  //todo
+
                                   CustomSnackBars.showRegularToast(title: 'ستبدأ إنتخابات مجلس المتطوعين قريبًا');
                                 }
                               },

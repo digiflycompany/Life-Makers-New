@@ -154,7 +154,7 @@ class _ElectionsScreenState extends State<ElectionsScreen> {
             shrinkWrap: true,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              // childAspectRatio: (1 / .94),
+              mainAxisExtent: 220.h,
               crossAxisSpacing: 21.w,
               mainAxisSpacing: 21.w,
             ),
@@ -229,8 +229,8 @@ class _ElectionsScreenState extends State<ElectionsScreen> {
                                             ? AppColors.white
                                             : AppColors.black,
                                         fontFamily: FontFamilies.alexandria,
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 8.5,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 10,
                                       ),
                                     ),
                                   ),
@@ -248,7 +248,7 @@ class _ElectionsScreenState extends State<ElectionsScreen> {
                                             : AppColors.black,
                                         fontFamily: FontFamilies.alexandria,
                                         fontWeight: FontWeight.w400,
-                                        fontSize: 12,
+                                        fontSize: 9,
                                       ),
                                     ),
                                   ),
@@ -283,116 +283,12 @@ class _ElectionsScreenState extends State<ElectionsScreen> {
                 shrinkWrap: true,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: (1 / .94),
+                  mainAxisExtent: 220.h,
                   crossAxisSpacing: 9,
                   mainAxisSpacing: 10,
+
                 ),
-                // itemCount: selectedManagerId =
-                //     allCandidatesCubit.allCandidatesModel!.voters!.where((element) => element.candidate==1).length,
-                // itemBuilder: (context, index) {
-                //      return StatefulBuilder(builder: (context, setState)
-                //      {
-                //       return InkWell(
-                //         onTap: () {
-                //           selectedManagerId = allCandidatesCubit
-                //               .allCandidatesModel!.voters![index].id;
-                //         },
-                //         child: Container(
-                //           decoration: BoxDecoration(
-                //             borderRadius: BorderRadius.circular(10.r),
-                //             boxShadow: [
-                //               BoxShadow(
-                //                 color: selectedManagerId ==
-                //                         allCandidatesCubit
-                //                             .allCandidatesModel!.voters![index].id
-                //                     ? Colors.black26
-                //                     : Colors.white,
-                //                 spreadRadius: 1,
-                //                 blurRadius: 1,
-                //               )
-                //             ],
-                //             color: selectedManagerId ==
-                //                     allCandidatesCubit
-                //                         .allCandidatesModel!.voters![index].id
-                //                 ? AppColors.darkBlueColor
-                //                 : Colors.white,
-                //           ),
-                //           child: Stack(
-                //             children: [
-                //               Align(
-                //                   alignment: AlignmentDirectional.bottomEnd,
-                //                   child: Padding(
-                //                     padding: EdgeInsets.only(left: 15.w),
-                //                     child: Image.asset(
-                //                         AppAssets.electionsCardBackgroundImage),
-                //                   )),
-                //               Column(
-                //                 children: [
-                //                   Padding(
-                //                     padding: EdgeInsets.only(bottom: 7.h),
-                //                     child: ClipRRect(
-                //                       borderRadius: BorderRadius.only(
-                //                           topLeft: Radius.circular(10.r),
-                //                           topRight: Radius.circular(10.r)),
-                //                       child: Padding(
-                //                         padding: const EdgeInsets.all(8.0),
-                //                         child: Image.network(
-                //                           '${allCandidatesCubit.allCandidatesModel?.voters?[index].imageUrl}',
-                //                           height: 100.h,
-                //                           fit: BoxFit.cover,
-                //                           width: double.infinity,
-                //                         ),
-                //                       ),
-                //                     ),
-                //                   ),
-                //                   Padding(
-                //                     padding: EdgeInsets.only(right: 6, left: 6),
-                //                     child: Text(
-                //                       '${allCandidatesCubit.allCandidatesModel?.voters?[index].details}',
-                //                       textDirection: TextDirection.rtl,
-                //                       style: TextStyle(
-                //                         color: selectedManagerId ==
-                //                                 allCandidatesCubit
-                //                                     .allCandidatesModel!
-                //                                     .voters![index]
-                //                                     .id
-                //                             ? AppColors.white
-                //                             : AppColors.darkBlueColor,
-                //                         fontFamily: FontFamilies.alexandria,
-                //                         fontWeight: FontWeight.w400,
-                //                         fontSize: 8.5,
-                //                       ),
-                //                     ),
-                //                   ),
-                //                   Align(
-                //                     alignment: AlignmentDirectional.centerStart,
-                //                     child: Padding(
-                //                       padding: EdgeInsets.only(right: 10.w),
-                //                       child: Text(
-                //                         '${allCandidatesCubit.allCandidatesModel?.voters?[index].name}',
-                //                         textDirection: TextDirection.rtl,
-                //                         style: TextStyle(
-                //                           color: selectedManagerId ==
-                //                                   allCandidatesCubit
-                //                                       .allCandidatesModel!
-                //                                       .voters![index]
-                //                                       .id
-                //                               ? AppColors.white
-                //                               : AppColors.black,
-                //                           fontFamily: FontFamilies.alexandria,
-                //                           fontWeight: FontWeight.w400,
-                //                           fontSize: 12,
-                //                         ),
-                //                       ),
-                //                     ),
-                //                   ),
-                //                 ],
-                //               ),
-                //             ],
-                //           ),
-                //         ),
-                //       );
-                //     });
+
 
                 children: allCandidatesCubit.allCandidatesModel!.voters!
                     .where((element) => element.candidate == 1)
@@ -459,8 +355,8 @@ class _ElectionsScreenState extends State<ElectionsScreen> {
                                               ? AppColors.white
                                               : AppColors.darkBlueColor,
                                           fontFamily: FontFamilies.alexandria,
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 8.5,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 10,
                                         ),
                                       ),
                                     ),
@@ -478,7 +374,7 @@ class _ElectionsScreenState extends State<ElectionsScreen> {
                                                 : AppColors.darkBlueColor,
                                             fontFamily: FontFamilies.alexandria,
                                             fontWeight: FontWeight.w400,
-                                            fontSize: 12,
+                                            fontSize: 9,
                                           ),
                                         ),
                                       ),

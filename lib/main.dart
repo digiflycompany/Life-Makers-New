@@ -16,6 +16,7 @@ import 'package:life_makers/features/volunteer_opportunity/cubit/volunteer_cubit
 import 'package:life_makers/features/volunteer_opportunity/cubit/volunteer_thanks_cubit.dart';
 import 'package:life_makers/services/app.service.dart';
 import 'package:life_makers/services/dio_helper/dio_helper.dart';
+import 'package:life_makers/services/screenshot_detector/screenshot_detector.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'core/utils/app-string.dart';
@@ -111,14 +112,12 @@ class MyApp extends StatelessWidget {
           FocusManager.instance.primaryFocus?.unfocus();
         },
         child: MaterialApp(
-          navigatorObservers: [
-            SentryNavigatorObserver(),
-          ],
+
           title: AppStrings.lifeMaker,
           debugShowCheckedModeBanner: false,
           navigatorKey: AppService().navigatorKey,
-          home: SplashScreen(),
-          // home: EditAccountScreen(),
+          home:
+          ScreenshotDetector(child: SplashScreen()),
         ),
       ),
     );
