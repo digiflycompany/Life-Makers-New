@@ -61,8 +61,7 @@ class _JoinedProgramCardState extends State<JoinedProgramCard> {
             if(state is JoinedProgramLoading)  {
               return Align(
                 alignment: AlignmentDirectional.center,
-                child: CircularProgressIndicator(
-                  color: AppColors.orangeBorderColor,
+                child: CircularProgressIndicator.adaptive(
                 ),
               );
             }

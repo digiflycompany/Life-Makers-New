@@ -59,8 +59,7 @@ class _RemoteTasksCardState extends State<RemoteTasksCard> {
             if(state is RemoteTasksLoading)  {
               return Align(
                 alignment: AlignmentDirectional.center,
-                child: CircularProgressIndicator(
-                  color: AppColors.orangeBorderColor,
+                child: CircularProgressIndicator.adaptive(
                 ),
               );
             }

@@ -56,10 +56,10 @@ class _NotificationPageState extends State<NotificationPage> {
                 header,
                 SizedBox(height: 20.h),
                 if (state is NotificationsLoading && !PreferencesHelper.getIsVisitor)
-                   Expanded(child: Center(child: CircularProgressIndicator(color: AppColors.orangeBorderColor))),
+                   Expanded(child: Center(child: CircularProgressIndicator.adaptive())),
                 if (state is NotificationSuccessfully)
                    Expanded(
-                    child: RefreshIndicator(
+                    child: RefreshIndicator.adaptive(
                       onRefresh: _refresh,
                       color: Colors.white,
                       backgroundColor: AppColors.orangeBorderColor,

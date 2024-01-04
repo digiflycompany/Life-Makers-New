@@ -61,8 +61,7 @@ class _OneDayActivityCardState extends State<OneDayActivityCard> {
             if(state is OneDayActivityLoading)  {
               return Align(
                 alignment: AlignmentDirectional.center,
-                child: CircularProgressIndicator(
-                  color: AppColors.orangeBorderColor,
+                child: CircularProgressIndicator.adaptive(
                 ),
               );
             }

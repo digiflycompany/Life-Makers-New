@@ -295,8 +295,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         height: 50,
                         child: Transform.scale(
                           scale: 0.6,
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
+                          child: CircularProgressIndicator.adaptive(
                           ),
                         ),
                       ),

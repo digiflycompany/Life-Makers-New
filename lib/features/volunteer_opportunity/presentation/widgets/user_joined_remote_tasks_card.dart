@@ -61,8 +61,7 @@ class _JoinedRemoteTasksState extends State<JoinedRemoteTasks> {
             if(state is JoinedProgramLoading)  {
               return Align(
                 alignment: AlignmentDirectional.center,
-                child: CircularProgressIndicator(
-                  color: AppColors.orangeBorderColor,
+                child: CircularProgressIndicator.adaptive(
                 ),
               );
             } else if(state is JoinedProgramSuccess && volunteerCubit.userJoinedVolunteerOpportunities?.tasksVolunteerOpportunities?.length!=0){
