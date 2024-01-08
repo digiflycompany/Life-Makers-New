@@ -46,10 +46,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
-    // if(Platform.isAndroid)
-    //
-    //   FirebaseCustomNotification.setUpFirebase();
-
     loginCubit = context.read<LoginCubit>();
   }
 
@@ -60,10 +56,6 @@ class _LoginScreenState extends State<LoginScreen> {
         if (state is LoginSuccess) {
           LoginSuccessful(context, usernameController.text);
         } else if (state is LoginFailure) {
-          // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          //   content: Text(state.error),
-          //   duration: Duration(seconds: 2)
-          // ));
           CustomSnackBars.showErrorToast(title: state.error);
         }
       },
@@ -75,77 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
               key: _formKey,
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
-                child: state is LoginLoading
-                    ? Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SizedBox(height: 15.h),
-                          loginImage,
-                          SizedBox(height: 16.h),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 23.w),
-                            child: Column(
-                              children: [
-                                welcomeBackText,
-                                SizedBox(height: 16.h),
-                                loggingInText,
-                                SizedBox(height: 16.h),
-                                emailTextField,
-                                SizedBox(height: 23.h),
-                                PasswordTextField(
-                                  controller: passwordController,
-                                  hintText: AppStrings.password,
-                                  obscureText: loginCubit.isPasswordVisible,
-                                  prefixIcon: GestureDetector(
-                                    onTap: () {
-                                      loginCubit.togglePasswordVisibility();
-                                    },
-                                    child: loginCubit.isPasswordVisible
-                                        ? Padding(
-                                            padding: EdgeInsets.only(top: 3.h),
-                                            child: Icon(
-                                              Icons.remove_red_eye_outlined,
-                                              size: 24.r,
-                                              color: AppColors.prefixIconColor,
-                                            ),
-                                          )
-                                        : Padding(
-                                            padding: EdgeInsets.only(top: 3.h),
-                                            child: Icon(
-                                              Icons.remove_red_eye,
-                                              size: 24.r,
-                                              color: AppColors.prefixIconColor,
-                                            ),
-                                          ),
-                                  ),
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'من فضلك أدخل الرقم السري الخاص بك';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                SizedBox(
-                                  height: 9.h,
-                                ),
-                                forgetPasswordText,
-                                SizedBox(
-                                  height: 73.h,
-                                ),
-                                LoginCircular(),
-                                SizedBox(
-                                  height: 25.h,
-                                ),
-                                signUpText,
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5.h,
-                          ),
-                        ],
-                      )
-                    : Column(
+                child:Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           SizedBox(
@@ -248,8 +170,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 SizedBox(
                                   height: 54.h,
                                 ),
-
-                                AuthButton(
+                                state is LoginLoading?LoginCircular():AuthButton(
                                   text: AppStrings.enter,
                                   onTap: () {
                                     if (_formKey.currentState!.validate()) {
@@ -266,23 +187,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 SizedBox(
                                   height: 10.h,
                                 ),
-                                InkWell(
-                                  onTap: (){
-                                    PreferencesHelper.saveIsVisitor(isVisitor: true);
-                                    Navigator.pushAndRemoveUntil(
-                                        context,
-                                        PageTransition(
-                                            type: PageTransitionType.fade,
-                                            duration: const Duration(milliseconds: 100),
-                                            child:  DrawerPage()),
-                                            (value)=>true);
-                                  },
-                                  child: Text('قم بتسجيل الدخول كزائر', style: TextStyle(
-                                      color: AppColors.black,
-                                      fontFamily: FontFamilies.alexandria,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 11),),
-                                ),
+                                visitorButton,
                               ],
                             ),
                           ),
@@ -317,13 +222,11 @@ class _LoginScreenState extends State<LoginScreen> {
         padding: const EdgeInsets.only(top: 32.0),
         child: SvgPicture.asset(AppAssets.logoFinalSvg),
       ));
-
   get welcomeBackText => Align(
       alignment: AlignmentDirectional.centerEnd,
       child: SmallText(
         text: AppStrings.welcomeBack,
       ));
-
   get loggingInText => const Align(
         alignment: AlignmentDirectional.centerEnd,
         child: Text(
@@ -334,7 +237,6 @@ class _LoginScreenState extends State<LoginScreen> {
               fontSize: 15),
         ),
       );
-
   get emailTextField => RegularTextField(
         max: 60,
         controller: usernameController,
@@ -348,7 +250,6 @@ class _LoginScreenState extends State<LoginScreen> {
           return null;
         },
       );
-
   get forgetPasswordText => Padding(
         padding: EdgeInsets.only(right: 6.w),
         child: const Align(
@@ -363,7 +264,6 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       );
-
   get donNotHaveAccountText => const Text(
         AppStrings.doNotHaveAccount,
         style: TextStyle(
@@ -372,7 +272,6 @@ class _LoginScreenState extends State<LoginScreen> {
             fontWeight: FontWeight.w500,
             fontSize: 11),
       );
-
   get signUpText => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         textDirection: TextDirection.rtl,
@@ -384,4 +283,21 @@ class _LoginScreenState extends State<LoginScreen> {
           CreateAccountText(),
         ],
       );
+  get visitorButton => InkWell(
+    onTap: (){
+      PreferencesHelper.saveIsVisitor(isVisitor: true);
+      Navigator.pushAndRemoveUntil(
+          context,
+          PageTransition(
+              type: PageTransitionType.fade,
+              duration: const Duration(milliseconds: 100),
+              child:  DrawerPage()),
+              (value)=>true);
+    },
+    child: Text('قم بتسجيل الدخول كزائر', style: TextStyle(
+        color: AppColors.black,
+        fontFamily: FontFamilies.alexandria,
+        fontWeight: FontWeight.w500,
+        fontSize: 11),),
+  );
 }
