@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_makers/core/utils/extensions.dart';
@@ -288,8 +288,6 @@ class _ElectionsScreenState extends State<ElectionsScreen> {
                   mainAxisSpacing: 10,
 
                 ),
-
-
                 children: allCandidatesCubit.allCandidatesModel!.voters!
                     .where((element) => element.candidate == 1)
                     .map((e) => InkWell(
