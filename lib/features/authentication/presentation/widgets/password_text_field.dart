@@ -1,73 +1,47 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:life_makers/core/utils/extensions.dart';
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app_fonts.dart';
+//////////////////////TextField\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-class RegularTextField extends StatelessWidget {
-  final TextInputType? keyboardType;
-  final double? space = 8.w;
-  double? iconWidth = 18.w;
-  double? iconHeight = 18.h;
-  final String img;
+class PasswordTextField extends StatelessWidget {
   final controller;
   final String hintText;
   final bool obscureText;
-  final suffixIcon;
+  final  suffixicon;
+  final  prefixIcon;
   final validator;
-  int max = 60;
-  bool readOnly = false;
-  final Function()? onChanged;
-  RegularTextField(
-      {Key? key,
-      this.suffixIcon,
-      this.controller,
-      required this.hintText,
-      required this.obscureText,
-      this.validator,
-      required this.img,
-      this.iconWidth,
-      this.iconHeight,
-      this.onChanged,
-      this.keyboardType,
-      this.readOnly = false,
-      this.max = 20})
-      : super(key: key);
+  const PasswordTextField({Key? key, this.suffixicon, this.controller, required this.hintText, required this.obscureText, this.validator, this.prefixIcon,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return  SizedBox(
       child: TextFormField(
+        textDirection: TextDirection.rtl,
         textInputAction: TextInputAction.next,
-        maxLength: max,
-        readOnly: readOnly,
-        keyboardType: keyboardType,
         cursorColor: AppColors.smallTextColor,
         cursorWidth: 2.w,
-        textDirection: TextDirection.rtl,
         validator: validator,
         controller: controller,
         obscureText: obscureText,
         decoration: InputDecoration(
-          counterText: '',
           contentPadding: EdgeInsets.symmetric(vertical: 25.h, horizontal: 20.w),
           errorMaxLines: 1,
           errorBorder:OutlineInputBorder(
               borderSide: const BorderSide(color: AppColors.redColor),
               borderRadius: BorderRadius.circular(8.r)
           ),
-          focusedErrorBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: AppColors.redColor),
-              borderRadius: BorderRadius.circular(8.r)
-          ),
-          errorStyle: TextStyle(
-            color: AppColors.redColor,
-            fontFamily: FontFamilies.alexandria,// Customize the error text color
-            fontSize: 10, // Customize the error text font size
-          ),
+           focusedErrorBorder: OutlineInputBorder(
+               borderSide: const BorderSide(color: AppColors.redColor),
+               borderRadius: BorderRadius.circular(8.r)
+           ),
+            errorStyle: TextStyle(
+              color: AppColors.redColor,
+              fontFamily: FontFamilies.alexandria,// Customize the error text color
+              fontSize: 10, // Customize the error text font size
+            ),
           focusColor: AppColors.borderColor,
           alignLabelWithHint: true,
           hintTextDirection:TextDirection.rtl ,
@@ -95,10 +69,11 @@ class RegularTextField extends StatelessWidget {
               children: [
                 SvgPicture.asset(AppAssets.dividerIcon,width: 22.w,height: 24.h,),
                 SizedBox(width: 8.w,),
-                SvgPicture.asset(img,width: iconWidth,height: iconHeight,),
+                SvgPicture.asset(AppAssets.passwordIcon,width: 15.w,height: 15.h,),
               ],
             ),
           ),
+          prefixIcon:prefixIcon
         ),
       ),
     );

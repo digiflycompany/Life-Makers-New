@@ -11,7 +11,7 @@ import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app-string.dart';
 import '../../../../core/utils/app_fonts.dart';
 import '../../../../core/widgets/custom_snack_bar.dart';
-import '../widgets/password_textfield.dart';
+import '../widgets/password_text_field.dart';
 
 class ChangePasswordAfterLoginScreen extends StatefulWidget {
   ChangePasswordAfterLoginScreen({super.key});

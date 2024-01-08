@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -7,9 +6,9 @@ import 'package:life_makers/core/widgets/custom_snack_bar.dart';
 import 'package:life_makers/features/authentication/domain/login_cubit/login_states.dart';
 import 'package:life_makers/features/authentication/presentation/pages/enter_phone_screen.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/createAccountText.dart';
-import 'package:life_makers/features/authentication/presentation/widgets/email_textfield.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/email_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/login_circular.dart';
-import 'package:life_makers/features/authentication/presentation/widgets/password_textfield.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/password_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/small_text.dart';
 import 'package:life_makers/features/home_page/presentation/pages/drawer_page.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
@@ -36,19 +35,14 @@ class _LoginScreenState extends State<LoginScreen> {
     usernameController.dispose();
     passwordController.dispose();
   }
-
   final TextEditingController usernameController = TextEditingController();
-
   final TextEditingController passwordController = TextEditingController();
-
   final _formKey = GlobalKey<FormState>();
-
   @override
   void initState() {
     super.initState();
     loginCubit = context.read<LoginCubit>();
   }
-
   @override
   Widget build(BuildContext context) {
     return BlocListener<LoginCubit, LoginState>(
@@ -121,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                   validator: (value) {
                                     if (value!.isEmpty) {
-                                      return 'من فضلك أدخل الرقم السري الخاص بك';
+                                      return AppStrings.pleaseEnterYourPassword;
                                     }
                                     return null;
                                   },
@@ -245,7 +239,7 @@ class _LoginScreenState extends State<LoginScreen> {
         obscureText: false,
         validator: (value) {
           if (value!.isEmpty) {
-            return 'من فضلك أدخل اسم المستخدم الخاص بك';
+            return AppStrings.pleaseEnterYourEmail;
           }
           return null;
         },
@@ -294,7 +288,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child:  DrawerPage()),
               (value)=>true);
     },
-    child: Text('قم بتسجيل الدخول كزائر', style: TextStyle(
+    child: Text(AppStrings.enterAsVisitor, style: TextStyle(
         color: AppColors.black,
         fontFamily: FontFamilies.alexandria,
         fontWeight: FontWeight.w500,
