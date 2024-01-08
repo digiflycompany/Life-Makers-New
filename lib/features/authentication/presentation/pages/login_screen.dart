@@ -69,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           loginImage,
                           SizedBox(
-                            height: 16.h,
+                            height: 12.h,
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 23.w),
@@ -77,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               children: [
                                 welcomeBackText,
                                 SizedBox(
-                                  height: 16.h,
+                                  height: 22.h,
                                 ),
                                 loggingInText,
                                 SizedBox(
@@ -98,19 +98,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                     child: loginCubit.isPasswordVisible
                                         ? Padding(
                                             padding: EdgeInsets.only(top: 3.h),
-                                            child: Icon(
-                                              Icons.remove_red_eye_outlined,
-                                              size: 24.r,
-                                              color: AppColors.prefixIconColor,
-                                            ),
+                                            child: Transform.scale(
+                                                scale: 0.5,
+                                                child: SvgPicture.asset(AppAssets.showIcon)),
                                           )
                                         : Padding(
                                             padding: EdgeInsets.only(top: 3.h),
-                                            child: Icon(
-                                              Icons.remove_red_eye,
-                                              size: 24.r,
-                                              color: AppColors.prefixIconColor,
-                                            ),
+                                            child:Transform.scale(
+                                                scale: 0.5,
+                                                child: SvgPicture.asset(AppAssets.hideIcon)),
                                           ),
                                   ),
                                   validator: (value) {
@@ -134,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           PageTransition(
                                             type: PageTransitionType.fade,
                                             duration: const Duration(
-                                                milliseconds: 400),
+                                                milliseconds: 100),
                                             child: BlocProvider.value(
                                               value:
                                                   context.read<SignUpCubit>(),
@@ -162,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ),
                                 SizedBox(
-                                  height: 54.h,
+                                  height: 22.h,
                                 ),
                                 state is LoginLoading?LoginCircular():AuthButton(
                                   text: AppStrings.enter,
@@ -175,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   },
                                 ),
                                 SizedBox(
-                                  height: 25.h,
+                                  height: 22.h,
                                 ),
                                 signUpText,
                                 SizedBox(
