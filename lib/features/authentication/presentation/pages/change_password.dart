@@ -10,7 +10,7 @@ import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app-string.dart';
 import '../../../../core/utils/app_fonts.dart';
-import '../widgets/password_textfield.dart';
+import '../widgets/password_text_field.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   ChangePasswordScreen({super.key});

@@ -13,7 +13,7 @@ import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app-string.dart';
 import '../../../../core/utils/app_fonts.dart';
-import '../widgets/email_textfield.dart';
+import '../widgets/email_text_field.dart';
 
 class EnterPhoneScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
