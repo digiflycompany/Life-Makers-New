@@ -155,21 +155,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     },
                     child: signUpCubit.isPasswordVisible
                         ? Padding(
-                            padding: EdgeInsets.only(top: 3.h),
-                            child: Icon(
-                              Icons.remove_red_eye_outlined,
-                              size: 24.r,
-                              color: AppColors.prefixIconColor,
-                            ),
-                          )
+                      padding: EdgeInsets.only(top: 3.h),
+                      child: Transform.scale(
+                          scale: 0.49,
+                          child: SvgPicture.asset(AppAssets.hideIcon)),
+                    )
                         : Padding(
-                            padding: EdgeInsets.only(top: 3.h),
-                            child: Icon(
-                              Icons.remove_red_eye,
-                              size: 24.r,
-                              color: AppColors.prefixIconColor,
-                            ),
-                          ),
+                      padding: EdgeInsets.only(top: 3.h),
+                      child:Transform.scale(
+                          scale: 0.49,
+                          child: SvgPicture.asset(AppAssets.showIcon)),
+                    ),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -203,21 +199,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     },
                     child: signUpCubit.isConfirmPasswordVisible
                         ? Padding(
-                            padding: EdgeInsets.only(top: 3.h),
-                            child: Icon(
-                              Icons.remove_red_eye_outlined,
-                              size: 24.r,
-                              color: AppColors.prefixIconColor,
-                            ),
-                          )
+                      padding: EdgeInsets.only(top: 3.h),
+                      child: Transform.scale(
+                          scale: 0.49,
+                          child: SvgPicture.asset(AppAssets.hideIcon)),
+                    )
                         : Padding(
-                            padding: EdgeInsets.only(top: 3.h),
-                            child: Icon(
-                              Icons.remove_red_eye,
-                              size: 24.r,
-                              color: AppColors.prefixIconColor,
-                            ),
-                          ),
+                      padding: EdgeInsets.only(top: 3.h),
+                      child:Transform.scale(
+                          scale: 0.49,
+                          child: SvgPicture.asset(AppAssets.showIcon)),
+                    ),
                   ),
                   validator: (value) {
                     if (value!.isEmpty) {

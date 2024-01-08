@@ -31,9 +31,6 @@ class LoginCubit extends Cubit<LoginState> {
     }
     emit(LoginLoading());
     try {
-      // if(Platform.isAndroid) {
-      //   deviceToken = await FirebaseMessaging.instance.getToken();
-      // }
       Response? response = await dio.post(
         EndPoints.loginApi,
         data: {
