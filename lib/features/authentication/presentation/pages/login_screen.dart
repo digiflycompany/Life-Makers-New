@@ -99,14 +99,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                         ? Padding(
                                             padding: EdgeInsets.only(top: 3.h),
                                             child: Transform.scale(
-                                                scale: 0.5,
-                                                child: SvgPicture.asset(AppAssets.showIcon)),
+                                                scale: 0.49,
+                                                child: SvgPicture.asset(AppAssets.hideIcon)),
                                           )
                                         : Padding(
                                             padding: EdgeInsets.only(top: 3.h),
                                             child:Transform.scale(
-                                                scale: 0.5,
-                                                child: SvgPicture.asset(AppAssets.hideIcon)),
+                                                scale: 0.49,
+                                                child: SvgPicture.asset(AppAssets.showIcon)),
                                           ),
                                   ),
                                   validator: (value) {
@@ -268,7 +268,7 @@ class _LoginScreenState extends State<LoginScreen> {
         children: [
           donNotHaveAccountText,
           SizedBox(
-            width: 2.w,
+            width: 4.w,
           ),
           CreateAccountText(),
         ],

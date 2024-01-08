@@ -1,7 +1,7 @@
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../data/apis/api.dart';
@@ -53,7 +53,12 @@ class LoginCubit extends Cubit<LoginState> {
         LoginFailure('اسم مستخدم خاطيء أو رقم سري خاطيء');
       }
     } catch (e) {
-      emit(LoginFailure('اسم مستخدم خاطيء أو رقم سري خاطيء'));
+      bool result = await InternetConnectionChecker().hasConnection;
+      if(result == false) {
+        emit(LoginFailure('تأكد من الانترنت الخاص بك'));
+      } else {
+        emit(LoginFailure('اسم مستخدم خاطيء أو رقم سري خاطيء'));
+      }
     }
   }
 }
