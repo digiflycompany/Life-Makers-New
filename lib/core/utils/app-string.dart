@@ -25,7 +25,7 @@ class AppStrings {
   static const String userNameError = 'Invalid user name';
   static const String passwordError = 'Password must be more than 6 character';
   static const String lifeMaker = 'Life Maker';
-  static const String welcomeBack = 'اهلًا بعودتك';
+  static const String welcomeBack = 'اهلًا بك';
   static const String loggingIn = 'تسجيل دخول';
   static const String email = 'البريد الالكتروني';
   static const String password = 'كلمة المرور';
