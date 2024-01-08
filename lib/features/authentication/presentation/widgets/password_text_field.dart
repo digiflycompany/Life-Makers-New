@@ -18,62 +18,65 @@ class PasswordTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  SizedBox(
-      child: TextFormField(
+      child: Directionality(
         textDirection: TextDirection.rtl,
-        textInputAction: TextInputAction.next,
-        cursorColor: AppColors.smallTextColor,
-        cursorWidth: 2.w,
-        validator: validator,
-        controller: controller,
-        obscureText: obscureText,
-        decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(vertical: 25.h, horizontal: 20.w),
-          errorMaxLines: 1,
-          errorBorder:OutlineInputBorder(
-              borderSide: const BorderSide(color: AppColors.redColor),
-              borderRadius: BorderRadius.circular(8.r)
-          ),
-           focusedErrorBorder: OutlineInputBorder(
-               borderSide: const BorderSide(color: AppColors.redColor),
-               borderRadius: BorderRadius.circular(8.r)
-           ),
-            errorStyle: TextStyle(
-              color: AppColors.redColor,
-              fontFamily: FontFamilies.alexandria,// Customize the error text color
-              fontSize: 10, // Customize the error text font size
+        child: TextFormField(
+          textDirection: TextDirection.rtl,
+          textInputAction: TextInputAction.next,
+          cursorColor: AppColors.smallTextColor,
+          cursorWidth: 2.w,
+          validator: validator,
+          controller: controller,
+          obscureText: obscureText,
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.symmetric(vertical: 25.h, horizontal: 20.w),
+            errorMaxLines: 1,
+            errorBorder:OutlineInputBorder(
+                borderSide: const BorderSide(color: AppColors.redColor),
+                borderRadius: BorderRadius.circular(8.r)
             ),
-          focusColor: AppColors.borderColor,
-          alignLabelWithHint: true,
-          hintTextDirection:TextDirection.rtl ,
-          enabledBorder: OutlineInputBorder(
+             focusedErrorBorder: OutlineInputBorder(
+                 borderSide: const BorderSide(color: AppColors.redColor),
+                 borderRadius: BorderRadius.circular(8.r)
+             ),
+              errorStyle: TextStyle(
+                color: AppColors.redColor,
+                fontFamily: FontFamilies.alexandria,// Customize the error text color
+                fontSize: 10, // Customize the error text font size
+              ),
+            focusColor: AppColors.borderColor,
+            alignLabelWithHint: true,
+            hintTextDirection:TextDirection.rtl ,
+            enabledBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: AppColors.borderColor),
+                borderRadius: BorderRadius.circular(8.r)
+            ),
+            focusedBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: AppColors.borderColor),
-              borderRadius: BorderRadius.circular(8.r)
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: AppColors.borderColor),
-            borderRadius: BorderRadius.circular(8.r),
-          ),
-          fillColor: Colors.white,
-          filled:true,
-          hintText: hintText,
-          hintStyle: const TextStyle(
-              color:AppColors.smallTextColor,
-              fontFamily: FontFamilies.alexandria,
-              fontSize: 11,
-              fontWeight: FontWeight.w400
-          ),
-          suffixIcon:  Padding(
-            padding:  EdgeInsets.only(left: 16.w ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SvgPicture.asset(AppAssets.dividerIcon,width: 22.w,height: 24.h,),
-                SizedBox(width: 8.w,),
-                SvgPicture.asset(AppAssets.passwordIcon,width: 15.w,height: 15.h,),
-              ],
+              borderRadius: BorderRadius.circular(8.r),
             ),
+            fillColor: Colors.white,
+            filled:true,
+            hintText: hintText,
+            hintStyle: const TextStyle(
+                color:AppColors.smallTextColor,
+                fontFamily: FontFamilies.alexandria,
+                fontSize: 11,
+                fontWeight: FontWeight.w400
+            ),
+            prefixIcon:  Padding(
+              padding:  EdgeInsets.only(right: 16.w ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SvgPicture.asset(AppAssets.passwordIcon,width: 15.w,height: 15.h,),
+                  SizedBox(width: 8.w,),
+                  SvgPicture.asset(AppAssets.dividerIcon,width: 22.w,height: 24.h,),
+                ],
+              ),
+            ),
+            suffixIcon:prefixIcon
           ),
-          prefixIcon:prefixIcon
         ),
       ),
     );
