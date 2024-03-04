@@ -1,12 +1,12 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_makers/features/authentication/domain/card_cubit/cards_cubit.dart';
-import 'package:life_makers/features/authentication/domain/login_cubit/login_cubit.dart';
-import 'package:life_makers/features/authentication/domain/sign_up_cubit/sign_up_cubit.dart';
+import 'package:life_makers/features/authentication/cubit/card_cubit/cards_cubit.dart';
+import 'package:life_makers/features/authentication/cubit/login_cubit/login_cubit.dart';
+import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_cubit.dart';
 import 'package:life_makers/features/edit_account/cubit/edit_account_cubit.dart';
-import 'package:life_makers/features/home_page/domain/menu_page_cubit/menu_page_cubit.dart';
+import 'package:life_makers/features/home_page/cubit/menu_page_cubit/menu_page_cubit.dart';
+import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/cubit/seasonal_campaigns_cubit.dart';
 import 'package:life_makers/features/splash_screen/presentation/cubit/splash_cubit.dart';
 import 'package:life_makers/features/splash_screen/presentation/widgets/splash_screen.dart';
 import 'package:life_makers/features/volunteer_opportunity/cubit/one_day_activity_cubit.dart';
@@ -25,16 +25,11 @@ import 'features/elections/cubit/vote_candidate_cubit.dart';
 import 'features/home_page/cubit/emergency_campaigns_cubit.dart';
 import 'features/home_page/cubit/home_calender_cubit.dart';
 import 'features/non_seasonal_campaigns/cubit/non_seasonal_campaigns_cubit.dart';
-import 'features/seasonal_campaigns/cubit/seasonal_campaigns_cubit.dart';
 
 Future<void> main() async {
     WidgetsFlutterBinding.ensureInitialized();
     DioHelper.init();
     PreferencesHelper.init();
-
-  //   if(Platform.isAndroid) {
-  //   await Firebase.initializeApp();
-  // }
   runApp(MyApp());
 
 }

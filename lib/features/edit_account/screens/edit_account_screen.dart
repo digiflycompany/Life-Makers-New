@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,10 +6,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:life_makers/core/utils/app-color.dart';
 import 'package:life_makers/core/utils/extensions.dart';
+import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_cubit.dart';
+import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_states.dart';
 import 'package:life_makers/features/authentication/data/models/user_model.dart';
-import 'package:life_makers/features/authentication/domain/sign_up_cubit/sign_up_states.dart';
 import 'package:life_makers/features/authentication/presentation/pages/change_password_after_login.dart';
 import 'package:life_makers/features/edit_account/cubit/edit_account_cubit.dart';
+import 'package:life_makers/features/home_page/cubit/menu_page_cubit/menu_page_cubit.dart';
+import 'package:life_makers/features/home_page/cubit/menu_page_cubit/menu_page_states.dart';
 import 'package:life_makers/services/cubit/global_cubit_state.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 import 'package:page_transition/page_transition.dart';
@@ -19,10 +21,7 @@ import '../../../core/utils/app-string.dart';
 import '../../../core/utils/app_fonts.dart';
 import '../../authentication/data/models/area_model.dart';
 import '../../authentication/data/models/city_model.dart';
-import '../../authentication/domain/sign_up_cubit/sign_up_cubit.dart';
 import '../../authentication/presentation/pages/login_screen.dart';
-import '../../home_page/domain/menu_page_cubit/menu_page_cubit.dart';
-import '../../home_page/domain/menu_page_cubit/menu_page_states.dart';
 
 class EditAccountScreen extends StatefulWidget {
   const EditAccountScreen({Key? key}) : super(key: key);

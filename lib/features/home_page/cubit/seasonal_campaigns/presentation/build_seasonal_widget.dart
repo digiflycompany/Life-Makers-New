@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:life_makers/core/utils/app-color.dart';
 import 'package:life_makers/core/utils/extensions.dart';
-import 'package:life_makers/features/seasonal_campaigns/presentation/pages/previous_seasonal_campaigns.dart';
-
-import '../../../core/utils/app-color.dart';
-import '../../non_seasonal_campaigns/presentation/pages/upcoming_non_seasonal_campaigns.dart';
+import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/presentation/pages/previous_seasonal_campaigns.dart';
+import 'package:life_makers/features/non_seasonal_campaigns/presentation/pages/upcoming_non_seasonal_campaigns.dart';
 import '../model/seasonal_campaigns_model.dart';
 
 Widget buildCampaignGridView(

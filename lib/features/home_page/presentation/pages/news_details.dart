@@ -3,11 +3,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:life_makers/core/utils/app-string.dart';
 import 'package:life_makers/core/utils/app_fonts.dart';
 import 'package:life_makers/core/utils/extensions.dart';
+import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import 'package:life_makers/features/home_page/presentation/widgets/news_button.dart';
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/widgets/custom_snack_bar.dart';
 import '../../../campaign_details/presentation/pages/campaign_details_screen.dart';
-import '../../../seasonal_campaigns/model/seasonal_campaigns_model.dart';
 
 class NewsDetails extends StatelessWidget {
   NewsDetails({super.key, this.campains});

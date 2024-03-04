@@ -5,12 +5,12 @@ import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/core/widgets/custom_appbar.dart';
 import 'package:life_makers/features/campaign_details/cubit/join_campaign_cubit.dart';
 import 'package:life_makers/features/campaign_details/presentation/widgets/send_button.dart';
+import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app-string.dart';
 import '../../../../core/utils/app_fonts.dart';
 import '../../../../core/widgets/title_text.dart';
-import '../../../seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import '../widgets/button.dart';
 
 class JoinCampaignDetails extends StatefulWidget {

@@ -1,4 +1,3 @@
-
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,8 +7,8 @@ import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
 import 'package:get/get.dart';
 import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/core/widgets/custom_snack_bar.dart';
-import 'package:life_makers/features/authentication/domain/sign_up_cubit/sign_up_cubit.dart';
-import 'package:life_makers/features/authentication/domain/sign_up_cubit/sign_up_states.dart';
+import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_cubit.dart';
+import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_states.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/auth_button.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/email_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/login_to_account_text.dart';

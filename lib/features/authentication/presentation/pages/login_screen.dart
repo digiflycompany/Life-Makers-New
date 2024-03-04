@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/core/widgets/custom_snack_bar.dart';
-import 'package:life_makers/features/authentication/domain/login_cubit/login_states.dart';
+import 'package:life_makers/features/authentication/cubit/login_cubit/login_cubit.dart';
+import 'package:life_makers/features/authentication/cubit/login_cubit/login_states.dart';
+import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_cubit.dart';
 import 'package:life_makers/features/authentication/presentation/pages/enter_phone_screen.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/createAccountText.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/email_text_field.dart';
@@ -17,8 +19,6 @@ import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app-string.dart';
 import '../../../../core/utils/app_fonts.dart';
-import '../../domain/login_cubit/login_cubit.dart';
-import '../../domain/sign_up_cubit/sign_up_cubit.dart';
 import '../widgets/auth_button.dart';
 
 class LoginScreen extends StatefulWidget {

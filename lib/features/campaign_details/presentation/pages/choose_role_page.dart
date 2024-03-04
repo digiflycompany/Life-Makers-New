@@ -4,12 +4,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/core/widgets/custom_snack_bar.dart';
 import 'package:life_makers/features/campaign_details/presentation/pages/choose_role_second_page.dart';
+import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app-string.dart';
 import '../../../../core/utils/app_fonts.dart';
-import '../../../seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import '../widgets/choose_role_button.dart';
 
 class ChooseRolePage extends StatefulWidget {

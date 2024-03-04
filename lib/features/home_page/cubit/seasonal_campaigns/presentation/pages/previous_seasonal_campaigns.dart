@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:life_makers/core/utils/app-assets.dart';
+import 'package:life_makers/core/utils/app-color.dart';
 import 'package:life_makers/core/utils/app_fonts.dart';
 import 'package:life_makers/core/utils/extensions.dart';
-import 'package:life_makers/features/seasonal_campaigns/model/seasonal_campaigns_model.dart';
+import 'package:life_makers/features/campaign_details/presentation/pages/campaign_details_screen.dart';
+import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import 'package:page_transition/page_transition.dart';
-import '../../../../core/utils/app-color.dart';
-import '../../../campaign_details/presentation/pages/campaign_details_screen.dart';
 import '../build_seasonal_widget.dart';
 
 class PreviousSeasonalCampaignsScreen extends StatelessWidget {
