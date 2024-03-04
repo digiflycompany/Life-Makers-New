@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_makers/features/home_page/domain/home_page_cubit/home_page_states.dart';
+import 'package:life_makers/features/home_page/cubit/home_page_cubit/home_page_states.dart';
 import '../../data/models/nav_bar_model.dart';
 
 class HomePageCubit extends Cubit<HomePageState> {

@@ -9,8 +9,9 @@ import 'package:life_makers/core/utils/app-color.dart';
 import 'package:life_makers/core/utils/app-string.dart';
 import 'package:life_makers/core/utils/app_fonts.dart';
 import 'package:life_makers/core/utils/extensions.dart';
+import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_cubit.dart';
+import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_states.dart';
 import 'package:life_makers/features/authentication/data/models/phone_user_mode.dart';
-import 'package:life_makers/features/authentication/domain/sign_up_cubit/sign_up_states.dart';
 import 'package:life_makers/features/authentication/presentation/pages/change_password.dart';
 import 'package:life_makers/features/authentication/presentation/pages/enter_phone_screen.dart';
 import 'package:otp_text_field/otp_field.dart';
@@ -18,7 +19,6 @@ import 'package:otp_text_field/otp_field_style.dart';
 import 'package:otp_text_field/style.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../../../services/shared_preferences/preferences_helper.dart';
-import '../../domain/sign_up_cubit/sign_up_cubit.dart';
 
 class OtpScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();

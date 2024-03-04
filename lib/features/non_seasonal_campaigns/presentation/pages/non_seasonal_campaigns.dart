@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/core/widgets/custom_appbar.dart';
+import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import 'package:life_makers/features/non_seasonal_campaigns/presentation/pages/previous_non_seasonal_campaigns.dart';
 import 'package:life_makers/features/non_seasonal_campaigns/presentation/pages/upcoming_non_seasonal_campaigns.dart';
 import '../../../../core/utils/app-assets.dart';
@@ -11,7 +12,6 @@ import '../../../../core/utils/app-string.dart';
 import '../../../../core/utils/app_fonts.dart';
 import '../../../../core/widgets/title_text.dart';
 import '../../../../services/cubit/global_cubit_state.dart';
-import '../../../seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import '../../cubit/non_seasonal_campaigns_cubit.dart';
 import 'current_non_seasonal_campaigns.dart';
 

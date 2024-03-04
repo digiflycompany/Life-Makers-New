@@ -4,13 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/features/campaign_details/presentation/pages/campaign_details_screen.dart';
+import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import 'package:life_makers/features/volunteer_opportunity/cubit/volunteer_states.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app-string.dart';
 import '../../../../core/utils/app_fonts.dart';
-import '../../../seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import '../../../volunteer_opportunity/cubit/volunteer_cubit.dart';
 
 class JoinedUpcomingCampaigns extends StatefulWidget {
