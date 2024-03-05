@@ -12,7 +12,7 @@ class SignInAsVisitor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: context.height12),
+      padding: EdgeInsets.only(top: context.height12,bottom: context.height40),
       child: InkWell(
         onTap: (){
           PreferencesHelper.saveIsVisitor(isVisitor: true);

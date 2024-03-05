@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:life_makers/core/utils/app-color.dart';
 
 class LoginCircular extends StatelessWidget {
   const LoginCircular({super.key});
@@ -6,9 +7,16 @@ class LoginCircular extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Transform.scale(
-          scale: 0.5,
-          child: CircularProgressIndicator.adaptive())
+      child:Theme(
+        data: Theme.of(context).copyWith(
+          colorScheme: ColorScheme.fromSwatch().copyWith(
+            primary: AppColors.white,
+          ),
+        ),
+        child: Transform.scale(
+            scale: 0.5,
+            child: CircularProgressIndicator.adaptive()),
+      )
     );
   }
 }

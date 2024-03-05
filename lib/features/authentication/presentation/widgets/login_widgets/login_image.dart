@@ -12,7 +12,7 @@ class LoginImage extends StatelessWidget {
         alignment: AlignmentDirectional.center,
         child: Padding(
           padding: EdgeInsets.only(top:context.height48,bottom: context.height32),
-          child: SvgPicture.asset(AppAssets.logoFinalSvg),
+          child: SvgPicture.asset(AppAssets.logoFinalSvg,height: context.height204,),
         ));
   }
 }
