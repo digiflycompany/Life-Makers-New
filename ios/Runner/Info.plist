@@ -33,8 +33,7 @@
 		<key>UIMainStoryboardFile</key>
 		<string>Main</string>
 		<key>NSPhotoLibraryUsageDescription</key>
-        <string>We need access to your photo library to upload and share photos within the app.</string>
-
+		<string>We need access to your photo library to upload and share photos within the app.</string>
 		<key>UISupportedInterfaceOrientations</key>
 		<array>
 			<string>UIInterfaceOrientationPortrait</string>
@@ -43,6 +42,8 @@
 			<string>UIInterfaceOrientationLandscapeRight</string>
 		</array>
 		<key>UIStatusBarHidden</key>
+		<false/>
+		<key>UIViewControllerBasedStatusBarAppearance</key>
 		<false/>
 	</dict>
 </plist>

@@ -27,7 +27,7 @@ class AppAssets {
       '$svgPath/notificationWhiteSvg.svg';
   static const String profileIcon = "$svgPath/profileIcon.svg";
   static const String achievementsIcon = "$svgPath/achievementIcon.svg";
-  static const String notificationIcon = "$svgPath/notificationIcon2.svg";
+  static const String notificationIcon = "$svgPath/notificationIcon.svg";
   static const String menuIcon = "$svgPath/menuIcon.svg";
   static const String crown = "$svgPath/crown.svg";
   static const String circleAvatar = "$imagesPath/circleAvatarPng.png";
@@ -80,7 +80,8 @@ class AppAssets {
   static const String newsDetailsImg = "$imagesPath/newsDetailsPage.png";
   static const String calenderIcon = "$svgPath/calender.svg";
   static const String uploadIcon = "$svgPath/upload.svg";
-  static const String lifeMakersProfileIcon = "$svgPath/lifeMakersProfileIcon.svg";
+  static const String lifeMakersProfileIcon =
+      "$svgPath/lifeMakersProfileIcon.svg";
   static const String qrCode = "$svgPath/qrCode.svg";
   static const String qrCode2 = "$svgPath/qrCode1.svg";
   static const String newsPopUp = "$svgPath/newsPopUp.svg";
