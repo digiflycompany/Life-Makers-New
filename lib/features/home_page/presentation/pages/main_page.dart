@@ -1,9 +1,9 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
-import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/core/widgets/title_text.dart';
 import 'package:life_makers/features/authentication/cubit/card_cubit/card_states.dart';
 import 'package:life_makers/features/authentication/cubit/card_cubit/cards_cubit.dart';

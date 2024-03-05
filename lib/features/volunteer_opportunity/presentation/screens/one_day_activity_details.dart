@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:life_makers/core/utils/app-color.dart';
 import 'package:life_makers/core/utils/app-string.dart';
 import 'package:life_makers/core/utils/app_fonts.dart';
-import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/features/home_page/presentation/widgets/news_button.dart';
 import 'package:life_makers/features/volunteer_opportunity/cubit/one_day_activity_cubit.dart';
 import 'package:life_makers/features/volunteer_opportunity/cubit/one_day_activity_states.dart';
 import 'package:life_makers/features/volunteer_opportunity/presentation/screens/volunteers_thanks_screen.dart';
 import 'package:page_transition/page_transition.dart';
-
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/widgets/custom_snack_bar.dart';
 import '../../../../services/shared_preferences/preferences_helper.dart';

@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:life_makers/core/utils/app-assets.dart';
-import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/core/widgets/custom_appbar.dart';
 import 'package:life_makers/features/campaign_details/cubit/join_campaign_cubit.dart';
 import 'package:life_makers/features/campaign_details/presentation/pages/member_campaign_details.dart';

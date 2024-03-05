@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:life_makers/core/utils/app-assets.dart';
 import 'package:life_makers/core/utils/app-color.dart';
 import 'package:life_makers/core/utils/app-string.dart';
 import 'package:life_makers/core/utils/app_fonts.dart';
-import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/core/widgets/custom_appbar.dart';
 import 'package:life_makers/core/widgets/title_text.dart';
 import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/cubit/seasonal_campaigns_cubit.dart';

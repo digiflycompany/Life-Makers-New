@@ -11,6 +11,9 @@ import 'login_states.dart';
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
 
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
   LoginCubit getCubit(context) => BlocProvider.of(context);
   Dio dio = Dio();
   Future<SharedPreferences> prefs = SharedPreferences.getInstance();

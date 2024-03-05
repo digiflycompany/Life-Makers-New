@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:life_makers/core/utils/extensions.dart';
 import '../../../../core/utils/app-assets.dart';
@@ -39,6 +40,7 @@ class RegularTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      height: context.height72,
       child: Directionality(
         textDirection: TextDirection.rtl,
         child: TextFormField(

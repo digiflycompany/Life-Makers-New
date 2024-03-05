@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:life_makers/core/utils/app-assets.dart';
-import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/features/volunteer_opportunity/presentation/widgets/remote_tasks_card.dart';
 import '../../../../core/utils/app-string.dart';
 import '../../../../core/widgets/custom_appbar.dart';

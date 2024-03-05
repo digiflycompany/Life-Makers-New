@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/features/volunteer_opportunity/cubit/remote_tasks_cubit.dart';
 import 'package:life_makers/features/volunteer_opportunity/cubit/remote_tasks_states.dart';
 import 'package:life_makers/features/volunteer_opportunity/presentation/screens/remote_tasks_details.dart';

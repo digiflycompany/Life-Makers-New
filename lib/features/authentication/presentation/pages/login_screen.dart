@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/core/widgets/custom_snack_bar.dart';
-import 'package:life_makers/core/widgets/spacer.dart';
 import 'package:life_makers/features/authentication/cubit/login_cubit/login_cubit.dart';
 import 'package:life_makers/features/authentication/cubit/login_cubit/login_states.dart';
 import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_cubit.dart';
@@ -11,6 +11,8 @@ import 'package:life_makers/features/authentication/presentation/pages/enter_pho
 import 'package:life_makers/features/authentication/presentation/widgets/createAccountText.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/email_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/login_circular.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/login_widgets/login_email_text_field.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/login_widgets/logging_in_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/login_widgets/login_image.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/login_widgets/welcome_back_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/password_text_field.dart';
@@ -73,15 +75,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: Column(
                               children: [
                                 WelcomeBackText(),
-                                VerticalSpace(context.height20),
-                                loggingInText,
-                                SizedBox(
-                                  height: 16.h,
-                                ),
-                                emailTextField,
-                                SizedBox(
-                                  height: 23.h,
-                                ),
+                                LoggingInText(),
+                                EmailTextField(),
                                 PasswordTextField(
                                   controller: passwordController,
                                   hintText: AppStrings.password,
@@ -201,16 +196,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   }
 
-  get loggingInText => const Align(
-        alignment: AlignmentDirectional.centerEnd,
-        child: Text(
-          AppStrings.loggingIn,
-          style: TextStyle(
-              color: AppColors.blueColor,
-              fontFamily: FontFamilies.alexandria,
-              fontSize: 15),
-        ),
-      );
   get emailTextField => RegularTextField(
         max: 60,
         controller: usernameController,

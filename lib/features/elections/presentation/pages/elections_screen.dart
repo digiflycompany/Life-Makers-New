@@ -1,7 +1,7 @@
 import'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_makers/core/utils/extensions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:life_makers/core/widgets/custom_appbar.dart';
 import 'package:life_makers/core/widgets/custom_snack_bar.dart';
 import 'package:life_makers/features/elections/cubit/all_candidates_cubit.dart';

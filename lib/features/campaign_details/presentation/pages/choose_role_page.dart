@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/core/widgets/custom_snack_bar.dart';
 import 'package:life_makers/features/campaign_details/presentation/pages/choose_role_second_page.dart';
 import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/model/seasonal_campaigns_model.dart';

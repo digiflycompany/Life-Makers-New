@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:life_makers/core/utils/app_fonts.dart';
-import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 import '../../../../core/utils/app-assets.dart';

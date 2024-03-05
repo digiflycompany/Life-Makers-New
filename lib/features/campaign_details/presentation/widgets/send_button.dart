@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:life_makers/core/utils/app-assets.dart';
 import 'package:life_makers/core/utils/app-string.dart';
 import 'package:life_makers/core/utils/app_fonts.dart';
-import 'package:life_makers/core/utils/extensions.dart';
 import '../../../../core/utils/app-color.dart';
 
 class SendButton extends StatelessWidget {

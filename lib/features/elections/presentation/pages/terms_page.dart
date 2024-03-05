@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:life_makers/core/utils/app-color.dart';
 import 'package:life_makers/core/utils/app_fonts.dart';
-import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/features/elections/presentation/pages/elections_screen.dart';
 import 'package:life_makers/features/elections/presentation/widgets/custom_term.dart';
 import 'package:life_makers/features/elections/presentation/widgets/terms_button.dart';
