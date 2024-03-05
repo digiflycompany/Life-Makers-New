@@ -12,8 +12,8 @@ import 'package:life_makers/features/authentication/presentation/widgets/createA
 import 'package:life_makers/features/authentication/presentation/widgets/email_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/login_circular.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/login_widgets/login_image.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/login_widgets/welcome_back_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/password_text_field.dart';
-import 'package:life_makers/features/authentication/presentation/widgets/small_text.dart';
 import 'package:life_makers/features/home_page/presentation/pages/drawer_page.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 import 'package:page_transition/page_transition.dart';
@@ -67,17 +67,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 child:Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          VerticalSpace(context.height16),
                           LoginImage(),
-                          VerticalSpace(context.height12),
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 23.w),
+                            padding: EdgeInsets.symmetric(horizontal: context.width20),
                             child: Column(
                               children: [
-                                welcomeBackText,
-                                SizedBox(
-                                  height: 22.h,
-                                ),
+                                WelcomeBackText(),
+                                VerticalSpace(context.height20),
                                 loggingInText,
                                 SizedBox(
                                   height: 16.h,
@@ -205,11 +201,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   }
 
-  get welcomeBackText => Align(
-      alignment: AlignmentDirectional.centerEnd,
-      child: SmallText(
-        text: AppStrings.welcomeBack,
-      ));
   get loggingInText => const Align(
         alignment: AlignmentDirectional.centerEnd,
         child: Text(

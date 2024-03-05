@@ -43,6 +43,7 @@ dependencies:
   flutter_bloc:
   flutter_zoom_drawer:
   dots_indicator:
+  flutter_screenutil: ^5.9.0
   dotted_border: ^2.1.0
   percent_indicator: ^4.2.3
   dio:
@@ -59,8 +60,6 @@ dependencies:
   path_provider: ^2.1.1
   dropdown_button2:
   flutter_windowmanager:
- # firebase_core: ^2.24.2
- # firebase_messaging: ^14.7.9
   flutter_local_notifications: ^16.3.0
   image_picker: ^1.0.5
   sentry_flutter: ^7.14.0
@@ -120,15 +119,5 @@ flutter:
         - asset: assets/fonts/Alexandria/Alexandria-SemiBold.ttf
         - asset: assets/fonts/Alexandria/Alexandria-Medium.ttf
 
-
-    - family: jFlat
-      fonts:
-        - asset: assets/fonts/jFlat/JF Flat Regular.ttf
-    - family: Outfit
-      fonts:
-        - asset: assets/fonts/Outfit/Outfit-Bold.ttf
-        - asset: assets/fonts/Outfit/Outfit-ExtraBold.ttf
-        - asset: assets/fonts/Outfit/Outfit-Light.ttf
-        - asset: assets/fonts/Outfit/Outfit-Regular.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
