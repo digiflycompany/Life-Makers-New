@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:life_makers/core/utils/app-color.dart';
 import 'package:life_makers/features/authentication/presentation/pages/enter_phone_screen.dart';
 import 'package:life_makers/features/authentication/presentation/pages/sign_up_screen.dart';
+import 'package:life_makers/features/home_page/presentation/pages/drawer_page.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 
 enum PageRouteAnimation { fade, scale, rotate, slide, slideBottomTop }
@@ -16,6 +17,7 @@ class Routes {
   static const String otpPageRoute = "/otp_screen";
   static const String enterPhonePageRoute = "/enter_phone_screen";
   static const String changPasswordPageRoute = "/change_password";
+  static const String mainPageRoute = "/drawer_page";
 }
 
 class RouteGenerator {
@@ -40,6 +42,11 @@ class RouteGenerator {
       case Routes.enterPhonePageRoute:
         return buildPageRoute(
             child: EnterPhoneScreen(),
+            routeSettings: routeSettings,
+            pageRouteAnimation: PageRouteAnimation.fade);
+      case Routes.mainPageRoute:
+        return buildPageRoute(
+            child: DrawerPage(),
             routeSettings: routeSettings,
             pageRouteAnimation: PageRouteAnimation.fade);
     }
