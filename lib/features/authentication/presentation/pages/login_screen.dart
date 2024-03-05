@@ -13,6 +13,7 @@ import 'package:life_makers/features/authentication/presentation/widgets/login_w
 import 'package:life_makers/features/authentication/presentation/widgets/login_widgets/logging_in_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/login_widgets/login_image.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/login_widgets/login_password_text_field.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/login_widgets/sign_in_as_visitor.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/login_widgets/sign_up_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/login_widgets/welcome_back_text.dart';
 import 'package:life_makers/features/home_page/presentation/pages/drawer_page.dart';
@@ -90,15 +91,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   },
                                 ),
                                 SignUpText(),
-                                SizedBox(
-                                  height: 10.h,
-                                ),
-                                visitorButton,
+                                SignInAsVisitor(),
                               ],
                             ),
-                          ),
-                          SizedBox(
-                            height: 5.h
                           ),
                         ],
                       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import '../../../../core/utils/app-color.dart';
 import 'home_page.dart';
@@ -17,7 +18,7 @@ class DrawerPage extends StatelessWidget {
       menuScreen: const MenuScreen(),
       mainScreenTapClose: true,
       mainScreen:  HomePage(),
-      borderRadius: 24.0,
+      borderRadius: 24.r,
       shadowLayer1Color: AppColors.drawerColor,
       showShadow: true,
       angle: 0.0,
