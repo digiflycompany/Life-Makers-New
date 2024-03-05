@@ -10,11 +10,11 @@ class LoginCircular extends StatelessWidget {
       child:Theme(
         data: Theme.of(context).copyWith(
           colorScheme: ColorScheme.fromSwatch().copyWith(
-            primary: AppColors.orangeBorderColor,
+            primary: AppColors.white,
           ),
         ),
         child: Transform.scale(
-            scale: 0.8,
+            scale: 0.5,
             child: CircularProgressIndicator.adaptive()),
       )
     );
