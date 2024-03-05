@@ -11,7 +11,7 @@ class PasswordTextField extends StatelessWidget {
   final String hintText;
   final bool obscureText;
   final  suffixicon;
-  final  prefixIcon;
+  final   prefixIcon;
   final validator;
   const PasswordTextField({Key? key, this.suffixicon, this.controller, required this.hintText, required this.obscureText, this.validator, this.prefixIcon,}) : super(key: key);
 
