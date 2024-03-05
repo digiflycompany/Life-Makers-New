@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/core/widgets/custom_snack_bar.dart';
+import 'package:life_makers/core/widgets/spacer.dart';
 import 'package:life_makers/features/authentication/cubit/login_cubit/login_cubit.dart';
 import 'package:life_makers/features/authentication/cubit/login_cubit/login_states.dart';
 import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_cubit.dart';
@@ -66,13 +67,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 child:Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          SizedBox(
-                            height: context.height16,
-                          ),
+                          VerticalSpace(context.height16),
                           LoginImage(),
-                          SizedBox(
-                            height: context.height12,
-                          ),
+                          VerticalSpace(context.height12),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 23.w),
                             child: Column(
