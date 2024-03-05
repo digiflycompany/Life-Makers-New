@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:life_makers/core/utils/app_fonts.dart';
+import 'package:life_makers/core/utils/extensions.dart';
 import '../../../../core/utils/app-color.dart';
 
 class AuthButton extends StatelessWidget {
@@ -13,20 +13,19 @@ class AuthButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 420.w,
-        height: 63.h,
+        width: double.infinity,
+        height: context.height51,
         decoration: BoxDecoration(
           color: AppColors.orangeBorderColor,
-          borderRadius: BorderRadius.circular(8.r),
+          borderRadius: BorderRadius.circular(5.r),
         ),
         child:  Center(
           child: Text(
             text!,
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.white,
-              fontFamily: FontFamilies.alexandria,
               fontWeight: FontWeight.w500,
-              fontSize: 12
+              fontSize: 12.sp
             ),
           ),
         ),

@@ -7,18 +7,17 @@ import 'package:life_makers/core/widgets/spacer.dart';
 import 'package:life_makers/features/authentication/cubit/login_cubit/login_cubit.dart';
 import 'package:life_makers/features/authentication/cubit/login_cubit/login_states.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/createAccountText.dart';
-import 'package:life_makers/features/authentication/presentation/widgets/email_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/login_circular.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/login_widgets/forget_password_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/login_widgets/login_email_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/login_widgets/logging_in_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/login_widgets/login_image.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/login_widgets/login_password_text_field.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/login_widgets/sign_up_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/login_widgets/welcome_back_text.dart';
 import 'package:life_makers/features/home_page/presentation/pages/drawer_page.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 import 'package:page_transition/page_transition.dart';
-import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app-string.dart';
 import '../../../../core/utils/app_fonts.dart';
@@ -80,9 +79,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 LoginPasswordTextField(),
                                 VerticalSpace(context.height4),
                                 ForgetPasswordText(),
-                                SizedBox(
-                                  height: 22.h,
-                                ),
                                 state is LoginLoading?LoginCircular():AuthButton(
                                   text: AppStrings.enter,
                                   onTap: () {
@@ -93,10 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     }
                                   },
                                 ),
-                                SizedBox(
-                                  height: 22.h,
-                                ),
-                                signUpText,
+                                SignUpText(),
                                 SizedBox(
                                   height: 10.h,
                                 ),
@@ -128,34 +121,6 @@ class _LoginScreenState extends State<LoginScreen> {
             (vale) => false);
 
   }
-
-  get emailTextField => RegularTextField(
-        max: 60,
-        controller: usernameController,
-        img: AppAssets.mailIcon,
-        hintText: AppStrings.email,
-        obscureText: false,
-        validator: (value) {
-          if (value!.isEmpty) {
-            return AppStrings.pleaseEnterYourEmail;
-          }
-          return null;
-        },
-      );
-  get forgetPasswordText => Padding(
-        padding: EdgeInsets.only(right: 6.w),
-        child: const Align(
-          alignment: AlignmentDirectional.topEnd,
-          child: Text(
-            AppStrings.forgetPassword,
-            style: TextStyle(
-                color: AppColors.smallTextColor,
-                fontFamily: FontFamilies.alexandria,
-                fontWeight: FontWeight.w500,
-                fontSize: 11),
-          ),
-        ),
-      );
   get donNotHaveAccountText => const Text(
         AppStrings.doNotHaveAccount,
         style: TextStyle(

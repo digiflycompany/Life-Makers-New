@@ -11,7 +11,7 @@ class ForgetPasswordText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(right: context.width6),
+      padding: EdgeInsets.only(right: context.width6,bottom: context.height20),
       child: Align(
         alignment: AlignmentDirectional.topEnd,
         child: TextButton(
@@ -19,7 +19,7 @@ class ForgetPasswordText extends StatelessWidget {
           style: TextButton.styleFrom(
               splashFactory: NoSplash.splashFactory,
               padding: EdgeInsets.zero,
-              minimumSize: Size(50, 30),
+              minimumSize: Size(50.w, 30.h),
               tapTargetSize:
               MaterialTapTargetSize.shrinkWrap,
               alignment: Alignment.centerLeft),
