@@ -5,7 +5,7 @@ import 'package:page_transition/page_transition.dart';
 
 import '../../../core/utils/app-assets.dart';
 import '../../../core/utils/app-color.dart';
-import '../../authentication/presentation/thanks_screen.dart';
+import '../../../core/widgets/thanks_screen.dart';
 
 class MemberShipThirdStep extends StatefulWidget {
   const MemberShipThirdStep({Key? key}) : super(key: key);

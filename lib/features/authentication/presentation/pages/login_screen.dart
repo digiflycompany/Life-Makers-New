@@ -10,7 +10,7 @@ import 'package:life_makers/features/authentication/presentation/pages/enter_pho
 import 'package:life_makers/features/authentication/presentation/widgets/createAccountText.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/email_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/login_circular.dart';
-import 'package:life_makers/features/authentication/presentation/widgets/login_image.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/login_widgets/login_image.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/password_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/small_text.dart';
 import 'package:life_makers/features/home_page/presentation/pages/drawer_page.dart';

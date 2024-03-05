@@ -3,8 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:life_makers/core/utils/extensions.dart';
 import 'package:page_transition/page_transition.dart';
 
-import '../../../../core/utils/app-assets.dart';
-import '../../home_page/presentation/pages/drawer_page.dart';
+import '../../../core/utils/app-assets.dart';
+import '../../features/home_page/presentation/pages/drawer_page.dart';
 
 class ThanksScreen extends StatelessWidget {
   const ThanksScreen({super.key});
