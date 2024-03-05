@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:life_makers/core/utils/extensions.dart';
 
-import '../../services/app.service.dart';
+import '../../core/utils/app.service.dart';
 
 Future<T?> pushRoute<T>(
   String route, {

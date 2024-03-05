@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:life_makers/core/utils/app-color.dart';
+import 'package:life_makers/features/authentication/presentation/pages/enter_phone_screen.dart';
 import 'package:life_makers/features/authentication/presentation/pages/sign_up_screen.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 
@@ -34,6 +35,11 @@ class RouteGenerator {
       case Routes.signUpPageRoute:
         return buildPageRoute(
             child: SignUpScreen(),
+            routeSettings: routeSettings,
+            pageRouteAnimation: PageRouteAnimation.fade);
+      case Routes.enterPhonePageRoute:
+        return buildPageRoute(
+            child: EnterPhoneScreen(),
             routeSettings: routeSettings,
             pageRouteAnimation: PageRouteAnimation.fade);
     }

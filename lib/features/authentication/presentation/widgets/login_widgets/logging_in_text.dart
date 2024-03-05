@@ -12,12 +12,12 @@ class LoggingInText extends StatelessWidget {
     return Align(
       alignment: AlignmentDirectional.centerEnd,
       child: Padding(
-        padding: EdgeInsets.only(top: context.height20,bottom: context.height16),
+        padding: EdgeInsets.only(top: context.height11,bottom: context.height16),
         child: Text(
           AppStrings.loggingIn,
           style: TextStyle(
               color: AppColors.blueColor,
-              fontSize: 16.sp,
+              fontSize: 14.sp,
               fontWeight: FontWeight.w600
           ),
         ),

@@ -6,8 +6,8 @@ import 'package:life_makers/features/authentication/cubit/login_cubit/login_cubi
 import 'package:life_makers/features/authentication/cubit/login_cubit/login_states.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/email_text_field.dart';
 
-class EmailTextField extends StatelessWidget {
-  const EmailTextField({super.key});
+class LoginEmailTextField extends StatelessWidget {
+  const LoginEmailTextField({super.key});
 
   @override
   Widget build(BuildContext context) {

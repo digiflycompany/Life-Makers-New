@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/core/widgets/custom_snack_bar.dart';
+import 'package:life_makers/core/widgets/spacer.dart';
 import 'package:life_makers/features/authentication/cubit/login_cubit/login_cubit.dart';
 import 'package:life_makers/features/authentication/cubit/login_cubit/login_states.dart';
-import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_cubit.dart';
-import 'package:life_makers/features/authentication/presentation/pages/enter_phone_screen.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/createAccountText.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/email_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/login_circular.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/login_widgets/forget_password_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/login_widgets/login_email_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/login_widgets/logging_in_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/login_widgets/login_image.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/login_widgets/login_password_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/login_widgets/welcome_back_text.dart';
-import 'package:life_makers/features/authentication/presentation/widgets/password_text_field.dart';
 import 'package:life_makers/features/home_page/presentation/pages/drawer_page.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 import 'package:page_transition/page_transition.dart';
@@ -76,77 +75,11 @@ class _LoginScreenState extends State<LoginScreen> {
                               children: [
                                 WelcomeBackText(),
                                 LoggingInText(),
-                                EmailTextField(),
-                                PasswordTextField(
-                                  controller: passwordController,
-                                  hintText: AppStrings.password,
-                                  obscureText: loginCubit.isPasswordVisible,
-                                  prefixIcon: GestureDetector(
-                                    onTap: () {
-                                      loginCubit.togglePasswordVisibility();
-                                    },
-                                    child: loginCubit.isPasswordVisible
-                                        ? Padding(
-                                            padding: EdgeInsets.only(top: 3.h),
-                                            child: Transform.scale(
-                                                scale: 0.49,
-                                                child: SvgPicture.asset(AppAssets.hideIcon)),
-                                          )
-                                        : Padding(
-                                            padding: EdgeInsets.only(top: 3.h),
-                                            child:Transform.scale(
-                                                scale: 0.49,
-                                                child: SvgPicture.asset(AppAssets.showIcon)),
-                                          ),
-                                  ),
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return AppStrings.pleaseEnterYourPassword;
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                SizedBox(
-                                  height: 4.h,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(right: 6.w),
-                                  child: Align(
-                                    alignment: AlignmentDirectional.topEnd,
-                                    child: TextButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          PageTransition(
-                                            type: PageTransitionType.fade,
-                                            duration: const Duration(
-                                                milliseconds: 100),
-                                            child: BlocProvider.value(
-                                              value:
-                                                  context.read<SignUpCubit>(),
-                                              child: EnterPhoneScreen(),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                      style: TextButton.styleFrom(
-                                          splashFactory: NoSplash.splashFactory,
-                                          padding: EdgeInsets.zero,
-                                          minimumSize: Size(50, 30),
-                                          tapTargetSize:
-                                              MaterialTapTargetSize.shrinkWrap,
-                                          alignment: Alignment.centerLeft),
-                                      child: Text(
-                                        AppStrings.forgetPassword,
-                                        style: TextStyle(
-                                            color: AppColors.smallTextColor,
-                                            fontFamily: FontFamilies.alexandria,
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 11),
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                LoginEmailTextField(),
+                                VerticalSpace(context.height20),
+                                LoginPasswordTextField(),
+                                VerticalSpace(context.height4),
+                                ForgetPasswordText(),
                                 SizedBox(
                                   height: 22.h,
                                 ),
