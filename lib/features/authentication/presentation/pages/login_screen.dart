@@ -10,6 +10,7 @@ import 'package:life_makers/features/authentication/presentation/pages/enter_pho
 import 'package:life_makers/features/authentication/presentation/widgets/createAccountText.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/email_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/login_circular.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/login_image.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/password_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/small_text.dart';
 import 'package:life_makers/features/home_page/presentation/pages/drawer_page.dart';
@@ -66,11 +67,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           SizedBox(
-                            height: 15.h,
+                            height: context.height16,
                           ),
-                          loginImage,
+                          LoginImage(),
                           SizedBox(
-                            height: 12.h,
+                            height: context.height12,
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 23.w),
@@ -207,12 +208,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   }
 
-  get loginImage => Align(
-      alignment: AlignmentDirectional.center,
-      child: Padding(
-        padding: const EdgeInsets.only(top: 32.0),
-        child: SvgPicture.asset(AppAssets.logoFinalSvg),
-      ));
   get welcomeBackText => Align(
       alignment: AlignmentDirectional.centerEnd,
       child: SmallText(

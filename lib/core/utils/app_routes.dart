@@ -2,20 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:life_makers/core/utils/app-color.dart';
-import 'package:life_makers/features/authentication/presentation/pages/login_screen.dart';
 import 'package:life_makers/features/authentication/presentation/pages/sign_up_screen.dart';
+import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 
 enum PageRouteAnimation { fade, scale, rotate, slide, slideBottomTop }
 
 class Routes {
   Routes._internal();
 
-  static const String onBoardingRoute = "/";
-  static const String loginRoute = "/login_screen";
-  static const String signUpRoute = "/sign_up_screen";
-  static const String resetPasswordRoute = "/reset_password_screen";
-  static const String verifyEmailRoute = "/verify_email_screen";
-  static const String createNewPasswordRoute = "/create_new_password_screen";
+  static const String firstPageRoute = "/";
+  static const String signUpPageRoute = "/sign_up_screen";
+  static const String otpPageRoute = "/otp_screen";
+  static const String enterPhonePageRoute = "/enter_phone_screen";
+  static const String changPasswordPageRoute = "/change_password";
 }
 
 class RouteGenerator {
@@ -27,12 +26,12 @@ class RouteGenerator {
   static Route<dynamic>? getRoute(RouteSettings routeSettings) {
     debugPrint(routeSettings.name);
     switch (routeSettings.name) {
-      case Routes.loginRoute:
+      case Routes.firstPageRoute:
         return buildPageRoute(
-            child:  LoginScreen(),
+            child: PreferencesHelper.applicationFirstPage,
             routeSettings: routeSettings,
             pageRouteAnimation: PageRouteAnimation.fade);
-      case Routes.signUpRoute:
+      case Routes.signUpPageRoute:
         return buildPageRoute(
             child: SignUpScreen(),
             routeSettings: routeSettings,

@@ -1,14 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:life_makers/core/utils/app_routes.dart';
 import 'package:life_makers/features/authentication/cubit/card_cubit/cards_cubit.dart';
 import 'package:life_makers/features/authentication/cubit/login_cubit/login_cubit.dart';
 import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_cubit.dart';
 import 'package:life_makers/features/edit_account/cubit/edit_account_cubit.dart';
 import 'package:life_makers/features/home_page/cubit/menu_page_cubit/menu_page_cubit.dart';
 import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/cubit/seasonal_campaigns_cubit.dart';
-import 'package:life_makers/features/splash_screen/presentation/cubit/splash_cubit.dart';
-import 'package:life_makers/features/splash_screen/presentation/widgets/splash_screen.dart';
 import 'package:life_makers/features/volunteer_opportunity/cubit/one_day_activity_cubit.dart';
 import 'package:life_makers/features/volunteer_opportunity/cubit/remote_tasks_cubit.dart';
 import 'package:life_makers/features/volunteer_opportunity/cubit/suggestion_cubit.dart';
@@ -30,7 +29,7 @@ Future<void> main() async {
     WidgetsFlutterBinding.ensureInitialized();
     DioHelper.init();
     PreferencesHelper.init();
-  runApp(MyApp());
+    runApp(MyApp());
 
 }
 
@@ -93,9 +92,6 @@ class MyApp extends StatelessWidget {
         BlocProvider<HomeCalenderCubit>(
           create: (BuildContext context) => HomeCalenderCubit(),
         ),
-        BlocProvider<SplashCubit>(
-          create: (BuildContext context) => SplashCubit(),
-        ),
         BlocProvider<CardCubit>(
           create: (BuildContext context) => CardCubit(),
         ),
@@ -109,7 +105,8 @@ class MyApp extends StatelessWidget {
           title: AppStrings.lifeMaker,
           debugShowCheckedModeBanner: false,
           navigatorKey: AppService().navigatorKey,
-          home:SplashScreen(),
+          onGenerateRoute: RouteGenerator.getRoute,
+          //home:SplashScreen(),
         ),
       ),
     );
