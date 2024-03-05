@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+
 import '../../../../core/utils/app-color.dart';
 import 'home_page.dart';
 import 'menu_page.dart';
 
 class DrawerPage extends StatelessWidget {
-   DrawerPage({super.key});
+  DrawerPage({super.key});
 
   final ZoomDrawerController _drawerController = ZoomDrawerController();
 
@@ -16,7 +17,7 @@ class DrawerPage extends StatelessWidget {
       style: DrawerStyle.defaultStyle,
       menuScreen: const MenuScreen(),
       mainScreenTapClose: true,
-      mainScreen:  HomePage(),
+      mainScreen: HomePage(),
       borderRadius: 24.0,
       shadowLayer1Color: AppColors.drawerColor,
       showShadow: true,
