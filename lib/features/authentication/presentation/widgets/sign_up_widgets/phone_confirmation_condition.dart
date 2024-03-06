@@ -9,6 +9,7 @@ import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/core/widgets/spacer.dart';
 import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_cubit.dart';
 import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_states.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/send_confirmation_code_button.dart';
 
 class PhoneConfirmationCondition extends StatelessWidget {
   const PhoneConfirmationCondition({super.key});
@@ -21,49 +22,7 @@ class PhoneConfirmationCondition extends StatelessWidget {
         return Column(
           children: [
             if (signUpCubit.otpSent == false)
-              GestureDetector(
-                onTap: () {
-                  if (signUpCubit.phoneController.isNotNull &&
-                      signUpCubit.phoneController
-                          .toString()
-                          .length >= 11) {
-                    signUpCubit.OtpCheck(signUpCubit.phoneController.text);
-                  }
-                },
-                child: Align(
-                    alignment: AlignmentDirectional.centerEnd,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                            width: 155.w,
-                            height: 50.h,
-                            decoration: BoxDecoration(
-                                color: AppColors.orangeBorderColor,
-                                borderRadius: BorderRadius.circular(5.r)),
-                            child: state is OtpSendLoading
-                                ? Center(
-                              child: Transform.scale(
-                                scale: 0.5,
-                                child: CircularProgressIndicator(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            )
-                                : Center(
-                              child: Text(
-                                'ارسال رمز التأكيد',
-                                textDirection: TextDirection.rtl,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 11.5.sp
-                                ),
-                              ),
-                            )),
-                      ],
-                    )),
-              ),
+              const SendConfirmationCodeButton(),
             if (signUpCubit.otpSent == true && signUpCubit.isConfirmed == false)
               GestureDetector(
                 onTap: () {
