@@ -24,7 +24,7 @@ class RegularTextField extends StatelessWidget {
       this.suffixIcon,
       this.controller,
       required this.hintText,
-      required this.obscureText,
+      this.obscureText=false,
       this.validator,
       required this.img,
       this.iconWidth,
