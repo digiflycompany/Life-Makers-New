@@ -16,6 +16,7 @@ import 'package:life_makers/features/authentication/presentation/widgets/sign_up
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/id_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/location_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/name_text_field.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/phone_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/sign_in_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/sign_up_email_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/sign_up_logo.dart';
@@ -355,7 +356,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 VerticalSpace(context.height20),
                 const ExperienceTextField(),
                 VerticalSpace(context.height20),
-                phoneTextField,
+                const PhoneTextField(),
                 SizedBox(height: 11.h),
                 if (signUpCubit.otpSent == false)
                   GestureDetector(
@@ -486,13 +487,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   focusedBorderColor:
                                       AppColors.orangeBorderColor,
                                   borderColor: Color(0xFF512DA8),
-                                  //set to true to show as box or false to show as dash
                                   showFieldAsBox: true,
-                                  //runs when a code is typed in
                                   onCodeChanged: (String code) {
-                                    //handle validation or checks here
                                   },
-                                  //runs when every textfield is filled
                                   onSubmit: (String verificationCode) {
                                     signUpCubit.controller.text = verificationCode;
                                   }, // end onSubmit
@@ -579,41 +576,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ],
                         )),
                   ),
-                SizedBox(
-                  height: 25.h,
-                ),
-                state is SignUpLoading
-                    ? Container(
-                        width: 420.w,
-                        height: 63.h,
-                        decoration: BoxDecoration(
-                          color: AppColors.orangeBorderColor,
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
-                        child: Center(
-                            child: Transform.scale(
-                          scale: 0.5,
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
-                          ),
-                        )),
-                      )
-                    : AuthButton(
+                VerticalSpace(context.height24),
+                AuthButton(
                         text: AppStrings.createAccount,
                         onTap: () {
-                          // if (_formKey.currentState!.validate()) {
                           if (signUpCubit.isConfirmed == true && signUpCubit.otpSent == true) {
                             signUpCubit.handleSignUp();
                           } else if (signUpCubit.isConfirmed == false || signUpCubit.otpSent == false) {
                             CustomSnackBars.showErrorToast(
                                 title: 'برجاء تأكيد رقم الهاتف');
-                            // }
                           }
                         },
                       ),
-                SizedBox(
-                  height: 30.h,
-                ),
+              VerticalSpace(context.height32),
               ],
             ),
           ),

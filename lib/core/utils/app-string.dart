@@ -27,7 +27,8 @@ class AppStrings {
   static const String lifeMaker = 'Life Maker';
   static const String nameMustContainLetters = 'name must contain letters';
   static const String enterCorrectWhatsAppNumber = 'أدخل رقم واتساب صحيح';
-  static const String enterValidIdNumber = 'أدخل رقم واتساب صحيح';
+  static const String enterValidIdNumber = 'أدخل رقم قومي صحيح';
+  static const String enterValidNumber = 'أدخل رقم هاتف صحيح';
   static const String welcomeBack = 'اهلًا بعودتك';
   static const String loggingIn = 'تسجيل دخول';
   static const String email = 'البريد الالكتروني';
