@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
 import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/core/widgets/custom_snack_bar.dart';
@@ -12,7 +11,6 @@ import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_
 import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_states.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/auth_button.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/email_text_field.dart';
-import 'package:life_makers/features/authentication/presentation/widgets/password_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/confirm_password_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/name_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/sign_in_text.dart';
@@ -21,6 +19,7 @@ import 'package:life_makers/features/authentication/presentation/widgets/sign_up
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/sign_up_password_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/signing_up_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/username_text_field.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/whats_app_text_field.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-color.dart';
@@ -89,10 +88,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 VerticalSpace(context.height20),
                 const SignUpEmailTextField(),
                 VerticalSpace(context.height20),
-                whatsAppTextField,
-                SizedBox(
-                  height: 23.h,
-                ),
+                const WhatsAppTextField(),
+                VerticalSpace(context.height20),
                 idTextField,
                 SizedBox(
                   height: 23.h,
