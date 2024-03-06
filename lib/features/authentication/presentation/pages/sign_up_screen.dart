@@ -12,6 +12,7 @@ import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_
 import 'package:life_makers/features/authentication/presentation/widgets/auth_button.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/email_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/confirm_password_text_field.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/id_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/name_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/sign_in_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/sign_up_email_text_field.dart';
@@ -90,18 +91,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 VerticalSpace(context.height20),
                 const WhatsAppTextField(),
                 VerticalSpace(context.height20),
-                idTextField,
-                SizedBox(
-                  height: 23.h,
-                ),
+                const IdTextField(),
+                VerticalSpace(context.height20),
                 workTextField,
-                SizedBox(
-                  height: 23.h,
-                ),
+                VerticalSpace(context.height20),
                 locationTextField,
-                SizedBox(
-                  height: 23.h,
-                ),
+                VerticalSpace(context.height20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -353,11 +348,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 23.h,
-                ),
+                VerticalSpace(context.height20),
                 experienceTextField,
-                SizedBox(height: 23.h),
+                VerticalSpace(context.height20),
                 phoneTextField,
                 SizedBox(height: 11.h),
                 if (signUpCubit.otpSent == false)
@@ -657,23 +650,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
             return AppStrings.pleaseEnterWhatsapp;
           } else if (value.length != 11) {
             return 'أدخل رقم واتساب صحيح';
-          }
-          return null;
-        },
-      );
-
-  get idTextField => RegularTextField(
-        max: 14,
-        keyboardType: TextInputType.number,
-        controller: signUpCubit.idNumberController,
-        hintText: AppStrings.idNumber,
-        obscureText: false,
-        img: AppAssets.idCardIcon,
-        validator: (value) {
-          if (value!.isEmpty) {
-            return AppStrings.pleaseEnterId;
-          } else if (value.length != 14) {
-            return 'أدخل رقم قومي صحيح';
           }
           return null;
         },
