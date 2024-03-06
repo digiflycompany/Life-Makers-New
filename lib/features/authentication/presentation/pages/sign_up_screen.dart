@@ -14,6 +14,7 @@ import 'package:life_makers/features/authentication/presentation/widgets/auth_bu
 import 'package:life_makers/features/authentication/presentation/widgets/email_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/login_to_account_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/password_text_field.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/sign_up_logo.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-color.dart';
@@ -123,7 +124,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             padding: EdgeInsets.symmetric(horizontal: 23.w),
             child: Column(
               children: [
-                logoImg,
+                SignUpLogo(),
                 signingUpText,
                 SizedBox(
                   height: 15.h,
@@ -762,11 +763,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ));
     });
   }
-
-  get logoImg => Padding(
-        padding: EdgeInsets.only(top: 15.h),
-        child: Center(child: SvgPicture.asset(AppAssets.signupFinalSvg)),
-      );
 
   get signingUpText => const Align(
         alignment: AlignmentDirectional.centerEnd,
