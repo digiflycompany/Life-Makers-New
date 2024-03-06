@@ -5,16 +5,19 @@ import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
-import 'package:get/get.dart';
 import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/core/widgets/custom_snack_bar.dart';
+import 'package:life_makers/core/widgets/spacer.dart';
 import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_cubit.dart';
 import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_states.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/auth_button.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/email_text_field.dart';
-import 'package:life_makers/features/authentication/presentation/widgets/login_to_account_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/password_text_field.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/name_text_field.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/sign_in_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/sign_up_logo.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/signing_up_text.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/username_text_field.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-color.dart';
@@ -31,71 +34,17 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   // final _formKey = GlobalKey<FormState>();
-  String? selectedCityName;
-  String? selectedAreaName;
-  late SignUpCubit signUpCubit;
-  final TextEditingController controller = TextEditingController();
-  final TextEditingController textEditingController = TextEditingController();
-  final TextEditingController textEditingController2 = TextEditingController();
 
-  final TextEditingController cityDropdownController = TextEditingController();
-
-  final TextEditingController areaDropdownController = TextEditingController();
-
-  final TextEditingController nameController = TextEditingController();
-
-  final TextEditingController usernameController = TextEditingController();
-
-  final TextEditingController passwordController = TextEditingController();
-
-  final TextEditingController confirmPasswordController = TextEditingController();
-
-  final TextEditingController emailController = TextEditingController();
-
-  final TextEditingController phoneController = TextEditingController();
-
-  final TextEditingController whatsappController = TextEditingController();
-
-  final TextEditingController idNumberController = TextEditingController();
-
-  final TextEditingController workController = TextEditingController();
-
-  final TextEditingController addressController = TextEditingController();
-
-  final TextEditingController previousExperienceController = TextEditingController();
-
-  bool isConfirmed = false;
-
-  bool otpSent = false;
-
-  bool resend = false;
 
   @override
   void initState() {
     super.initState();
-    signUpCubit = context.read<SignUpCubit>();
     signUpCubit.fetchCityData();
    }
 
   @override
   Widget build(BuildContext context) {
-    void _handleSignUp() {
-      signUpCubit.SignUp(
-        nameController.text,
-        usernameController.text,
-        passwordController.text,
-        emailController.text,
-        phoneController.text,
-        whatsappController.text,
-        idNumberController.text,
-        workController.text,
-        addressController.text,
-        cityDropdownController.text,
-        areaDropdownController.text,
-        previousExperienceController.text,
-      );
-    }
-
+    SignUpCubit signUpCubit = context.read<SignUpCubit>();
     return BlocConsumer<SignUpCubit, SignUpState>(listener: (context, state) {
       if (state is SignUpSuccess) {
         Navigator.pushReplacement(
@@ -105,14 +54,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 duration: const Duration(milliseconds: 400),
                 child: DrawerPage()));
       } else if (state is OtpSendSuccess) {
-        otpSent = true;
+        signUpCubit.otpSent = true;
       } else if (state is OtpSubmitSuccess) {
-        isConfirmed = true;
+        signUpCubit.isConfirmed = true;
       } else if (state is OtpResend) {
-        resend = true;
+        signUpCubit.resend = true;
       } else if (state is OtpResendCycleState) {
-        otpSent = false;
-        phoneController.clear();
+        signUpCubit.otpSent = false;
+        signUpCubit.phoneController.clear();
       }
     }, builder: (context, state) {
       return Scaffold(
@@ -125,24 +74,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: Column(
               children: [
                 SignUpLogo(),
-                signingUpText,
-                SizedBox(
-                  height: 15.h,
-                ),
-                signIn,
-                SizedBox(
-                  height: 16.h,
-                ),
-                nameTextField,
-                SizedBox(
-                  height: 23.h,
-                ),
-                userNameTextField,
-                SizedBox(
-                  height: 23.h,
-                ),
+                SigningUpText(),
+                SignInText(),
+                NameTextField(),
+                VerticalSpace(context.height20),
+                UsernameTextField(),
+                VerticalSpace(context.height20),
                 PasswordTextField(
-                  controller: passwordController,
+                  controller: signUpCubit.passwordController,
                   hintText: AppStrings.password,
                   obscureText: signUpCubit.isPasswordVisible,
                   prefixIcon: GestureDetector(
@@ -186,7 +125,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   height: 23.h,
                 ),
                 PasswordTextField(
-                  controller: confirmPasswordController,
+                  controller: signUpCubit.confirmPasswordController,
                   hintText: AppStrings.confirmPassword,
                   obscureText: signUpCubit.isConfirmPasswordVisible,
                   prefixIcon: GestureDetector(
@@ -210,8 +149,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   validator: (value) {
                     if (value!.isEmpty) {
                       return AppStrings.pleaseConfirmPassword;
-                    } else if (confirmPasswordController.text !=
-                        passwordController.text) {
+                    } else if (signUpCubit.confirmPasswordController.text !=
+                        signUpCubit.passwordController.text) {
                       return 'الرقم السري غير مماثل للرقم السري في الأعلى';
                     }
 
@@ -275,7 +214,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 .toList(),
                             onChanged: (String? areaName) {
                               // Update the selected city name
-                              selectedAreaName = areaName;
+                              signUpCubit.selectedAreaName = areaName;
 
                               // Find the corresponding city object based on the selected city name
                               final selectedArea =
@@ -286,13 +225,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               );
 
                               // Update your state or perform actions with the selected city
-                              areaDropdownController.text =
+                              signUpCubit.areaDropdownController.text =
                                   selectedArea.name ?? "";
                               signUpCubit.fetchAreaData();
                             },
                             isExpanded: true,
                             hint: Text(
-                              selectedAreaName ?? 'المركز',
+                              signUpCubit.selectedAreaName ?? 'المركز',
                               style: TextStyle(
                                   color: AppColors.smallTextColor,
                                   fontFamily: FontFamilies.alexandria,
@@ -322,7 +261,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               height: 40,
                             ),
                             dropdownSearchData: DropdownSearchData(
-                              searchController: textEditingController2,
+                              searchController: signUpCubit.textEditingController2,
                               searchInnerWidgetHeight: 50,
                               searchInnerWidget: Container(
                                 height: 50,
@@ -335,7 +274,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 child: TextFormField(
                                   expands: true,
                                   maxLines: null,
-                                  controller: textEditingController2,
+                                  controller: signUpCubit.textEditingController2,
                                   decoration: InputDecoration(
                                     isDense: true,
                                     contentPadding: const EdgeInsets.symmetric(
@@ -360,7 +299,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             onMenuStateChange: (isOpen) {
                               if (!isOpen) {
-                                textEditingController2.clear();
+                                signUpCubit.textEditingController2.clear();
                               }
                             },
                           ),
@@ -395,8 +334,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     ))
                                 .toList(),
                             onChanged: (String? cityName) {
-                              selectedCityName = cityName;
-                              selectedAreaName = null;
+                              signUpCubit.selectedCityName = cityName;
+                              signUpCubit.selectedAreaName = null;
                               setState(() {});
                               // Find the corresponding city object based on the selected city name
                               final selectedCity =
@@ -405,7 +344,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 orElse: () => signUpCubit.citiesList
                                     .first, // Default to the first city
                               );
-                              cityDropdownController.text =
+                              signUpCubit.cityDropdownController.text =
                                   selectedCity.name ?? "";
                               signUpCubit.cityId =
                                   selectedCity.id?.toInt() ?? 0;
@@ -414,7 +353,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             hint: Align(
                               alignment: Alignment.centerRight,
                               child: Text(
-                                selectedCityName ?? 'المحافظة',
+                                signUpCubit.selectedCityName ?? 'المحافظة',
                                 style: TextStyle(
                                     color: AppColors.smallTextColor,
                                     fontFamily: FontFamilies.alexandria,
@@ -444,7 +383,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               height: 40,
                             ),
                             dropdownSearchData: DropdownSearchData(
-                              searchController: textEditingController,
+                              searchController: signUpCubit.textEditingController,
                               searchInnerWidgetHeight: 50,
                               searchInnerWidget: Container(
                                 height: 50,
@@ -457,7 +396,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 child: TextFormField(
                                   expands: true,
                                   maxLines: null,
-                                  controller: textEditingController,
+                                  controller: signUpCubit.textEditingController,
                                   decoration: InputDecoration(
                                     isDense: true,
                                     contentPadding: const EdgeInsets.symmetric(
@@ -483,7 +422,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             onMenuStateChange: (isOpen) {
                               if (!isOpen) {
-                                textEditingController.clear();
+                                signUpCubit.textEditingController.clear();
                               }
                             },
                           ),
@@ -499,12 +438,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 SizedBox(height: 23.h),
                 phoneTextField,
                 SizedBox(height: 11.h),
-                if (otpSent == false)
+                if (signUpCubit.otpSent == false)
                   GestureDetector(
                     onTap: () {
-                      if (phoneController.isNotNull &&
-                          phoneController.toString().length >= 11) {
-                        signUpCubit.OtpCheck(phoneController.text);
+                      if (signUpCubit.phoneController.isNotNull &&
+                          signUpCubit.phoneController.toString().length >= 11) {
+                        signUpCubit.OtpCheck(signUpCubit.phoneController.text);
                       }
                     },
                     child: Align(
@@ -542,10 +481,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ],
                         )),
                   ),
-                if (otpSent == true && isConfirmed == false)
+                if (signUpCubit.otpSent == true && signUpCubit.isConfirmed == false)
                   GestureDetector(
                     onTap: () {
-                      signUpCubit.OtpSubmit(controller.text);
+                      signUpCubit.OtpSubmit(signUpCubit.controller.text);
                     },
                     child: Align(
                         alignment: AlignmentDirectional.centerEnd,
@@ -554,7 +493,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           children: [
                             Padding(
                               padding: EdgeInsets.only(
-                                  bottom: resend == true ? 0.h : 12.h),
+                                  bottom: signUpCubit.resend == true ? 0.h : 12.h),
                               child: Column(
                                 children: [
                                   Container(
@@ -593,7 +532,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   SizedBox(
                                     height: 18.h,
                                   ),
-                                  if (resend)
+                                  if (signUpCubit.resend)
                                     Padding(
                                       padding: EdgeInsets.only(left: 6.0),
                                       child: InkWell(
@@ -636,7 +575,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   },
                                   //runs when every textfield is filled
                                   onSubmit: (String verificationCode) {
-                                    controller.text = verificationCode;
+                                    signUpCubit.controller.text = verificationCode;
                                   }, // end onSubmit
                                 ),
                                 SizedBox(
@@ -684,7 +623,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ],
                         )),
                   ),
-                if (isConfirmed == true && otpSent == true)
+                if (signUpCubit.isConfirmed == true && signUpCubit.otpSent == true)
                   GestureDetector(
                     onTap: () {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -744,9 +683,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         text: AppStrings.createAccount,
                         onTap: () {
                           // if (_formKey.currentState!.validate()) {
-                          if (isConfirmed == true && otpSent == true) {
-                            _handleSignUp();
-                          } else if (isConfirmed == false || otpSent == false) {
+                          if (signUpCubit.isConfirmed == true && signUpCubit.otpSent == true) {
+                            signUpCubit.handleSignUp();
+                          } else if (signUpCubit.isConfirmed == false || signUpCubit.otpSent == false) {
                             CustomSnackBars.showErrorToast(
                                 title: 'برجاء تأكيد رقم الهاتف');
                             // }
@@ -764,64 +703,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
     });
   }
 
-  get signingUpText => const Align(
-        alignment: AlignmentDirectional.centerEnd,
-        child: Text(
-          AppStrings.signingUp,
-          style: TextStyle(
-              color: AppColors.blueColor,
-              fontFamily: FontFamilies.alexandria,
-              fontSize: 15),
-        ),
-      );
-
-  get haveAnAccountText => const Text(
-        AppStrings.haveAnAccount,
-        style: TextStyle(
-            color: AppColors.smallTextColor,
-            fontFamily: FontFamilies.alexandria,
-            fontWeight: FontWeight.w500,
-            fontSize: 11),
-      );
-
-  get signIn => Align(
-        alignment: AlignmentDirectional.centerEnd,
-        child: Row(
-          textDirection: TextDirection.rtl,
-          children: [
-            haveAnAccountText,
-            SizedBox(
-              width: 4.3.w,
-            ),
-            loginToAccountText(),
-          ],
-        ),
-      );
-
-  get nameTextField => RegularTextField(
-        controller: nameController,
-        hintText: AppStrings.name,
-        obscureText: false,
-        img: AppAssets.usernameIcon,
-        validator: (value) {
-          if (value!.isEmpty) {
-            return AppStrings.pleaseEnterName;
-          } else if (nameController.text.isNumericOnly) {
-            return 'name must contain letters';
-          }
-          return null;
-        },
-      );
-
   get userNameTextField => RegularTextField(
-    controller: nameController,
+    controller: signUpCubit.nameController,
     hintText: AppStrings.username,
     obscureText: false,
     img: AppAssets.usernameIcon,
     validator: (value) {
       if (value!.isEmpty) {
         return AppStrings.pleaseEnterName;
-      } else if (nameController.text.isNumericOnly) {
+      } else if (signUpCubit.nameController.text.isNumericOnly) {
         return 'name must contain letters';
       }
       return null;
@@ -830,7 +720,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   get emailTextField => RegularTextField(
         max: 40,
-        controller: emailController,
+        controller: signUpCubit.emailController,
         hintText: AppStrings.email,
         obscureText: false,
         img: AppAssets.mailIcon,
@@ -844,15 +734,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   get phoneTextField => RegularTextField(
         max: 11,
-        readOnly: otpSent == true ? true : false,
+        readOnly: signUpCubit.otpSent == true ? true : false,
         keyboardType: TextInputType.number,
-        controller: phoneController,
+        controller: signUpCubit.phoneController,
         hintText: AppStrings.phoneNumber,
         obscureText: false,
         img: AppAssets.phoneIcon,
         validator: (value) {
           if (value!.isEmpty) {
-            if (phoneController.text.length < 11) {
+            if (signUpCubit.phoneController.text.length < 11) {
               return AppStrings.pleaseEnterPhone;
             }
           } else if (value.length != 11) {
@@ -865,7 +755,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   get whatsAppTextField => RegularTextField(
         max: 11,
         keyboardType: TextInputType.number,
-        controller: whatsappController,
+        controller: signUpCubit.whatsappController,
         hintText: AppStrings.whatsAppNumber,
         obscureText: false,
         img: AppAssets.whatsAppIcon,
@@ -882,7 +772,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   get idTextField => RegularTextField(
         max: 14,
         keyboardType: TextInputType.number,
-        controller: idNumberController,
+        controller: signUpCubit.idNumberController,
         hintText: AppStrings.idNumber,
         obscureText: false,
         img: AppAssets.idCardIcon,
@@ -898,7 +788,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   get workTextField => RegularTextField(
         max: 60,
-        controller: workController,
+        controller: signUpCubit.workController,
         hintText: AppStrings.work,
         obscureText: false,
         img: AppAssets.workIcon,
@@ -912,7 +802,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   get locationTextField => RegularTextField(
         max: 60,
-        controller: addressController,
+        controller: signUpCubit.addressController,
         hintText: AppStrings.address,
         obscureText: false,
         img: AppAssets.locationIcon,
@@ -926,7 +816,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   get experienceTextField => RegularTextField(
         max: 60,
-        controller: previousExperienceController,
+        controller: signUpCubit.previousExperienceController,
         hintText: AppStrings.experience,
         obscureText: false,
         img: AppAssets.experienceIcon,

@@ -32,6 +32,46 @@ class SignUpCubit extends Cubit<SignUpState> {
   NotificationModel? notificationModel;
   CurrentJoinedCampaignsAndOpp? currentJoinedCampaignsAndOpp;
 
+  String? selectedCityName;
+  String? selectedAreaName;
+  late SignUpCubit signUpCubit;
+  final TextEditingController controller = TextEditingController();
+  final TextEditingController textEditingController = TextEditingController();
+  final TextEditingController textEditingController2 = TextEditingController();
+  final TextEditingController cityDropdownController = TextEditingController();
+  final TextEditingController areaDropdownController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController whatsappController = TextEditingController();
+  final TextEditingController idNumberController = TextEditingController();
+  final TextEditingController workController = TextEditingController();
+  final TextEditingController addressController = TextEditingController();
+  final TextEditingController previousExperienceController = TextEditingController();
+  bool isConfirmed = false;
+  bool otpSent = false;
+  bool resend = false;
+
+  void handleSignUp() {
+    signUpCubit.SignUp(
+      signUpCubit.nameController.text,
+      signUpCubit.usernameController.text,
+      signUpCubit.passwordController.text,
+      signUpCubit.emailController.text,
+      signUpCubit.phoneController.text,
+      signUpCubit.whatsappController.text,
+      signUpCubit.idNumberController.text,
+      signUpCubit.workController.text,
+      signUpCubit.addressController.text,
+      signUpCubit.cityDropdownController.text,
+      signUpCubit.areaDropdownController.text,
+      signUpCubit.previousExperienceController.text,
+    );
+  }
+
   void resendOtp() {
     emit(OtpResend());
   }
