@@ -14,7 +14,6 @@ import 'package:life_makers/features/authentication/presentation/widgets/auth_bu
 import 'package:life_makers/features/authentication/presentation/widgets/email_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/login_to_account_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/password_text_field.dart';
-import 'package:life_makers/features/authentication/presentation/widgets/username_text_feild.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-color.dart';
@@ -48,8 +47,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   final TextEditingController passwordController = TextEditingController();
 
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
 
   final TextEditingController emailController = TextEditingController();
 
@@ -63,8 +61,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   final TextEditingController addressController = TextEditingController();
 
-  final TextEditingController previousExperienceController =
-      TextEditingController();
+  final TextEditingController previousExperienceController = TextEditingController();
 
   bool isConfirmed = false;
 
@@ -77,8 +74,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.initState();
     signUpCubit = context.read<SignUpCubit>();
     signUpCubit.fetchCityData();
-    // if(Platform.isAndroid)
-    //   FirebaseCustomNotification.setUpFirebase();
    }
 
   @override
@@ -822,20 +817,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
         },
       );
 
-  get userNameTextField => UsernameTextField(
-        controller: usernameController,
-        hintText: AppStrings.username,
-        obsecureText: false,
-        img: AppAssets.usernameIcon,
-        validator: (value) {
-          if (value!.isEmpty) {
-            return AppStrings.pleaseEnterUserName;
-          } else if (usernameController.text.isNumericOnly) {
-            return 'username must contain letters';
-          }
-          return null;
-        },
-      );
+  get userNameTextField => RegularTextField(
+    controller: nameController,
+    hintText: AppStrings.username,
+    obscureText: false,
+    img: AppAssets.usernameIcon,
+    validator: (value) {
+      if (value!.isEmpty) {
+        return AppStrings.pleaseEnterName;
+      } else if (nameController.text.isNumericOnly) {
+        return 'name must contain letters';
+      }
+      return null;
+    },
+  );
 
   get emailTextField => RegularTextField(
         max: 40,
@@ -843,8 +838,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
         hintText: AppStrings.email,
         obscureText: false,
         img: AppAssets.mailIcon,
-        iconWidth: 14.w,
-        iconHeight: 14.h,
         validator: (value) {
           if (value!.isEmpty) {
             return AppStrings.pleaseEnterEmail;
@@ -897,8 +890,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
         hintText: AppStrings.idNumber,
         obscureText: false,
         img: AppAssets.idCardIcon,
-        iconHeight: 17.h,
-        iconWidth: 17.w,
         validator: (value) {
           if (value!.isEmpty) {
             return AppStrings.pleaseEnterId;
@@ -929,7 +920,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
         hintText: AppStrings.address,
         obscureText: false,
         img: AppAssets.locationIcon,
-        iconHeight: 18.h,
         validator: (value) {
           if (value!.isEmpty) {
             return AppStrings.pleaseEnterAddress;

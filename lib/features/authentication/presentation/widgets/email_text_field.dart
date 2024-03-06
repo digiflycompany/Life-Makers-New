@@ -95,7 +95,7 @@ class RegularTextField extends StatelessWidget {
                   SizedBox(width:context.width8,),
                   Container(
                     width: 2.w,
-                    height: context.height27,
+                    height: context.height20,
                     color: AppColors.blueColor,
                   ),
                 ],

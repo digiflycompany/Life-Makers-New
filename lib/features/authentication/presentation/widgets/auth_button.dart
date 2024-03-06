@@ -26,9 +26,15 @@ class AuthButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(5.r),
             ),
             child: Center(
-              child: state is LoginLoading ? Transform.scale(
-                  scale: 0.6,
-                  child: CircularProgressIndicator.adaptive()):Text(
+              child: state is LoginLoading ?Theme(
+                data: Theme.of(context).copyWith(
+              colorScheme: ColorScheme.fromSwatch().copyWith(
+                primary: Colors.white,
+              ),
+            ),
+            child: Transform.scale(
+                scale: 0.6,
+                child: CircularProgressIndicator.adaptive()),):Text(
                 text!,
                 style: TextStyle(
                     color: Colors.white,
