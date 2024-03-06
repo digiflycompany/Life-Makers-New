@@ -38,6 +38,7 @@ class AppStrings {
   static const String passwordMustContainAtLeastOneCapital = 'يجب أن تحتوي كلمة المرور على حرف أبجدي على الأقل';
   static const String passwordMustContainAtLeastOneNumber = 'يجب أن تحتوي كلمة المرور على رقم واحد على الأقل';
   static const String passwordMustContainAtLeastOneSpecialCharacter = 'يجب أن تحتوي كلمة المرور على رقم واحد على الأقل';
+  static const String passwordNotMatching= 'الرقم السري غير مماثل للرقم السري في الأعلى';
   static const String doNotHaveAccount = 'ليس لديك حساب؟';
   static const String createAccount = 'انشاء حساب';
   static const String mainPage = 'الرئيسية';

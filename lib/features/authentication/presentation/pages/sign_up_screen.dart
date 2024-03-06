@@ -13,6 +13,7 @@ import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_
 import 'package:life_makers/features/authentication/presentation/widgets/auth_button.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/email_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/password_text_field.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/confirm_password_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/name_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/sign_in_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/sign_up_logo.dart';
@@ -74,51 +75,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
             padding: EdgeInsets.symmetric(horizontal: 23.w),
             child: Column(
               children: [
-                SignUpLogo(),
-                SigningUpText(),
-                SignInText(),
-                NameTextField(),
+                const SignUpLogo(),
+                const SigningUpText(),
+                const SignInText(),
+                const NameTextField(),
                 VerticalSpace(context.height20),
-                UsernameTextField(),
+                const UsernameTextField(),
                 VerticalSpace(context.height20),
-                SignUpPasswordTextField(),
+                const SignUpPasswordTextField(),
                 VerticalSpace(context.height20),
-                PasswordTextField(
-                  controller: signUpCubit.confirmPasswordController,
-                  hintText: AppStrings.confirmPassword,
-                  obscureText: signUpCubit.isConfirmPasswordVisible,
-                  prefixIcon: GestureDetector(
-                    onTap: () {
-                      signUpCubit.toggleConfirmPasswordVisibility();
-                    },
-                    child: signUpCubit.isConfirmPasswordVisible
-                        ? Padding(
-                      padding: EdgeInsets.only(top: 3.h),
-                      child: Transform.scale(
-                          scale: 0.49,
-                          child: SvgPicture.asset(AppAssets.hideIcon)),
-                    )
-                        : Padding(
-                      padding: EdgeInsets.only(top: 3.h),
-                      child:Transform.scale(
-                          scale: 0.49,
-                          child: SvgPicture.asset(AppAssets.showIcon)),
-                    ),
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return AppStrings.pleaseConfirmPassword;
-                    } else if (signUpCubit.confirmPasswordController.text !=
-                        signUpCubit.passwordController.text) {
-                      return 'الرقم السري غير مماثل للرقم السري في الأعلى';
-                    }
-
-                    return null;
-                  },
-                ),
-                SizedBox(
-                  height: 23.h,
-                ),
+                const SignUpConfirmPasswordTextField(),
+                VerticalSpace(context.height20),
                 emailTextField,
                 SizedBox(
                   height: 23.h,
