@@ -6,7 +6,7 @@ class AppStrings {
   static const String skip='تخطي';
   static const String yes='نعم';
   static const String cancel='الغاء';
-  static const String pleaseEnterYourPassword='من فضلك أدخل الرقم السري الخاص بك';
+  static const String pleaseEnterYourPassword='يرجى إدخال كلمة المرور';
   static const String pleaseEnterYourEmail='من فضلك أدخل البريد الالكتروني الخاص بك';
   static const String enterAsVisitor='قم بتسجيل الدخول كزائر';
   static const String longDescription ='هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي للنص أو شكل توضع الفقرات في الصفحة التي يقرأها. ولذلك يتم استخدام طريقة لوريم إيبسوم لأنها تعطي توزيعاَ طبيعياَ -إلى حد ما- للأحرف عوضاً عن استخدام "هنا يوجد محتوى نصي، هنا يوجد محتوى نصي" فتجعلها تبدو';
@@ -34,6 +34,10 @@ class AppStrings {
   static const String enterPhoneNumberForConfirmation = 'ادخل رقم الهاتف الخاص بك لارسال رمز التحقق';
   static const String enter = 'دخول';
   static const String pendingText = 'يرجى الانتظار لضمان مراجعة طلبك';
+  static const String passwordMustContain7letters = 'يجب أن تكون كلمة المرور على الأقل 7 أحرف';
+  static const String passwordMustContainAtLeastOneCapital = 'يجب أن تحتوي كلمة المرور على حرف أبجدي على الأقل';
+  static const String passwordMustContainAtLeastOneNumber = 'يجب أن تحتوي كلمة المرور على رقم واحد على الأقل';
+  static const String passwordMustContainAtLeastOneSpecialCharacter = 'يجب أن تحتوي كلمة المرور على رقم واحد على الأقل';
   static const String doNotHaveAccount = 'ليس لديك حساب؟';
   static const String createAccount = 'انشاء حساب';
   static const String mainPage = 'الرئيسية';

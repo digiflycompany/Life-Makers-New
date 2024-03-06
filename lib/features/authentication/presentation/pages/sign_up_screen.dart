@@ -16,6 +16,7 @@ import 'package:life_makers/features/authentication/presentation/widgets/passwor
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/name_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/sign_in_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/sign_up_logo.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/sign_up_password_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/signing_up_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/username_text_field.dart';
 import 'package:page_transition/page_transition.dart';
@@ -80,50 +81,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 VerticalSpace(context.height20),
                 UsernameTextField(),
                 VerticalSpace(context.height20),
-                PasswordTextField(
-                  controller: signUpCubit.passwordController,
-                  hintText: AppStrings.password,
-                  obscureText: signUpCubit.isPasswordVisible,
-                  prefixIcon: GestureDetector(
-                    onTap: () {
-                      signUpCubit.togglePasswordVisibility();
-                    },
-                    child: signUpCubit.isPasswordVisible
-                        ? Padding(
-                      padding: EdgeInsets.only(top: 3.h),
-                      child: Transform.scale(
-                          scale: 0.49,
-                          child: SvgPicture.asset(AppAssets.hideIcon)),
-                    )
-                        : Padding(
-                      padding: EdgeInsets.only(top: 3.h),
-                      child:Transform.scale(
-                          scale: 0.49,
-                          child: SvgPicture.asset(AppAssets.showIcon)),
-                    ),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'يرجى إدخال كلمة المرور';
-                    }
-                    if (value.length < 7) {
-                      return 'يجب أن تكون كلمة المرور على الأقل 7 أحرف';
-                    }
-                    if (!RegExp(r'[a-zA-Z]').hasMatch(value)) {
-                      return 'يجب أن تحتوي كلمة المرور على حرف أبجدي على الأقل';
-                    }
-                    if (!RegExp(r'\d').hasMatch(value)) {
-                      return 'يجب أن تحتوي كلمة المرور على رقم واحد على الأقل';
-                    }
-                    if (!RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(value)) {
-                      return 'يجب أن تحتوي كلمة المرور على حرف خاص واحد على الأقل';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(
-                  height: 23.h,
-                ),
+                SignUpPasswordTextField(),
+                VerticalSpace(context.height20),
                 PasswordTextField(
                   controller: signUpCubit.confirmPasswordController,
                   hintText: AppStrings.confirmPassword,
