@@ -21,6 +21,7 @@ import 'package:life_makers/features/authentication/presentation/widgets/sign_up
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/signing_up_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/username_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/whats_app_text_field.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/work_text_field.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-color.dart';
@@ -93,7 +94,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 VerticalSpace(context.height20),
                 const IdTextField(),
                 VerticalSpace(context.height20),
-                workTextField,
+                const WorkTextField(),
                 VerticalSpace(context.height20),
                 locationTextField,
                 VerticalSpace(context.height20),
