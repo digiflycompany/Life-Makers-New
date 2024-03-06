@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:life_makers/core/utils/app_routes.dart';
+import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../data/apis/api.dart';
@@ -27,6 +29,12 @@ class LoginCubit extends Cubit<LoginState> {
     emit(LoginInitial());
   }
 
+  void LoginSuccessful(BuildContext context, String email) async {
+    PreferencesHelper.saveIsVisitor(isVisitor: false);
+    Routes.mainPageRoute.moveToCurrentRouteAndRemoveAll;
+  }
+
+
   Future<void> login(String username, String password) async {
     if (username == 'yousef@gmai11l.com' || username == 'abanoub123') {
       username = 'mostafahamdi235@gmail.com';
@@ -39,14 +47,12 @@ class LoginCubit extends Cubit<LoginState> {
         data: {
           'email': username,
           'password': password,
-          // 'device_token': 'test',
         },
       );
 
       if (response.statusCode == 200 && response.data['status'] == true) {
         UserModel userModel = UserModel.fromJson(response.data);
         await PreferencesHelper.saveToken(token: response.data['token']);
-
         await PreferencesHelper.saveUserModel(userModel);
         emit(LoginSuccess());
       } else {
