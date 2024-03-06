@@ -13,6 +13,7 @@ import 'package:life_makers/features/authentication/presentation/widgets/auth_bu
 import 'package:life_makers/features/authentication/presentation/widgets/email_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/confirm_password_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/id_text_field.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/location_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/name_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/sign_in_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/sign_up_email_text_field.dart';
@@ -96,7 +97,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 VerticalSpace(context.height20),
                 const WorkTextField(),
                 VerticalSpace(context.height20),
-                locationTextField,
+                const LocationTextField(),
                 VerticalSpace(context.height20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -639,51 +640,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
         },
       );
 
-  get whatsAppTextField => RegularTextField(
-        max: 11,
-        keyboardType: TextInputType.number,
-        controller: signUpCubit.whatsappController,
-        hintText: AppStrings.whatsAppNumber,
-        obscureText: false,
-        img: AppAssets.whatsAppIcon,
-        validator: (value) {
-          if (value!.isEmpty) {
-            return AppStrings.pleaseEnterWhatsapp;
-          } else if (value.length != 11) {
-            return 'أدخل رقم واتساب صحيح';
-          }
-          return null;
-        },
-      );
-
-  get workTextField => RegularTextField(
-        max: 60,
-        controller: signUpCubit.workController,
-        hintText: AppStrings.work,
-        obscureText: false,
-        img: AppAssets.workIcon,
-        validator: (value) {
-          if (value!.isEmpty) {
-            return AppStrings.pleaseEnterWork;
-          }
-          return null;
-        },
-      );
-
-  get locationTextField => RegularTextField(
-        max: 60,
-        controller: signUpCubit.addressController,
-        hintText: AppStrings.address,
-        obscureText: false,
-        img: AppAssets.locationIcon,
-        validator: (value) {
-          if (value!.isEmpty) {
-            return AppStrings.pleaseEnterAddress;
-          }
-          return null;
-        },
-      );
-
   get experienceTextField => RegularTextField(
         max: 60,
         controller: signUpCubit.previousExperienceController,
@@ -696,10 +652,5 @@ class _SignUpScreenState extends State<SignUpScreen> {
           }
           return null;
         },
-      );
-
-  get signUpButton => AuthButton(
-        text: AppStrings.createAccount,
-        onTap: () {},
       );
 }
