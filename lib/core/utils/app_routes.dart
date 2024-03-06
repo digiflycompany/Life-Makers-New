@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:life_makers/core/utils/app-color.dart';
 import 'package:life_makers/features/authentication/presentation/pages/enter_phone_screen.dart';
+import 'package:life_makers/features/authentication/presentation/pages/login_screen.dart';
 import 'package:life_makers/features/authentication/presentation/pages/sign_up_screen.dart';
 import 'package:life_makers/features/home_page/presentation/pages/drawer_page.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
@@ -13,6 +14,7 @@ class Routes {
   Routes._internal();
 
   static const String firstPageRoute = "/";
+  static const String loginPageRoute = "/login_screen";
   static const String signUpPageRoute = "/sign_up_screen";
   static const String otpPageRoute = "/otp_screen";
   static const String enterPhonePageRoute = "/enter_phone_screen";
@@ -32,6 +34,11 @@ class RouteGenerator {
       case Routes.firstPageRoute:
         return buildPageRoute(
             child: PreferencesHelper.applicationFirstPage,
+            routeSettings: routeSettings,
+            pageRouteAnimation: PageRouteAnimation.fade);
+      case Routes.loginPageRoute:
+        return buildPageRoute(
+            child: const LoginScreen(),
             routeSettings: routeSettings,
             pageRouteAnimation: PageRouteAnimation.fade);
       case Routes.signUpPageRoute:

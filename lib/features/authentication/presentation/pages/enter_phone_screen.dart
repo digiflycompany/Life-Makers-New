@@ -117,7 +117,6 @@ class EnterPhoneScreen extends StatelessWidget {
     style: TextStyle(
         color: AppColors.gradientColor1,
         fontWeight: FontWeight.w500,
-        fontFamily: FontFamilies.alexandria,
         fontSize: 13.5
     ),
   );
