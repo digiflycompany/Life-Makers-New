@@ -16,6 +16,7 @@ import 'package:life_makers/features/authentication/presentation/widgets/passwor
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/confirm_password_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/name_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/sign_in_text.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/sign_up_email_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/sign_up_logo.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/sign_up_password_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/signing_up_text.dart';
@@ -86,10 +87,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 VerticalSpace(context.height20),
                 const SignUpConfirmPasswordTextField(),
                 VerticalSpace(context.height20),
-                emailTextField,
-                SizedBox(
-                  height: 23.h,
-                ),
+                const SignUpEmailTextField(),
+                VerticalSpace(context.height20),
                 whatsAppTextField,
                 SizedBox(
                   height: 23.h,
@@ -628,35 +627,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ));
     });
   }
-
-  get userNameTextField => RegularTextField(
-    controller: signUpCubit.nameController,
-    hintText: AppStrings.username,
-    obscureText: false,
-    img: AppAssets.usernameIcon,
-    validator: (value) {
-      if (value!.isEmpty) {
-        return AppStrings.pleaseEnterName;
-      } else if (signUpCubit.nameController.text.isNumericOnly) {
-        return 'name must contain letters';
-      }
-      return null;
-    },
-  );
-
-  get emailTextField => RegularTextField(
-        max: 40,
-        controller: signUpCubit.emailController,
-        hintText: AppStrings.email,
-        obscureText: false,
-        img: AppAssets.mailIcon,
-        validator: (value) {
-          if (value!.isEmpty) {
-            return AppStrings.pleaseEnterEmail;
-          }
-          return null;
-        },
-      );
 
   get phoneTextField => RegularTextField(
         max: 11,
