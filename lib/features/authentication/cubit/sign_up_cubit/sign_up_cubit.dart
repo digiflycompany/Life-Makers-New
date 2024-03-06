@@ -120,9 +120,6 @@ class SignUpCubit extends Cubit<SignUpState> {
     String previous_experience,
   ) async {
 
-    // if(Platform.isAndroid) {
-    //   deviceToken = await FirebaseMessaging.instance.getToken();
-    // }
     emit(SignUpLoading());
     Response? response = await dio.post(
       EndPoints.registerApi,
