@@ -12,6 +12,7 @@ import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_
 import 'package:life_makers/features/authentication/presentation/widgets/auth_button.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/email_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/confirm_password_text_field.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/experience_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/id_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/location_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/name_text_field.dart';
@@ -75,7 +76,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 23.w),
+            padding: EdgeInsets.symmetric(horizontal: context.width20),
             child: Column(
               children: [
                 const SignUpLogo(),
@@ -99,6 +100,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 VerticalSpace(context.height20),
                 const LocationTextField(),
                 VerticalSpace(context.height20),
+                /// City And Center
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -351,7 +353,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ],
                 ),
                 VerticalSpace(context.height20),
-                experienceTextField,
+                const ExperienceTextField(),
                 VerticalSpace(context.height20),
                 phoneTextField,
                 SizedBox(height: 11.h),
