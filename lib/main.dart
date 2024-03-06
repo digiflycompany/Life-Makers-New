@@ -1,7 +1,9 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:life_makers/core/utils/app.service.dart';
 import 'package:life_makers/core/utils/app_routes.dart';
 import 'package:life_makers/core/utils/app_theme.dart';
 import 'package:life_makers/features/authentication/cubit/card_cubit/cards_cubit.dart';
@@ -14,9 +16,9 @@ import 'package:life_makers/features/volunteer_opportunity/cubit/remote_tasks_cu
 import 'package:life_makers/features/volunteer_opportunity/cubit/suggestion_cubit.dart';
 import 'package:life_makers/features/volunteer_opportunity/cubit/volunteer_cubit.dart';
 import 'package:life_makers/features/volunteer_opportunity/cubit/volunteer_thanks_cubit.dart';
-import 'package:life_makers/core/utils/app.service.dart';
 import 'package:life_makers/services/dio_helper/dio_helper.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
+
 import 'core/utils/app-string.dart';
 import 'features/campaign_details/cubit/all_campaigns_cubit.dart';
 import 'features/campaign_details/cubit/join_campaign_cubit.dart';
@@ -27,92 +29,89 @@ import 'features/home_page/cubit/home_calender_cubit.dart';
 import 'features/non_seasonal_campaigns/cubit/non_seasonal_campaigns_cubit.dart';
 
 Future<void> main() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    DioHelper.init();
-    PreferencesHelper.init();
-    runApp(MyApp());
-
+  WidgetsFlutterBinding.ensureInitialized();
+  DioHelper.init();
+  PreferencesHelper.init();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-
   MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-       designSize: const Size(360, 690),
-       minTextAdapt: true,
-       splitScreenMode: true,
-       builder: (BuildContext context, Widget? child) {
-         return MultiBlocProvider(
-        providers: [
-          BlocProvider<JoinCampaignCubit>(
-            create: (BuildContext context) => JoinCampaignCubit(),
-          ),
-          BlocProvider<EditAccountCubit>(
-            create: (BuildContext context) => EditAccountCubit(),
-          ),
-          BlocProvider<EmergencyCampaignsCubit>(
-            create: (BuildContext context) => EmergencyCampaignsCubit(),
-          ),
-          BlocProvider<AllCandidatesCubit>(
-            create: (BuildContext context) => AllCandidatesCubit(),
-          ),
-          BlocProvider<SignUpCubit>(
-            create: (BuildContext context) => SignUpCubit(),
-          ),
-          BlocProvider<NonSeasonalCampaignsCubit>(
-            create: (BuildContext context) => NonSeasonalCampaignsCubit(),
-          ),
-          BlocProvider<VoteCandidateCubit>(
-            create: (BuildContext context) => VoteCandidateCubit(),
-          ),
-          BlocProvider<MenuCubit>(
-            create: (BuildContext context) => MenuCubit(),
-          ),
-          BlocProvider<SeasonalCampaignsCubit>(
-            create: (BuildContext context) => SeasonalCampaignsCubit(),
-          ),
-          BlocProvider<VolunteerCubit>(
-            create: (BuildContext context) => VolunteerCubit(),
-          ),
-          BlocProvider<OneDayActivityCubit>(
-            create: (BuildContext context) => OneDayActivityCubit(),
-          ),
-          BlocProvider<RemoteTasksCubit>(
-            create: (BuildContext context) => RemoteTasksCubit(),
-          ),
-          BlocProvider<AllCampaignsCubit>(
-            create: (BuildContext context) => AllCampaignsCubit(),
-          ),
-          BlocProvider<SuggestionCubit>(
-            create: (BuildContext context) => SuggestionCubit(),
-          ),
-          BlocProvider<VolunteerThanksCubit>(
-            create: (BuildContext context) => VolunteerThanksCubit(),
-          ),
-          BlocProvider<HomeCalenderCubit>(
-            create: (BuildContext context) => HomeCalenderCubit(),
-          ),
-          BlocProvider<CardCubit>(
-            create: (BuildContext context) => CardCubit(),
-          ),
-        ],
-        child: GestureDetector(
-          onTap: () {
-            FocusManager.instance.primaryFocus?.unfocus();
-          },
-          child: MaterialApp(
-            theme: AppTheme.lightTheme,
-            title: AppStrings.lifeMaker,
-            debugShowCheckedModeBanner: false,
-            navigatorKey: AppService().navigatorKey,
-            onGenerateRoute: RouteGenerator.getRoute,
-            //home:SplashScreen(),
-          ),
-        ),
-      );
-    }
-    );
+        designSize: const Size(360, 690),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (BuildContext context, Widget? child) {
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider<JoinCampaignCubit>(
+                create: (BuildContext context) => JoinCampaignCubit(),
+              ),
+              BlocProvider<EditAccountCubit>(
+                create: (BuildContext context) => EditAccountCubit(),
+              ),
+              BlocProvider<EmergencyCampaignsCubit>(
+                create: (BuildContext context) => EmergencyCampaignsCubit(),
+              ),
+              BlocProvider<AllCandidatesCubit>(
+                create: (BuildContext context) => AllCandidatesCubit(),
+              ),
+              BlocProvider<SignUpCubit>(
+                create: (BuildContext context) => SignUpCubit(),
+              ),
+              BlocProvider<NonSeasonalCampaignsCubit>(
+                create: (BuildContext context) => NonSeasonalCampaignsCubit(),
+              ),
+              BlocProvider<VoteCandidateCubit>(
+                create: (BuildContext context) => VoteCandidateCubit(),
+              ),
+              BlocProvider<MenuCubit>(
+                create: (BuildContext context) => MenuCubit(),
+              ),
+              BlocProvider<SeasonalCampaignsCubit>(
+                create: (BuildContext context) => SeasonalCampaignsCubit(),
+              ),
+              BlocProvider<VolunteerCubit>(
+                create: (BuildContext context) => VolunteerCubit(),
+              ),
+              BlocProvider<OneDayActivityCubit>(
+                create: (BuildContext context) => OneDayActivityCubit(),
+              ),
+              BlocProvider<RemoteTasksCubit>(
+                create: (BuildContext context) => RemoteTasksCubit(),
+              ),
+              BlocProvider<AllCampaignsCubit>(
+                create: (BuildContext context) => AllCampaignsCubit(),
+              ),
+              BlocProvider<SuggestionCubit>(
+                create: (BuildContext context) => SuggestionCubit(),
+              ),
+              BlocProvider<VolunteerThanksCubit>(
+                create: (BuildContext context) => VolunteerThanksCubit(),
+              ),
+              BlocProvider<HomeCalenderCubit>(
+                create: (BuildContext context) => HomeCalenderCubit(),
+              ),
+              BlocProvider<CardCubit>(
+                create: (BuildContext context) => CardCubit(),
+              ),
+            ],
+            child: GestureDetector(
+              onTap: () {
+                FocusManager.instance.primaryFocus?.unfocus();
+              },
+              child: MaterialApp(
+                theme: AppTheme.lightTheme,
+                title: AppStrings.lifeMaker,
+                debugShowCheckedModeBanner: false,
+                navigatorKey: AppService().navigatorKey,
+                onGenerateRoute: RouteGenerator.getRoute,
+                //home:SplashScreen(),
+              ),
+            ),
+          );
+        });
   }
 }
