@@ -5,12 +5,9 @@ import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
 import 'package:life_makers/core/utils/extensions.dart';
-import 'package:life_makers/core/widgets/custom_snack_bar.dart';
 import 'package:life_makers/core/widgets/spacer.dart';
 import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_cubit.dart';
 import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_states.dart';
-import 'package:life_makers/features/authentication/presentation/widgets/auth_button.dart';
-import 'package:life_makers/features/authentication/presentation/widgets/email_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/confirm_password_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/experience_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/id_text_field.dart';
@@ -18,6 +15,7 @@ import 'package:life_makers/features/authentication/presentation/widgets/sign_up
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/name_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/phone_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/sign_in_text.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/sign_up_button.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/sign_up_email_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/sign_up_logo.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/sign_up_password_text_field.dart';
@@ -26,7 +24,6 @@ import 'package:life_makers/features/authentication/presentation/widgets/sign_up
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/whats_app_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/work_text_field.dart';
 import 'package:page_transition/page_transition.dart';
-import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app-string.dart';
 import '../../../../core/utils/app_fonts.dart';
@@ -577,18 +574,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         )),
                   ),
                 VerticalSpace(context.height24),
-                AuthButton(
-                        text: AppStrings.createAccount,
-                        onTap: () {
-                          if (signUpCubit.isConfirmed == true && signUpCubit.otpSent == true) {
-                            signUpCubit.handleSignUp();
-                          } else if (signUpCubit.isConfirmed == false || signUpCubit.otpSent == false) {
-                            CustomSnackBars.showErrorToast(
-                                title: 'برجاء تأكيد رقم الهاتف');
-                          }
-                        },
-                      ),
-              VerticalSpace(context.height32),
+                SignUpButton(),
+                VerticalSpace(context.height32),
               ],
             ),
           ),
@@ -596,38 +583,4 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ));
     });
   }
-
-  get phoneTextField => RegularTextField(
-        max: 11,
-        readOnly: signUpCubit.otpSent == true ? true : false,
-        keyboardType: TextInputType.number,
-        controller: signUpCubit.phoneController,
-        hintText: AppStrings.phoneNumber,
-        obscureText: false,
-        img: AppAssets.phoneIcon,
-        validator: (value) {
-          if (value!.isEmpty) {
-            if (signUpCubit.phoneController.text.length < 11) {
-              return AppStrings.pleaseEnterPhone;
-            }
-          } else if (value.length != 11) {
-            return 'أدخل رقم هاتف صحيح';
-          }
-          return null;
-        },
-      );
-
-  get experienceTextField => RegularTextField(
-        max: 60,
-        controller: signUpCubit.previousExperienceController,
-        hintText: AppStrings.experience,
-        obscureText: false,
-        img: AppAssets.experienceIcon,
-        validator: (value) {
-          if (value!.isEmpty) {
-            return AppStrings.pleaseEnterPreviousExperience;
-          }
-          return null;
-        },
-      );
 }
