@@ -12,9 +12,11 @@ import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_
 import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_states.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/auth_button.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/email_text_field.dart';
-import 'package:life_makers/features/authentication/presentation/widgets/login_to_account_text.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/login_to_account_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/password_text_field.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/sign_in_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/sign_up_logo.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/signing_up_text.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-color.dart';
@@ -125,14 +127,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: Column(
               children: [
                 SignUpLogo(),
-                signingUpText,
-                SizedBox(
-                  height: 15.h,
-                ),
-                signIn,
-                SizedBox(
-                  height: 16.h,
-                ),
+                SigningUpText(),
+                SignInText(),
                 nameTextField,
                 SizedBox(
                   height: 23.h,

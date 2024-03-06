@@ -7,7 +7,7 @@ import 'package:life_makers/features/authentication/presentation/widgets/login_w
 import 'package:life_makers/features/authentication/presentation/widgets/login_widgets/login_image.dart';
 
 class LoginScreen extends StatelessWidget {
-
+  const LoginScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

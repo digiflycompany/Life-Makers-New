@@ -66,6 +66,6 @@ class PreferencesHelper {
 
   static Widget get applicationFirstPage {
 
-    return PreferencesHelper.getToken() != null ? DrawerPage() : LoginScreen();
+    return PreferencesHelper.getToken() != null ? DrawerPage() : const LoginScreen();
   }
 }
