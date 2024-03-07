@@ -31,7 +31,8 @@ class SignUpCubit extends Cubit<SignUpState> {
   int? cityId;
   NotificationModel? notificationModel;
   CurrentJoinedCampaignsAndOpp? currentJoinedCampaignsAndOpp;
-
+  bool phoneResetPasswordLoading =false;
+  final TextEditingController phoneResetPasswordController = TextEditingController();
   String? selectedCityName;
   String? selectedAreaName;
   late SignUpCubit signUpCubit;

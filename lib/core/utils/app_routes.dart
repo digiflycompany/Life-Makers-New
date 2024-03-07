@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:life_makers/core/utils/app-color.dart';
 import 'package:life_makers/features/authentication/presentation/pages/enter_phone_screen.dart';
 import 'package:life_makers/features/authentication/presentation/pages/login_screen.dart';
+import 'package:life_makers/features/authentication/presentation/pages/otp_screen.dart';
 import 'package:life_makers/features/authentication/presentation/pages/sign_up_screen.dart';
 import 'package:life_makers/features/home_page/presentation/pages/drawer_page.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
@@ -54,6 +55,11 @@ class RouteGenerator {
       case Routes.mainPageRoute:
         return buildPageRoute(
             child: DrawerPage(),
+            routeSettings: routeSettings,
+            pageRouteAnimation: PageRouteAnimation.fade);
+      case Routes.otpPageRoute:
+        return buildPageRoute(
+            child: OtpScreen(),
             routeSettings: routeSettings,
             pageRouteAnimation: PageRouteAnimation.fade);
     }

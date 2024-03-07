@@ -33,7 +33,7 @@ class ChangeNumberOrResendCodeButton extends StatelessWidget {
                     child: Column(
                       children: [
                         Container(
-                          width: context.width152,
+                          width: context.width135*1.1,
                           height: context.height64,
                           decoration: BoxDecoration(
                               color: AppColors.orangeBorderColor,
