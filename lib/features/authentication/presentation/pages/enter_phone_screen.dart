@@ -9,11 +9,10 @@ import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_
 import 'package:life_makers/features/authentication/presentation/widgets/enter_phone_widgets/enter_confirmation_code_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/enter_phone_widgets/enter_phone_image.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/enter_phone_widgets/forgot_password_text.dart';
-import '../../../../core/utils/app-assets.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/enter_phone_widgets/phone_reset_text_field.dart';
 import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app-string.dart';
 import '../../../../core/utils/app_fonts.dart';
-import '../widgets/email_text_field.dart';
 
 class EnterPhoneScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -48,7 +47,7 @@ class EnterPhoneScreen extends StatelessWidget {
                     const EnterPhoneImage(),
                     const ForgotPasswordText(),
                     const EnterConfirmationCodeText(),
-                    phoneTextField,
+                    const PhoneResetTextField(),
                     SizedBox(height: 75.h),
                     GestureDetector(
                       onTap: (){
@@ -91,23 +90,4 @@ class EnterPhoneScreen extends StatelessWidget {
     ),
 );
   }
-  get phoneTextField => RegularTextField(
-    max: 11,
-    readOnly: false,
-    keyboardType: TextInputType.number,
-    controller: phoneController,
-    hintText: AppStrings.phoneNumber,
-    obscureText: false,
-    img: AppAssets.phoneIcon,
-    validator: (value){
-      if (value!.isEmpty) {
-        if(phoneController.text.length<11){
-          return AppStrings.pleaseEnterPhone;
-        }
-      } else if (value.length != 11 ){
-        return 'أدخل رقم هاتف صحيح';
-      }
-      return null;
-    },
-  );
 }
