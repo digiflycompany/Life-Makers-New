@@ -87,7 +87,7 @@ class RegularTextField extends StatelessWidget {
                 fontWeight: FontWeight.w400
             ),
             prefixIcon:  Padding(
-              padding:  EdgeInsets.only(right: context.width16,left: context.width6),
+              padding:  EdgeInsets.only(right: context.width16,left: context.width8),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
