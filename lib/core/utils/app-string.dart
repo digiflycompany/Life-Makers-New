@@ -30,6 +30,11 @@ class AppStrings {
   static const String enterValidIdNumber = 'أدخل رقم قومي صحيح';
   static const String enterValidNumber = 'أدخل رقم هاتف صحيح';
   static const String pleaseConfirmPhoneNumber = 'برجاء تأكيد رقم الهاتف';
+  static const String sendConfirmationCode = 'ارسال رمز التأكيد';
+  static const String codeHasBeenSentEnterTheCodeCorrectly = 'تم ارسال الرمز \nادخل الرمز صحيحا للتأكيد';
+  static const String changeNumberOrdResendCode = 'تغيير الرقم/ إعادة الإرسال';
+  static const String sendCodeAfter = 'إعادة إرسال الرمز بعد';
+  static const String codeAcceptedAlready = 'تم التأكيد بالفعل';
   static const String welcomeBack = 'اهلًا بعودتك';
   static const String loggingIn = 'تسجيل دخول';
   static const String email = 'البريد الالكتروني';

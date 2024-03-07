@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:life_makers/core/utils/app-color.dart';
 import 'package:life_makers/core/utils/app-string.dart';
 import 'package:life_makers/core/utils/extensions.dart';
-import 'package:life_makers/features/authentication/presentation/widgets/createAccountText.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/createAccountText.dart';
 
 class SignUpText extends StatelessWidget {
   const SignUpText({super.key});
