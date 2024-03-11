@@ -35,6 +35,7 @@ class SignUpCubit extends Cubit<SignUpState> {
   String? selectedCityName;
   String? selectedAreaName;
   late SignUpCubit signUpCubit;
+  final TextEditingController otpController =TextEditingController();
   final TextEditingController controller = TextEditingController();
   final TextEditingController textEditingController = TextEditingController();
   final TextEditingController textEditingController2 = TextEditingController();
@@ -210,8 +211,6 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   }
 
-
-
   Future<void> OtpCheck(String phone) async {
     emit(OtpSendLoading());
     try {
@@ -369,8 +368,6 @@ class SignUpCubit extends Cubit<SignUpState> {
         }
   }
 
-
-
   Future<void> fetchCityData() async {
     emit(cityListLoading());
     try {
@@ -395,11 +392,6 @@ class SignUpCubit extends Cubit<SignUpState> {
           .get('https://life-makers.digifly-eg.com/api/areas/$cityId');
       if (response.statusCode == 200) {
         areaModel = AreaModel.fromJson(response.data);
-        //final List<dynamic> jsonData = response.data;
-        //final List<String> data = jsonData.map((item) => item.toString()).toList();
-        //print(data);
-        //finalData =data;
-        //print(finalData);
         List<dynamic> areaData = response.data['areas'];
         areasList = areaData.map((json) => Areas.fromJson(json)).toList();
         emit(areaListSuccessfully());

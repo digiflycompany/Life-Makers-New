@@ -15,9 +15,7 @@ import 'package:life_makers/features/authentication/presentation/pages/change_pa
 import 'package:life_makers/features/authentication/presentation/pages/enter_phone_screen.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/otp_widgets/code_will_be_sent_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/otp_widgets/otp_image.dart';
-import 'package:otp_text_field/otp_field.dart';
-import 'package:otp_text_field/otp_field_style.dart';
-import 'package:otp_text_field/style.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/otp_widgets/otp_text_field.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../../../services/shared_preferences/preferences_helper.dart';
 import '../widgets/otp_widgets/forget_password_text.dart';
@@ -27,11 +25,9 @@ class OtpScreen extends StatelessWidget {
   bool loading =false;
   int? idNumber;
   String code ='';
-  final TextEditingController controller =TextEditingController();
   String id ='';
   @override
   Widget build(BuildContext context) {
-
   return BlocProvider(
   create: (context) => SignUpCubit(),
   child: BlocConsumer<SignUpCubit, SignUpState>(
@@ -71,29 +67,7 @@ class OtpScreen extends StatelessWidget {
                     const OtpImage(),
                     const ForgetPasswordText(),
                     const CodeWillBeSentText(),
-                    Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: 20.w),
-                      child: OTPTextField(
-                        length: 4,
-                        width: MediaQuery.of(context).size.width,
-                        fieldWidth: 55.w,
-                        style: TextStyle(
-                            fontSize: 17,
-                            color: AppColors.orangeBorderColor,
-                            fontWeight: FontWeight.w700
-                        ),
-                        textFieldAlignment: MainAxisAlignment.spaceAround,
-                        fieldStyle: FieldStyle.underline,
-                        otpFieldStyle: OtpFieldStyle(
-                            focusBorderColor: Colors.orange,
-                            borderColor: Colors.black
-                        ),
-                        onCompleted: (pin) {
-                          controller.text=pin;
-
-                        },
-                      ),
-                    ),
+                    const OtpCustomTextField(),
                     SizedBox(height: 55.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -131,7 +105,7 @@ class OtpScreen extends StatelessWidget {
                         padding:  EdgeInsets.symmetric(horizontal: 25.w),
                         child:GestureDetector(
                           onTap: (){
-                            if(controller.isNull
+                            if(signUpCubit.otpController.isNull
                             ){
                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 content: Text('من فضلك أدخل ال otp'),
@@ -146,9 +120,9 @@ class OtpScreen extends StatelessWidget {
                               }
                               id = idNumber.toString();
                               if (kDebugMode) {
-                                print(controller.text);
+                                print(signUpCubit.otpController.text);
                               }
-                              signUpCubit.OtpRestPasswordSubmit(controller.text,id);
+                              signUpCubit.OtpRestPasswordSubmit(signUpCubit.otpController.text,id);
                               if (kDebugMode) {
                                 print(id);
                               }
@@ -190,16 +164,6 @@ class OtpScreen extends StatelessWidget {
     ),
 );
   }
-  get enterConfirmationCodeText => Text(
-    AppStrings.codeWillBeSentToYou,
-    textDirection: TextDirection.rtl,
-    style: TextStyle(
-        color: AppColors.smallTextColor,
-        fontWeight: FontWeight.w400,
-        fontFamily: FontFamilies.alexandria,
-        fontSize: 10.8
-    ),
-  );
   get didNotReceiveOtp =>Text(
     AppStrings.didNotReceiveOtp,
     textDirection: TextDirection.rtl,
