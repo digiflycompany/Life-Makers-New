@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:life_makers/core/utils/app-string.dart';
 import 'package:life_makers/core/utils/extensions.dart';
+import 'package:life_makers/core/widgets/button_circular_progress.dart';
 import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_cubit.dart';
 import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_states.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/confirmation_button.dart';
@@ -25,15 +26,7 @@ class ConfirmPhoneButton extends StatelessWidget {
                     signUpCubit.phoneResetPasswordController.text);
               }
             },
-            content:state is otpResetPasswordSentLoading?Theme(
-              data: Theme.of(context).copyWith(
-                colorScheme: ColorScheme.fromSwatch().copyWith(
-                  primary: Colors.white,
-                ),
-              ),
-              child: Transform.scale(
-                  scale: 0.6,
-                  child: CircularProgressIndicator.adaptive()),):Text(
+            content:state is otpResetPasswordSentLoading?const ButtonCircularProgress():Text(
               AppStrings.confirm,
               style: TextStyle(
                   color: Colors.white,
