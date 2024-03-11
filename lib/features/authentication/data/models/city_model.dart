@@ -2,7 +2,7 @@ class CityModel {
   bool? status;
   String? errNum;
   String? msg;
-  List<Cities>? cities;
+  List<City>? cities;
 
   CityModel({this.status, this.errNum, this.msg, this.cities});
 
@@ -11,9 +11,9 @@ class CityModel {
     errNum = json['errNum'];
     msg = json['msg'];
     if (json['cities'] != null) {
-      cities = <Cities>[];
+      cities = <City>[];
       json['cities'].forEach((v) {
-        cities!.add(new Cities.fromJson(v));
+        cities!.add(new City.fromJson(v));
       });
     }
   }
@@ -30,15 +30,15 @@ class CityModel {
   }
 }
 
-class Cities {
+class City {
   int? id;
   String? name;
   String? createdAt;
   String? updatedAt;
 
-  Cities({this.id, this.name, this.createdAt, this.updatedAt});
+  City({this.id, this.name, this.createdAt, this.updatedAt});
 
-  Cities.fromJson(Map<String, dynamic> json) {
+  City.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     createdAt = json['created_at'];

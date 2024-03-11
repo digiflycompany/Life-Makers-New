@@ -9,6 +9,7 @@ import 'package:life_makers/features/authentication/data/models/notification_mod
 import 'package:life_makers/features/authentication/data/models/phone_user_mode.dart';
 import 'package:life_makers/features/authentication/data/models/register_error_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../../../core/widgets/custom_snack_bar.dart';
 import '../../../../services/shared_preferences/preferences_helper.dart';
 import '../../data/apis/api.dart';
@@ -18,6 +19,8 @@ import '../../data/models/user_model.dart';
 class SignUpCubit extends Cubit<SignUpState> {
   SignUpCubit() : super(SignUpInitial());
 
+  static SignUpCubit get(context) => BlocProvider.of(context);
+
   SignUpCubit getCubit(context) => BlocProvider.of(context);
   Dio dio = Dio();
   final _prefs = SharedPreferences.getInstance();
@@ -26,13 +29,13 @@ class SignUpCubit extends Cubit<SignUpState> {
   CityModel? cityModel;
   AreaModel? areaModel;
   bool phoneLength = true;
-  List<Cities> citiesList = [];
+  List<City> citiesList = [];
   List<Areas> areasList = [];
   int? cityId;
   NotificationModel? notificationModel;
   CurrentJoinedCampaignsAndOpp? currentJoinedCampaignsAndOpp;
 
-  String? selectedCityName;
+  City? selectedCity;
   String? selectedAreaName;
   late SignUpCubit signUpCubit;
   final TextEditingController controller = TextEditingController();
@@ -43,14 +46,16 @@ class SignUpCubit extends Cubit<SignUpState> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController whatsappController = TextEditingController();
   final TextEditingController idNumberController = TextEditingController();
   final TextEditingController workController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
-  final TextEditingController previousExperienceController = TextEditingController();
+  final TextEditingController previousExperienceController =
+      TextEditingController();
   bool isConfirmed = false;
   bool otpSent = false;
   bool resend = false;
@@ -119,7 +124,6 @@ class SignUpCubit extends Cubit<SignUpState> {
     String city_center,
     String previous_experience,
   ) async {
-
     emit(SignUpLoading());
     Response? response = await dio.post(
       EndPoints.registerApi,
@@ -137,7 +141,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         'city_center': city_center,
         'previous_experience': previous_experience,
       },
-    // ignore: body_might_complete_normally_catch_error
+      // ignore: body_might_complete_normally_catch_error
     ).catchError((e) {
       emit(SignUpFailure('خطأ في إنشاء الحساب'));
     });
@@ -170,7 +174,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         }),
       );
       if (response.statusCode == 200) {
-         notificationModel = NotificationModel.fromJson(response.data);
+        notificationModel = NotificationModel.fromJson(response.data);
         emit(NotificationSuccessfully());
       } else {
         NotificationFailure('حدث خطأ حاول مجددا');
@@ -186,8 +190,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         if (kDebugMode) {
           print('Dio exception: ${dioException.message}');
         }
-        emit(
-            NotificationFailure("Dio exception: ${dioException.message}"));
+        emit(NotificationFailure("Dio exception: ${dioException.message}"));
       }
     }
   }
@@ -195,22 +198,19 @@ class SignUpCubit extends Cubit<SignUpState> {
   Future<void> GetCurrentJoinedCampaignsAndOpp() async {
     emit(CurrCampAndOppLoading());
 
-      Response? response = await dio.get(
-        EndPoints.currentCampaignsAndOpportunities,
-        options: Options(headers: {
-          'Authorization': 'Bearer ${PreferencesHelper.getToken()}'
-        }),
-      );
-      if (response.statusCode == 200) {
-        currentJoinedCampaignsAndOpp = CurrentJoinedCampaignsAndOpp.fromJson(response.data);
-        emit(CurrCampAndOppSuccess());
-      } else {
-        CurrCampAndOppFailure('حدث خطأ حاول مجددا');
-      }
-
+    Response? response = await dio.get(
+      EndPoints.currentCampaignsAndOpportunities,
+      options: Options(
+          headers: {'Authorization': 'Bearer ${PreferencesHelper.getToken()}'}),
+    );
+    if (response.statusCode == 200) {
+      currentJoinedCampaignsAndOpp =
+          CurrentJoinedCampaignsAndOpp.fromJson(response.data);
+      emit(CurrCampAndOppSuccess());
+    } else {
+      CurrCampAndOppFailure('حدث خطأ حاول مجددا');
+    }
   }
-
-
 
   Future<void> OtpCheck(String phone) async {
     emit(OtpSendLoading());
@@ -348,28 +348,23 @@ class SignUpCubit extends Cubit<SignUpState> {
       print(token);
     }
     emit(changePasswordAfterLoginLoading());
-      final response = await dio.post(
-        EndPoints.changePasswordAfterLogin,
-        options: Options(headers: {
-          'Authorization': 'Bearer $token',
-        }),
-        data: {
-          'old_password': oldPassword,
-          'password': password,
-          'password_confirmation': password_confirmation,
-        },
-      );
-      if (response.statusCode == 200 && response.data['status'] == true) {
-        emit(changePasswordAfterLoginSuccess());
-      }
-      else
-        {
-          emit(changePasswordAfterLoginFailure('كلمة المرور القديمة غير صحيحة'));
-
-        }
+    final response = await dio.post(
+      EndPoints.changePasswordAfterLogin,
+      options: Options(headers: {
+        'Authorization': 'Bearer $token',
+      }),
+      data: {
+        'old_password': oldPassword,
+        'password': password,
+        'password_confirmation': password_confirmation,
+      },
+    );
+    if (response.statusCode == 200 && response.data['status'] == true) {
+      emit(changePasswordAfterLoginSuccess());
+    } else {
+      emit(changePasswordAfterLoginFailure('كلمة المرور القديمة غير صحيحة'));
+    }
   }
-
-
 
   Future<void> fetchCityData() async {
     emit(cityListLoading());
@@ -378,7 +373,7 @@ class SignUpCubit extends Cubit<SignUpState> {
       if (response.statusCode == 200) {
         cityModel = CityModel.fromJson(response.data);
         List<dynamic> cityData = response.data['cities'];
-        citiesList = cityData.map((json) => Cities.fromJson(json)).toList();
+        citiesList = cityData.map((json) => City.fromJson(json)).toList();
         emit(cityListSuccessfully());
       } else {
         throw Exception('Failed to load data');
@@ -391,15 +386,10 @@ class SignUpCubit extends Cubit<SignUpState> {
   Future<void> fetchAreaData() async {
     emit(areaListLoading());
     try {
-      final response = await Dio()
-          .get('https://life-makers.digifly-eg.com/api/areas/$cityId');
+      final response = await Dio().get(
+          'https://life-makers.digifly-eg.com/api/areas/${selectedCity?.id}');
       if (response.statusCode == 200) {
         areaModel = AreaModel.fromJson(response.data);
-        //final List<dynamic> jsonData = response.data;
-        //final List<String> data = jsonData.map((item) => item.toString()).toList();
-        //print(data);
-        //finalData =data;
-        //print(finalData);
         List<dynamic> areaData = response.data['areas'];
         areasList = areaData.map((json) => Areas.fromJson(json)).toList();
         emit(areaListSuccessfully());
