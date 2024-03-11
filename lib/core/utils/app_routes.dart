@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:life_makers/core/utils/app-color.dart';
+import 'package:life_makers/features/authentication/presentation/pages/change_password.dart';
 import 'package:life_makers/features/authentication/presentation/pages/enter_phone_screen.dart';
 import 'package:life_makers/features/authentication/presentation/pages/login_screen.dart';
 import 'package:life_makers/features/authentication/presentation/pages/otp_screen.dart';
@@ -60,6 +61,11 @@ class RouteGenerator {
       case Routes.otpPageRoute:
         return buildPageRoute(
             child: OtpScreen(),
+            routeSettings: routeSettings,
+            pageRouteAnimation: PageRouteAnimation.fade);
+      case Routes.changPasswordPageRoute:
+        return buildPageRoute(
+            child: ChangePasswordScreen(),
             routeSettings: routeSettings,
             pageRouteAnimation: PageRouteAnimation.fade);
     }
