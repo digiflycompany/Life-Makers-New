@@ -15,6 +15,7 @@ import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_
 import 'package:life_makers/features/authentication/data/models/phone_user_mode.dart';
 import 'package:life_makers/features/authentication/presentation/pages/change_password.dart';
 import 'package:life_makers/features/authentication/presentation/pages/enter_phone_screen.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/otp_widgets/otp_image.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/otp_field_style.dart';
 import 'package:otp_text_field/style.dart';
@@ -30,9 +31,10 @@ class OtpScreen extends StatelessWidget {
   String id ='';
   @override
   Widget build(BuildContext context) {
-    final otpCubit = BlocProvider.of<SignUpCubit>(context);
 
-    return BlocConsumer<SignUpCubit, SignUpState>(
+  return BlocProvider(
+  create: (context) => SignUpCubit(),
+  child: BlocConsumer<SignUpCubit, SignUpState>(
       listener: (context,state){
         if (state is otpResetPasswordSubmitLoading) {
           loading =true;
@@ -55,17 +57,18 @@ class OtpScreen extends StatelessWidget {
         }
       },
       builder: (context, state) {
+        SignUpCubit signUpCubit = context.read<SignUpCubit>();
         return Scaffold(
           backgroundColor: Colors.white,
           body: Form(
             key: _formKey,
             child: SafeArea(
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Center(child: SvgPicture.asset(AppAssets.forgotPassword)),
+                    const OtpImage(),
                     SizedBox(height: 30.h),
                     confirmationCodeText,
                     SizedBox(height: 22.h),
@@ -148,7 +151,7 @@ class OtpScreen extends StatelessWidget {
                               if (kDebugMode) {
                                 print(controller.text);
                               }
-                              otpCubit.OtpRestPasswordSubmit(controller.text,id);
+                              signUpCubit.OtpRestPasswordSubmit(controller.text,id);
                               if (kDebugMode) {
                                 print(id);
                               }
@@ -187,7 +190,8 @@ class OtpScreen extends StatelessWidget {
           ),
         );
       },
-    );
+    ),
+);
   }
   get confirmationCodeText => Text(
     AppStrings.forgetPasswordQuestion,
