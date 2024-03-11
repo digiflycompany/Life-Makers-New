@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/otp_widgets/code_not_sent_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/otp_widgets/code_will_be_sent_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/otp_widgets/confirm_otp_button.dart';
@@ -11,14 +12,17 @@ class OtpScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const ForgetPasswordText(),
-        const CodeWillBeSentText(),
-        const OtpCustomTextField(),
-        const CodeNotSentText(),
-        ConfirmOtpButton(formKey: formKey,),
-      ],
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: context.width20),
+      child: Column(
+        children: [
+          const ForgetPasswordText(),
+          const CodeWillBeSentText(),
+          const OtpCustomTextField(),
+          const CodeNotSentText(),
+          ConfirmOtpButton(formKey: formKey,),
+        ],
+      ),
     );
   }
 }
