@@ -35,6 +35,8 @@ class SignUpCubit extends Cubit<SignUpState> {
   String? selectedCityName;
   String? selectedAreaName;
   late SignUpCubit signUpCubit;
+  final TextEditingController resetPasswordController = TextEditingController();
+  final TextEditingController confirmResetPasswordController = TextEditingController();
   final TextEditingController otpController =TextEditingController();
   final TextEditingController controller = TextEditingController();
   final TextEditingController textEditingController = TextEditingController();

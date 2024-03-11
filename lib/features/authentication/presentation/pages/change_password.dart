@@ -6,11 +6,11 @@ import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_
 import 'package:life_makers/features/authentication/presentation/pages/login_screen.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/change_password_widgets/change_passsword_image.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/change_password_widgets/create_new_password_text.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/change_password_widgets/reset_passwords_text_fields.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app-string.dart';
 import '../../../../core/utils/app_fonts.dart';
-import '../widgets/password_text_field.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   ChangePasswordScreen({super.key});
@@ -22,13 +22,6 @@ class ChangePasswordScreen extends StatefulWidget {
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  bool loading = false;
-
-  final TextEditingController passwordController = TextEditingController();
-
-  final TextEditingController confirmPasswordController =
-  TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -36,10 +29,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       child: BlocConsumer<SignUpCubit, SignUpState>(
         listener: (context, state) {
           if (state is changePasswordLoading) {
-            loading = true;
           } else if (state is changePasswordSuccess) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text('تم تغيير الرقم السري بنجاح'),
+              content: Text(AppStrings.passwordHasBeenChangedSuccessfully),
               duration: Duration(seconds: 2),
             ));
             Navigator.push(
@@ -56,7 +48,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           }
         },
         builder: (context, state) {
-          final changePasswordCubit = context.read<SignUpCubit>();
+          SignUpCubit signUpCubit = context.read<SignUpCubit>();
           return Scaffold(
             backgroundColor: Colors.white,
             body: Form(
@@ -68,103 +60,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     children: [
                       const ChangePasswordImage(),
                       const CreateNewPasswordText(),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.w),
-                        child: Column(
-                          children: [
-                            PasswordTextField(
-                              controller: passwordController,
-                              hintText: AppStrings.password,
-                              obscureText: changePasswordCubit
-                                  .isPasswordVisible,
-                              prefixIcon: GestureDetector(
-                                onTap: () {
-                                  changePasswordCubit
-                                      .togglePasswordVisibility();
-                                },
-                                child: changePasswordCubit.isPasswordVisible
-                                    ? Padding(
-                                  padding: EdgeInsets.only(top: 3.h),
-                                  child: Icon(
-                                    Icons.remove_red_eye_outlined,
-                                    size: 24.r,
-                                    color: AppColors.prefixIconColor,
-                                  ),
-                                )
-                                    : Padding(
-                                  padding: EdgeInsets.only(top: 3.h),
-                                  child: Icon(
-                                    Icons.remove_red_eye,
-                                    size: 24.r,
-                                    color: AppColors.prefixIconColor,
-                                  ),
-                                ),
-                              ),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'يرجى إدخال كلمة المرور';
-                                }
-                                if (value.length < 7) {
-                                  return 'يجب أن تكون كلمة المرور على الأقل 7 أحرف';
-                                }
-                                if (!RegExp(r'[a-zA-Z]').hasMatch(value)) {
-                                  return 'يجب أن تحتوي كلمة المرور على حرف أبجدي على الأقل';
-                                }
-                                if (!RegExp(r'\d').hasMatch(value)) {
-                                  return 'يجب أن تحتوي كلمة المرور على رقم واحد على الأقل';
-                                }
-                                if (!RegExp(r'[!@#$%^&*(),.?":{}|<>]')
-                                    .hasMatch(value)) {
-                                  return 'يجب أن تحتوي كلمة المرور على حرف خاص واحد على الأقل';
-                                }
-                                return null;
-                              },
-                            ),
-                            SizedBox(
-                              height: 23.h,
-                            ),
-                            PasswordTextField(
-                              controller: confirmPasswordController,
-                              hintText: AppStrings.confirmPassword,
-                              obscureText:
-                              changePasswordCubit.isConfirmPasswordVisible,
-                              prefixIcon: GestureDetector(
-                                onTap: () {
-                                  changePasswordCubit
-                                      .toggleConfirmPasswordVisibility();
-                                },
-                                child:
-                                changePasswordCubit.isConfirmPasswordVisible
-                                    ? Padding(
-                                  padding: EdgeInsets.only(top: 3.h),
-                                  child: Icon(
-                                    Icons.remove_red_eye_outlined,
-                                    size: 24.r,
-                                    color: AppColors.prefixIconColor,
-                                  ),
-                                )
-                                    : Padding(
-                                  padding: EdgeInsets.only(top: 3.h),
-                                  child: Icon(
-                                    Icons.remove_red_eye,
-                                    size: 24.r,
-                                    color: AppColors.prefixIconColor,
-                                  ),
-                                ),
-                              ),
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return AppStrings.pleaseConfirmPassword;
-                                } else if (confirmPasswordController.text !=
-                                    passwordController.text) {
-                                  return 'الرقم السري غير مماثل للرقم السري في الأعلى';
-                                }
-                                return null;
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
+                      const ResetPasswordsTextFields(),
                       SizedBox(
                         height: 30.h,
                       ),
@@ -173,9 +69,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                           child: GestureDetector(
                             onTap: () {
                               if (_formKey.currentState!.validate()) {
-                                changePasswordCubit.ChangePassword(
-                                    passwordController.text,
-                                    confirmPasswordController.text);
+                                signUpCubit.ChangePassword(
+                                    signUpCubit.resetPasswordController.text,
+                                    signUpCubit.confirmResetPasswordController.text);
                               }
                             },
                             child: Container(
@@ -186,7 +82,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                 borderRadius: BorderRadius.circular(8.r),
                               ),
                               child: Center(
-                                child: loading == true
+                                child: state is changePasswordLoading
                                     ? Transform.scale(
                                   scale: 0.4,
                                   child: CircularProgressIndicator(

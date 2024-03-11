@@ -30,6 +30,7 @@ class AppStrings {
   static const String enterValidIdNumber = 'أدخل رقم قومي صحيح';
   static const String enterValidNumber = 'أدخل رقم هاتف صحيح';
   static const String pleaseConfirmPhoneNumber = 'برجاء تأكيد رقم الهاتف';
+  static const String passwordHasBeenChangedSuccessfully = 'تم تغيير الرقم السري بنجاح';
   static const String pleaseEnterOtp = 'من فضلك أدخل ال otp';
   static const String sendConfirmationCode = 'ارسال رمز التأكيد';
   static const String codeHasBeenSentEnterTheCodeCorrectly = 'تم ارسال الرمز \nادخل الرمز صحيحا للتأكيد';
@@ -47,7 +48,7 @@ class AppStrings {
   static const String passwordMustContain7letters = 'يجب أن تكون كلمة المرور على الأقل 7 أحرف';
   static const String passwordMustContainAtLeastOneCapital = 'يجب أن تحتوي كلمة المرور على حرف أبجدي على الأقل';
   static const String passwordMustContainAtLeastOneNumber = 'يجب أن تحتوي كلمة المرور على رقم واحد على الأقل';
-  static const String passwordMustContainAtLeastOneSpecialCharacter = 'يجب أن تحتوي كلمة المرور على رقم واحد على الأقل';
+  static const String passwordMustContainAtLeastOneSpecialCharacter = 'يجب أن تحتوي كلمة المرور على حرف واحد خاص على الأقل';
   static const String passwordNotMatching= 'الرقم السري غير مماثل للرقم السري في الأعلى';
   static const String doNotHaveAccount = 'ليس لديك حساب؟';
   static const String createAccount = 'انشاء حساب';
