@@ -16,15 +16,10 @@ class EnterPhoneScreen extends StatelessWidget {
   create: (context) => SignUpCubit(),
   child: BlocConsumer<SignUpCubit, SignUpState>(
       listener: (context, state) {
-        SignUpCubit signUpCubit = context.read<SignUpCubit>();
-        if(state is otpResetPasswordSentLoading){
-          signUpCubit.phoneResetPasswordLoading =true;
-        } else if(state is otpResetPasswordSentSuccess){
-          signUpCubit.phoneResetPasswordLoading =false;
+       if(state is otpResetPasswordSentSuccess){
           Routes.otpPageRoute.moveTo;
         } else if(state is otpResetPasswordSentFailure){
           CustomSnackBars.showErrorToast(title: state.error);
-          signUpCubit.phoneResetPasswordLoading =false;
         }
       },
       builder: (context, state) {

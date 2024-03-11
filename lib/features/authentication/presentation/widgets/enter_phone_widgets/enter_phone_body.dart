@@ -20,7 +20,9 @@ class EnterPhoneBody extends StatelessWidget {
             const ForgotPasswordText(),
             const EnterConfirmationCodeText(),
             const PhoneResetTextField(),
-            ConfirmPhoneButton(formKey: _formKey,),
+            ConfirmPhoneButton(
+              formKey: _formKey,
+            ),
           ],
         ),
       ),

@@ -5,9 +5,9 @@ import '../../../../core/utils/app-color.dart';
 
 class ConfirmationButton extends StatelessWidget {
   final Function()? onTap;
-  final String? text;
+  final Widget? content;
 
-  const ConfirmationButton({super.key, required this.onTap, required this.text});
+  const ConfirmationButton({super.key, required this.onTap, required this.content});
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +21,7 @@ class ConfirmationButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(5.r),
             ),
             child: Center(
-              child:Text(
-                text!,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12.sp
-                ),
-              ),
+              child: content
             ),
           ),
         );
