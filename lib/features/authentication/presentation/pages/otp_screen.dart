@@ -13,6 +13,7 @@ import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_
 import 'package:life_makers/features/authentication/data/models/phone_user_mode.dart';
 import 'package:life_makers/features/authentication/presentation/pages/change_password.dart';
 import 'package:life_makers/features/authentication/presentation/pages/enter_phone_screen.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/otp_widgets/code_will_be_sent_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/otp_widgets/otp_image.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/otp_field_style.dart';
@@ -69,8 +70,7 @@ class OtpScreen extends StatelessWidget {
                   children: [
                     const OtpImage(),
                     const ForgetPasswordText(),
-                    enterConfirmationCodeText,
-                    SizedBox(height: 45.h),
+                    const CodeWillBeSentText(),
                     Padding(
                       padding:  EdgeInsets.symmetric(horizontal: 20.w),
                       child: OTPTextField(
