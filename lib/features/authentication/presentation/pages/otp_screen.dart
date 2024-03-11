@@ -4,8 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:life_makers/core/utils/app-assets.dart';
 import 'package:life_makers/core/utils/app-color.dart';
 import 'package:life_makers/core/utils/app-string.dart';
 import 'package:life_makers/core/utils/app_fonts.dart';
@@ -21,6 +19,7 @@ import 'package:otp_text_field/otp_field_style.dart';
 import 'package:otp_text_field/style.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../../../services/shared_preferences/preferences_helper.dart';
+import '../widgets/otp_widgets/forget_password_text.dart';
 
 class OtpScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -69,9 +68,7 @@ class OtpScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const OtpImage(),
-                    SizedBox(height: 30.h),
-                    confirmationCodeText,
-                    SizedBox(height: 22.h),
+                    const ForgetPasswordText(),
                     enterConfirmationCodeText,
                     SizedBox(height: 45.h),
                     Padding(
@@ -193,16 +190,6 @@ class OtpScreen extends StatelessWidget {
     ),
 );
   }
-  get confirmationCodeText => Text(
-    AppStrings.forgetPasswordQuestion,
-    textDirection: TextDirection.rtl,
-    style: TextStyle(
-        color: AppColors.gradientColor1,
-        fontWeight: FontWeight.w500,
-        fontFamily: FontFamilies.alexandria,
-        fontSize: 13.5
-    ),
-  );
   get enterConfirmationCodeText => Text(
     AppStrings.codeWillBeSentToYou,
     textDirection: TextDirection.rtl,

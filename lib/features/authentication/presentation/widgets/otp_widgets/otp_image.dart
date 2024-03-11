@@ -9,7 +9,7 @@ class OtpImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Center(child: Padding(
-      padding:  EdgeInsets.only(bottom:context.height12),
+      padding:  EdgeInsets.only(bottom:context.height32),
       child: SvgPicture.asset(AppAssets.forgotPassword),
     ));
   }
