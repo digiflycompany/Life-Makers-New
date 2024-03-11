@@ -5,6 +5,7 @@ import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_
 import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_states.dart';
 import 'package:life_makers/features/authentication/presentation/pages/login_screen.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/change_password_widgets/change_passsword_image.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/change_password_widgets/create_new_password_text.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app-string.dart';
@@ -66,10 +67,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   child: Column(
                     children: [
                       const ChangePasswordImage(),
-                      createNewPassword,
-                      SizedBox(
-                          height: 52.h
-                      ),
+                      const CreateNewPasswordText(),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20.w),
                         child: Column(
@@ -216,15 +214,4 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       ),
     );
   }
-
-  get createNewPassword =>
-      Text(
-        AppStrings.createNewPassowrd,
-        textDirection: TextDirection.rtl,
-        style: TextStyle(
-            color: AppColors.gradientColor1,
-            fontWeight: FontWeight.w500,
-            fontFamily: FontFamilies.alexandria,
-            fontSize: 13.5),
-      );
 }

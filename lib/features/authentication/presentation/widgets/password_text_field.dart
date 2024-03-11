@@ -18,7 +18,6 @@ class PasswordTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  SizedBox(
-      //height: context.height64,
       child: Directionality(
         textDirection: TextDirection.rtl,
         child: TextFormField(
