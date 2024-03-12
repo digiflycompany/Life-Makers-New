@@ -260,3 +260,77 @@
 //     );
 //   }
 // }
+
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:life_makers/core/widgets/spacer.dart';
+import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_cubit.dart';
+import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_states.dart';
+import 'package:life_makers/features/authentication/data/models/area_model.dart';
+import 'package:life_makers/features/authentication/data/models/city_model.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/custom_drop_down.dart';
+
+class CityAndCenterFields extends StatelessWidget {
+  const CityAndCenterFields({super.key, this.items, this.onChangeFunction});
+
+  final List<DropdownMenuItem<City>>? items;
+  final Function(String? cityName)? onChangeFunction;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<SignUpCubit, SignUpState>(
+      listener: (BuildContext context, SignUpState state) {},
+      builder: (BuildContext context, SignUpState state) {
+        final signUpCubit = SignUpCubit.get(context);
+        return Row(
+          children: [
+            CustomDropDown(
+                hint: "مركز",
+                items: signUpCubit.areasList
+                    .map((Areas area) => DropdownMenuItem<Areas>(
+                          value: area, // Assuming city.name is a String
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: FittedBox(
+                              child: Text(
+                                area.name ?? "",
+                                style: TextStyle(fontSize: 10.sp),
+                                textDirection: TextDirection.rtl,
+                              ),
+                            ),
+                          ),
+                        ))
+                    .toList(),
+                onChange: (cityName) {
+                  signUpCubit.selectedCity = cityName;
+                  signUpCubit.fetchAreaData();
+                }),
+            HorizontalSpace(10.w),
+            CustomDropDown(
+                hint: "المحافظة",
+                items: signUpCubit.citiesList
+                    .map((City city) => DropdownMenuItem<City>(
+                          value: city, // Assuming city.name is a String
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: FittedBox(
+                              child: Text(
+                                city.name ?? "",
+                                style: TextStyle(fontSize: 10.sp),
+                                textDirection: TextDirection.rtl,
+                              ),
+                            ),
+                          ),
+                        ))
+                    .toList(),
+                onChange: (cityName) {
+                  signUpCubit.selectedCity = cityName;
+                  signUpCubit.fetchAreaData();
+                }),
+          ],
+        );
+      },
+    );
+  }
+}

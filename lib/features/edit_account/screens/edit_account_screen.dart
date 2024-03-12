@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,6 +17,7 @@ import 'package:life_makers/features/home_page/cubit/menu_page_cubit/menu_page_s
 import 'package:life_makers/services/cubit/global_cubit_state.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 import 'package:page_transition/page_transition.dart';
+
 import '../../../../core/utils/app-assets.dart';
 import '../../../core/utils/app-string.dart';
 import '../../../core/utils/app_fonts.dart';
@@ -50,11 +52,8 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
   final TextEditingController previousExperienceController =
       TextEditingController();
 
-
   final TextEditingController textEditingController = TextEditingController();
   final TextEditingController textEditingController2 = TextEditingController();
-
-
 
   @override
   void dispose() {
@@ -75,8 +74,8 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
   @override
   void initState() {
     super.initState();
-    selectedCityName=userModel.user?.governorate;
-    selectedAreaName=userModel.user?.cityCenter;
+    selectedCityName = userModel.user?.governorate;
+    selectedAreaName = userModel.user?.cityCenter;
     nameController.text = userModel.user?.name ?? '';
     userNameController.text = userModel.user?.username ?? '';
     emailController.text = userModel.user?.email ?? '';
@@ -321,11 +320,10 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
         ),
         body: Directionality(
           textDirection: TextDirection.rtl,
-          child: BlocConsumer<SignUpCubit,SignUpState>(
-            listener: (context,state){},
-            builder: (context,state){
+          child: BlocConsumer<SignUpCubit, SignUpState>(
+            listener: (context, state) {},
+            builder: (context, state) {
               return SingleChildScrollView(
-
                 physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
@@ -358,7 +356,8 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                       decoration: InputDecoration(
                                         labelText: 'الاسم * ',
                                         labelStyle: buildLabelStyle(),
-                                        focusedBorder: buildUnderlineInputBorder(),
+                                        focusedBorder:
+                                            buildUnderlineInputBorder(),
                                       ))),
                               const SizedBox(width: 34),
                               Flexible(
@@ -371,7 +370,8 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                       decoration: InputDecoration(
                                         labelText: 'اسم المستخدم * ',
                                         labelStyle: buildLabelStyle(),
-                                        focusedBorder: buildUnderlineInputBorder(),
+                                        focusedBorder:
+                                            buildUnderlineInputBorder(),
                                       ))),
                             ],
                           ),
@@ -392,7 +392,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                           labelText: 'رقم الهاتف * ',
                                           labelStyle: buildLabelStyle(),
                                           focusedBorder:
-                                          buildUnderlineInputBorder(),
+                                              buildUnderlineInputBorder(),
                                         ))),
                                 const SizedBox(width: 34),
                                 Flexible(
@@ -407,7 +407,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                           labelText: 'رقم الواتساب * ',
                                           labelStyle: buildLabelStyle(),
                                           focusedBorder:
-                                          buildUnderlineInputBorder(),
+                                              buildUnderlineInputBorder(),
                                         ))),
                               ],
                             ),
@@ -429,7 +429,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                           labelText: 'الرقم القومي * ',
                                           labelStyle: buildLabelStyle(),
                                           focusedBorder:
-                                          buildUnderlineInputBorder(),
+                                              buildUnderlineInputBorder(),
                                         ))),
                                 const SizedBox(
                                   width: 34,
@@ -445,7 +445,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                           labelText: 'العمل * ',
                                           labelStyle: buildLabelStyle(),
                                           focusedBorder:
-                                          buildUnderlineInputBorder(),
+                                              buildUnderlineInputBorder(),
                                         ))),
                               ],
                             ),
@@ -466,14 +466,15 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                           labelText: 'العنوان * ',
                                           labelStyle: buildLabelStyle(),
                                           focusedBorder:
-                                          buildUnderlineInputBorder(),
+                                              buildUnderlineInputBorder(),
                                         ))),
                                 const SizedBox(
                                   width: 34,
                                 ),
                                 Flexible(
                                     child: TextField(
-                                        controller: previousExperienceController,
+                                        controller:
+                                            previousExperienceController,
                                         cursorColor: AppColors.blueColor,
                                         textInputAction: TextInputAction.next,
                                         keyboardType: TextInputType.name,
@@ -482,7 +483,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                           labelText: 'الخبرة السابقة * ',
                                           labelStyle: buildLabelStyle(),
                                           focusedBorder:
-                                          buildUnderlineInputBorder(),
+                                              buildUnderlineInputBorder(),
                                         ))),
                               ],
                             ),
@@ -499,35 +500,35 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                     border: Border.all(color: Colors.black26),
                                   ),
                                   child: Center(
-
                                     child: DropdownButton2<String>(
-
                                       underline: SizedBox.shrink(),
                                       isExpanded: true,
                                       items: signUpCubit.citiesList
-                                          .map((Cities city) => DropdownMenuItem<String>(
-                                        value: city.name ??
-                                            "", // Assuming city.name is a String
-                                        child: Align(
-                                          alignment: Alignment.centerRight,
-                                          child: Text(
-                                            city.name ?? "",
-                                            textDirection: TextDirection.rtl,
-                                            maxLines:
-                                            2, // Set text direction to RTL
-                                          ),
-                                        ),
-                                      ))
+                                          .map((City city) =>
+                                              DropdownMenuItem<String>(
+                                                value: city.name ??
+                                                    "", // Assuming city.name is a String
+                                                child: Align(
+                                                  alignment:
+                                                      Alignment.centerRight,
+                                                  child: Text(
+                                                    city.name ?? "",
+                                                    textDirection:
+                                                        TextDirection.rtl,
+                                                    maxLines:
+                                                        2, // Set text direction to RTL
+                                                  ),
+                                                ),
+                                              ))
                                           .toList(),
-
                                       onChanged: (String? cityName) {
                                         selectedCityName = cityName;
                                         selectedAreaName = null;
                                         setState(() {});
                                         // Find the corresponding city object based on the selected city name
                                         final selectedCity =
-                                        signUpCubit.citiesList.firstWhere(
-                                              (city) => city.name == cityName,
+                                            signUpCubit.citiesList.firstWhere(
+                                          (city) => city.name == cityName,
                                           orElse: () => signUpCubit.citiesList
                                               .first, // Default to the first city
                                         );
@@ -536,18 +537,18 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                             selectedCity.id?.toInt() ?? 0;
                                         signUpCubit.fetchAreaData();
                                       },
-                                      hint:
-                                        Padding(
-                                          padding: EdgeInsets.only(right: 8),
-                                          child:Text(
+                                      hint: Padding(
+                                        padding: EdgeInsets.only(right: 8),
+                                        child: Text(
                                           selectedCityName ?? 'المحافظة',
                                           style: TextStyle(
                                               color: AppColors.smallTextColor,
-                                              fontFamily: FontFamilies.alexandria,
+                                              fontFamily:
+                                                  FontFamilies.alexandria,
                                               fontSize: 11,
                                               fontWeight: FontWeight.w700),
-                                        ),),
-
+                                        ),
+                                      ),
                                       style: TextStyle(
                                         fontFamily: FontFamilies.alexandria,
                                         fontSize: 12,
@@ -557,16 +558,17 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                         height: 40,
                                         width: 160.w,
                                       ),
-
                                       dropdownStyleData: DropdownStyleData(
                                         maxHeight: 200,
                                         decoration: BoxDecoration(
                                             color: Colors.white,
-                                            borderRadius: BorderRadius.circular(8.0),
-                                            border:
-                                            Border.all(color: Colors.transparent)),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            border: Border.all(
+                                                color: Colors.transparent)),
                                       ),
-                                      menuItemStyleData: const MenuItemStyleData(
+                                      menuItemStyleData:
+                                          const MenuItemStyleData(
                                         height: 40,
                                       ),
                                       dropdownSearchData: DropdownSearchData(
@@ -586,15 +588,19 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                             controller: textEditingController,
                                             decoration: InputDecoration(
                                               isDense: true,
-                                              contentPadding: const EdgeInsets.symmetric(
+                                              contentPadding:
+                                                  const EdgeInsets.symmetric(
                                                 horizontal: 10,
                                                 vertical: 8,
                                               ),
-                                              hintTextDirection: TextDirection.rtl,
+                                              hintTextDirection:
+                                                  TextDirection.rtl,
                                               hintText: 'ابحث عن محافظة....',
-                                              hintStyle: const TextStyle(fontSize: 12),
+                                              hintStyle:
+                                                  const TextStyle(fontSize: 12),
                                               border: OutlineInputBorder(
-                                                borderRadius: BorderRadius.circular(8),
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
                                               ),
                                             ),
                                           ),
@@ -602,9 +608,12 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                         searchMatchFn: (item, searchValue) {
                                           final myItem = signUpCubit.citiesList
                                               .firstWhere((element) =>
-                                          element.name == item.value);
-                                          return myItem.name!.contains(searchValue) ||
-                                              item.value.toString().contains(searchValue);
+                                                  element.name == item.value);
+                                          return myItem.name!
+                                                  .contains(searchValue) ||
+                                              item.value
+                                                  .toString()
+                                                  .contains(searchValue);
                                         },
                                       ),
                                       onMenuStateChange: (isOpen) {
@@ -616,7 +625,6 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                   ),
                                 ),
                               ),
-
                               Padding(
                                 padding: EdgeInsets.only(top: 14.h),
                                 child: Container(
@@ -630,21 +638,24 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                       underline: const SizedBox.shrink(),
                                       alignment: Alignment.centerRight,
                                       items: signUpCubit.areasList
-                                          .map((Areas area) => DropdownMenuItem<String>(
-                                        value: area.name ??
-                                            "", // Assuming city.name is a String
-                                        child: Align(
-                                          alignment: Alignment.centerRight,
-                                          child: Text(
-                                            area.name ?? "",
-                                            textDirection: TextDirection.rtl,
-                                            maxLines: 2,
-                                            style: TextStyle(
-                                                fontFamily: 'Alexandria'),
-                                          ),
-
-                                        ),
-                                      ))
+                                          .map((Areas area) =>
+                                              DropdownMenuItem<String>(
+                                                value: area.name ??
+                                                    "", // Assuming city.name is a String
+                                                child: Align(
+                                                  alignment:
+                                                      Alignment.centerRight,
+                                                  child: Text(
+                                                    area.name ?? "",
+                                                    textDirection:
+                                                        TextDirection.rtl,
+                                                    maxLines: 2,
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'Alexandria'),
+                                                  ),
+                                                ),
+                                              ))
                                           .toSet()
                                           .toList(),
                                       onChanged: (String? areaName) {
@@ -653,15 +664,17 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                       },
                                       isExpanded: true,
                                       hint: Padding(
-                                        padding: EdgeInsets.only(right:8),
-                                        child:Text(
-                                        selectedAreaName ?? 'المركز',
-                                        style: TextStyle(
-                                            color: AppColors.smallTextColor,
-                                            fontFamily: FontFamilies.alexandria,
-                                            fontSize: 11,
-                                            fontWeight: FontWeight.w700),
-                                      ),), //) Set the selected value
+                                        padding: EdgeInsets.only(right: 8),
+                                        child: Text(
+                                          selectedAreaName ?? 'المركز',
+                                          style: TextStyle(
+                                              color: AppColors.smallTextColor,
+                                              fontFamily:
+                                                  FontFamilies.alexandria,
+                                              fontSize: 11,
+                                              fontWeight: FontWeight.w700),
+                                        ),
+                                      ), //) Set the selected value
                                       style: TextStyle(
                                         fontFamily: FontFamilies.alexandria,
                                         fontSize: 12,
@@ -677,15 +690,18 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                         maxHeight: 200,
                                         decoration: BoxDecoration(
                                             color: Colors.white,
-                                            borderRadius: BorderRadius.circular(8.0),
-                                            border:
-                                            Border.all(color: Colors.transparent)),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            border: Border.all(
+                                                color: Colors.transparent)),
                                       ),
-                                      menuItemStyleData: const MenuItemStyleData(
+                                      menuItemStyleData:
+                                          const MenuItemStyleData(
                                         height: 40,
                                       ),
                                       dropdownSearchData: DropdownSearchData(
-                                        searchController: textEditingController2,
+                                        searchController:
+                                            textEditingController2,
                                         searchInnerWidgetHeight: 50,
                                         searchInnerWidget: Container(
                                           height: 50,
@@ -701,24 +717,32 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                             controller: textEditingController2,
                                             decoration: InputDecoration(
                                               isDense: true,
-                                              contentPadding: const EdgeInsets.symmetric(
+                                              contentPadding:
+                                                  const EdgeInsets.symmetric(
                                                 horizontal: 10,
                                                 vertical: 8,
                                               ),
-                                              hintTextDirection: TextDirection.rtl,
+                                              hintTextDirection:
+                                                  TextDirection.rtl,
                                               hintText: 'ابحث عن مركز....',
-                                              hintStyle: const TextStyle(fontSize: 12),
+                                              hintStyle:
+                                                  const TextStyle(fontSize: 12),
                                               border: OutlineInputBorder(
-                                                borderRadius: BorderRadius.circular(8),
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
                                               ),
                                             ),
                                           ),
                                         ),
                                         searchMatchFn: (item, searchValue) {
-                                          final myItem = signUpCubit.areasList.firstWhere(
-                                                  (element) => element.name == item.value);
-                                          return myItem.name!.contains(searchValue) ||
-                                              item.value.toString().contains(searchValue);
+                                          final myItem = signUpCubit.areasList
+                                              .firstWhere((element) =>
+                                                  element.name == item.value);
+                                          return myItem.name!
+                                                  .contains(searchValue) ||
+                                              item.value
+                                                  .toString()
+                                                  .contains(searchValue);
                                         },
                                       ),
                                       onMenuStateChange: (isOpen) {
@@ -732,55 +756,58 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                               ),
                             ],
                           ),
-
                           Padding(
                             padding: EdgeInsets.only(top: 12.h),
                             child: Center(
-                              child: BlocBuilder<EditAccountCubit, CubitBaseState>(
+                              child:
+                                  BlocBuilder<EditAccountCubit, CubitBaseState>(
                                 builder: (context, state) {
                                   return ElevatedButton(
                                     onPressed: () {
-                                      context.read<EditAccountCubit>().editAccountData(
-                                          file: _image,
-                                          name: nameController.text,
-                                          email: emailController.text,
-                                          password: passwordController.text,
-                                          context: context,
-                                          phone: phoneController.text,
-
-                                          gender:
-                                          '${PreferencesHelper.getUserModel?.user?.gender}',
-                                          address: addressController.text,
-                                          job: JobController.text,
-                                          governorate: selectedCityName,
-                                          whatsAppNumber: whatsappController.text,
-                                          cityCenter: selectedAreaName,
-
-                                          previousExperience:
-                                          previousExperienceController.text,
-                                          education: 'education');
+                                      context
+                                          .read<EditAccountCubit>()
+                                          .editAccountData(
+                                              file: _image,
+                                              name: nameController.text,
+                                              email: emailController.text,
+                                              password: passwordController.text,
+                                              context: context,
+                                              phone: phoneController.text,
+                                              gender:
+                                                  '${PreferencesHelper.getUserModel?.user?.gender}',
+                                              address: addressController.text,
+                                              job: JobController.text,
+                                              governorate: selectedCityName,
+                                              whatsAppNumber:
+                                                  whatsappController.text,
+                                              cityCenter: selectedAreaName,
+                                              previousExperience:
+                                                  previousExperienceController
+                                                      .text,
+                                              education: 'education');
                                     },
                                     style: ElevatedButton.styleFrom(
                                         elevation: 0,
                                         backgroundColor:
-                                        AppColors.orangeBorderColor,
+                                            AppColors.orangeBorderColor,
                                         fixedSize: Size(95.w, 48.h),
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
-                                            BorderRadius.circular(8.r))),
+                                                BorderRadius.circular(8.r))),
                                     child: state == CubitBaseState.loading
                                         ? CircularProgressIndicator.adaptive(
-                                      backgroundColor: Colors.white,
-                                    )
+                                            backgroundColor: Colors.white,
+                                          )
                                         : Text(
-                                      'حفظ',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: FontFamilies.alexandria,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
+                                            'حفظ',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily:
+                                                  FontFamilies.alexandria,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
                                   );
                                 },
                               ),

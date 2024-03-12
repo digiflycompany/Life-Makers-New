@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:life_makers/core/utils/app_fonts.dart';
 import 'package:life_makers/features/home_page/presentation/pages/profile_screen.dart';
 import 'package:life_makers/features/notification/presentation/pages/notification_page.dart';
+
 import '../../../../core/utils/app-color.dart';
 import '../../data/models/nav_bar_model.dart';
 import '../widgets/custom_paint.dart';

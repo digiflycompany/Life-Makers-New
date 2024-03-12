@@ -12,6 +12,7 @@ import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/cubit/se
 import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/presentation/pages/previous_seasonal_campaigns.dart';
 import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/presentation/pages/upcoming_seasonal_campaigns.dart';
 import 'package:life_makers/services/cubit/global_cubit_state.dart';
+
 import '../../model/seasonal_campaigns_model.dart';
 import 'current_seasonal_campaigns.dart';
 
@@ -72,12 +73,6 @@ class _SeasonalCampaignsScreenState extends State<SeasonalCampaignsScreen>
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    if (mounted) _pageController.dispose();
   }
 
   void _changePage(int page) {
