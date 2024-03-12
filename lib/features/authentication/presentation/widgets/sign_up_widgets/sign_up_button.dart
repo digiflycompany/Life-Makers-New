@@ -8,7 +8,8 @@ import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_
 import 'package:life_makers/features/authentication/presentation/widgets/auth_button.dart';
 
 class SignUpButton extends StatelessWidget {
-  const SignUpButton({super.key});
+  final GlobalKey<FormState> formKey;
+  const SignUpButton({super.key, required this.formKey});
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +21,16 @@ class SignUpButton extends StatelessWidget {
           return AuthButton(
             text: AppStrings.createAccount,
             onTap: () {
-              if (signUpCubit.isConfirmed == true &&
-                  signUpCubit.otpSent == true) {
-                signUpCubit.handleSignUp();
-              } else if (signUpCubit.isConfirmed == false ||
-                  signUpCubit.otpSent == false) {
-                CustomSnackBars.showErrorToast(
-                    title: AppStrings.pleaseConfirmPhoneNumber
-                );
+              if(formKey.currentState!.validate()){
+                if (signUpCubit.isConfirmed == true &&
+                    signUpCubit.otpSent == true) {
+                  signUpCubit.handleSignUp();
+                } else if (signUpCubit.isConfirmed == false ||
+                    signUpCubit.otpSent == false) {
+                  CustomSnackBars.showErrorToast(
+                      title: AppStrings.pleaseConfirmPhoneNumber
+                  );
+                }
               }
             },
           );
