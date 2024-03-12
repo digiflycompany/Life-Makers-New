@@ -30,12 +30,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               content: Text(AppStrings.passwordHasBeenChangedSuccessfully),
               duration: Duration(seconds: 2),
             ));
-            Routes.loginPageRoute.moveToCurrentRouteAndRemoveAll;
+            Future.delayed(Duration(seconds: 2), () {
+              Routes.loginPageRoute.moveToCurrentRouteAndRemoveAll(context);
+            });
           } else if (state is changePasswordFailure) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text(AppStrings.errorHappenedTryAgain),
-              duration: Duration(seconds: 2),
-            ));
           }
         },
         builder: (context, state) {
