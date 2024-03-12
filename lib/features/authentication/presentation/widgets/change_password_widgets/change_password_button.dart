@@ -18,7 +18,7 @@ class ChangePasswordButton extends StatelessWidget {
       builder: (context, state) {
         SignUpCubit signUpCubit = context.read<SignUpCubit>();
         return Padding(
-            padding: EdgeInsets.only(top: context.height32),
+            padding: EdgeInsets.only(top: context.height51),
             child: ConfirmationButton(
                   onTap: () {
                     if (formKey.currentState!.validate()) {
