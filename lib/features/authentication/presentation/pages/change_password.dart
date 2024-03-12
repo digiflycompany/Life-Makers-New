@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:life_makers/core/utils/app_routes.dart';
+import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_cubit.dart';
 import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_states.dart';
-import 'package:life_makers/features/authentication/presentation/pages/login_screen.dart';
+import 'package:life_makers/features/authentication/presentation/widgets/change_password_widgets/change_password_body.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/change_password_widgets/change_password_image.dart';
-import 'package:life_makers/features/authentication/presentation/widgets/change_password_widgets/change_password_button.dart';
-import 'package:life_makers/features/authentication/presentation/widgets/change_password_widgets/create_new_password_text.dart';
-import 'package:life_makers/features/authentication/presentation/widgets/change_password_widgets/reset_passwords_text_fields.dart';
-import 'package:page_transition/page_transition.dart';
 import '../../../../core/utils/app-string.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
@@ -32,21 +30,15 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               content: Text(AppStrings.passwordHasBeenChangedSuccessfully),
               duration: Duration(seconds: 2),
             ));
-            Navigator.push(
-                context,
-                PageTransition(
-                  type: PageTransitionType.fade,
-                  duration: const Duration(milliseconds: 400),
-                  child: BlocProvider.value(
-                    value: context.read<SignUpCubit>(),
-                    child: LoginScreen(),
-                  ),
-                ));
+            Routes.loginPageRoute.moveToCurrentRouteAndRemoveAll;
           } else if (state is changePasswordFailure) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text(AppStrings.errorHappenedTryAgain),
+              duration: Duration(seconds: 2),
+            ));
           }
         },
         builder: (context, state) {
-          SignUpCubit signUpCubit = context.read<SignUpCubit>();
           return Scaffold(
             backgroundColor: Colors.white,
             body: Form(
@@ -57,9 +49,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   child: Column(
                     children: [
                       const ChangePasswordImage(),
-                      const CreateNewPasswordText(),
-                      const ResetPasswordsTextFields(),
-                      ChangePasswordButton(formKey: _formKey,),
+                      ChangePasswordBody(formKey: _formKey,),
                     ],
                   ),
                 ),
