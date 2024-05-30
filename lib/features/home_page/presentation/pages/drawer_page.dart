@@ -20,7 +20,7 @@ class DrawerPage extends StatelessWidget {
       mainScreenTapClose: true,
       mainScreen: HomePage(),
       borderRadius: 24.r,
-      shadowLayer1Color: AppColors.drawerColor,
+      shadowLayer1Color: AppColors.blueColor4,
       showShadow: true,
       angle: 0.0,
       drawerShadowsBackgroundColor: Colors.grey.shade400,

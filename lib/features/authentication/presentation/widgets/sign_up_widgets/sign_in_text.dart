@@ -20,7 +20,7 @@ class SignInText extends StatelessWidget {
             Text(
               AppStrings.haveAnAccount,
               style: TextStyle(
-                  color: AppColors.smallTextColor,
+                  color: AppColors.blueColor6,
                   fontWeight: FontWeight.w500,
                   fontSize: 11.sp
               ),

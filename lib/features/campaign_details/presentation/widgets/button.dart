@@ -16,7 +16,7 @@ class Button extends StatelessWidget {
         width: 320.w,
         height: 63.h,
         decoration: BoxDecoration(
-          color: AppColors.orangeBorderColor,
+          color: AppColors.orangeColor,
           borderRadius: BorderRadius.circular(5.r),
         ),
         child:  Center(

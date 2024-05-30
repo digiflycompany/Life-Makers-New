@@ -87,8 +87,8 @@ class _OneDayActivityCardState extends State<OneDayActivityCard> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        color: AppColors.trainingCardColor,
-                        border: Border.all(color: AppColors.darkBlueColor,width:1.6.w),
+                        color: AppColors.whiteColor2,
+                        border: Border.all(color: AppColors.blueColor4,width:1.6.w),
                         borderRadius: BorderRadius.circular(20.r),
                       ),
                       child: Padding(
@@ -108,7 +108,7 @@ class _OneDayActivityCardState extends State<OneDayActivityCard> {
                                       // '${OneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities?[index].name}',
                                       '${oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities?[index].name}',
                                       style: TextStyle(
-                                          color: AppColors.darkBlueColor,
+                                          color: AppColors.blueColor4,
                                           fontFamily: FontFamilies.alexandria,
                                           fontWeight: FontWeight.w500,
                                           fontSize: 13.5
@@ -156,7 +156,7 @@ class _OneDayActivityCardState extends State<OneDayActivityCard> {
                   const Text(
                     'لا يوجد أنشطة حاليا',
                     style: TextStyle(
-                        color:AppColors.greyNoCampaignsTextColor,
+                        color:AppColors.greyColor4,
                         fontFamily: FontFamilies.alexandria,
                         fontWeight: FontWeight.w500,
                         fontSize: 13
@@ -167,7 +167,7 @@ class _OneDayActivityCardState extends State<OneDayActivityCard> {
             );
           },
         ),
-        color: AppColors.orangeBorderColor,
+        color: AppColors.orangeColor,
         backgroundColor: Colors.white,
       ),
     );

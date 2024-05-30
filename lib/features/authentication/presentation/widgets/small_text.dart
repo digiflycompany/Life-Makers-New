@@ -11,7 +11,7 @@ class SmallText extends StatelessWidget {
     return Text(
         text!,
         style: const TextStyle(
-         color: AppColors.smallTextColor,
+         color: AppColors.blueColor6,
          fontFamily: FontFamilies.alexandria,
          fontWeight: FontWeight.w400,
          fontSize: 11

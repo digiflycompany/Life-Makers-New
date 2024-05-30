@@ -20,14 +20,14 @@ class CustomRadio extends StatelessWidget {
           height: 17,
           decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: AppColors.checkBoxColor,width: 2.w)
+              border: Border.all(color: AppColors.greyColor5,width: 2.w)
           ),
           child:selected==true? Center(
             child: Container(
               width: 11.w,
               height: 11.h,
               decoration: const BoxDecoration(
-                color: AppColors.darkBlueColor,
+                color: AppColors.blueColor4,
                 shape: BoxShape.circle,
                 //border: Border.all(color: Colors.transparent,width: 2.w)
               ),

@@ -23,7 +23,7 @@ class PasswordTextField extends StatelessWidget {
         child: TextFormField(
           textDirection: TextDirection.rtl,
           textInputAction: TextInputAction.next,
-          cursorColor: AppColors.smallTextColor,
+          cursorColor: AppColors.blueColor6,
           cursorWidth: 2.w,
           validator: validator,
           controller: controller,
@@ -43,22 +43,22 @@ class PasswordTextField extends StatelessWidget {
                 color: AppColors.redColor,
                 fontSize: 10.sp, // Customize the error text font size
               ),
-            focusColor: AppColors.borderColor,
+            focusColor: AppColors.blueColor7,
             alignLabelWithHint: true,
             hintTextDirection:TextDirection.rtl ,
             enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: AppColors.borderColor),
+                borderSide: const BorderSide(color: AppColors.blueColor7),
                 borderRadius: BorderRadius.circular(5.r)
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: AppColors.borderColor),
+              borderSide: const BorderSide(color: AppColors.blueColor7),
               borderRadius: BorderRadius.circular(5.r),
             ),
             fillColor: Colors.white,
             filled:true,
             hintText: hintText,
             hintStyle: TextStyle(
-                color:AppColors.smallTextColor,
+                color:AppColors.blueColor6,
                 fontSize: 11.sp,
                 fontWeight: FontWeight.w400
             ),

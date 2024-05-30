@@ -101,7 +101,7 @@ class _MemberShipThirdStepState extends State<MemberShipThirdStep> {
                   child: Row(
                     children: [
                       Radio(
-                        activeColor: AppColors.orangeBorderColor,
+                        activeColor: AppColors.orangeColor,
                         onChanged: (int? val) {
                           selectedPayment = val!;
                           setState(() {});
@@ -112,7 +112,7 @@ class _MemberShipThirdStepState extends State<MemberShipThirdStep> {
                       Image.asset('assets/images/fawry.png',
                           width: 50, height: 10),
                       Radio(
-                        activeColor: AppColors.orangeBorderColor,
+                        activeColor: AppColors.orangeColor,
                         onChanged: (int? val) {
                           selectedPayment = val!;
                           setState(() {});
@@ -123,7 +123,7 @@ class _MemberShipThirdStepState extends State<MemberShipThirdStep> {
                       Image.asset('assets/images/meza.png',
                           width: 50, height: 10),
                       Radio(
-                        activeColor: AppColors.orangeBorderColor,
+                        activeColor: AppColors.orangeColor,
                         onChanged: (int? val) {
                           selectedPayment = val!;
                           setState(() {});
@@ -134,7 +134,7 @@ class _MemberShipThirdStepState extends State<MemberShipThirdStep> {
                       Image.asset('assets/images/visa.png',
                           width: 50, height: 10),
                       Radio(
-                        activeColor: AppColors.orangeBorderColor,
+                        activeColor: AppColors.orangeColor,
                         onChanged: (int? val) {
                           selectedPayment = val!;
                           setState(() {});
@@ -203,7 +203,7 @@ class _MemberShipThirdStepState extends State<MemberShipThirdStep> {
                 padding: EdgeInsets.symmetric(vertical: 10),
                 child: Row(
                   children: [
-                    CircleAvatar(radius: 5,backgroundColor: AppColors.orangeBorderColor),
+                    CircleAvatar(radius: 5,backgroundColor: AppColors.orangeColor),
                  SizedBox(width: 10),
                     Text(
                       'اختار ( شراء - Purchase )',
@@ -220,7 +220,7 @@ class _MemberShipThirdStepState extends State<MemberShipThirdStep> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  CircleAvatar(radius: 5,backgroundColor: AppColors.orangeBorderColor),
+                  CircleAvatar(radius: 5,backgroundColor: AppColors.orangeColor),
                SizedBox(width: 10),
                   Flexible(
                     child: Text(
@@ -238,7 +238,7 @@ class _MemberShipThirdStepState extends State<MemberShipThirdStep> {
                 padding: EdgeInsets.symmetric(vertical: 10),
                 child: Row(
                   children: [
-                    CircleAvatar(radius: 5,backgroundColor: AppColors.orangeBorderColor),
+                    CircleAvatar(radius: 5,backgroundColor: AppColors.orangeColor),
                     SizedBox(width: 10),
                     Text(
                       'أو أدخل رقم التاجر (Life Makers)',
@@ -253,7 +253,7 @@ class _MemberShipThirdStepState extends State<MemberShipThirdStep> {
               ),
               const Row(
                 children: [
-                  CircleAvatar(radius: 5,backgroundColor: AppColors.orangeBorderColor),
+                  CircleAvatar(radius: 5,backgroundColor: AppColors.orangeColor),
                   SizedBox(width: 10),
                   Text(
                     'أو أدخل رقم ميزة (102731204)',
@@ -278,7 +278,7 @@ class _MemberShipThirdStepState extends State<MemberShipThirdStep> {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
             elevation: 0,
-            backgroundColor: AppColors.orangeBorderColor,
+            backgroundColor: AppColors.orangeColor,
             minimumSize: const Size(double.infinity, 55),
           ),
           onPressed: () {

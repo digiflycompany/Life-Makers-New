@@ -16,7 +16,7 @@ class ElectionsButton extends StatelessWidget {
       child: ElevatedButton(
 
         style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.orangeBorderColor,
+            backgroundColor: AppColors.orangeColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5.r),
 

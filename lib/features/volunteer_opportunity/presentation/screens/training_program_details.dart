@@ -72,7 +72,7 @@ class _TrainingProgramDetailsState extends State<TrainingProgramDetails> {
                       child: IconButton(
                         icon: Icon(
                           Icons.arrow_forward,
-                          color: AppColors.gradientColor1,
+                          color: AppColors.blueColor4,
                         ),
                         onPressed: () {
                           Navigator.pop(context);
@@ -148,7 +148,7 @@ class _TrainingProgramDetailsState extends State<TrainingProgramDetails> {
                       child: Transform.scale(
                         scale: 0.5,
                         child: CircularProgressIndicator(
-                          color: AppColors.orangeBorderColor,
+                          color: AppColors.orangeColor,
                         ),
                       ),
                     )
@@ -166,7 +166,7 @@ class _TrainingProgramDetailsState extends State<TrainingProgramDetails> {
                       child: Transform.scale(
                         scale: 0.5,
                         child: CircularProgressIndicator(
-                          color: AppColors.orangeBorderColor,
+                          color: AppColors.orangeColor,
                         ),
                       ),
                     )
@@ -185,7 +185,7 @@ class _TrainingProgramDetailsState extends State<TrainingProgramDetails> {
                       child: Transform.scale(
                         scale: 0.5,
                         child: CircularProgressIndicator(
-                          color: AppColors.orangeBorderColor,
+                          color: AppColors.orangeColor,
                         ),
                       ),
                     )

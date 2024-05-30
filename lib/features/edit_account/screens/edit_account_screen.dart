@@ -135,7 +135,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                               child: SizedBox(
                                 height: 50.h,
                                 child: CircularProgressIndicator(
-                                  color: AppColors.orangeBorderColor,
+                                  color: AppColors.orangeColor,
                                 ),
                               ),
                             )
@@ -542,7 +542,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                         child: Text(
                                           selectedCityName ?? 'المحافظة',
                                           style: TextStyle(
-                                              color: AppColors.smallTextColor,
+                                              color: AppColors.blueColor6,
                                               fontFamily:
                                                   FontFamilies.alexandria,
                                               fontSize: 11,
@@ -668,7 +668,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                         child: Text(
                                           selectedAreaName ?? 'المركز',
                                           style: TextStyle(
-                                              color: AppColors.smallTextColor,
+                                              color: AppColors.blueColor6,
                                               fontFamily:
                                                   FontFamilies.alexandria,
                                               fontSize: 11,
@@ -789,7 +789,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                     style: ElevatedButton.styleFrom(
                                         elevation: 0,
                                         backgroundColor:
-                                            AppColors.orangeBorderColor,
+                                            AppColors.orangeColor,
                                         fixedSize: Size(95.w, 48.h),
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
@@ -865,7 +865,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                 width: 115.w,
                                 height: 41.h,
                                 decoration: BoxDecoration(
-                                    color: AppColors.orangeBorderColor,
+                                    color: AppColors.orangeColor,
                                     borderRadius: BorderRadius.only(
                                       topRight: Radius.circular(6.r),
                                       bottomRight: Radius.circular(6.r),
@@ -935,7 +935,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
         //               },
         //               style: ElevatedButton.styleFrom(
         //                   elevation: 0,
-        //                   backgroundColor: AppColors.orangeBorderColor,
+        //                   backgroundColor: AppColors.orangeColor,
         //                   fixedSize: Size(230.w, 50.h),
         //                   shape: RoundedRectangleBorder(
         //                       borderRadius: BorderRadius.circular(5))),

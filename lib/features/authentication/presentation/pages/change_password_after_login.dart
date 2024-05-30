@@ -89,7 +89,7 @@ class _ChangePasswordAfterLoginScreenState extends State<ChangePasswordAfterLogi
                                 child: Icon(
                                   Icons.remove_red_eye_outlined,
                                   size: 24.r,
-                                  color: AppColors.prefixIconColor,
+                                  color: AppColors.greyColor,
                                 ),
                               )
                                   : Padding(
@@ -97,7 +97,7 @@ class _ChangePasswordAfterLoginScreenState extends State<ChangePasswordAfterLogi
                                 child: Icon(
                                   Icons.remove_red_eye,
                                   size: 24.r,
-                                  color: AppColors.prefixIconColor,
+                                  color: AppColors.greyColor,
                                 ),
                               ),
                             ),
@@ -125,7 +125,7 @@ class _ChangePasswordAfterLoginScreenState extends State<ChangePasswordAfterLogi
                                 child: Icon(
                                   Icons.remove_red_eye_outlined,
                                   size: 24.r,
-                                  color: AppColors.prefixIconColor,
+                                  color: AppColors.greyColor,
                                 ),
                               )
                                   : Padding(
@@ -133,7 +133,7 @@ class _ChangePasswordAfterLoginScreenState extends State<ChangePasswordAfterLogi
                                 child: Icon(
                                   Icons.remove_red_eye,
                                   size: 24.r,
-                                  color: AppColors.prefixIconColor,
+                                  color: AppColors.greyColor,
                                 ),
                               ),
                             ),
@@ -177,7 +177,7 @@ class _ChangePasswordAfterLoginScreenState extends State<ChangePasswordAfterLogi
                                 child: Icon(
                                   Icons.remove_red_eye_outlined,
                                   size: 24.r,
-                                  color: AppColors.prefixIconColor,
+                                  color: AppColors.greyColor,
                                 ),
                               )
                                   : Padding(
@@ -185,7 +185,7 @@ class _ChangePasswordAfterLoginScreenState extends State<ChangePasswordAfterLogi
                                 child: Icon(
                                   Icons.remove_red_eye,
                                   size: 24.r,
-                                  color: AppColors.prefixIconColor,
+                                  color: AppColors.greyColor,
                                 ),
                               ),
                             ),
@@ -220,7 +220,7 @@ class _ChangePasswordAfterLoginScreenState extends State<ChangePasswordAfterLogi
                             width: 420.w,
                             height: 63.h,
                             decoration: BoxDecoration(
-                              color: AppColors.orangeBorderColor,
+                              color: AppColors.orangeColor,
                               borderRadius: BorderRadius.circular(8.r),
                             ),
                             child: Center(
@@ -228,7 +228,7 @@ class _ChangePasswordAfterLoginScreenState extends State<ChangePasswordAfterLogi
                                   ? Transform.scale(
                                 scale: 0.4,
                                 child: CircularProgressIndicator(
-                                  color: AppColors.white,
+                                  color: AppColors.whiteColor,
                                 ),
                               )
                                   : Text(
@@ -256,7 +256,7 @@ class _ChangePasswordAfterLoginScreenState extends State<ChangePasswordAfterLogi
     AppStrings.createNewPassowrd,
     textDirection: TextDirection.rtl,
     style: TextStyle(
-        color: AppColors.gradientColor1,
+        color: AppColors.blueColor4,
         fontWeight: FontWeight.w500,
         fontFamily: FontFamilies.alexandria,
         fontSize: 13.5),

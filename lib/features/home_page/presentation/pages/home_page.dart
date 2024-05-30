@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColors.whiteColor3,
       body: Stack(
         children: [
           pages,
@@ -131,7 +131,7 @@ class _HomePageState extends State<HomePage> {
                         isActive ? navBtn[i].name : '',
                         style: const TextStyle(
                             fontFamily: FontFamilies.alexandria,
-                            color: AppColors.navBarTextColor,
+                            color: AppColors.whiteColor3,
                             fontWeight: FontWeight.w600,
                             fontSize: 10),
                       ),

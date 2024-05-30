@@ -152,7 +152,7 @@ class _HomeCalenderDetailsScreenState extends State<HomeCalenderDetailsScreen> {
             fixedSize: Size.fromHeight(60.h),
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-            backgroundColor: AppColors.orangeBorderColor,
+            backgroundColor: AppColors.orangeColor,
           ),
           onPressed: () {},
           child: Row(

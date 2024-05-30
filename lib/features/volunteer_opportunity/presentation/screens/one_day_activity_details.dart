@@ -70,7 +70,7 @@ class _OneDayActivityDetailsState extends State<OneDayActivityDetails> {
                           radius: 20,
                           child: IconButton(
                             icon: Icon(
-                              Icons.arrow_forward, color: AppColors.gradientColor1,),
+                              Icons.arrow_forward, color: AppColors.blueColor4,),
                             onPressed: () {
                               Navigator.pop(context);
                             },
@@ -148,7 +148,7 @@ class _OneDayActivityDetailsState extends State<OneDayActivityDetails> {
                       child: Transform.scale(
                         scale: 0.5,
                         child: CircularProgressIndicator(
-                          color: AppColors.orangeBorderColor,
+                          color: AppColors.orangeColor,
                         ),
                       ),
                     )
@@ -166,7 +166,7 @@ class _OneDayActivityDetailsState extends State<OneDayActivityDetails> {
                       child: Transform.scale(
                         scale: 0.5,
                         child: CircularProgressIndicator(
-                          color: AppColors.orangeBorderColor,
+                          color: AppColors.orangeColor,
                         ),
                       ),
                     )
@@ -184,7 +184,7 @@ class _OneDayActivityDetailsState extends State<OneDayActivityDetails> {
                       child: Transform.scale(
                         scale: 0.5,
                         child: CircularProgressIndicator(
-                          color: AppColors.orangeBorderColor,
+                          color: AppColors.orangeColor,
                         ),
                       ),
                     )

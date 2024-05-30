@@ -87,7 +87,7 @@ class _CandidateDetailsState extends State<CandidateDetails> {
                             height: 25,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
-                              color: AppColors.orangeBackgroundColor,
+                              color: AppColors.orangeColor2,
                             ),
                             child: Center(
                               child: Text(
@@ -96,7 +96,7 @@ class _CandidateDetailsState extends State<CandidateDetails> {
                                   fontFamily: FontFamilies.alexandria,
                                   fontSize: 11.2,
                                   fontWeight: FontWeight.w600,
-                                  color: AppColors.orangeBorderColor
+                                  color: AppColors.orangeColor
                                 ),
                               ),
                             ),
@@ -193,7 +193,7 @@ class _CandidateDetailsState extends State<CandidateDetails> {
                             height: 25,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
-                              color: AppColors.orangeBackgroundColor,
+                              color: AppColors.orangeColor2,
                             ),
                             child: Center(
                               child: Text(
@@ -202,7 +202,7 @@ class _CandidateDetailsState extends State<CandidateDetails> {
                                     fontFamily: FontFamilies.alexandria,
                                     fontSize: 11.2,
                                     fontWeight: FontWeight.w600,
-                                    color: AppColors.orangeBorderColor
+                                    color: AppColors.orangeColor
                                 ),
                               ),
                             ),
@@ -244,7 +244,7 @@ class _CandidateDetailsState extends State<CandidateDetails> {
                             height: 25,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
-                              color: AppColors.orangeBackgroundColor,
+                              color: AppColors.orangeColor2,
                             ),
                             child: Center(
                               child: Text(
@@ -253,7 +253,7 @@ class _CandidateDetailsState extends State<CandidateDetails> {
                                     fontFamily: FontFamilies.alexandria,
                                     fontSize: 11.2,
                                     fontWeight: FontWeight.w600,
-                                    color: AppColors.orangeBorderColor
+                                    color: AppColors.orangeColor
                                 ),
                               ),
                             ),
@@ -282,7 +282,7 @@ class _CandidateDetailsState extends State<CandidateDetails> {
                             height: 25.h,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
-                              color: AppColors.orangeBackgroundColor,
+                              color: AppColors.orangeColor2,
                             ),
                             child: Center(
                               child: Text(
@@ -291,7 +291,7 @@ class _CandidateDetailsState extends State<CandidateDetails> {
                                     fontFamily: FontFamilies.alexandria,
                                     fontSize: 11.2,
                                     fontWeight: FontWeight.w600,
-                                    color: AppColors.orangeBorderColor
+                                    color: AppColors.orangeColor
                                 ),
                               ),
                             ),
@@ -305,7 +305,7 @@ class _CandidateDetailsState extends State<CandidateDetails> {
                               height: 250.h,
                               decoration: BoxDecoration(
                                 color: Colors.transparent,
-                                border: Border.all(color: AppColors.greyTabColor),
+                                border: Border.all(color: AppColors.greyColor3),
                                 borderRadius: BorderRadius.circular(5.r),
                               ),
                               child: ListView.builder(
@@ -332,7 +332,7 @@ class _CandidateDetailsState extends State<CandidateDetails> {
                                                 fontFamily: FontFamilies.alexandria,
                                                 fontSize: 10.2,
                                                 fontWeight: FontWeight.w600,
-                                                color: AppColors.orangeBorderColor,
+                                                color: AppColors.orangeColor,
                                               ),
                                             ),
                                           ),

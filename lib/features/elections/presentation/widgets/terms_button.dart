@@ -15,7 +15,7 @@ class TermsButton extends StatelessWidget {
       child: Container(
         height: 60.h,
         decoration: BoxDecoration(
-          color: AppColors.orangeBorderColor,
+          color: AppColors.orangeColor,
           borderRadius: BorderRadius.circular(6.r),
         ),
         child:  Center(

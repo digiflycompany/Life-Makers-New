@@ -42,9 +42,9 @@ class UpcomingNonSeasonalCampaignsScreen extends StatelessWidget {
            return CampaignDetailsWidget(
              context: context,
                campaignDetails: campaigns?[index],
-               color: AppColors.greenBackgroundColor,
+               color: AppColors.greenColor3,
                borderColor:
-               AppColors.greenBorderColor
+               AppColors.greenColor
            );
          },
        ):buildEmptySeasonWidget(),
@@ -64,7 +64,7 @@ Widget buildEmptySeasonWidget(){
           const Text(
             AppStrings.noCampaignsText,
             style: TextStyle(
-                color:AppColors.greyNoCampaignsTextColor,
+                color:AppColors.greyColor4,
                 fontFamily: FontFamilies.alexandria,
                 fontWeight: FontWeight.w500,
                 fontSize: 13

@@ -57,7 +57,7 @@ class _ElectionsScreenState extends State<ElectionsScreen> {
                     style: TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.w700,
-                      color: AppColors.black,
+                      color: AppColors.blueColor2,
                       fontFamily: 'Alexandria',
                     ),
                   ),
@@ -69,7 +69,7 @@ class _ElectionsScreenState extends State<ElectionsScreen> {
                     style: TextStyle(
                       fontSize: 9,
                       fontWeight: FontWeight.w400,
-                      color: AppColors.black,
+                      color: AppColors.blueColor2,
                       fontFamily: 'Alexandria',
                     ),
                     textAlign: TextAlign.right,
@@ -83,7 +83,7 @@ class _ElectionsScreenState extends State<ElectionsScreen> {
                     style: TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.w700,
-                      color: AppColors.black,
+                      color: AppColors.blueColor2,
                       fontFamily: 'Alexandria',
                     ),
                   ),
@@ -95,7 +95,7 @@ class _ElectionsScreenState extends State<ElectionsScreen> {
                     style: TextStyle(
                       fontSize: 9,
                       fontWeight: FontWeight.w400,
-                      color: AppColors.black,
+                      color: AppColors.blueColor2,
                       fontFamily: 'Alexandria',
                     ),
                     textAlign: TextAlign.right,
@@ -180,15 +180,15 @@ class _ElectionsScreenState extends State<ElectionsScreen> {
                           boxShadow: [
                             BoxShadow(
                               color: selectedVotedSet.contains(e.id!)
-                                  ? AppColors.white
+                                  ? AppColors.whiteColor
                                   : Colors.black26,
                               spreadRadius: 1,
                               blurRadius: 1,
                             )
                           ],
                           color: selectedVotedSet.contains(e.id!)
-                              ? AppColors.darkBlueColor
-                              : AppColors.white,
+                              ? AppColors.blueColor4
+                              : AppColors.whiteColor,
                         ),
                         child: Stack(
                           children: [
@@ -226,8 +226,8 @@ class _ElectionsScreenState extends State<ElectionsScreen> {
                                       textDirection: TextDirection.rtl,
                                       style: TextStyle(
                                         color: selectedVotedSet.contains(e.id!)
-                                            ? AppColors.white
-                                            : AppColors.black,
+                                            ? AppColors.whiteColor
+                                            : AppColors.blueColor2,
                                         fontFamily: FontFamilies.alexandria,
                                         fontWeight: FontWeight.w600,
                                         fontSize: 10,
@@ -244,8 +244,8 @@ class _ElectionsScreenState extends State<ElectionsScreen> {
                                       textDirection: TextDirection.rtl,
                                       style: TextStyle(
                                         color: selectedVotedSet.contains(e.id!)
-                                            ? AppColors.white
-                                            : AppColors.black,
+                                            ? AppColors.whiteColor
+                                            : AppColors.blueColor2,
                                         fontFamily: FontFamilies.alexandria,
                                         fontWeight: FontWeight.w400,
                                         fontSize: 9,
@@ -311,7 +311,7 @@ class _ElectionsScreenState extends State<ElectionsScreen> {
                                 )
                               ],
                               color: selectedManagerId == e.id
-                                  ? AppColors.darkBlueColor
+                                  ? AppColors.blueColor4
                                   : Colors.white,
                             ),
                             child: Stack(
@@ -350,8 +350,8 @@ class _ElectionsScreenState extends State<ElectionsScreen> {
                                         textDirection: TextDirection.rtl,
                                         style: TextStyle(
                                           color: selectedManagerId == e.id
-                                              ? AppColors.white
-                                              : AppColors.darkBlueColor,
+                                              ? AppColors.whiteColor
+                                              : AppColors.blueColor4,
                                           fontFamily: FontFamilies.alexandria,
                                           fontWeight: FontWeight.w600,
                                           fontSize: 10,
@@ -368,8 +368,8 @@ class _ElectionsScreenState extends State<ElectionsScreen> {
                                           textDirection: TextDirection.rtl,
                                           style: TextStyle(
                                             color: selectedManagerId == e.id
-                                                ? AppColors.white
-                                                : AppColors.darkBlueColor,
+                                                ? AppColors.whiteColor
+                                                : AppColors.blueColor4,
                                             fontFamily: FontFamilies.alexandria,
                                             fontWeight: FontWeight.w400,
                                             fontSize: 9,

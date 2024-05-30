@@ -19,7 +19,7 @@ class NewsButton extends StatelessWidget {
         margin:  EdgeInsets.symmetric(horizontal: 19.w,vertical: 20.h),
         height: 60.h,
         decoration: BoxDecoration(
-          color: AppColors.orangeBorderColor,
+          color: AppColors.orangeColor,
           borderRadius: BorderRadius.circular(5.r),
         ),
         child:  Center(
@@ -59,7 +59,7 @@ class NewsButton2 extends StatelessWidget {
         width: 380.w,
         height: 60.h,
         decoration: BoxDecoration(
-          color: AppColors.orangeBorderColor,
+          color: AppColors.orangeColor,
           borderRadius: BorderRadius.circular(5.r),
         ),
         child:  Center(
@@ -99,7 +99,7 @@ class NewsButton3 extends StatelessWidget {
         width: 380.w,
         height: 60.h,
         decoration: BoxDecoration(
-          color: AppColors.orangeBorderColor,
+          color: AppColors.orangeColor,
           borderRadius: BorderRadius.circular(5.r),
         ),
         child:  Center(
@@ -139,7 +139,7 @@ class PendingButton extends StatelessWidget {
         width: 380.w,
         height: 60.h,
         decoration: BoxDecoration(
-          color: AppColors.greyTabColor,
+          color: AppColors.greyColor3,
           borderRadius: BorderRadius.circular(5.r),
         ),
         child:  Center(

@@ -24,7 +24,7 @@ class OtpCustomTextField extends StatelessWidget {
             fieldWidth: context.width52,
             style: TextStyle(
                 fontSize: 17.sp,
-                color: AppColors.orangeBorderColor,
+                color: AppColors.orangeColor,
                 fontWeight: FontWeight.w700
             ),
             textFieldAlignment: MainAxisAlignment.spaceAround,

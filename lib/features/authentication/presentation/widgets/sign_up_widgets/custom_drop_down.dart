@@ -24,7 +24,7 @@ class CustomDropDown extends StatelessWidget {
     return Expanded(
       child: Container(
         decoration: BoxDecoration(
-            border: Border.all(color: AppColors.borderColor),
+            border: Border.all(color: AppColors.blueColor7),
             borderRadius: BorderRadius.circular(10)),
         child: Row(
           textDirection: TextDirection.rtl,
@@ -68,7 +68,7 @@ class CustomDropDown extends StatelessWidget {
                   hint: Text(
                     hint,
                     style: TextStyle(
-                      color: AppColors.smallTextColor,
+                      color: AppColors.blueColor6,
                       fontSize: 10.sp,
                     ),
                   ),
@@ -98,7 +98,7 @@ class CustomDropDown extends StatelessWidget {
                     padding: EdgeInsets.only(right: 0.w),
                     decoration: BoxDecoration(
                       // color: AppColors.gray1,
-                      border: Border.all(color: AppColors.borderColor),
+                      border: Border.all(color: AppColors.blueColor7),
                       borderRadius: BorderRadius.circular(15.r),
                     ),
                     offset: const Offset(0, -5),

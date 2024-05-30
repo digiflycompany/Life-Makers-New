@@ -25,9 +25,9 @@ Widget buildCampaignGridView(
               itemBuilder: (context, index) {
                 return CampaignDetailsWidget(
                     campaignDetails: campaigns?[index],
-                    color: AppColors.greenBackgroundColor,
+                    color: AppColors.greenColor3,
                     context: context,
-                    borderColor: AppColors.greenBorderColor);
+                    borderColor: AppColors.greenColor);
               },
             ),
           )
@@ -53,9 +53,9 @@ Widget buildAllCampaignGridView(
             itemBuilder: (context, index) {
               return CampaignDetailsWidget(
                   campaignDetails: campaigns?[index],
-                  color: AppColors.greenBackgroundColor,
+                  color: AppColors.greenColor3,
                   context: context,
-                  borderColor: AppColors.greenBorderColor);
+                  borderColor: AppColors.greenColor);
             },
           )
         : buildEmptySeasonWidget(),

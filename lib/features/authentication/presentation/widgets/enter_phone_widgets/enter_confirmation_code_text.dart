@@ -15,7 +15,7 @@ class EnterConfirmationCodeText extends StatelessWidget {
         AppStrings.enterPhoneNumberForConfirmation,
         textDirection: TextDirection.rtl,
         style: TextStyle(
-            color: AppColors.smallTextColor,
+            color: AppColors.blueColor6,
             fontWeight: FontWeight.w400,
             fontSize: 10.8.sp
         ),

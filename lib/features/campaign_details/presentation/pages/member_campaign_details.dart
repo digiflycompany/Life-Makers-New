@@ -113,7 +113,7 @@ class _JoinCampaignDetailsState extends State<JoinCampaignDetails> {
                                               CircleAvatar(
                                                   radius: 15,
                                                   backgroundColor: AppColors
-                                                      .orangeBorderColor,
+                                                      .orangeColor,
                                                   child: Icon(
                                                     Icons.done_outline,
                                                     size: 20,
@@ -145,7 +145,7 @@ class _JoinCampaignDetailsState extends State<JoinCampaignDetails> {
               width: 390.w,
               height: 63.h,
               decoration: BoxDecoration(
-                color: AppColors.orangeBorderColor,
+                color: AppColors.orangeColor,
                 borderRadius: BorderRadius.circular(5.r),
               ),
               child: Center(
@@ -424,7 +424,7 @@ class _JoinCampaignDetailsState extends State<JoinCampaignDetails> {
                             hintTextDirection: TextDirection.rtl,
                             hintText: AppStrings.message,
                             hintStyle: TextStyle(
-                                color: AppColors.smallTextColor,
+                                color: AppColors.blueColor6,
                                 fontFamily: FontFamilies.alexandria,
                                 fontWeight: FontWeight.w500,
                                 fontSize: 11),
@@ -525,7 +525,7 @@ class _JoinCampaignDetailsState extends State<JoinCampaignDetails> {
                             hintTextDirection: TextDirection.rtl,
                             hintText: AppStrings.message,
                             hintStyle: TextStyle(
-                                color: AppColors.smallTextColor,
+                                color: AppColors.blueColor6,
                                 fontFamily: FontFamilies.alexandria,
                                 fontWeight: FontWeight.w500,
                                 fontSize: 11),
@@ -622,7 +622,7 @@ class _JoinCampaignDetailsState extends State<JoinCampaignDetails> {
                             hintTextDirection: TextDirection.rtl,
                             hintText: AppStrings.message,
                             hintStyle: TextStyle(
-                                color: AppColors.smallTextColor,
+                                color: AppColors.blueColor6,
                                 fontFamily: FontFamilies.alexandria,
                                 fontWeight: FontWeight.w500,
                                 fontSize: 11),

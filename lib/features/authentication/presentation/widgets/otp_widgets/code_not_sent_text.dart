@@ -21,7 +21,7 @@ class CodeNotSentText extends StatelessWidget {
             AppStrings.didNotReceiveOtp,
             textDirection: TextDirection.rtl,
             style: TextStyle(
-                color: AppColors.smallTextColor,
+                color: AppColors.blueColor6,
                 fontWeight: FontWeight.w400,
                 fontSize: 11.sp
             ),
@@ -33,7 +33,7 @@ class CodeNotSentText extends StatelessWidget {
               AppStrings.resendOtp2,
               textDirection: TextDirection.rtl,
               style: TextStyle(
-                  color: AppColors.gradientColor1,
+                  color: AppColors.blueColor4,
                   fontWeight: FontWeight.w600,
                   fontSize: 11.sp
               ),

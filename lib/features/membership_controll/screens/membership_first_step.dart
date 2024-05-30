@@ -140,7 +140,7 @@ class _MemberShipFirstStepState extends State<MemberShipFirstStep> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5)
             ),
-            backgroundColor: AppColors.orangeBorderColor,
+            backgroundColor: AppColors.orangeColor,
             minimumSize: const Size(double.infinity, 55),
             
           ),

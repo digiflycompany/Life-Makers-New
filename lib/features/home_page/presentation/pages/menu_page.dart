@@ -118,12 +118,12 @@ class _MenuScreenState extends State<MenuScreen> {
       },
       builder: (context, state) {
         return Scaffold(
-            backgroundColor: AppColors.drawerColor,
+            backgroundColor: AppColors.blueColor4,
             body: SafeArea(
               child: RefreshIndicator.adaptive(
                 onRefresh: _refresh,
                 color: Colors.white,
-                backgroundColor: AppColors.orangeBorderColor,
+                backgroundColor: AppColors.orangeColor,
                 child: SingleChildScrollView(
                   physics:const  AlwaysScrollableScrollPhysics(),
                   child: Column(
@@ -514,7 +514,7 @@ class _MenuScreenState extends State<MenuScreen> {
               width: 160.w,
               height: 47.h,
               decoration: BoxDecoration(
-                  color: AppColors.greyContainerColor,
+                  color: AppColors.greyColor2,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(6.r),
                     bottomLeft: Radius.circular(6.r),

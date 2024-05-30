@@ -25,9 +25,9 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
           child: Checkbox(
             value: widget.value,
             onChanged:widget.onChanged,
-            activeColor: AppColors.orangeBorderColor,
+            activeColor: AppColors.orangeColor,
             focusColor: Colors.white,
-            side: const BorderSide(width: 1.0, color: AppColors.checkBoxColor),
+            side: const BorderSide(width: 1.0, color: AppColors.greyColor5),
           ),
         ),
         SizedBox(width: 10.w,),

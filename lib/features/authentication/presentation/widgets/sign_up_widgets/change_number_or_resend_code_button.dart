@@ -36,7 +36,7 @@ class ChangeNumberOrResendCodeButton extends StatelessWidget {
                           width: context.width135*1.1,
                           height: context.height64,
                           decoration: BoxDecoration(
-                              color: AppColors.orangeBorderColor,
+                              color: AppColors.orangeColor,
                               borderRadius:
                               BorderRadius.circular(5.r)),
                           child: state is OtpSubmitLoading
@@ -76,7 +76,7 @@ class ChangeNumberOrResendCodeButton extends StatelessWidget {
                                 AppStrings.changeNumberOrdResendCode,
                                 style: TextStyle(
                                     color:
-                                    AppColors.orangeBorderColor,
+                                    AppColors.orangeColor,
                                     fontWeight: FontWeight.w800,
                                     fontSize: 11.sp
                                 ),
@@ -90,13 +90,13 @@ class ChangeNumberOrResendCodeButton extends StatelessWidget {
                     children: [
                       OtpTextField(
                         textStyle: TextStyle(
-                            color: AppColors.orangeBorderColor,
+                            color: AppColors.orangeColor,
                             fontWeight: FontWeight.w600),
-                        cursorColor: AppColors.orangeBorderColor,
+                        cursorColor: AppColors.orangeColor,
                         fieldWidth: 35.w,
                         numberOfFields: 4,
                         focusedBorderColor:
-                        AppColors.orangeBorderColor,
+                        AppColors.orangeColor,
                         borderColor: Color(0xFF512DA8),
                         showFieldAsBox: true,
                         onCodeChanged: (String code) {},
@@ -111,7 +111,7 @@ class ChangeNumberOrResendCodeButton extends StatelessWidget {
                           Text(
                             AppStrings.sendCodeAfter,
                             style: TextStyle(
-                                color: AppColors.orangeBorderColor,
+                                color: AppColors.orangeColor,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 11.sp
                             ),
@@ -119,12 +119,12 @@ class ChangeNumberOrResendCodeButton extends StatelessWidget {
                           HorizontalSpace(context.width6),
                           TimerCountdown(
                             descriptionTextStyle: TextStyle(
-                                color: AppColors.orangeBorderColor,
+                                color: AppColors.orangeColor,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 11.sp
                             ),
                             timeTextStyle: TextStyle(
-                                color: AppColors.orangeBorderColor,
+                                color: AppColors.orangeColor,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 11.sp
                             ),
