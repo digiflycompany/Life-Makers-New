@@ -45,7 +45,7 @@ class PreviousNonSeasonalCampaignsScreen extends StatelessWidget {
           child: const Text(
             AppStrings.education,
             style: TextStyle(
-                color: AppColors.orangeBorderColor,
+                color: AppColors.orangeColor,
                 fontFamily: FontFamilies.alexandria,
                 fontWeight: FontWeight.w500,
                 fontSize: 13.5),
@@ -114,8 +114,8 @@ class PreviousNonSeasonalCampaignsScreen extends StatelessWidget {
       );
   get previousSeasonalCampaigns => Container(
         decoration: BoxDecoration(
-          color: AppColors.orangeBackgroundColor,
-          border: Border.all(color: AppColors.orangeBorderColor, width: 1.7.w),
+          color: AppColors.orangeColor2,
+          border: Border.all(color: AppColors.orangeColor, width: 1.7.w),
           borderRadius: BorderRadius.circular(20.r),
         ),
         child: Padding(

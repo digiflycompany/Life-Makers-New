@@ -340,7 +340,7 @@ class _CompleteEditAccountScreenState extends State<CompleteEditAccountScreen> {
               },
               style: ElevatedButton.styleFrom(
                   elevation: 0,
-                  backgroundColor: AppColors.orangeBorderColor,
+                  backgroundColor: AppColors.orangeColor,
                   fixedSize: Size(80.w, 30.h),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5))),

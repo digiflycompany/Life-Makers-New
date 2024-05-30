@@ -149,7 +149,7 @@ class _VolunteerOpportunityScreenState
                   child: state is SuggestionLoading
                       ? Center(
                           child: CircularProgressIndicator(
-                            color: AppColors.orangeBorderColor,
+                            color: AppColors.orangeColor,
                           ),
                         )
                       : Column(
@@ -205,7 +205,7 @@ class _VolunteerOpportunityScreenState
                                       hintTextDirection: TextDirection.rtl,
                                       hintText: AppStrings.message,
                                       hintStyle: TextStyle(
-                                          color: AppColors.smallTextColor,
+                                          color: AppColors.blueColor6,
                                           fontFamily: FontFamilies.alexandria,
                                           fontWeight: FontWeight.w500,
                                           fontSize: 11),

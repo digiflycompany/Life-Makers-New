@@ -16,7 +16,7 @@ class ChooseButton extends StatelessWidget {
         width: 87.w,
         height: 37.h,
         decoration: BoxDecoration(
-          color: AppColors.orangeBorderColor,
+          color: AppColors.orangeColor,
           borderRadius: BorderRadius.circular(7.r),
         ),
         child:  Center(

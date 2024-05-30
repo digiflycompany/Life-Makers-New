@@ -40,7 +40,7 @@ class _TermsPageState extends State<TermsPage> {
                 width: double.infinity,
                 height: 574.h,
                 decoration: BoxDecoration(
-                  color: AppColors.electionBackgroundColor,
+                  color: AppColors.greyColor6,
                   borderRadius: BorderRadius.circular(12.r),
                 ),
                 child: Stack(
@@ -58,7 +58,7 @@ class _TermsPageState extends State<TermsPage> {
                           width: double.infinity,
                           height: 70.h,
                           decoration: BoxDecoration(
-                              color: AppColors.darkBlueColor,
+                              color: AppColors.blueColor4,
                               borderRadius: BorderRadius.only(
                                 topRight: Radius.circular(12.r),
                                 topLeft: Radius.circular(12.r),

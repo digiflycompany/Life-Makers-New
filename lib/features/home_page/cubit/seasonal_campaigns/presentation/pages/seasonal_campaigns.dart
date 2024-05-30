@@ -195,8 +195,8 @@ class _SeasonalCampaignsScreenState extends State<SeasonalCampaignsScreen>
           AppStrings.past,
           style: TextStyle(
               color: _currentPage == 0
-                  ? AppColors.orangeBorderColor
-                  : AppColors.greyTabColor,
+                  ? AppColors.orangeColor
+                  : AppColors.greyColor3,
               fontFamily: FontFamilies.alexandria,
               fontWeight: _currentPage == 0 ? FontWeight.w600 : FontWeight.w400,
               fontSize: 11.5),
@@ -210,8 +210,8 @@ class _SeasonalCampaignsScreenState extends State<SeasonalCampaignsScreen>
           AppStrings.current,
           style: TextStyle(
               color: _currentPage == 1
-                  ? AppColors.greenTextColor
-                  : AppColors.greyTabColor,
+                  ? AppColors.greenColor2
+                  : AppColors.greyColor3,
               fontFamily: FontFamilies.alexandria,
               fontWeight: _currentPage == 1 ? FontWeight.w600 : FontWeight.w400,
               fontSize: 11.5),
@@ -225,8 +225,8 @@ class _SeasonalCampaignsScreenState extends State<SeasonalCampaignsScreen>
           AppStrings.upcoming,
           style: TextStyle(
               color: _currentPage == 2
-                  ? AppColors.blueTextColor
-                  : AppColors.greyTabColor,
+                  ? AppColors.blueColor4
+                  : AppColors.greyColor3,
               fontFamily: FontFamilies.alexandria,
               fontWeight: _currentPage == 2 ? FontWeight.w600 : FontWeight.w400,
               fontSize: 11.5),

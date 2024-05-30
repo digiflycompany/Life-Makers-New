@@ -70,7 +70,7 @@ class _RemoteTasksDetailsState extends State<RemoteTasksDetails> {
                           radius: 20,
                           child: IconButton(
                             icon: Icon(
-                              Icons.arrow_forward, color: AppColors.gradientColor1,),
+                              Icons.arrow_forward, color: AppColors.blueColor4,),
                             onPressed: () {
                               Navigator.pop(context);
                             },
@@ -148,7 +148,7 @@ class _RemoteTasksDetailsState extends State<RemoteTasksDetails> {
                       child: Transform.scale(
                         scale: 0.5,
                         child: CircularProgressIndicator(
-                          color: AppColors.orangeBorderColor,
+                          color: AppColors.orangeColor,
                         ),
                       ),
                     )
@@ -166,7 +166,7 @@ class _RemoteTasksDetailsState extends State<RemoteTasksDetails> {
                       child: Transform.scale(
                         scale: 0.5,
                         child: CircularProgressIndicator(
-                          color: AppColors.orangeBorderColor,
+                          color: AppColors.orangeColor,
                         ),
                       ),
                     )
@@ -185,7 +185,7 @@ class _RemoteTasksDetailsState extends State<RemoteTasksDetails> {
                       child: Transform.scale(
                         scale: 0.5,
                         child: CircularProgressIndicator(
-                          color: AppColors.orangeBorderColor,
+                          color: AppColors.orangeColor,
                         ),
                       ),
                     )

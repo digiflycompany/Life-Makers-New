@@ -89,8 +89,8 @@ class _JoinedPreviousCampaignsState extends State<JoinedPreviousCampaigns> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        color: AppColors.orangeBackgroundColor,
-                        border: Border.all(color: AppColors.orangeBorderColor,width:1.6.w),
+                        color: AppColors.orangeColor2,
+                        border: Border.all(color: AppColors.orangeColor,width:1.6.w),
                         borderRadius: BorderRadius.circular(20.r),
                       ),
                       child: Padding(
@@ -109,7 +109,7 @@ class _JoinedPreviousCampaignsState extends State<JoinedPreviousCampaigns> {
                                     child:  Text(
                                       '${volunteerCubit.joinedCampaignsModel?.pastCampaigns?[index].name}',
                                       style: TextStyle(
-                                          color: AppColors.orangeBorderColor,
+                                          color: AppColors.orangeColor,
                                           fontFamily: FontFamilies.alexandria,
                                           fontWeight: FontWeight.w500,
                                           fontSize: 13.5
@@ -159,7 +159,7 @@ class _JoinedPreviousCampaignsState extends State<JoinedPreviousCampaigns> {
                       const Text(
                         'لا يوجد حملات سابقة',
                         style: TextStyle(
-                            color:AppColors.greyNoCampaignsTextColor,
+                            color:AppColors.greyColor4,
                             fontFamily: FontFamilies.alexandria,
                             fontWeight: FontWeight.w500,
                             fontSize: 13
@@ -172,7 +172,7 @@ class _JoinedPreviousCampaignsState extends State<JoinedPreviousCampaigns> {
             }
           },
         ),
-        color: AppColors.orangeBorderColor,
+        color: AppColors.orangeColor,
         backgroundColor: Colors.white,
       ),
     );

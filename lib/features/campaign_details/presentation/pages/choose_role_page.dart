@@ -37,7 +37,7 @@ class _ChooseRolePageState extends State<ChooseRolePage> {
             width: double.infinity,
             height: 55,
             decoration: BoxDecoration(
-                color: AppColors.orangeBorderColor,
+                color: AppColors.orangeColor,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(7.r),
                   topRight: Radius.circular(7.r),

@@ -90,8 +90,8 @@ class _JoinedRemoteTasksState extends State<JoinedRemoteTasks> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        color: AppColors.trainingCardColor,
-                        border: Border.all(color: AppColors.darkBlueColor,width:1.6.w),
+                        color: AppColors.whiteColor2,
+                        border: Border.all(color: AppColors.blueColor4,width:1.6.w),
                         borderRadius: BorderRadius.circular(20.r),
                       ),
                       child: Padding(
@@ -110,7 +110,7 @@ class _JoinedRemoteTasksState extends State<JoinedRemoteTasks> {
                                     child:  Text(
                                       '${volunteerCubit.userJoinedVolunteerOpportunities?.tasksVolunteerOpportunities?[index].name}',
                                       style: TextStyle(
-                                          color: AppColors.darkBlueColor,
+                                          color: AppColors.blueColor4,
                                           fontFamily: FontFamilies.alexandria,
                                           fontWeight: FontWeight.w500,
                                           fontSize: 13.5
@@ -160,7 +160,7 @@ class _JoinedRemoteTasksState extends State<JoinedRemoteTasks> {
                       const Text(
                         'لا يوجد مهام',
                         style: TextStyle(
-                            color:AppColors.greyNoCampaignsTextColor,
+                            color:AppColors.greyColor4,
                             fontFamily: FontFamilies.alexandria,
                             fontWeight: FontWeight.w500,
                             fontSize: 13
@@ -173,7 +173,7 @@ class _JoinedRemoteTasksState extends State<JoinedRemoteTasks> {
             }
           },
         ),
-        color: AppColors.orangeBorderColor,
+        color: AppColors.orangeColor,
         backgroundColor: Colors.white,
       ),
     );

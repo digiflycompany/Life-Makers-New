@@ -57,7 +57,7 @@ class _CurrentSeasonalCampaignsScreenState
           child: const Text(
             AppStrings.orphan,
             style: TextStyle(
-                color: AppColors.greenTextColor,
+                color: AppColors.greenColor2,
                 fontFamily: FontFamilies.alexandria,
                 fontWeight: FontWeight.w500,
                 fontSize: 13.5),
@@ -124,8 +124,8 @@ class _CurrentSeasonalCampaignsScreenState
         },
         child: Container(
           decoration: BoxDecoration(
-            color: AppColors.greenBackgroundColor,
-            border: Border.all(color: AppColors.greenBorderColor, width: 1.6.w),
+            color: AppColors.greenColor3,
+            border: Border.all(color: AppColors.greenColor, width: 1.6.w),
             borderRadius: BorderRadius.circular(20.r),
           ),
           child: Padding(

@@ -47,7 +47,7 @@ class _NotificationPageState extends State<NotificationPage> {
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
-          backgroundColor: AppColors.backgroundColor,
+          backgroundColor: AppColors.whiteColor3,
           body: SafeArea(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -62,7 +62,7 @@ class _NotificationPageState extends State<NotificationPage> {
                     child: RefreshIndicator.adaptive(
                       onRefresh: _refresh,
                       color: Colors.white,
-                      backgroundColor: AppColors.orangeBorderColor,
+                      backgroundColor: AppColors.orangeColor,
                       child: Padding(
                         padding:  EdgeInsets.only(bottom: 100.h),
                         child: ListView.builder(
@@ -92,7 +92,7 @@ class _NotificationPageState extends State<NotificationPage> {
                         const Text(
                           'لا توجد اشعارات',
                           style: TextStyle(
-                            color: AppColors.greyNoCampaignsTextColor,
+                            color: AppColors.greyColor4,
                             fontFamily: FontFamilies.alexandria,
                             fontWeight: FontWeight.w500,
                             fontSize: 13,

@@ -53,7 +53,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: AppColors.backgroundColor,
+        backgroundColor: AppColors.whiteColor3,
         body: BlocBuilder<CardCubit, CardStates>(
           builder: (context, state) {
             return Column(
@@ -66,8 +66,8 @@ class _MainPageState extends State<MainPage> {
                       borderRadius: BorderRadius.circular(20.r),
                       gradient: const LinearGradient(
                         colors: [
-                          AppColors.gradientColor1,
-                          AppColors.gradientColor2,
+                          AppColors.blueColor4,
+                          AppColors.blueColor5,
                         ],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
@@ -218,7 +218,7 @@ class _MainPageState extends State<MainPage> {
                               child: Text(
                                 'لا توجد أنشطة حالية',
                                 style: TextStyle(
-                                  color: AppColors.white,
+                                  color: AppColors.whiteColor,
                                   fontSize: 13,
                                   fontWeight: FontWeight.w700,
                                   fontFamily: FontFamilies.alexandria,
@@ -281,7 +281,7 @@ class _MainPageState extends State<MainPage> {
                                 child: Container(
                                   width: double.infinity,
                                   decoration: BoxDecoration(
-                                    color: AppColors.greyContainerColor,
+                                    color: AppColors.greyColor2,
                                     borderRadius: BorderRadius.circular(7.r),
                                   ),
                                   child: Row(
@@ -547,7 +547,7 @@ class _MainPageState extends State<MainPage> {
             style: TextStyle(
                 fontFamily: FontFamilies.alexandria,
                 fontWeight: FontWeight.w700,
-                color: AppColors.blueTextColor,
+                color: AppColors.blueColor4,
                 fontSize: 7),
           ),
         ),
@@ -559,7 +559,7 @@ class _MainPageState extends State<MainPage> {
           child: const Text(
             AppStrings.education,
             style: TextStyle(
-                color: AppColors.blueTextColor,
+                color: AppColors.blueColor4,
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
                 fontFamily: FontFamilies.alexandria),
@@ -573,7 +573,7 @@ class _MainPageState extends State<MainPage> {
           borderRadius: BorderRadius.circular(23.r),
           color: Colors.white70,
           border: Border.all(
-            color: AppColors.blueTextColor,
+            color: AppColors.blueColor4,
             width: 2.0, // Adjust the border width as needed
           ),
         ),
@@ -586,7 +586,7 @@ class _MainPageState extends State<MainPage> {
                 child: const Text(
                   AppStrings.education,
                   style: TextStyle(
-                      color: AppColors.blueTextColor,
+                      color: AppColors.blueColor4,
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                       fontFamily: FontFamilies.alexandria),
@@ -605,7 +605,7 @@ class _MainPageState extends State<MainPage> {
             style: TextStyle(
                 fontFamily: FontFamilies.alexandria,
                 fontWeight: FontWeight.w700,
-                color: AppColors.greenTextColor,
+                color: AppColors.greenColor2,
                 fontSize: 7),
           ),
         ),
@@ -618,7 +618,7 @@ class _MainPageState extends State<MainPage> {
             AppStrings.palestine,
             textDirection: TextDirection.rtl,
             style: TextStyle(
-                color: AppColors.greenTextColor,
+                color: AppColors.greenColor2,
                 fontSize: 11,
                 fontWeight: FontWeight.w500,
                 fontFamily: FontFamilies.alexandria),
@@ -634,7 +634,7 @@ class _MainPageState extends State<MainPage> {
             style: TextStyle(
                 fontFamily: FontFamilies.alexandria,
                 fontWeight: FontWeight.w700,
-                color: AppColors.orangeBorderColor,
+                color: AppColors.orangeColor,
                 fontSize: 7),
           ),
         ),
@@ -646,7 +646,7 @@ class _MainPageState extends State<MainPage> {
           child: const Text(
             AppStrings.orphan,
             style: TextStyle(
-                color: AppColors.greenTextColor,
+                color: AppColors.greenColor2,
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
                 fontFamily: FontFamilies.alexandria),
@@ -660,7 +660,7 @@ class _MainPageState extends State<MainPage> {
           child: const Text(
             AppStrings.orphan,
             style: TextStyle(
-                color: AppColors.orangeBorderColor,
+                color: AppColors.orangeColor,
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
                 fontFamily: FontFamilies.alexandria),
@@ -674,7 +674,7 @@ class _MainPageState extends State<MainPage> {
           borderRadius: BorderRadius.circular(23.r),
           color: Colors.white70,
           border: Border.all(
-            color: AppColors.greenBorderColor,
+            color: AppColors.greenColor,
             width: 2.0, // Adjust the border width as needed
           ),
         ),
@@ -687,7 +687,7 @@ class _MainPageState extends State<MainPage> {
                 child: const Text(
                   AppStrings.orphan,
                   style: TextStyle(
-                      color: AppColors.greenTextColor,
+                      color: AppColors.greenColor2,
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                       fontFamily: FontFamilies.alexandria),
@@ -764,7 +764,7 @@ class _MainPageState extends State<MainPage> {
               Padding(
                 padding: EdgeInsets.only(right: 13.5.w),
                 child: CircleAvatar(
-                  backgroundColor: AppColors.darkBlueColor,
+                  backgroundColor: AppColors.blueColor4,
                   radius: 35.r,
                   child: Text(
                     '${calender?.date}',

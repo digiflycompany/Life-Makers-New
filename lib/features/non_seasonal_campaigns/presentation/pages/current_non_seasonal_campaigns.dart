@@ -51,7 +51,7 @@ class CurrentNonSeasonalCampaignsScreen extends StatelessWidget {
           child: const Text(
             AppStrings.orphan,
             style: TextStyle(
-                color: AppColors.greenTextColor,
+                color: AppColors.greenColor2,
                 fontFamily: FontFamilies.alexandria,
                 fontWeight: FontWeight.w500,
                 fontSize: 13.5),

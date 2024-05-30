@@ -103,7 +103,7 @@ class _ChooseRoleSecondPageState extends State<ChooseRoleSecondPage> {
         },
         child: CircleAvatar(
           radius: 11.r,
-          backgroundColor: AppColors.orangeBorderColor,
+          backgroundColor: AppColors.orangeColor,
           child: dataEntry == false
               ? SvgPicture.asset(
                   AppAssets.plusIcon,

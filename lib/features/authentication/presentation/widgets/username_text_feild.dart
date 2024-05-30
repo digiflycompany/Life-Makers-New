@@ -32,7 +32,7 @@ class UsernameTextField extends StatelessWidget {
         maxLength: 10,
         readOnly:readOnly,
         keyboardType:keyboardType ,
-        cursorColor: AppColors.smallTextColor,
+        cursorColor: AppColors.blueColor6,
         cursorWidth: 2.w,
         textDirection: TextDirection.rtl,
         validator: validator,
@@ -59,22 +59,22 @@ class UsernameTextField extends StatelessWidget {
             fontFamily: FontFamilies.alexandria,// Customize the error text color
             fontSize: 10, // Customize the error text font size
           ),
-          focusColor: AppColors.borderColor,
+          focusColor: AppColors.blueColor7,
           alignLabelWithHint: true,
           hintTextDirection:TextDirection.rtl ,
           enabledBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: AppColors.borderColor),
+              borderSide: const BorderSide(color: AppColors.blueColor7),
               borderRadius: BorderRadius.circular(8.r)
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: AppColors.borderColor),
+            borderSide: const BorderSide(color: AppColors.blueColor7),
             borderRadius: BorderRadius.circular(8.r),
           ),
           fillColor: Colors.white,
           filled:true,
           hintText: hintText,
           hintStyle: const TextStyle(
-              color:AppColors.smallTextColor,
+              color:AppColors.blueColor6,
               fontFamily: FontFamilies.alexandria,
               fontSize: 11,
               fontWeight: FontWeight.w400

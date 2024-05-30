@@ -92,8 +92,8 @@ class _JoinedCurrentCampaignsState extends State<JoinedCurrentCampaigns> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        color: AppColors.greenBackgroundColor,
-                        border: Border.all(color: AppColors.greenBorderColor,width:1.6.w),
+                        color: AppColors.greenColor3,
+                        border: Border.all(color: AppColors.greenColor,width:1.6.w),
                         borderRadius: BorderRadius.circular(20.r),
                       ),
                       child: Padding(
@@ -112,7 +112,7 @@ class _JoinedCurrentCampaignsState extends State<JoinedCurrentCampaigns> {
                                     child:  Text(
                                       '${volunteerCubit.joinedCampaignsModel?.currentCampaigns?[index].name}',
                                       style: TextStyle(
-                                          color: AppColors.greenBorderColor,
+                                          color: AppColors.greenColor,
                                           fontFamily: FontFamilies.alexandria,
                                           fontWeight: FontWeight.w500,
                                           fontSize: 13.5
@@ -162,7 +162,7 @@ class _JoinedCurrentCampaignsState extends State<JoinedCurrentCampaigns> {
                       const Text(
                         'لا يوجد حملات حالية',
                         style: TextStyle(
-                            color:AppColors.greyNoCampaignsTextColor,
+                            color:AppColors.greyColor4,
                             fontFamily: FontFamilies.alexandria,
                             fontWeight: FontWeight.w500,
                             fontSize: 13
@@ -175,7 +175,7 @@ class _JoinedCurrentCampaignsState extends State<JoinedCurrentCampaigns> {
             }
           },
         ),
-        color: AppColors.orangeBorderColor,
+        color: AppColors.orangeColor,
         backgroundColor: Colors.white,
       ),
     );

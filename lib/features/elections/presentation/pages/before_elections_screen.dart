@@ -57,7 +57,7 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
                       style: TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.w700,
-                        color: AppColors.black,
+                        color: AppColors.blueColor2,
                         fontFamily: 'Alexandria',
                       ),
                     ),
@@ -72,7 +72,7 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
                       style: TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.w700,
-                        color: AppColors.black,
+                        color: AppColors.blueColor2,
                         fontFamily: 'Alexandria',
                       ),
                     ),
@@ -124,7 +124,7 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
                         blurRadius: 1,
                       )
                     ],
-                    color: AppColors.white,
+                    color: AppColors.whiteColor,
                   ),
                   child: Stack(
                     children: [
@@ -160,7 +160,7 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
                                 '${allCandidatesCubit.allCandidatesModel?.voters![index].name}',
                                 textDirection: TextDirection.rtl,
                                 style: TextStyle(
-                                  color: AppColors.black,
+                                  color: AppColors.blueColor2,
                                   fontFamily: FontFamilies.alexandria,
                                   fontWeight: FontWeight.w600,
                                   fontSize: 10,
@@ -177,7 +177,7 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
                                 'محافظة: ${allCandidatesCubit.allCandidatesModel?.voters![index].city}',
                                 textDirection: TextDirection.rtl,
                                 style: TextStyle(
-                                  color: AppColors.black,
+                                  color: AppColors.blueColor2,
                                   fontFamily: FontFamilies.alexandria,
                                   fontWeight: FontWeight.w400,
                                   fontSize:9,
@@ -287,7 +287,7 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
                                 '${e.details}',
                                 textDirection: TextDirection.rtl,
                                 style: TextStyle(
-                                  color: AppColors.darkBlueColor,
+                                  color: AppColors.blueColor4,
                                   fontFamily: FontFamilies.alexandria,
                                   fontWeight: FontWeight.w600,
                                   fontSize: 10,
@@ -302,7 +302,7 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
                                   '${e.name}',
                                   textDirection: TextDirection.rtl,
                                   style: TextStyle(
-                                    color: AppColors.darkBlueColor,
+                                    color: AppColors.blueColor4,
                                     fontFamily: FontFamilies.alexandria,
                                     fontWeight: FontWeight.w400,
                                     fontSize: 9,

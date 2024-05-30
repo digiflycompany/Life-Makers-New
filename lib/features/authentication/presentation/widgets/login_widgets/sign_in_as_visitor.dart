@@ -20,7 +20,7 @@ class SignInAsVisitor extends StatelessWidget {
         },
         child: Text(
           AppStrings.enterAsVisitor, style: TextStyle(
-            color: AppColors.black,
+            color: AppColors.blueColor2,
             fontWeight: FontWeight.w500,
             fontSize: 11.sp
         ),),

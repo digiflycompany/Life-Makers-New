@@ -18,7 +18,7 @@ class SaveButton extends StatelessWidget {
         width: 147.w,
         height: 45.h,
         decoration: BoxDecoration(
-          color: AppColors.orangeBorderColor,
+          color: AppColors.orangeColor,
           borderRadius: BorderRadius.circular(5.r),
         ),
         child:  Row(

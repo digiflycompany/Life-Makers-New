@@ -33,7 +33,7 @@ class SendConfirmationCodeButton extends StatelessWidget {
                       width: context.width152,
                       height: context.height51,
                       decoration: BoxDecoration(
-                          color: AppColors.orangeBorderColor,
+                          color: AppColors.orangeColor,
                           borderRadius: BorderRadius.circular(5.r)),
                       child: state is OtpSendLoading
                           ? Center(

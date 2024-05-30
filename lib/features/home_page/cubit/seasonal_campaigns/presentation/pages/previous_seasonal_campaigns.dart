@@ -52,7 +52,7 @@ class PreviousSeasonalCampaignsScreen extends StatelessWidget {
       child: Text(
         title,
         style: TextStyle(
-            color: AppColors.orangeBorderColor,
+            color: AppColors.orangeColor,
             fontFamily: FontFamilies.alexandria,
             fontWeight: FontWeight.w500,
             fontSize: 12),

@@ -15,7 +15,7 @@ class CodeWillBeSentText extends StatelessWidget {
         AppStrings.codeWillBeSentToYou,
         textDirection: TextDirection.rtl,
         style: TextStyle(
-            color: AppColors.smallTextColor,
+            color: AppColors.blueColor6,
             fontWeight: FontWeight.w400,
             fontSize: 11.sp
         ),

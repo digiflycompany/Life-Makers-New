@@ -85,8 +85,8 @@ class _RemoteTasksCardState extends State<RemoteTasksCard> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        color: AppColors.trainingCardColor,
-                        border: Border.all(color: AppColors.darkBlueColor,width:1.6.w),
+                        color: AppColors.whiteColor2,
+                        border: Border.all(color: AppColors.blueColor4,width:1.6.w),
                         borderRadius: BorderRadius.circular(20.r),
                       ),
                       child: Padding(
@@ -106,7 +106,7 @@ class _RemoteTasksCardState extends State<RemoteTasksCard> {
                                       // '${OneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities?[index].name}',
                                       '${remoteTasksCubit.remoteTasksModel?.volunteerOpportunities?[index].name}',
                                       style: TextStyle(
-                                          color: AppColors.darkBlueColor,
+                                          color: AppColors.blueColor4,
                                           fontFamily: FontFamilies.alexandria,
                                           fontWeight: FontWeight.w500,
                                           fontSize: 13.5
@@ -154,7 +154,7 @@ class _RemoteTasksCardState extends State<RemoteTasksCard> {
                   const Text(
                     'لا يوجد مهام حاليا',
                     style: TextStyle(
-                        color:AppColors.greyNoCampaignsTextColor,
+                        color:AppColors.greyColor4,
                         fontFamily: FontFamilies.alexandria,
                         fontWeight: FontWeight.w500,
                         fontSize: 13
@@ -165,7 +165,7 @@ class _RemoteTasksCardState extends State<RemoteTasksCard> {
             );
           },
         ),
-        color: AppColors.orangeBorderColor,
+        color: AppColors.orangeColor,
         backgroundColor: Colors.white,
       ),
     );

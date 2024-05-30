@@ -92,8 +92,8 @@ class _JoinedUpcomingCampaignsState extends State<JoinedUpcomingCampaigns> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        color: AppColors.trainingCardColor,
-                        border: Border.all(color: AppColors.darkBlueColor,width:1.6.w),
+                        color: AppColors.whiteColor2,
+                        border: Border.all(color: AppColors.blueColor4,width:1.6.w),
                         borderRadius: BorderRadius.circular(20.r),
                       ),
                       child: Padding(
@@ -112,7 +112,7 @@ class _JoinedUpcomingCampaignsState extends State<JoinedUpcomingCampaigns> {
                                     child:  Text(
                                       '${volunteerCubit.joinedCampaignsModel?.nextCampaigns?[index].name}',
                                       style: TextStyle(
-                                          color: AppColors.darkBlueColor,
+                                          color: AppColors.blueColor4,
                                           fontFamily: FontFamilies.alexandria,
                                           fontWeight: FontWeight.w500,
                                           fontSize: 13.5
@@ -128,7 +128,7 @@ class _JoinedUpcomingCampaignsState extends State<JoinedUpcomingCampaigns> {
                                     child:  Text(
                                       '${volunteerCubit.joinedCampaignsModel?.nextCampaigns?[index].shortDetails}',
                                       style: TextStyle(
-                                          color: AppColors.darkBlueColor,
+                                          color: AppColors.blueColor4,
                                           fontFamily: FontFamilies.alexandria,
                                           fontWeight: FontWeight.w400,
                                           fontSize: 10,
@@ -162,7 +162,7 @@ class _JoinedUpcomingCampaignsState extends State<JoinedUpcomingCampaigns> {
                       const Text(
                         'لا يوجد حملات قادمة',
                         style: TextStyle(
-                            color:AppColors.greyNoCampaignsTextColor,
+                            color:AppColors.greyColor4,
                             fontFamily: FontFamilies.alexandria,
                             fontWeight: FontWeight.w500,
                             fontSize: 13
@@ -175,7 +175,7 @@ class _JoinedUpcomingCampaignsState extends State<JoinedUpcomingCampaigns> {
             }
           },
         ),
-        color: AppColors.orangeBorderColor,
+        color: AppColors.orangeColor,
         backgroundColor: Colors.white,
       ),
     );

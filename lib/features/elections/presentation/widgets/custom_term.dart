@@ -15,7 +15,7 @@ class CustomTerm extends StatelessWidget {
       textDirection: TextDirection.rtl,
       children: [
         CircleAvatar(
-          backgroundColor: AppColors.orangeBorderColor,
+          backgroundColor: AppColors.orangeColor,
           radius: 8.5.r
         ),
         SizedBox(width: 12.w,),

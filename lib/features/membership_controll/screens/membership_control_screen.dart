@@ -92,7 +92,7 @@ class _MembershipControlState extends State<MembershipControl> {
                 SvgPicture.asset(
                   'assets/svg/circleIcon.svg',
                   // ignore: deprecated_member_use
-                  color: AppColors.orangeBorderColor,
+                  color: AppColors.orangeColor,
                 ),
               ],
             ),

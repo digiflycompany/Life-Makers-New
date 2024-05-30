@@ -17,7 +17,7 @@ class CreateAccountText extends StatelessWidget {
         AppStrings.createAccount,
         style: TextStyle(
           decoration: TextDecoration.underline,
-          color: AppColors.gradientColor1,
+          color: AppColors.blueColor4,
           fontWeight: FontWeight.w500,
           fontSize: 11.sp,
         ),
