@@ -13,7 +13,7 @@ class SignInText extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: context.height16),
       child: Align(
-        alignment: AlignmentDirectional.centerEnd,
+        alignment: AlignmentDirectional.centerStart,
         child: Row(
           textDirection: TextDirection.rtl,
           children: [

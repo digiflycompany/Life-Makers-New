@@ -8,7 +8,7 @@ class WelcomeBackText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-        alignment: AlignmentDirectional.centerEnd,
+        alignment: AlignmentDirectional.centerStart,
         child: SmallText(
           text: AppStrings.welcomeBack,
         ));
