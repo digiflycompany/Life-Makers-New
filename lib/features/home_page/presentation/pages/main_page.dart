@@ -10,14 +10,15 @@ import 'package:life_makers/features/authentication/cubit/card_cubit/cards_cubit
 import 'package:life_makers/features/authentication/cubit/card_cubit/volunteer_card_details.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/volunteers_card.dart';
 import 'package:life_makers/features/home_page/cubit/home_calender_cubit.dart';
-import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import 'package:life_makers/features/home_page/presentation/pages/home_calender_details_screen.dart';
 import 'package:life_makers/features/home_page/presentation/pages/news_details.dart';
 import 'package:life_makers/features/home_page/presentation/pages/profile_screen.dart';
+import 'package:life_makers/features/seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import 'package:life_makers/services/cubit/global_cubit_state.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app-string.dart';

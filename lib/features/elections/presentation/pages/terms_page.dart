@@ -7,6 +7,7 @@ import 'package:life_makers/features/elections/presentation/pages/elections_scre
 import 'package:life_makers/features/elections/presentation/widgets/custom_term.dart';
 import 'package:life_makers/features/elections/presentation/widgets/terms_button.dart';
 import 'package:page_transition/page_transition.dart';
+
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-string.dart';
 import '../../../../core/widgets/custom_appbar.dart';

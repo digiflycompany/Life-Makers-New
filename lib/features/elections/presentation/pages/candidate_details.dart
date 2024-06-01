@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:life_makers/core/utils/app-color.dart';
 import 'package:life_makers/core/utils/app_fonts.dart';
 import 'package:life_makers/services/cubit/global_cubit_state.dart';
+
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/widgets/custom_appbar.dart';
 import '../../cubit/all_candidates_cubit.dart';

@@ -7,9 +7,10 @@ import 'package:life_makers/core/utils/app-assets.dart';
 import 'package:life_makers/core/widgets/custom_appbar.dart';
 import 'package:life_makers/features/campaign_details/cubit/join_campaign_cubit.dart';
 import 'package:life_makers/features/campaign_details/presentation/pages/member_campaign_details.dart';
-import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import 'package:life_makers/features/home_page/presentation/widgets/news_button.dart';
+import 'package:life_makers/features/seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import 'package:life_makers/services/cubit/global_cubit_state.dart';
+
 import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app-string.dart';
 import '../../../../core/utils/app_fonts.dart';

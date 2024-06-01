@@ -3,8 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:life_makers/core/utils/app-string.dart';
 import 'package:life_makers/core/utils/app_fonts.dart';
-import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import 'package:life_makers/features/home_page/presentation/widgets/news_button.dart';
+import 'package:life_makers/features/seasonal_campaigns/model/seasonal_campaigns_model.dart';
+
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/widgets/custom_snack_bar.dart';
 import '../../../campaign_details/presentation/pages/campaign_details_screen.dart';

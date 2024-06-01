@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:life_makers/core/utils/app-color.dart';
- import 'package:page_transition/page_transition.dart';
+import 'package:page_transition/page_transition.dart';
+
 import '../../../core/utils/app-assets.dart';
 import '../../membership_controll/screens/membership_first_step.dart';
 

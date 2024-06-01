@@ -7,6 +7,7 @@ import 'package:life_makers/core/utils/app-string.dart';
 import 'package:life_makers/core/utils/app_fonts.dart';
 import 'package:life_makers/features/campaign_details/presentation/pages/campaign_details_screen.dart';
 import 'package:page_transition/page_transition.dart';
+
 import '../../model/seasonal_campaigns_model.dart';
 import '../build_seasonal_widget.dart';
 

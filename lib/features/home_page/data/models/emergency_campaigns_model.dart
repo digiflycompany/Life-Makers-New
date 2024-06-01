@@ -1,11 +1,10 @@
-
-import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/model/seasonal_campaigns_model.dart';
+import 'package:life_makers/features/seasonal_campaigns/model/seasonal_campaigns_model.dart';
 
 class EmergencyCampaignModel {
   bool? status;
   String? errNum;
   String? msg;
-  List<Campains>? campaigns=[];
+  List<Campains>? campaigns = [];
 
   EmergencyCampaignModel({this.status, this.errNum, this.msg, this.campaigns});
 
@@ -49,17 +48,17 @@ class Campaigns {
 
   Campaigns(
       {this.id,
-        this.name,
-        this.details,
-        this.startAt,
-        this.endAt,
-        this.type,
-        this.createdAt,
-        this.updatedAt,
-        this.city,
-        this.photo,
-        this.isActive,
-        this.tasks});
+      this.name,
+      this.details,
+      this.startAt,
+      this.endAt,
+      this.type,
+      this.createdAt,
+      this.updatedAt,
+      this.city,
+      this.photo,
+      this.isActive,
+      this.tasks});
 
   Campaigns.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -113,13 +112,13 @@ class Tasks {
 
   Tasks(
       {this.id,
-        this.taskId,
-        this.campaignId,
-        this.createdAt,
-        this.updatedAt,
-        this.details,
-        this.count,
-        this.task});
+      this.taskId,
+      this.campaignId,
+      this.createdAt,
+      this.updatedAt,
+      this.details,
+      this.count,
+      this.task});
 
   Tasks.fromJson(Map<String, dynamic> json) {
     id = json['id'];

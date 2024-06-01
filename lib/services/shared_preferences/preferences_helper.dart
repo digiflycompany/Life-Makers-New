@@ -1,9 +1,11 @@
 import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:life_makers/features/authentication/data/models/phone_user_mode.dart';
 import 'package:life_makers/features/authentication/presentation/pages/login_screen.dart';
 import 'package:life_makers/features/home_page/presentation/pages/drawer_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../features/authentication/data/models/user_model.dart';
 
 class PreferencesHelper {

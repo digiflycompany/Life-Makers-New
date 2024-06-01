@@ -4,9 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:life_makers/features/campaign_details/presentation/pages/campaign_details_screen.dart';
-import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/model/seasonal_campaigns_model.dart';
+import 'package:life_makers/features/seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import 'package:life_makers/features/volunteer_opportunity/cubit/volunteer_states.dart';
 import 'package:page_transition/page_transition.dart';
+
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app-string.dart';

@@ -8,9 +8,9 @@ import 'package:life_makers/core/utils/app-string.dart';
 import 'package:life_makers/core/utils/app_fonts.dart';
 import 'package:life_makers/core/widgets/custom_appbar.dart';
 import 'package:life_makers/core/widgets/title_text.dart';
-import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/cubit/seasonal_campaigns_cubit.dart';
-import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/presentation/pages/previous_seasonal_campaigns.dart';
-import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/presentation/pages/upcoming_seasonal_campaigns.dart';
+import 'package:life_makers/features/seasonal_campaigns/cubit/seasonal_campaigns_cubit.dart';
+import 'package:life_makers/features/seasonal_campaigns/presentation/pages/previous_seasonal_campaigns.dart';
+import 'package:life_makers/features/seasonal_campaigns/presentation/pages/upcoming_seasonal_campaigns.dart';
 import 'package:life_makers/services/cubit/global_cubit_state.dart';
 
 import '../../model/seasonal_campaigns_model.dart';

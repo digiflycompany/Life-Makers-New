@@ -1,6 +1,7 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
- import 'package:life_makers/core/utils/extensions.dart';
+import 'package:life_makers/core/utils/extensions.dart';
 import 'package:singleton/singleton.dart';
 class AppService {
   //

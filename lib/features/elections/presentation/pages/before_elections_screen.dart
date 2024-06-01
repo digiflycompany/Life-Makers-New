@@ -7,6 +7,7 @@ import 'package:life_makers/features/elections/cubit/vote_candidate_cubit.dart';
 import 'package:life_makers/features/elections/presentation/pages/candidate_details.dart';
 import 'package:life_makers/services/cubit/global_cubit_state.dart';
 import 'package:page_transition/page_transition.dart';
+
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app_fonts.dart';

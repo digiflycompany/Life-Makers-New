@@ -1,4 +1,5 @@
-import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/model/seasonal_campaigns_model.dart';
+
+import 'package:life_makers/features/seasonal_campaigns/model/seasonal_campaigns_model.dart';
 
 class AllCampainsModel {
   bool? status;

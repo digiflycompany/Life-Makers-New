@@ -6,6 +6,7 @@ import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_
 import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_states.dart';
 import 'package:life_makers/features/edit_account/screens/edit_account_screen.dart';
 import 'package:page_transition/page_transition.dart';
+
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app-string.dart';

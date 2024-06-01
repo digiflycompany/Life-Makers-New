@@ -7,6 +7,7 @@ import 'package:life_makers/core/utils/app-color.dart';
 import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_cubit.dart';
 import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_states.dart';
 import 'package:life_makers/features/notification/presentation/widgets/notification_widget.dart';
+
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-string.dart';
 import '../../../../core/utils/app_fonts.dart';

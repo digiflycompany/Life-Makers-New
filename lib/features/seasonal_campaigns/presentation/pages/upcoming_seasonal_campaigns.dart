@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../model/seasonal_campaigns_model.dart';
 import '../build_seasonal_widget.dart';
 

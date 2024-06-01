@@ -3,9 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:life_makers/core/widgets/custom_appbar.dart';
-import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import 'package:life_makers/features/non_seasonal_campaigns/presentation/pages/previous_non_seasonal_campaigns.dart';
 import 'package:life_makers/features/non_seasonal_campaigns/presentation/pages/upcoming_non_seasonal_campaigns.dart';
+import 'package:life_makers/features/seasonal_campaigns/model/seasonal_campaigns_model.dart';
+
 import '../../../../core/utils/app-assets.dart';
 import '../../../../core/utils/app-color.dart';
 import '../../../../core/utils/app-string.dart';

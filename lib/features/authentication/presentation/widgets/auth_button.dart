@@ -6,6 +6,7 @@ import 'package:life_makers/features/authentication/cubit/login_cubit/login_cubi
 import 'package:life_makers/features/authentication/cubit/login_cubit/login_states.dart';
 import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_cubit.dart';
 import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_states.dart';
+
 import '../../../../core/utils/app-color.dart';
 
 class AuthButton extends StatelessWidget {
