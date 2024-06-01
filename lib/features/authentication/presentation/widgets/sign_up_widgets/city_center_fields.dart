@@ -289,7 +289,7 @@ class CityAndCenterFields extends StatelessWidget {
                 hint: "مركز",
                 items: signUpCubit.areasList
                     .map((Areas area) => DropdownMenuItem<Areas>(
-                          value: area, // Assuming city.name is a String
+                          value: area,
                           child: Align(
                             alignment: Alignment.centerRight,
                             child: FittedBox(
@@ -311,7 +311,7 @@ class CityAndCenterFields extends StatelessWidget {
                 hint: "المحافظة",
                 items: signUpCubit.citiesList
                     .map((City city) => DropdownMenuItem<City>(
-                          value: city, // Assuming city.name is a String
+                          value: city,
                           child: Align(
                             alignment: Alignment.centerRight,
                             child: FittedBox(

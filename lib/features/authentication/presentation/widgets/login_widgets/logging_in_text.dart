@@ -10,7 +10,7 @@ class LoggingInText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: AlignmentDirectional.centerEnd,
+      alignment: AlignmentDirectional.centerStart,
       child: Padding(
         padding: EdgeInsets.only(top: context.height11,bottom: context.height16),
         child: Text(

@@ -18,7 +18,7 @@ class OtpScreen extends StatelessWidget {
       listener: (context,state){
         if (state is otpResetPasswordSubmitLoading) {
         } else if (state is otpResetPasswordSubmitSuccess) {
-             Routes.changPasswordPageRoute.moveTo;
+             Routes.changePasswordPageRoute.moveTo;
         } else if (state is otpResetPasswordSubmitFailure) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(state.error),

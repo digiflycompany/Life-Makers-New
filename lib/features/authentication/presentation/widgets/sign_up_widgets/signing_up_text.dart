@@ -10,7 +10,7 @@ class SigningUpText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: AlignmentDirectional.centerEnd,
+      alignment: AlignmentDirectional.centerStart,
       child: Text(
         AppStrings.signingUp,
         style: TextStyle(

@@ -10,17 +10,16 @@ import 'package:life_makers/features/authentication/presentation/pages/sign_up_s
 import 'package:life_makers/features/home_page/presentation/pages/drawer_page.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 
-enum PageRouteAnimation { fade, scale, rotate, slide, slideBottomTop }
+enum PageRouteAnimation {fade, scale, rotate, slide, slideBottomTop}
 
 class Routes {
   Routes._internal();
-
   static const String firstPageRoute = "/";
   static const String loginPageRoute = "/login_screen";
   static const String signUpPageRoute = "/sign_up_screen";
   static const String otpPageRoute = "/otp_screen";
   static const String enterPhonePageRoute = "/enter_phone_screen";
-  static const String changPasswordPageRoute = "/change_password";
+  static const String changePasswordPageRoute = "/change_password";
   static const String mainPageRoute = "/drawer_page";
 }
 
@@ -63,7 +62,7 @@ class RouteGenerator {
             child: OtpScreen(),
             routeSettings: routeSettings,
             pageRouteAnimation: PageRouteAnimation.fade);
-      case Routes.changPasswordPageRoute:
+      case Routes.changePasswordPageRoute:
         return buildPageRoute(
             child: ChangePasswordScreen(),
             routeSettings: routeSettings,

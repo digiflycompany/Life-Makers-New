@@ -73,7 +73,7 @@ class AppStrings {
   static const String palestine = 'قافلة إغاثة \nفلسطين';
   static const String palestine2 = 'قافلة إغاثة فلسطين';
   static const String signingUp = 'انشاء حساب';
-  static const String haveAnAccount = 'لديك حساب؟';
+  static const String haveAnAccount = 'لديك حساب؟ ';
   static const String name = 'الاسم';
   static const String username = 'اسم المستخدم';
   static const String confirmPassword = 'تأكيد كلمة المرور';
