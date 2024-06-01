@@ -2,19 +2,19 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:life_makers/core/widgets/custom_snack_bar.dart';
 import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_states.dart';
+import 'package:life_makers/features/authentication/data/apis/api.dart';
+import 'package:life_makers/features/authentication/data/models/area_model.dart';
 import 'package:life_makers/features/authentication/data/models/city_model.dart';
 import 'package:life_makers/features/authentication/data/models/current_joined_campaigns_and_opp.dart';
 import 'package:life_makers/features/authentication/data/models/notification_model.dart';
 import 'package:life_makers/features/authentication/data/models/phone_user_mode.dart';
 import 'package:life_makers/features/authentication/data/models/register_error_model.dart';
+import 'package:life_makers/features/authentication/data/models/user_model.dart';
+import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../../../core/widgets/custom_snack_bar.dart';
-import '../../../../services/shared_preferences/preferences_helper.dart';
-import '../../data/apis/api.dart';
-import '../../data/models/area_model.dart';
-import '../../data/models/user_model.dart';
 
 class SignUpCubit extends Cubit<SignUpState> {
   SignUpCubit() : super(SignUpInitial());
@@ -130,42 +130,51 @@ class SignUpCubit extends Cubit<SignUpState> {
     String previous_experience,
   ) async {
     emit(SignUpLoading());
-    Response? response = await dio.post(
-      EndPoints.registerApi,
-      data: {
-        'name': name,
-        'username': username,
-        'password': password,
-        'email': email,
-        'phone': phone,
-        'whatsapp_number': whatsapp_number,
-        'id_card_number': id_card_number,
-        'the_job': the_job,
-        'the_address': the_address,
-        'governorate': governorate,
-        'city_center': city_center,
-        'previous_experience': previous_experience,
-      },
-      // ignore: body_might_complete_normally_catch_error
-    ).catchError((e) {
-      emit(SignUpFailure('خطأ في إنشاء الحساب'));
-    });
+    try {
+      Response? response = await dio.post(
+        EndPoints.registerApi,
+        data: {
+          'name': name,
+          'username': username,
+          'password': password,
+          'email': email,
+          'phone': phone,
+          'whatsapp_number': whatsapp_number,
+          'id_card_number': id_card_number,
+          'the_job': the_job,
+          'the_address': the_address,
+          'governorate': governorate,
+          'city_center': city_center,
+          'previous_experience': previous_experience,
+        },
+        // ignore: body_might_complete_normally_catch_error
+      ).catchError((e) {
+        emit(SignUpFailure('خطأ في إنشاء الحساب'));
+      });
 
-    if (response.statusCode == 200 && response.data['status'] == true) {
-      PreferencesHelper.saveIsVisitor(isVisitor: false);
-      UserModel userModel = UserModel.fromJson(response.data);
-      await PreferencesHelper.saveToken(token: response.data['token']);
-      await PreferencesHelper.saveUserModel(userModel);
+      if (response.statusCode == 200 && response.data['status'] == true) {
+        PreferencesHelper.saveIsVisitor(isVisitor: false);
+        UserModel userModel = UserModel.fromJson(response.data);
+        await PreferencesHelper.saveToken(token: response.data['token']);
+        await PreferencesHelper.saveUserModel(userModel);
 
-      await _prefs.then((prefs) => prefs.setBool('isAuthenticated', true));
-      emit(SignUpSuccess());
-    } else {
-      emit(SignUpFailure("Invalid credentials"));
+        await _prefs.then((prefs) => prefs.setBool('isAuthenticated', true));
+        emit(SignUpSuccess());
+      } else {
+        emit(SignUpFailure("Invalid credentials"));
 
-      RegisterErrorModel? errorModel =
-          RegisterErrorModel.fromJson(response.data);
-      CustomSnackBars.showErrorToast(
-          title: '${errorModel.errors?.first ?? "خطأ في تسجيل الدخول"}');
+        RegisterErrorModel? errorModel =
+        RegisterErrorModel.fromJson(response.data);
+        CustomSnackBars.showErrorToast(
+            title: '${errorModel.errors?.first ?? "خطأ في عملية انشاء الحساب"}');
+      }
+    }catch(e){
+      bool result = await InternetConnectionChecker().hasConnection;
+      if(result == false) {
+        emit(SignUpFailure('تأكد من الانترنت الخاص بك'));
+      } else {
+        emit(SignUpFailure('خطأ في عملية انشاء الحساب'));
+      }
     }
   }
 
@@ -230,10 +239,12 @@ class SignUpCubit extends Cubit<SignUpState> {
         emit(OtpSendFailure("Invalid credentials"));
       }
     } catch (e) {
-      if (kDebugMode) {
-        print('Error during signup: $e');
+      bool result = await InternetConnectionChecker().hasConnection;
+      if(result == false) {
+        emit(OtpSendFailure('تأكد من الانترنت الخاص بك'));
+      } else {
+        emit(OtpSendFailure("حدث خطأ في زمز التحقق"));
       }
-      emit(OtpSendFailure("حدث خطأ في زمز التحقق"));
     }
   }
 
@@ -254,10 +265,12 @@ class SignUpCubit extends Cubit<SignUpState> {
         emit(otpResetPasswordSentFailure("هذا الرقم غير مسجل"));
       }
     } catch (e) {
-      if (kDebugMode) {
-        print('Error during login: $e');
+      bool result = await InternetConnectionChecker().hasConnection;
+      if(result == false) {
+        emit(otpResetPasswordSentFailure('تأكد من الانترنت الخاص بك'));
+      } else {
+        emit(otpResetPasswordSentFailure("هذا الرقم غير مسجل"));
       }
-      emit(otpResetPasswordSentFailure("هذا الرقم غير مسجل"));
     }
   }
 
@@ -279,10 +292,13 @@ class SignUpCubit extends Cubit<SignUpState> {
         emit(OtpSubmitFailure("Invalid credentials"));
       }
     } catch (e) {
-      if (kDebugMode) {
-        print('Error during Sign Up: $e');
+      bool result = await InternetConnectionChecker().hasConnection;
+      if(result == false) {
+        emit(OtpSubmitFailure('تأكد من الانترنت الخاص بك'));
+      } else {
+        emit(OtpSubmitFailure(
+            "رقم الهاتف غير مسجل.. حاول رقم آخر"));
       }
-      emit(OtpSubmitFailure("Phone Number is taken.. Try Another one"));
     }
   }
 
@@ -304,11 +320,13 @@ class SignUpCubit extends Cubit<SignUpState> {
         emit(otpResetPasswordSubmitFailure("Invalid credentials"));
       }
     } catch (e) {
-      if (kDebugMode) {
-        print('Error during Sign Up: $e');
+      bool result = await InternetConnectionChecker().hasConnection;
+      if(result == false) {
+        emit(otpResetPasswordSubmitFailure('تأكد من الانترنت الخاص بك'));
+      } else {
+        emit(otpResetPasswordSubmitFailure(
+            "رقم الهاتف غير مسجل.. حاول رقم آخر"));
       }
-      emit(otpResetPasswordSubmitFailure(
-          "Phone Number is taken.. Try Another one"));
     }
   }
 
@@ -339,10 +357,15 @@ class SignUpCubit extends Cubit<SignUpState> {
         emit(changePasswordFailure("Invalid credentials"));
       }
     } catch (e) {
-      if (kDebugMode) {
-        print('Error during Sign Up: $e');
+      // if (kDebugMode) {
+      //   print('Error during Sign Up: $e');
+      // }
+      bool result = await InternetConnectionChecker().hasConnection;
+      if(result == false) {
+        emit(changePasswordFailure('تأكد من الانترنت الخاص بك'));
+      } else{
+        emit(changePasswordFailure("Phone Number is taken.. Try Another one"));
       }
-      emit(changePasswordFailure("Phone Number is taken.. Try Another one"));
     }
   }
 
