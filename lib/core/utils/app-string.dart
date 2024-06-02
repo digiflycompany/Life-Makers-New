@@ -7,6 +7,7 @@ class AppStrings {
   static const String yes='نعم';
   static const String cancel='الغاء';
   static const String noActivities='لا توجد أنشطة حالية';
+  static const String noUrgentCampaigns='لا يوجد حملات طارئة';
   static const String scanHere='امسح هنا';
   static const String pleaseEnterYourPassword='يرجى إدخال كلمة المرور';
   static const String errorHappenedTryAgain='حدث خطأ حاول مجددا';
