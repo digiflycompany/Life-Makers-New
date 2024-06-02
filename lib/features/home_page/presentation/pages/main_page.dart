@@ -1,21 +1,19 @@
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
-import 'package:life_makers/core/widgets/title_text.dart';
 import 'package:life_makers/features/authentication/cubit/card_cubit/card_states.dart';
 import 'package:life_makers/features/authentication/cubit/card_cubit/cards_cubit.dart';
 import 'package:life_makers/features/authentication/cubit/card_cubit/volunteer_card_details.dart';
+import 'package:life_makers/features/home_page/presentation/widgets/main_page_widgets/details_row.dart';
+import 'package:life_makers/features/home_page/presentation/widgets/main_page_widgets/home_app_bar.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/volunteers_card.dart';
 import 'package:life_makers/features/home_page/cubit/home_calender_cubit.dart';
 import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import 'package:life_makers/features/home_page/presentation/pages/home_calender_details_screen.dart';
 import 'package:life_makers/features/home_page/presentation/pages/news_details.dart';
 import 'package:life_makers/features/home_page/presentation/pages/profile_screen.dart';
-import 'package:life_makers/features/home_page/presentation/widgets/drawer_icon.dart';
 import 'package:life_makers/services/cubit/global_cubit_state.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 import 'package:page_transition/page_transition.dart';
@@ -56,45 +54,18 @@ class _MainPageState extends State<MainPage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.whiteColor3,
-        appBar: AppBar(
-          backgroundColor: AppColors.whiteColor3,
-          elevation: 0,
-          centerTitle: true,
-          title: TitleText(text: AppStrings.mainPage),
-          leadingWidth: 45.w,
-          leading:DrawerIcon(),
-        ),
+        appBar: PreferredSize(
+            preferredSize: Size(double.infinity,50.h),
+            child: HomeAppBar()),
         body: BlocBuilder<CardCubit, CardStates>(
           builder: (context, state) {
             return Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Column(
                 children: [
-                  // Row(
-                  //   children: [
-                  //     InkWell(
-                  //       onTap: () {
-                  //         if (ZoomDrawer.of(context)!.isOpen()) {
-                  //           ZoomDrawer.of(context)!.close();
-                  //         } else {
-                  //           ZoomDrawer.of(context)!.open();
-                  //         }
-                  //       },
-                  //       child: Padding(
-                  //         padding: const EdgeInsets.all(5),
-                  //         child: SvgPicture.asset(
-                  //           AppAssets.menuIcon,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     Spacer(),
-                  //     TitleText(text: AppStrings.mainPage),
-                  //     Spacer(),
-                  //   ],
-                  // ),
                   SizedBox(height: 8.h),
                   Container(
-                      width: 376.w,
+                      width: double.infinity,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20.r),
                         gradient: const LinearGradient(
@@ -110,7 +81,7 @@ class _MainPageState extends State<MainPage> {
                         children: [
                           Column(
                             children: [
-                              details,
+                              DetailsRow(),
                               SizedBox(height: 16.h),
                               activitiesAndMore,
                               SizedBox(height: 9.h),
@@ -388,35 +359,6 @@ class _MainPageState extends State<MainPage> {
       ),
     );
   }
-
-  get title => TitleText(text: AppStrings.mainPage);
-  get menuIcon => InkWell(
-        onTap: () {
-          if (ZoomDrawer.of(context)!.isOpen()) {
-            ZoomDrawer.of(context)!.close();
-          } else {
-            ZoomDrawer.of(context)!.open();
-          }
-        },
-        child: Padding(
-          padding: const EdgeInsets.all(14),
-          child: SvgPicture.asset(
-            AppAssets.menuIcon,
-          ),
-        ),
-      );
-  get header => Row(
-        children: [
-          SizedBox(
-            width: 180.w,
-          ),
-          title,
-          SizedBox(
-            width: 115.w,
-          ),
-          menuIcon,
-        ],
-      );
   get dropDownIcon => GestureDetector(
         // onTap: () {
         //   setState(() {
