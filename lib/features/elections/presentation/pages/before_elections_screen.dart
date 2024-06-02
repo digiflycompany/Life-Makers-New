@@ -287,7 +287,7 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
                                 '${e.details}',
                                 textDirection: TextDirection.rtl,
                                 style: TextStyle(
-                                  color: AppColors.blueColor4,
+                                  color: AppColors.blueColor,
                                   fontFamily: FontFamilies.alexandria,
                                   fontWeight: FontWeight.w600,
                                   fontSize: 10,
@@ -302,7 +302,7 @@ class _BeforeElectionsScreenState extends State<BeforeElectionsScreen> {
                                   '${e.name}',
                                   textDirection: TextDirection.rtl,
                                   style: TextStyle(
-                                    color: AppColors.blueColor4,
+                                    color: AppColors.blueColor,
                                     fontFamily: FontFamilies.alexandria,
                                     fontWeight: FontWeight.w400,
                                     fontSize: 9,

@@ -33,7 +33,7 @@ class CodeNotSentText extends StatelessWidget {
               AppStrings.resendOtp2,
               textDirection: TextDirection.rtl,
               style: TextStyle(
-                  color: AppColors.blueColor4,
+                  color: AppColors.blueColor,
                   fontWeight: FontWeight.w600,
                   fontSize: 11.sp
               ),

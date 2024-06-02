@@ -6,6 +6,8 @@ class AppStrings {
   static const String skip='تخطي';
   static const String yes='نعم';
   static const String cancel='الغاء';
+  static const String noActivities='لا توجد أنشطة حالية';
+  static const String scanHere='امسح هنا';
   static const String pleaseEnterYourPassword='يرجى إدخال كلمة المرور';
   static const String errorHappenedTryAgain='حدث خطأ حاول مجددا';
   static const String pleaseEnterYourEmail='من فضلك أدخل البريد الالكتروني الخاص بك';

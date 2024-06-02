@@ -14,7 +14,7 @@ class MoreIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Routes.profilePageBackIconRoute.moveTo;
+        Routes.profilePageBackIconRoute.moveTo(false);
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),

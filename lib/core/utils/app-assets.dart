@@ -10,6 +10,7 @@ class AppAssets {
   static const String notificationImg = "$imagesPath/notificationImage.png";
   static const String loadingImg = "$imagesPath/loadingImage.png";
   static const String homeIconSvg = "$svgPath/homeIcon.svg";
+  static const String tieSvg = "$svgPath/tie.svg";
   static const String forgotPassword = "$svgPath/forget_password.svg";
   static const String showIcon = "$svgPath/showIcon.svg";
   static const String hideIcon = "$svgPath/hideIcon.svg";

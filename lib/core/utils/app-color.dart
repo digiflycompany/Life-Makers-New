@@ -5,7 +5,6 @@ class AppColors {
   static const Color blueColor= Color(0xFF0E395E);
   static const Color blueColor2 = Color(0xFF191555);
   static const Color blueColor3 = Color(0xFF3E7FB7);
-  static const Color blueColor4 = Color(0xFF0E395E);
   static const Color blueColor5 = Color(0xFF6B9CDF);
   static const Color blueColor6= Color.fromRGBO(14, 57, 94, 0.45);
   static const Color blueColor7 = Color.fromRGBO(38, 115, 209, 0.4);

@@ -118,7 +118,7 @@ class _MenuScreenState extends State<MenuScreen> {
       },
       builder: (context, state) {
         return Scaffold(
-            backgroundColor: AppColors.blueColor4,
+            backgroundColor: AppColors.blueColor,
             body: SafeArea(
               child: RefreshIndicator.adaptive(
                 onRefresh: _refresh,

@@ -88,7 +88,7 @@ class _OneDayActivityCardState extends State<OneDayActivityCard> {
                     child: Container(
                       decoration: BoxDecoration(
                         color: AppColors.whiteColor2,
-                        border: Border.all(color: AppColors.blueColor4,width:1.6.w),
+                        border: Border.all(color: AppColors.blueColor,width:1.6.w),
                         borderRadius: BorderRadius.circular(20.r),
                       ),
                       child: Padding(
@@ -108,7 +108,7 @@ class _OneDayActivityCardState extends State<OneDayActivityCard> {
                                       // '${OneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities?[index].name}',
                                       '${oneDayActivityCubit.oneDayActivityModel?.volunteerOpportunities?[index].name}',
                                       style: TextStyle(
-                                          color: AppColors.blueColor4,
+                                          color: AppColors.blueColor,
                                           fontFamily: FontFamilies.alexandria,
                                           fontWeight: FontWeight.w500,
                                           fontSize: 13.5

@@ -25,7 +25,7 @@ class _ElectionsCardState extends State<ElectionsCard> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.r),
         color: selected == false
-            ? AppColors.blueColor4
+            ? AppColors.blueColor
             : AppColors.orangeColor,
       ),
       child: InkWell(

@@ -93,7 +93,7 @@ class _JoinedUpcomingCampaignsState extends State<JoinedUpcomingCampaigns> {
                     child: Container(
                       decoration: BoxDecoration(
                         color: AppColors.whiteColor2,
-                        border: Border.all(color: AppColors.blueColor4,width:1.6.w),
+                        border: Border.all(color: AppColors.blueColor,width:1.6.w),
                         borderRadius: BorderRadius.circular(20.r),
                       ),
                       child: Padding(
@@ -112,7 +112,7 @@ class _JoinedUpcomingCampaignsState extends State<JoinedUpcomingCampaigns> {
                                     child:  Text(
                                       '${volunteerCubit.joinedCampaignsModel?.nextCampaigns?[index].name}',
                                       style: TextStyle(
-                                          color: AppColors.blueColor4,
+                                          color: AppColors.blueColor,
                                           fontFamily: FontFamilies.alexandria,
                                           fontWeight: FontWeight.w500,
                                           fontSize: 13.5
@@ -128,7 +128,7 @@ class _JoinedUpcomingCampaignsState extends State<JoinedUpcomingCampaigns> {
                                     child:  Text(
                                       '${volunteerCubit.joinedCampaignsModel?.nextCampaigns?[index].shortDetails}',
                                       style: TextStyle(
-                                          color: AppColors.blueColor4,
+                                          color: AppColors.blueColor,
                                           fontFamily: FontFamilies.alexandria,
                                           fontWeight: FontWeight.w400,
                                           fontSize: 10,

@@ -15,7 +15,7 @@ class CreateNewPasswordText extends StatelessWidget {
         AppStrings.createNewPassowrd,
         textDirection: TextDirection.rtl,
         style: TextStyle(
-            color: AppColors.blueColor4,
+            color: AppColors.blueColor,
             fontWeight: FontWeight.w500,
             fontSize: 14.sp,
         ),
