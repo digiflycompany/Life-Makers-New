@@ -263,9 +263,9 @@ class _NonSeasonalCampaignsScreenState
         ],
       );
   Widget pages({
-    List<Campains>? previousCampaigns,
-    List<Campains>? currentCampaigns,
-    List<Campains>? upcomingCampaigns,
+    List<Campaigns>? previousCampaigns,
+    List<Campaigns>? currentCampaigns,
+    List<Campaigns>? upcomingCampaigns,
   }) =>
       Expanded(
           child: PageView(

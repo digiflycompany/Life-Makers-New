@@ -9,7 +9,7 @@ import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/presenta
 import '../../../../core/utils/app-string.dart';
 
 class UpcomingNonSeasonalCampaignsScreen extends StatelessWidget {
-   final List<Campains>? campaigns;
+   final List<Campaigns>? campaigns;
 
    UpcomingNonSeasonalCampaignsScreen({this.campaigns});
 
