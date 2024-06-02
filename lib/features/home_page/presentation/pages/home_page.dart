@@ -19,7 +19,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late PageController _pageController;
-  int selectBtn = navBtn2.length - 1;
+  int selectBtn = navBtn2.length - 3;
 
   @override
   void initState() {
@@ -55,9 +55,9 @@ class _HomePageState extends State<HomePage> {
           });
         },
         children: const [
-          ProfileScreen(),
-          NotificationPage(),
           MainPage(),
+          NotificationPage(),
+          ProfileScreen(),
         ],
       );
   get navBar => Align(

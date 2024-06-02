@@ -13,9 +13,9 @@ class NavModel {
 }
 
 List<NavModel> navBtn = [
-  NavModel(id: 0, imagePath: AppAssets.profileIcon, name:AppStrings.personalFile ),
+  NavModel(id: 0, imagePath: AppAssets.homeIconSvg, name: AppStrings.mainPage),
   NavModel(id: 1, imagePath: AppAssets.notificationIcon, name: AppStrings.notifications),
-  NavModel(id: 2, imagePath: AppAssets.homeIconSvg, name: AppStrings.mainPage),
+  NavModel(id: 2, imagePath: AppAssets.profileIcon, name:AppStrings.personalFile ),
 ];
 class NavModel2 {
   final int id;
@@ -30,7 +30,7 @@ class NavModel2 {
 }
 
 List<NavModel2> navBtn2 = [
-  NavModel2(id: 0, imagePath: AppAssets.profileWhiteIcon, name:AppStrings.personalFile ),
+  NavModel2(id: 0, imagePath: AppAssets.homeWhiteIcon, name: AppStrings.mainPage),
   NavModel2(id: 1, imagePath: AppAssets.notificationWhiteIcon, name: AppStrings.notifications),
-  NavModel2(id: 2, imagePath: AppAssets.homeWhiteIcon, name: AppStrings.mainPage),
+  NavModel2(id: 2, imagePath: AppAssets.profileWhiteIcon, name:AppStrings.personalFile ),
 ];
