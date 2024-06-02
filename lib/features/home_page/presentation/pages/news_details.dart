@@ -11,7 +11,7 @@ import '../../../campaign_details/presentation/pages/campaign_details_screen.dar
 
 class NewsDetails extends StatelessWidget {
   NewsDetails({super.key, this.campains});
-  final Campains? campains;
+  final Campaigns? campains;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

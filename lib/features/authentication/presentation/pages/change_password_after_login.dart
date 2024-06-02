@@ -256,7 +256,7 @@ class _ChangePasswordAfterLoginScreenState extends State<ChangePasswordAfterLogi
     AppStrings.createNewPassowrd,
     textDirection: TextDirection.rtl,
     style: TextStyle(
-        color: AppColors.blueColor4,
+        color: AppColors.blueColor,
         fontWeight: FontWeight.w500,
         fontFamily: FontFamilies.alexandria,
         fontSize: 13.5),

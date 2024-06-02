@@ -70,7 +70,7 @@ class _RemoteTasksDetailsState extends State<RemoteTasksDetails> {
                           radius: 20,
                           child: IconButton(
                             icon: Icon(
-                              Icons.arrow_forward, color: AppColors.blueColor4,),
+                              Icons.arrow_forward, color: AppColors.blueColor,),
                             onPressed: () {
                               Navigator.pop(context);
                             },

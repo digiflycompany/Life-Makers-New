@@ -9,7 +9,7 @@ import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/presenta
 import '../../../../core/utils/app-color.dart';
 
 class PreviousNonSeasonalCampaignsScreen extends StatelessWidget {
-  final List<Campains>? campaigns;
+  final List<Campaigns>? campaigns;
 
   PreviousNonSeasonalCampaignsScreen({this.campaigns});
   @override

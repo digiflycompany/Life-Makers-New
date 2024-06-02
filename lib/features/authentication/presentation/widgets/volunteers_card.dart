@@ -17,7 +17,7 @@ class VolunteerContainer extends StatelessWidget {
         borderRadius: BorderRadius.circular(23.r),
         color: Colors.white70,
         border: Border.all(
-          color: AppColors.blueColor4,
+          color: AppColors.blueColor,
           width: 2.0,
         ),
       ),
@@ -28,7 +28,7 @@ class VolunteerContainer extends StatelessWidget {
           child: Text(
             itemName,
             style: TextStyle(
-              color: AppColors.blueColor4,
+              color: AppColors.blueColor,
               fontSize: 10,
               fontWeight: FontWeight.w700,
               fontFamily: FontFamilies.alexandria,

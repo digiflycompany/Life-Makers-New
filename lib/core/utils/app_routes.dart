@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:life_makers/core/utils/app-color.dart';
+import 'package:life_makers/features/authentication/cubit/card_cubit/volunteer_card_details.dart';
 import 'package:life_makers/features/authentication/presentation/pages/change_password.dart';
 import 'package:life_makers/features/authentication/presentation/pages/enter_phone_screen.dart';
 import 'package:life_makers/features/authentication/presentation/pages/login_screen.dart';
 import 'package:life_makers/features/authentication/presentation/pages/otp_screen.dart';
 import 'package:life_makers/features/authentication/presentation/pages/sign_up_screen.dart';
 import 'package:life_makers/features/home_page/presentation/pages/drawer_page.dart';
+import 'package:life_makers/features/home_page/presentation/pages/profile_screen.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 
 enum PageRouteAnimation {fade, scale, rotate, slide, slideBottomTop}
@@ -21,6 +23,8 @@ class Routes {
   static const String enterPhonePageRoute = "/enter_phone_screen";
   static const String changePasswordPageRoute = "/change_password";
   static const String mainPageRoute = "/drawer_page";
+  static const String profilePageBackIconRoute = "/profile_screen";
+  static const String volunteerCardDetailsPage = "/volunteer_card_details";
 }
 
 class RouteGenerator {
@@ -67,6 +71,21 @@ class RouteGenerator {
             child: ChangePasswordScreen(),
             routeSettings: routeSettings,
             pageRouteAnimation: PageRouteAnimation.fade);
+      case Routes.profilePageBackIconRoute:
+        final hasBackButton = routeSettings.arguments as bool;
+          return buildPageRoute(
+              child: ProfileScreen(
+                hasBackButton: hasBackButton,
+              ),
+              routeSettings: routeSettings,
+              pageRouteAnimation: PageRouteAnimation.fade);
+      case Routes.volunteerCardDetailsPage:
+        final index = routeSettings.arguments as int;
+          return buildPageRoute(
+              child: VolunteerCardDetails(index: index),
+              routeSettings: routeSettings,
+              pageRouteAnimation: PageRouteAnimation.fade);
+
     }
     return buildPageRoute(
         child: const Center(

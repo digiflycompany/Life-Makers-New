@@ -11,7 +11,7 @@ import '../../model/seasonal_campaigns_model.dart';
 import '../build_seasonal_widget.dart';
 
 class CurrentSeasonalCampaignsScreen extends StatefulWidget {
- final List<Campains>? campaigns;
+ final List<Campaigns>? campaigns;
 
   CurrentSeasonalCampaignsScreen({super.key, this.campaigns});
 
@@ -112,7 +112,7 @@ class _CurrentSeasonalCampaignsScreenState
           ),
         ],
       );
-  Widget previousSeasonalCampaigns(Campains? campaignDetails) =>
+  Widget previousSeasonalCampaigns(Campaigns? campaignDetails) =>
       GestureDetector(
         onTap: () {
           Navigator.push(

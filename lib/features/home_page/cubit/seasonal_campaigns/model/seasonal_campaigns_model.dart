@@ -2,9 +2,9 @@ class CampaignsModel {
   bool? status;
   String? errNum;
   String? msg;
-  List<Campains>? currentCampaigns;
-  List<Campains>? pastCampaigns;
-  List<Campains>? nextCampaigns;
+  List<Campaigns>? currentCampaigns;
+  List<Campaigns>? pastCampaigns;
+  List<Campaigns>? nextCampaigns;
 
   CampaignsModel(
       {this.status,
@@ -19,21 +19,21 @@ class CampaignsModel {
     errNum = json['errNum'];
     msg = json['msg'];
     if (json['current_campaigns'] != null) {
-      currentCampaigns = <Campains>[];
+      currentCampaigns = <Campaigns>[];
       json['current_campaigns'].forEach((v) {
-        currentCampaigns!.add(new Campains.fromJson(v));
+        currentCampaigns!.add(new Campaigns.fromJson(v));
       });
     }
     if (json['past_campaigns'] != null) {
-      pastCampaigns = <Campains>[];
+      pastCampaigns = <Campaigns>[];
       json['past_campaigns'].forEach((v) {
-        pastCampaigns!.add(new Campains.fromJson(v));
+        pastCampaigns!.add(new Campaigns.fromJson(v));
       });
     }
     if (json['next_campaigns'] != null) {
-      nextCampaigns = <Campains>[];
+      nextCampaigns = <Campaigns>[];
       json['next_campaigns'].forEach((v) {
-        nextCampaigns!.add(new Campains.fromJson(v));
+        nextCampaigns!.add(new Campaigns.fromJson(v));
       });
     }
   }
@@ -59,7 +59,7 @@ class CampaignsModel {
   }
 }
 
-class Campains {
+class Campaigns {
   int? id;
   String? name;
   String? details;
@@ -75,7 +75,7 @@ class Campains {
   String? userJoined;
   List<Tasks>? tasks;
 
-  Campains(
+  Campaigns(
       {this.id,
         this.name,
         this.details,
@@ -91,7 +91,7 @@ class Campains {
         this.userJoined,
         this.tasks});
 
-  Campains.fromJson(Map<String, dynamic> json) {
+  Campaigns.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     details = json['details'];

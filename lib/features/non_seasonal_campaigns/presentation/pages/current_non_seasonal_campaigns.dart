@@ -10,7 +10,7 @@ import '../../../../core/utils/app_fonts.dart';
 
 // ignore: must_be_immutable
 class CurrentNonSeasonalCampaignsScreen extends StatelessWidget {
-  final List<Campains>? campaigns;
+  final List<Campaigns>? campaigns;
 
    CurrentNonSeasonalCampaignsScreen({this.campaigns});
 
