@@ -262,7 +262,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                                 duration: const Duration(
                                                     milliseconds: 280),
                                                 child:
-                                                    const SeasonalCampaignsScreen()));
+                                                     SeasonalCampaignsScreen()));
                                       },
                                       child: Row(
                                         textDirection: TextDirection.rtl,

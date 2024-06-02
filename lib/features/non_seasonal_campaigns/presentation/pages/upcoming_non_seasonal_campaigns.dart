@@ -7,7 +7,6 @@ import 'package:life_makers/core/utils/app_fonts.dart';
 import 'package:life_makers/features/seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import 'package:life_makers/features/seasonal_campaigns/presentation/pages/previous_seasonal_campaigns.dart';
 
-
 import '../../../../core/utils/app-string.dart';
 
 class UpcomingNonSeasonalCampaignsScreen extends StatelessWidget {
