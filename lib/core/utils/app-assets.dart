@@ -15,6 +15,12 @@ class AppAssets {
   static const String forgotPassword = "$svgPath/forget_password.svg";
   static const String showIcon = "$svgPath/showIcon.svg";
   static const String hideIcon = "$svgPath/hideIcon.svg";
+  static const String homeUnselectedIcon = "$svgPath/home_unselected_icon.svg";
+  static const String homeSelectedIcon = "$svgPath/home_selected_icon.svg";
+  static const String notificationSelectedIcon = "$svgPath/notification_selected_icon.svg";
+  static const String notificationUnselectedIcon = "$svgPath/notification_unselected_icon.svg";
+  static const String profileSelectedIcon = "$svgPath/profile_selected_icon.svg";
+  static const String profileUnselectedIcon = "$svgPath/profile_unselected_icon.svg";
   static const String changePassword = "$svgPath/changePassword.svg";
   static const String circleAvatar2 = "$svgPath/maleAvatar2.svg";
   static const String homeIcon = "$imagesPath/homeIcon.png";

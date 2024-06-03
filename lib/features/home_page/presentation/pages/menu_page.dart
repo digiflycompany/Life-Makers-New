@@ -104,7 +104,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     SizedBox(height:menuCubit.isVisible==false? 30.h:20.h),
                     if (!PreferencesHelper.getIsVisitor)...[const LogoutIcon(),],
                     if (PreferencesHelper.getIsVisitor)...[const LoginIcon(),],
-                    SizedBox(height: 50.h,),
+                    VerticalSpace(50.h,),
                   ],
                 ),
               ),

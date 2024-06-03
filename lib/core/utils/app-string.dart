@@ -60,7 +60,7 @@ class AppStrings {
   static const String mainPage = 'الرئيسية';
   static const String personalFile = 'الملف الشخصي';
   static const String thanksForJoiningUs = 'شكرا لانضمامك معنا';
-  static const String notifications = 'الاشعارات';
+  static const String notifications = 'الإشعارات';
   static const String lailaAhmed = 'ليلى أحمد';
   static const String activities = 'الأنشطة';
   static const String volunteerJoinedSuccessfully = 'تم الانضمام الي الحملة بنجاح';
