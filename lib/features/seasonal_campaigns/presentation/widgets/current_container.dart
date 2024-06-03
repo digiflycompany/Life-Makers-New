@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:life_makers/core/utils/app-color.dart';
+import 'package:life_makers/core/utils/app-string.dart';
+import 'package:life_makers/core/utils/app_fonts.dart';
 import 'package:life_makers/features/seasonal_campaigns/cubit/seasonal_campaigns_cubit.dart';
 
 class CurrentContainer extends StatelessWidget {
@@ -9,23 +12,44 @@ class CurrentContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 70.w,
-      height: 43.h,
-      decoration: BoxDecoration(
-        border: Border(
-          top: BorderSide(
-              color: seasonalCampaignsCubit.currentPage == 1 ? Colors.grey.shade300 : Colors.white,
-              width: 1.w),
-          left: BorderSide(
-              color: seasonalCampaignsCubit.currentPage == 1 ? Colors.grey.shade300 : Colors.white,
-              width: 1.w),
-          right: BorderSide(
-              color: seasonalCampaignsCubit.currentPage == 1 ? Colors.grey.shade300 : Colors.white,
-              width: 1.w),
-          bottom: BorderSide(
-              color: seasonalCampaignsCubit.currentPage == 1 ? Colors.white : Colors.transparent,
-              width: 2.5.w),
+    return GestureDetector(
+      onTap: () {
+        seasonalCampaignsCubit.changePageView(1);
+      },
+      child: Container(
+        width: 70.w,
+        height: 43.h,
+        decoration: BoxDecoration(
+          border: seasonalCampaignsCubit.currentPage == 1 ? Border(
+            top: BorderSide(
+                color: Colors.grey.shade300,
+                width: 1.w),
+            left: BorderSide(
+                color: Colors.grey.shade300,
+                width: 1.w),
+            right: BorderSide(
+                color: Colors.grey.shade300,
+                width: 1.w),
+            bottom: BorderSide(
+                color: Colors.white ,
+                width: 1.w),
+          ): Border(
+            bottom: BorderSide(
+                color: Colors.grey.shade300,
+                width: 1.w),
+          ),
+        ),
+        child: Center(
+          child: Text(
+            AppStrings.current,
+            style: TextStyle(
+                color: seasonalCampaignsCubit.currentPage == 1
+                    ? AppColors.greenColor2
+                    : AppColors.greyColor3,
+                fontFamily: FontFamilies.alexandria,
+                fontWeight: seasonalCampaignsCubit.currentPage == 1 ? FontWeight.w600 : FontWeight.w400,
+                fontSize: 11.5),
+          ),
         ),
       ),
     );

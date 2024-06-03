@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:life_makers/features/seasonal_campaigns/cubit/seasonal_campaigns_cubit.dart';
 import 'package:life_makers/features/seasonal_campaigns/presentation/widgets/current_container.dart';
 import 'package:life_makers/features/seasonal_campaigns/presentation/widgets/previous_container.dart';
@@ -12,20 +11,42 @@ class Tabs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: 13.w,
-        right: 12.w,
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      textDirection: TextDirection.rtl,
+      children: [
+        Expanded(
+          flex: 1,
+          child: Divider(
+            height: 0,
+            thickness: 1,
+          ),
+        ),
+        PreviousContainer(seasonalCampaignsCubit: seasonalCampaignsCubit),
+      Expanded(
+        flex: 2,
+        child: Divider(
+          height: 0,
+          thickness: 1,
+        ),
       ),
-      child: Row(
-        textDirection: TextDirection.rtl,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          PreviousContainer(seasonalCampaignsCubit: seasonalCampaignsCubit),
-          CurrentContainer(seasonalCampaignsCubit: seasonalCampaignsCubit),
-          UpComingContainer(seasonalCampaignsCubit: seasonalCampaignsCubit),
-        ],
+        CurrentContainer(seasonalCampaignsCubit: seasonalCampaignsCubit),
+      Expanded(
+        flex: 2,
+        child: Divider(
+          height: 0,
+          thickness: 1,
+        ),
       ),
+        UpComingContainer(seasonalCampaignsCubit: seasonalCampaignsCubit),
+        Expanded(
+          flex: 1,
+          child: Divider(
+            height: 0,
+            thickness: 1,
+          ),
+        ),
+      ],
     );
   }
 }
