@@ -13,7 +13,7 @@ class NotificationWidget extends StatelessWidget {
      return Padding(
        padding:  EdgeInsets.only(right: 20.w,left: 20.w),
        child: Container(
-         height: 88.h,
+         height: 70.h,
          decoration: BoxDecoration(
            color:Colors.grey.shade300,
            borderRadius: BorderRadius.circular(8.r),

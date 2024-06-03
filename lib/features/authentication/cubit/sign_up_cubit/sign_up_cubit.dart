@@ -177,7 +177,16 @@ class SignUpCubit extends Cubit<SignUpState> {
       }
     }
   }
-
+  Future<void> refresh() async {
+    try {
+      await Future.delayed(const Duration(seconds: 1));
+      await signUpCubit.GetUserNotifications();
+    } catch (error) {
+      if (kDebugMode) {
+        print('Error refreshing data: $error');
+      }
+    }
+  }
   Future<void> GetUserNotifications() async {
     emit(NotificationsLoading());
     try {

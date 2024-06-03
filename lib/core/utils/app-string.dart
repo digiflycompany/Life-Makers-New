@@ -59,6 +59,7 @@ class AppStrings {
   static const String createAccount = 'انشاء حساب';
   static const String mainPage = 'الرئيسية';
   static const String personalFile = 'الملف الشخصي';
+  static const String noNotifications = 'لا توجد اشعارات';
   static const String thanksForJoiningUs = 'شكرا لانضمامك معنا';
   static const String notifications = 'الإشعارات';
   static const String lailaAhmed = 'ليلى أحمد';
