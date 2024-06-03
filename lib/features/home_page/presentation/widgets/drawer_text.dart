@@ -25,6 +25,7 @@ class DrawerText extends StatelessWidget {
               fontFamily: FontFamilies.alexandria,
               fontSize: font,
               fontWeight: FontWeight.w500,
+                height:1.2.h
 
             ),
             textDirection: TextDirection.rtl,

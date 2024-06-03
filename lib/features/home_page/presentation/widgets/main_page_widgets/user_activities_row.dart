@@ -42,7 +42,7 @@ class UserActivities extends StatelessWidget {
                           return InkWell(
                             splashColor: Colors.transparent,
                             onTap: () {
-                              Routes.volunteerCardDetailsPage.moveTo(index);
+                              Routes.volunteerCardDetailsPageRoute.moveTo(index);
                             },
                             child: Padding(
                               padding: EdgeInsets.only(right: 5.w),

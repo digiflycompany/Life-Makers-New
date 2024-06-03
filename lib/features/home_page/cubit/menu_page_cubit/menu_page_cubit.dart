@@ -61,4 +61,30 @@ class MenuCubit extends Cubit<MenuState> {
       emit(fetchDateTimeFailure('Failed to load program volunteer opportunities: $error'));
     }
   }
+
+// Future<void> _refresh() async {
+//   try {
+//     await Future.delayed(const Duration(seconds: 1));
+//     await  menuCubit.fetchDateAndTime().then((value) {
+//       String? apiStartDateString = menuCubit.appSettingsModel?.data?.electionsStartDate;
+//       String? apiEndDateString = menuCubit.appSettingsModel?.data?.electionsEndDate;
+//
+//       if (kDebugMode) {
+//         print('***** DATE *****');
+//         print(apiEndDateString);
+//         print(apiEndDateString);
+//       }
+//
+//       if(apiStartDateString!=null && apiEndDateString!=null)
+//       {
+//         startTime= DateTime.parse(apiStartDateString);
+//         endTime= DateTime.parse(apiEndDateString);
+//       }
+//     });
+//   } catch (error) {
+//     if (kDebugMode) {
+//       print('Error refreshing data: $error');
+//     }
+//   }
+// }
 }

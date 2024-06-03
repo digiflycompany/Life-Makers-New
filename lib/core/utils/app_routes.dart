@@ -8,8 +8,14 @@ import 'package:life_makers/features/authentication/presentation/pages/enter_pho
 import 'package:life_makers/features/authentication/presentation/pages/login_screen.dart';
 import 'package:life_makers/features/authentication/presentation/pages/otp_screen.dart';
 import 'package:life_makers/features/authentication/presentation/pages/sign_up_screen.dart';
+import 'package:life_makers/features/edit_account/screens/edit_account_screen.dart';
+import 'package:life_makers/features/elections/presentation/pages/before_elections_screen.dart';
+import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/presentation/pages/seasonal_campaigns.dart';
 import 'package:life_makers/features/home_page/presentation/pages/drawer_page.dart';
 import 'package:life_makers/features/home_page/presentation/pages/profile_screen.dart';
+import 'package:life_makers/features/membership_controll/screens/membership_control_screen.dart';
+import 'package:life_makers/features/non_seasonal_campaigns/presentation/pages/non_seasonal_campaigns.dart';
+import 'package:life_makers/features/volunteer_opportunity/presentation/screens/volunteer_opportunity_screen.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 
 enum PageRouteAnimation {fade, scale, rotate, slide, slideBottomTop}
@@ -24,7 +30,14 @@ class Routes {
   static const String changePasswordPageRoute = "/change_password";
   static const String mainPageRoute = "/drawer_page";
   static const String profilePageBackIconRoute = "/profile_screen";
-  static const String volunteerCardDetailsPage = "/volunteer_card_details";
+  static const String volunteerCardDetailsPageRoute = "/volunteer_card_details";
+  static const String membershipControlPageRoute = "/membership_control_screen";
+  static const String profilePageRoute = "/profile_screen";
+  static const String editAccountPageRoute = "/edit_account_screen";
+  static const String seasonalCampaignsPageRoute = "/seasonal_campaigns";
+  static const String nonSeasonalCampaignsPageRoute = "/non_seasonal_campaigns";
+  static const String volunteerOpportunityPageRoute = "/volunteer_opportunity_screen";
+  static const String beforeElectionsPageRoute = "/before_elections_screen";
 }
 
 class RouteGenerator {
@@ -66,9 +79,50 @@ class RouteGenerator {
             child: OtpScreen(),
             routeSettings: routeSettings,
             pageRouteAnimation: PageRouteAnimation.fade);
+      case Routes.beforeElectionsPageRoute:
+        return buildPageRoute(
+            child: BeforeElectionsScreen(),
+            routeSettings: routeSettings,
+            pageRouteAnimation: PageRouteAnimation.fade);
+      case Routes.membershipControlPageRoute:
+        return buildPageRoute(
+            child: MembershipControl(),
+            routeSettings: routeSettings,
+            pageRouteAnimation: PageRouteAnimation.fade);
+      case Routes.profilePageRoute:
+        return buildPageRoute(
+            child: ProfileScreen(),
+            routeSettings: routeSettings,
+            pageRouteAnimation: PageRouteAnimation.fade);
+      case Routes.seasonalCampaignsPageRoute:
+        return buildPageRoute(
+            child: SeasonalCampaignsScreen(),
+            routeSettings: routeSettings,
+            pageRouteAnimation: PageRouteAnimation.fade);
+      case Routes.volunteerOpportunityPageRoute:
+        return buildPageRoute(
+            child: VolunteerOpportunityScreen(),
+            routeSettings: routeSettings,
+            pageRouteAnimation: PageRouteAnimation.fade);
+      case Routes.nonSeasonalCampaignsPageRoute:
+        return buildPageRoute(
+            child: NonSeasonalCampaignsScreen(),
+            routeSettings: routeSettings,
+            pageRouteAnimation: PageRouteAnimation.fade);
+      case Routes.editAccountPageRoute:
+        return buildPageRoute(
+            child: EditAccountScreen(),
+            routeSettings: routeSettings,
+            pageRouteAnimation: PageRouteAnimation.fade);
       case Routes.changePasswordPageRoute:
         return buildPageRoute(
             child: ChangePasswordScreen(),
+            routeSettings: routeSettings,
+            pageRouteAnimation: PageRouteAnimation.fade);
+      case Routes.volunteerCardDetailsPageRoute:
+        final index = routeSettings.arguments as int;
+        return buildPageRoute(
+            child: VolunteerCardDetails(index: index),
             routeSettings: routeSettings,
             pageRouteAnimation: PageRouteAnimation.fade);
       case Routes.profilePageBackIconRoute:
@@ -77,12 +131,6 @@ class RouteGenerator {
               child: ProfileScreen(
                 hasBackButton: hasBackButton,
               ),
-              routeSettings: routeSettings,
-              pageRouteAnimation: PageRouteAnimation.fade);
-      case Routes.volunteerCardDetailsPage:
-        final index = routeSettings.arguments as int;
-          return buildPageRoute(
-              child: VolunteerCardDetails(index: index),
               routeSettings: routeSettings,
               pageRouteAnimation: PageRouteAnimation.fade);
 

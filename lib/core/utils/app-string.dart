@@ -8,6 +8,7 @@ class AppStrings {
   static const String cancel='الغاء';
   static const String noActivities='لا توجد أنشطة حالية';
   static const String noUrgentCampaigns='لا يوجد حملات طارئة';
+  static const String electionsSoon='ستبدأ إنتخابات مجلس المتطوعين قريبًا';
   static const String scanHere='امسح هنا';
   static const String pleaseEnterYourPassword='يرجى إدخال كلمة المرور';
   static const String errorHappenedTryAgain='حدث خطأ حاول مجددا';
@@ -93,7 +94,7 @@ class AppStrings {
   static const String campaigns = 'حملات';
   static const String volunteerOpportunities = 'فرص تطوعية';
   static const String volunteerBoardOfDirectors = 'مجلس ادارة المتطوعين';
-  static const String volunteerBoardOfDirectorsElections = 'انتخابات مجلس ادارة المتطوعين';
+  static const String volunteerBoardOfDirectorsElections = 'انتخابات مجلس\n ادارة المتطوعين';
   static const String volunteerBoardOfDirectorsElections2 = 'مرشحين مجلس ادارة المتطوعين';
   static const String signOut = 'تسجيل الخروج';
   static const String seasonalCampaigns = 'حملات موسمية';
