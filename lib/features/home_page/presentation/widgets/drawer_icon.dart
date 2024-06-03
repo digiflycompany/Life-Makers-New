@@ -11,10 +11,13 @@ class DrawerIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        if (ZoomDrawer.of(context)!.isOpen()) {
-          ZoomDrawer.of(context)!.close();
-        } else {
-          ZoomDrawer.of(context)!.open();
+        final drawer = ZoomDrawer.of(context);
+        if (drawer != null) {
+          if (drawer.isOpen()) {
+            drawer.close();
+          } else {
+            drawer.open();
+          }
         }
       },
       child: Padding(
