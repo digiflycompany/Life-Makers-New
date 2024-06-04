@@ -7,6 +7,7 @@ import 'package:life_makers/core/utils/app-string.dart';
 import 'package:life_makers/core/utils/app_fonts.dart';
 import 'package:life_makers/features/home_page/presentation/pages/profile_screen.dart';
 import 'package:life_makers/features/notification/presentation/pages/notification_page.dart';
+
 import 'main_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -30,6 +31,7 @@ class _HomePageState extends State<HomePage> {
       _currentIndex = index;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,14 +70,12 @@ class _HomePageState extends State<HomePage> {
               fontWeight: FontWeight.w500,
               fontFamily: FontFamilies.alexandria,
               fontSize: 12.sp,
-              height: 2.h
-          ),
+              height: 2.h),
           unselectedLabelStyle: TextStyle(
               fontWeight: FontWeight.w500,
               fontFamily: FontFamilies.alexandria,
               fontSize: 12.sp,
-              height: 2.h
-          ),
+              height: 2.h),
         ),
       ),
     );

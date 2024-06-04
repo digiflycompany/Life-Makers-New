@@ -1,10 +1,10 @@
-import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/model/seasonal_campaigns_model.dart';
+import 'package:life_makers/features/seasonal_campaigns/model/seasonal_campaigns_model.dart';
 
 class EmergencyCampaignModel {
   bool? status;
   String? errNum;
   String? msg;
-  List<Campaigns>? campaigns=[];
+  List<Campaigns>? campaigns = [];
 
   EmergencyCampaignModel({this.status, this.errNum, this.msg, this.campaigns});
 

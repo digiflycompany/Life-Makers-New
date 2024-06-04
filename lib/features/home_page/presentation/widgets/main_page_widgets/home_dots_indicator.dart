@@ -1,6 +1,6 @@
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:dots_indicator/dots_indicator.dart';
 
 class HomeDotsIndicator extends StatelessWidget {
   final int length;
@@ -9,7 +9,7 @@ class HomeDotsIndicator extends StatelessWidget {
   const HomeDotsIndicator({
     Key? key,
     required this.length,
-    this.currentPage=0,
+    this.currentPage = 0,
   }) : super(key: key);
 
   @override

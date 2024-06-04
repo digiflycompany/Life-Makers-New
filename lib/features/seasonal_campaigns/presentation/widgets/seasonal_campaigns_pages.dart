@@ -17,7 +17,6 @@ class SeasonalCampaignsPages extends StatelessWidget {
     return Expanded(
         child: PageView(
       physics: const BouncingScrollPhysics(),
-      reverse: true,
       controller: seasonalCampaignsCubit.pageController,
       onPageChanged: (int page) {
         seasonalCampaignsCubit.changCurrentPage(page);

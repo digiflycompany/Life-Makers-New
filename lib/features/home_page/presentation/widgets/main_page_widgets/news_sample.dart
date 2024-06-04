@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:life_makers/features/home_page/cubit/seasonal_campaigns/model/seasonal_campaigns_model.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:life_makers/core/utils/app-color.dart';
 import 'package:life_makers/features/home_page/presentation/pages/news_details.dart';
 import 'package:life_makers/features/home_page/presentation/widgets/main_page_widgets/info_icon.dart';
 import 'package:life_makers/features/home_page/presentation/widgets/main_page_widgets/news_text.dart';
+import 'package:life_makers/features/seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:life_makers/core/utils/app-color.dart';
 
 class NewsSample extends StatelessWidget {
   final Campaigns? campaigns;

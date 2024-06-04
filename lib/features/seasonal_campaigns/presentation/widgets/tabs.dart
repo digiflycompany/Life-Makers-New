@@ -13,7 +13,6 @@ class Tabs extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
-      textDirection: TextDirection.rtl,
       children: [
         Expanded(
           flex: 1,
@@ -23,21 +22,21 @@ class Tabs extends StatelessWidget {
           ),
         ),
         PreviousContainer(seasonalCampaignsCubit: seasonalCampaignsCubit),
-      Expanded(
-        flex: 2,
-        child: Divider(
-          height: 0,
-          thickness: 1,
+        Expanded(
+          flex: 2,
+          child: Divider(
+            height: 0,
+            thickness: 1,
+          ),
         ),
-      ),
         CurrentContainer(seasonalCampaignsCubit: seasonalCampaignsCubit),
-      Expanded(
-        flex: 2,
-        child: Divider(
-          height: 0,
-          thickness: 1,
+        Expanded(
+          flex: 2,
+          child: Divider(
+            height: 0,
+            thickness: 1,
+          ),
         ),
-      ),
         UpComingContainer(seasonalCampaignsCubit: seasonalCampaignsCubit),
         Expanded(
           flex: 1,

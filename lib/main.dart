@@ -5,13 +5,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:life_makers/core/utils/app.service.dart';
+import 'package:life_makers/core/utils/app_routes.dart';
 import 'package:life_makers/core/utils/app_theme.dart';
 import 'package:life_makers/features/authentication/cubit/card_cubit/cards_cubit.dart';
 import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_cubit.dart';
 import 'package:life_makers/features/edit_account/cubit/edit_account_cubit.dart';
 import 'package:life_makers/features/home_page/cubit/menu_page_cubit/menu_page_cubit.dart';
 import 'package:life_makers/features/seasonal_campaigns/cubit/seasonal_campaigns_cubit.dart';
-import 'package:life_makers/features/seasonal_campaigns/presentation/pages/seasonal_campaigns.dart';
 import 'package:life_makers/features/volunteer_opportunity/cubit/one_day_activity_cubit.dart';
 import 'package:life_makers/features/volunteer_opportunity/cubit/remote_tasks_cubit.dart';
 import 'package:life_makers/features/volunteer_opportunity/cubit/suggestion_cubit.dart';
@@ -116,8 +116,7 @@ class MyApp extends StatelessWidget {
                 ],
                 debugShowCheckedModeBanner: false,
                 navigatorKey: AppService().navigatorKey,
-               // onGenerateRoute: RouteGenerator.getRoute,
-                home:SeasonalCampaignsScreen(),
+                onGenerateRoute: RouteGenerator.getRoute,
               ),
             ),
           );

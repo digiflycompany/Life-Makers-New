@@ -4,6 +4,7 @@ import 'package:life_makers/core/utils/app-color.dart';
 import 'package:life_makers/features/home_page/presentation/widgets/main_page_widgets/activities_and_more_row.dart';
 import 'package:life_makers/features/home_page/presentation/widgets/main_page_widgets/details_row.dart';
 import 'package:life_makers/features/home_page/presentation/widgets/main_page_widgets/user_qr.dart';
+
 import 'user_activities_row.dart';
 
 class UserDetailsCard extends StatelessWidget {
@@ -12,7 +13,7 @@ class UserDetailsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 8.h,bottom: 15.h),
+      padding: EdgeInsets.only(top: 8.h, bottom: 15.h),
       child: Container(
           width: double.infinity,
           decoration: BoxDecoration(

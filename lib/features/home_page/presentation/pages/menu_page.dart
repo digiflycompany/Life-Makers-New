@@ -37,29 +37,30 @@ class _MenuScreenState extends State<MenuScreen> {
     super.initState();
     menuCubit = context.read<MenuCubit>();
     menuCubit.fetchDateAndTime().then((value) {
-      String? apiStartDateString = menuCubit.appSettingsModel?.data?.electionsStartDate;
-      String? apiEndDateString = menuCubit.appSettingsModel?.data?.electionsEndDate;
+      String? apiStartDateString =
+          menuCubit.appSettingsModel?.data?.electionsStartDate;
+      String? apiEndDateString =
+          menuCubit.appSettingsModel?.data?.electionsEndDate;
       if (kDebugMode) {
         print(apiEndDateString);
         print('***** DATE *****');
         print(apiEndDateString);
       }
-      if(apiStartDateString!=null && apiEndDateString!=null)
-      {
-        startTime= DateTime.parse(apiStartDateString);
-        endTime= DateTime.parse(apiEndDateString);
+      if (apiStartDateString != null && apiEndDateString != null) {
+        startTime = DateTime.parse(apiStartDateString);
+        endTime = DateTime.parse(apiEndDateString);
       }
     });
-     if (kDebugMode) {
-       print('$startTime');
-       print('$endTime');
-
-     }
+    if (kDebugMode) {
+      print('$startTime');
+      print('$endTime');
+    }
   }
+
   @override
   void dispose() {
-    startTime =DateTime.now();
-    endTime =DateTime.now();
+    startTime = DateTime.now();
+    endTime = DateTime.now();
     super.dispose();
   }
 
@@ -85,26 +86,32 @@ class _MenuScreenState extends State<MenuScreen> {
                 child: Column(
                   children: [
                     const CloseDrawerIcon(),
-                    if(!PreferencesHelper.getIsVisitor)...[
-                       VerticalSpace(20.h),
+                    if (!PreferencesHelper.getIsVisitor) ...[
+                      VerticalSpace(20.h),
                     ],
-                    if(!PreferencesHelper.getIsVisitor)...[
+                    if (!PreferencesHelper.getIsVisitor) ...[
                       const MentorShipEditIcon(),
                     ],
-                     VerticalSpace(20.h),
-                    if(!PreferencesHelper.getIsVisitor)...[
+                    VerticalSpace(20.h),
+                    if (!PreferencesHelper.getIsVisitor) ...[
                       const ProfileIcon(),
                       const EditAccountIcon(),
                     ],
                     const CampaignsIcon(),
                     const VolunteerOppIcon(),
                     const ElectionsCandidateIcon(),
-                        if(!PreferencesHelper.getIsVisitor)
-                          const ElectionsIcon(),
-                    SizedBox(height:menuCubit.isVisible==false? 30.h:20.h),
-                    if (!PreferencesHelper.getIsVisitor)...[const LogoutIcon(),],
-                    if (PreferencesHelper.getIsVisitor)...[const LoginIcon(),],
-                    VerticalSpace(50.h,),
+                    if (!PreferencesHelper.getIsVisitor) const ElectionsIcon(),
+                    SizedBox(
+                        height: menuCubit.isVisible == false ? 30.h : 20.h),
+                    if (!PreferencesHelper.getIsVisitor) ...[
+                      const LogoutIcon(),
+                    ],
+                    if (PreferencesHelper.getIsVisitor) ...[
+                      const LoginIcon(),
+                    ],
+                    VerticalSpace(
+                      50.h,
+                    ),
                   ],
                 ),
               ),

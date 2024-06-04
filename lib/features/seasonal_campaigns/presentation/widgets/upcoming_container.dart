@@ -10,7 +10,6 @@ class UpComingContainer extends StatelessWidget {
 
   final SeasonalCampaignsCubit seasonalCampaignsCubit;
 
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -21,34 +20,28 @@ class UpComingContainer extends StatelessWidget {
         width: 70.w,
         height: 43.h,
         decoration: BoxDecoration(
-          border: seasonalCampaignsCubit.currentPage == 2 ? Border(
-            top: BorderSide(
-                color: Colors.grey.shade300,
-                width: 1.w),
-            left: BorderSide(
-                color: Colors.grey.shade300,
-                width: 1.w),
-            right: BorderSide(
-                color: Colors.grey.shade300,
-                width: 1.w),
-            bottom: BorderSide(
-                color: Colors.white ,
-                width: 1.w),
-          ): Border(
-            bottom: BorderSide(
-                color: Colors.grey.shade300,
-                width: 1.w),
-          ),
+          border: seasonalCampaignsCubit.currentPage == 2
+              ? Border(
+                  top: BorderSide(color: Colors.grey.shade300, width: 1.w),
+                  left: BorderSide(color: Colors.grey.shade300, width: 1.w),
+                  right: BorderSide(color: Colors.grey.shade300, width: 1.w),
+                  bottom: BorderSide(color: Colors.white, width: 1.w),
+                )
+              : Border(
+                  bottom: BorderSide(color: Colors.grey.shade300, width: 1.w),
+                ),
         ),
         child: Center(
           child: Text(
             AppStrings.upcoming,
             style: TextStyle(
                 color: seasonalCampaignsCubit.currentPage == 2
-                    ? AppColors.blueColor4
+                    ? AppColors.blueColor
                     : AppColors.greyColor3,
                 fontFamily: FontFamilies.alexandria,
-                fontWeight: seasonalCampaignsCubit.currentPage == 2 ? FontWeight.w600 : FontWeight.w400,
+                fontWeight: seasonalCampaignsCubit.currentPage == 2
+                    ? FontWeight.w600
+                    : FontWeight.w400,
                 fontSize: 11.5),
           ),
         ),
