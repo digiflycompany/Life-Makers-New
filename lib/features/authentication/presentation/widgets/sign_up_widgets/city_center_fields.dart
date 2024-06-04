@@ -286,28 +286,6 @@ class CityAndCenterFields extends StatelessWidget {
         return Row(
           children: [
             CustomDropDown(
-                hint: "مركز",
-                items: signUpCubit.areasList
-                    .map((Areas area) => DropdownMenuItem<Areas>(
-                          value: area,
-                          child: Align(
-                            alignment: Alignment.centerRight,
-                            child: FittedBox(
-                              child: Text(
-                                area.name ?? "",
-                                style: TextStyle(fontSize: 10.sp),
-                                textDirection: TextDirection.rtl,
-                              ),
-                            ),
-                          ),
-                        ))
-                    .toList(),
-                onChange: (cityName) {
-                  signUpCubit.selectedCity = cityName;
-                  signUpCubit.fetchAreaData();
-                }),
-            HorizontalSpace(10.w),
-            CustomDropDown(
                 hint: "المحافظة",
                 items: signUpCubit.citiesList
                     .map((City city) => DropdownMenuItem<City>(
@@ -323,6 +301,28 @@ class CityAndCenterFields extends StatelessWidget {
                             ),
                           ),
                         ))
+                    .toList(),
+                onChange: (cityName) {
+                  signUpCubit.selectedCity = cityName;
+                  signUpCubit.fetchAreaData();
+                }),
+            HorizontalSpace(10.w),
+            CustomDropDown(
+                hint: "مركز",
+                items: signUpCubit.areasList
+                    .map((Areas area) => DropdownMenuItem<Areas>(
+                  value: area,
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: FittedBox(
+                      child: Text(
+                        area.name ?? "",
+                        style: TextStyle(fontSize: 10.sp),
+                        textDirection: TextDirection.rtl,
+                      ),
+                    ),
+                  ),
+                ))
                     .toList(),
                 onChange: (cityName) {
                   signUpCubit.selectedCity = cityName;

@@ -16,22 +16,20 @@ class CustomAppBar extends StatelessWidget {
       elevation: 0,
       title: TitleText(text: text),
       centerTitle: true,
-      actions: [
-        InkWell(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Padding(
-            padding: const EdgeInsets.only(right: 15),
-            child: Container(
-                width: 30.w,
-                height: 30.h,
-                child: Transform.scale(
-                    scale: 0.4,
-                    child: SvgPicture.asset(AppAssets.popUpIcon,))),
-          ),
+      leading: InkWell(
+        onTap: () {
+          Navigator.pop(context);
+        },
+        child: Padding(
+          padding: EdgeInsets.only(right: 10.w),
+          child: Container(
+              width: 30.w,
+              height: 30.h,
+              child: Transform.scale(
+                  scale: 0.35,
+                  child: SvgPicture.asset(AppAssets.popUpIcon,))),
         ),
-      ],
+      ),
     );
   }
 }

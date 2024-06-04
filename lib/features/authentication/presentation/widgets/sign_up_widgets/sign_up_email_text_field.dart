@@ -16,6 +16,7 @@ class SignUpEmailTextField extends StatelessWidget {
         SignUpCubit signUpCubit = context.read<SignUpCubit>();
         return RegularTextField(
           max: 40,
+          keyboardType:TextInputType.emailAddress,
           controller: signUpCubit.emailController,
           hintText: AppStrings.email,
           obscureText: false,

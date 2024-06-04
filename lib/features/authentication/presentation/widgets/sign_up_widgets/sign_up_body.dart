@@ -18,7 +18,12 @@ import 'package:life_makers/features/authentication/presentation/widgets/sign_up
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/whats_app_text_field.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/sign_up_widgets/work_text_field.dart';
 
-class SignUpBody extends StatelessWidget {
+class SignUpBody extends StatefulWidget {
+  @override
+  State<SignUpBody> createState() => _SignUpBodyState();
+}
+
+class _SignUpBodyState extends State<SignUpBody> {
   final _formKey = GlobalKey<FormState>();
 
   @override
