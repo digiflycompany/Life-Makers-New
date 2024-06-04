@@ -15,7 +15,7 @@ class ForgetPasswordText extends StatelessWidget {
         AppStrings.forgetPasswordQuestion,
         textDirection: TextDirection.rtl,
         style: TextStyle(
-            color: AppColors.blueColor4,
+            color: AppColors.blueColor,
             fontWeight: FontWeight.w500,
             fontSize: 13.5.sp
         ),

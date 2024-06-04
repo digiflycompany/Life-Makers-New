@@ -73,7 +73,7 @@ class _TrainingProgramDetailsState extends State<TrainingProgramDetails> {
                       child: IconButton(
                         icon: Icon(
                           Icons.arrow_forward,
-                          color: AppColors.blueColor4,
+                          color: AppColors.blueColor,
                         ),
                         onPressed: () {
                           Navigator.pop(context);

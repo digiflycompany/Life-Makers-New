@@ -59,7 +59,7 @@ class _TermsPageState extends State<TermsPage> {
                           width: double.infinity,
                           height: 70.h,
                           decoration: BoxDecoration(
-                              color: AppColors.blueColor4,
+                              color: AppColors.blueColor,
                               borderRadius: BorderRadius.only(
                                 topRight: Radius.circular(12.r),
                                 topLeft: Radius.circular(12.r),

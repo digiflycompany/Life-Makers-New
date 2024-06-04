@@ -601,7 +601,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             AppStrings.upcoming,
             style: TextStyle(
                 color: _currentPage == 2
-                    ? AppColors.blueColor4
+                    ? AppColors.blueColor
                     : AppColors.greyColor3,
                 fontFamily: FontFamilies.alexandria,
                 fontWeight:
@@ -663,7 +663,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             'برامجك',
             style: TextStyle(
                 color: _currentPage2 == 0
-                    ? AppColors.blueColor4
+                    ? AppColors.blueColor
                     : AppColors.greyColor3,
                 fontFamily: FontFamilies.alexandria,
                 fontWeight:
@@ -684,7 +684,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             'أنشطتك',
             style: TextStyle(
                 color: _currentPage2 == 1
-                    ? AppColors.blueColor4
+                    ? AppColors.blueColor
                     : AppColors.greyColor3,
                 fontFamily: FontFamilies.alexandria,
                 fontWeight:
@@ -705,7 +705,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             'مهامك',
             style: TextStyle(
                 color: _currentPage2 == 2
-                    ? AppColors.blueColor4
+                    ? AppColors.blueColor
                     : AppColors.greyColor3,
                 fontFamily: FontFamilies.alexandria,
                 fontWeight:
@@ -1016,7 +1016,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             style: TextStyle(
                 fontFamily: FontFamilies.alexandria,
                 fontWeight: FontWeight.w700,
-                color: AppColors.blueColor4,
+                color: AppColors.blueColor,
                 fontSize: 7),
           ),
         ),
@@ -1028,7 +1028,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: const Text(
             AppStrings.education,
             style: TextStyle(
-                color: AppColors.blueColor4,
+                color: AppColors.blueColor,
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
                 fontFamily: FontFamilies.alexandria),
@@ -1042,7 +1042,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           borderRadius: BorderRadius.circular(23.r),
           color: Colors.white70,
           border: Border.all(
-            color: AppColors.blueColor4,
+            color: AppColors.blueColor,
             width: 1.5, // Adjust the border width as needed
           ),
         ),
@@ -1228,7 +1228,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         borderRadius: BorderRadius.circular(20.r),
         gradient: const LinearGradient(
           colors: [
-            AppColors.blueColor4,
+            AppColors.blueColor,
             AppColors.blueColor5,
           ],
           begin: Alignment.topLeft,
@@ -1304,7 +1304,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   get dateCircleAvatar => Padding(
         padding: EdgeInsets.only(right: 13.5.w),
         child: CircleAvatar(
-          backgroundColor: AppColors.blueColor4,
+          backgroundColor: AppColors.blueColor,
           radius: 35.r,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

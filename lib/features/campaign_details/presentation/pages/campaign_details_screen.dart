@@ -15,7 +15,7 @@ import 'member_campaign_details.dart';
 
 class CampaignDetailsScreen extends StatefulWidget {
   CampaignDetailsScreen({super.key, this.campaignDetails, this.tasks});
-  final Campains? campaignDetails;
+  final Campaigns? campaignDetails;
   final Tasks? tasks;
   @override
   State<CampaignDetailsScreen> createState() => _CampaignDetailsScreenState();
@@ -190,7 +190,7 @@ class _CampaignDetailsScreenState extends State<CampaignDetailsScreen> {
 }
 
 void showJoinCampaignPopUp(
-    {required BuildContext context, required Campains? campaignDetails}) {
+    {required BuildContext context, required Campaigns? campaignDetails}) {
   showDialog(
     context: context,
     builder: (BuildContext context) {

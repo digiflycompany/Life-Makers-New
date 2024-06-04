@@ -6,6 +6,10 @@ class AppStrings {
   static const String skip='تخطي';
   static const String yes='نعم';
   static const String cancel='الغاء';
+  static const String noActivities='لا توجد أنشطة حالية';
+  static const String noUrgentCampaigns='لا يوجد حملات طارئة';
+  static const String electionsSoon='ستبدأ إنتخابات مجلس المتطوعين قريبًا';
+  static const String scanHere='امسح هنا';
   static const String pleaseEnterYourPassword='يرجى إدخال كلمة المرور';
   static const String errorHappenedTryAgain='حدث خطأ حاول مجددا';
   static const String pleaseEnterYourEmail='من فضلك أدخل البريد الالكتروني الخاص بك';
@@ -55,8 +59,9 @@ class AppStrings {
   static const String createAccount = 'انشاء حساب';
   static const String mainPage = 'الرئيسية';
   static const String personalFile = 'الملف الشخصي';
+  static const String noNotifications = 'لا توجد اشعارات';
   static const String thanksForJoiningUs = 'شكرا لانضمامك معنا';
-  static const String notifications = 'الاشعارات';
+  static const String notifications = 'الإشعارات';
   static const String lailaAhmed = 'ليلى أحمد';
   static const String activities = 'الأنشطة';
   static const String volunteerJoinedSuccessfully = 'تم الانضمام الي الحملة بنجاح';
@@ -73,7 +78,7 @@ class AppStrings {
   static const String palestine = 'قافلة إغاثة \nفلسطين';
   static const String palestine2 = 'قافلة إغاثة فلسطين';
   static const String signingUp = 'انشاء حساب';
-  static const String haveAnAccount = 'لديك حساب؟';
+  static const String haveAnAccount = 'لديك حساب؟ ';
   static const String name = 'الاسم';
   static const String username = 'اسم المستخدم';
   static const String confirmPassword = 'تأكيد كلمة المرور';
@@ -90,7 +95,7 @@ class AppStrings {
   static const String campaigns = 'حملات';
   static const String volunteerOpportunities = 'فرص تطوعية';
   static const String volunteerBoardOfDirectors = 'مجلس ادارة المتطوعين';
-  static const String volunteerBoardOfDirectorsElections = 'انتخابات مجلس ادارة المتطوعين';
+  static const String volunteerBoardOfDirectorsElections = 'انتخابات مجلس\n ادارة المتطوعين';
   static const String volunteerBoardOfDirectorsElections2 = 'مرشحين مجلس ادارة المتطوعين';
   static const String signOut = 'تسجيل الخروج';
   static const String seasonalCampaigns = 'حملات موسمية';

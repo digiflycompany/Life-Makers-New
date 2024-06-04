@@ -5,7 +5,7 @@ import '../../model/seasonal_campaigns_model.dart';
 import '../build_seasonal_widget.dart';
 
 class UpcomingSeasonalCampaigns extends StatelessWidget {
-  final List<Campains>? campaigns;
+  final List<Campaigns>? campaigns;
 
   UpcomingSeasonalCampaigns({this.campaigns});
   @override

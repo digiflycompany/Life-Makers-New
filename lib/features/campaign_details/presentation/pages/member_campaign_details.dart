@@ -19,7 +19,7 @@ class JoinCampaignDetails extends StatefulWidget {
       {super.key, required this.taskId, required this.campaignDetails});
 
   final int taskId;
-  final Campains? campaignDetails;
+  final Campaigns? campaignDetails;
 
   @override
   State<JoinCampaignDetails> createState() => _JoinCampaignDetailsState();

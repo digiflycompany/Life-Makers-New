@@ -10,7 +10,7 @@ import 'package:life_makers/features/seasonal_campaigns/presentation/pages/previ
 import '../../../../core/utils/app-string.dart';
 
 class UpcomingNonSeasonalCampaignsScreen extends StatelessWidget {
-   final List<Campains>? campaigns;
+   final List<Campaigns>? campaigns;
 
    UpcomingNonSeasonalCampaignsScreen({this.campaigns});
 

@@ -15,7 +15,7 @@ import '../widgets/choose_role_button.dart';
 
 class ChooseRolePage extends StatefulWidget {
     ChooseRolePage({super.key, this.campaignDetails});
-  final Campains? campaignDetails;
+  final Campaigns? campaignDetails;
 
   @override
   State<ChooseRolePage> createState() => _ChooseRolePageState();

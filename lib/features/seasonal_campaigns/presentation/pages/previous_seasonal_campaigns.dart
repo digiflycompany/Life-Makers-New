@@ -13,7 +13,7 @@ import '../build_seasonal_widget.dart';
 class PreviousSeasonalCampaignsScreen extends StatelessWidget {
   PreviousSeasonalCampaignsScreen({super.key, this.campaigns});
 
-  final List<Campains>? campaigns;
+  final List<Campaigns>? campaigns;
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +123,7 @@ class PreviousSeasonalCampaignsScreen extends StatelessWidget {
         ],
       );
 
-Widget CampaignDetailsWidget({Campains? campaignDetails,required Color color,
+Widget CampaignDetailsWidget({Campaigns? campaignDetails,required Color color,
   required BuildContext context,
 required Color borderColor,
 }) => InkWell(
@@ -157,7 +157,7 @@ required Color borderColor,
 );
 
 
-Widget AllCampaignDetailsWidget({Campains? campaignDetails,required Color color,
+Widget AllCampaignDetailsWidget({Campaigns? campaignDetails,required Color color,
   required BuildContext context,
   required Color borderColor,
 }) => InkWell(

@@ -20,7 +20,7 @@ class ChooseRoleSecondPage extends StatefulWidget {
       {super.key, required this.selectedRoleId, required this.campaignDetails});
 
   final int selectedRoleId;
-  final Campains? campaignDetails;
+  final Campaigns? campaignDetails;
   @override
   State<ChooseRoleSecondPage> createState() => _ChooseRoleSecondPageState();
 }

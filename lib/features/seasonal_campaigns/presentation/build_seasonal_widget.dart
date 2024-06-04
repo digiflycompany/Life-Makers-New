@@ -7,7 +7,7 @@ import 'package:life_makers/features/seasonal_campaigns/presentation/pages/previ
 import '../model/seasonal_campaigns_model.dart';
 
 Widget buildCampaignGridView(
-    {List<Campains>? campaigns, required BuildContext context}) {
+    {List<Campaigns>? campaigns, required BuildContext context}) {
   return Directionality(
     textDirection: TextDirection.rtl,
     child: campaigns?.isNotEmpty == true
@@ -37,7 +37,7 @@ Widget buildCampaignGridView(
 }
 
 Widget buildAllCampaignGridView(
-    {List<Campains>? campaigns, required BuildContext context}) {
+    {List<Campaigns>? campaigns, required BuildContext context}) {
   return Directionality(
     textDirection: TextDirection.rtl,
     child: campaigns?.isNotEmpty == true

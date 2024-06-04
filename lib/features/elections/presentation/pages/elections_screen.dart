@@ -188,7 +188,7 @@ class _ElectionsScreenState extends State<ElectionsScreen> {
                             )
                           ],
                           color: selectedVotedSet.contains(e.id!)
-                              ? AppColors.blueColor4
+                              ? AppColors.blueColor
                               : AppColors.whiteColor,
                         ),
                         child: Stack(
@@ -312,7 +312,7 @@ class _ElectionsScreenState extends State<ElectionsScreen> {
                                 )
                               ],
                               color: selectedManagerId == e.id
-                                  ? AppColors.blueColor4
+                                  ? AppColors.blueColor
                                   : Colors.white,
                             ),
                             child: Stack(
@@ -352,7 +352,7 @@ class _ElectionsScreenState extends State<ElectionsScreen> {
                                         style: TextStyle(
                                           color: selectedManagerId == e.id
                                               ? AppColors.whiteColor
-                                              : AppColors.blueColor4,
+                                              : AppColors.blueColor,
                                           fontFamily: FontFamilies.alexandria,
                                           fontWeight: FontWeight.w600,
                                           fontSize: 10,
@@ -370,7 +370,7 @@ class _ElectionsScreenState extends State<ElectionsScreen> {
                                           style: TextStyle(
                                             color: selectedManagerId == e.id
                                                 ? AppColors.whiteColor
-                                                : AppColors.blueColor4,
+                                                : AppColors.blueColor,
                                             fontFamily: FontFamilies.alexandria,
                                             fontWeight: FontWeight.w400,
                                             fontSize: 9,

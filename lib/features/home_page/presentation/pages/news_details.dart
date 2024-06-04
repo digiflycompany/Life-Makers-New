@@ -11,8 +11,8 @@ import '../../../../core/widgets/custom_snack_bar.dart';
 import '../../../campaign_details/presentation/pages/campaign_details_screen.dart';
 
 class NewsDetails extends StatelessWidget {
-  NewsDetails({super.key, this.campains});
-  final Campains? campains;
+  NewsDetails({super.key, this.campaigns});
+  final Campaigns? campaigns;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +38,7 @@ class NewsDetails extends StatelessWidget {
   get campaignImage => AspectRatio(
       aspectRatio: 16 / 10,
       child: Image.network(
-        campains!.photo!,
+        campaigns!.photo!,
         fit: BoxFit.fill,
       ));
 
@@ -78,7 +78,7 @@ class NewsDetails extends StatelessWidget {
       );
 
   get title => Text(
-    '${campains?.name}',
+    '${campaigns?.name}',
     style: TextStyle(
         color: Colors.black,
         fontFamily: FontFamilies.alexandria,
@@ -90,7 +90,7 @@ class NewsDetails extends StatelessWidget {
   );
 
   get detailsText1 => Text(
-        '${campains?.details}',
+        '${campaigns?.details}',
         style: TextStyle(
             color: Colors.black,
             fontFamily: FontFamilies.alexandria,
@@ -101,12 +101,12 @@ class NewsDetails extends StatelessWidget {
       );
 
   getButton(BuildContext context) {
-    if(campains?.userJoined=='false')
+    if(campaigns?.userJoined=='false')
     return NewsButton2(
       onTap: () {
         showJoinCampaignPopUp(
             context: context,
-            campaignDetails: campains);
+            campaignDetails: campaigns);
       },
       text: AppStrings.joinCampaign);
     else return PendingButton(onTap: (){

@@ -15,25 +15,24 @@ class DrawerText extends StatelessWidget {
     return  Padding(
       padding:  EdgeInsets.only(right: 15.7.w),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          drawerText,
-          SizedBox(width:11.w ,),
-          drawerIcon,
+          SvgPicture.asset(img),
+          SizedBox(width:11.w,),
+          Flexible(child:Text(
+            text,
+            style:  TextStyle(
+              color: Colors.white,
+              fontFamily: FontFamilies.alexandria,
+              fontSize: font,
+              fontWeight: FontWeight.w500,
+                height:1.2.h
+
+            ),
+            textDirection: TextDirection.rtl,
+          )),
         ],
       ),
     );
   }
-  get drawerText =>  Flexible(child:Text(
-    text,
-    style:  TextStyle(
-        color: Colors.white,
-        fontFamily: FontFamilies.alexandria,
-        fontSize: font,
-        fontWeight: FontWeight.w500,
-
-    ),
-    textDirection: TextDirection.rtl,
-  ));
-  get drawerIcon => SvgPicture.asset(img);
 }

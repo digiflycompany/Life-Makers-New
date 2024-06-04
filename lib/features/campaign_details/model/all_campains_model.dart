@@ -5,9 +5,9 @@ class AllCampainsModel {
   bool? status;
   String? errNum;
   String? msg;
-  List<Campains>? allCurrentCampaigns;
-  List<Campains>? allPastCampaigns;
-  List<Campains>? allNextCampaigns;
+  List<Campaigns>? allCurrentCampaigns;
+  List<Campaigns>? allPastCampaigns;
+  List<Campaigns>? allNextCampaigns;
 
   AllCampainsModel(
       {this.status,
@@ -22,21 +22,21 @@ class AllCampainsModel {
     errNum = json['errNum'];
     msg = json['msg'];
     if (json['all_current_campaigns'] != null) {
-      allCurrentCampaigns = <Campains>[];
+      allCurrentCampaigns = <Campaigns>[];
       json['all_current_campaigns'].forEach((v) {
-        allCurrentCampaigns!.add(new Campains.fromJson(v));
+        allCurrentCampaigns!.add(new Campaigns.fromJson(v));
       });
     }
     if (json['all_past_campaigns'] != null) {
-      allPastCampaigns = <Campains>[];
+      allPastCampaigns = <Campaigns>[];
       json['all_past_campaigns'].forEach((v) {
-        allPastCampaigns!.add(new Campains.fromJson(v));
+        allPastCampaigns!.add(new Campaigns.fromJson(v));
       });
     }
     if (json['all_next_campaigns'] != null) {
-      allNextCampaigns = <Campains>[];
+      allNextCampaigns = <Campaigns>[];
       json['all_next_campaigns'].forEach((v) {
-        allNextCampaigns!.add(new Campains.fromJson(v));
+        allNextCampaigns!.add(new Campaigns.fromJson(v));
       });
     }
   }

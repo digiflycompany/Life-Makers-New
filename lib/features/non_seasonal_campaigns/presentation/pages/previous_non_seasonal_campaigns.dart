@@ -10,7 +10,7 @@ import 'package:life_makers/features/seasonal_campaigns/presentation/build_seaso
 import '../../../../core/utils/app-color.dart';
 
 class PreviousNonSeasonalCampaignsScreen extends StatelessWidget {
-  final List<Campains>? campaigns;
+  final List<Campaigns>? campaigns;
 
   PreviousNonSeasonalCampaignsScreen({this.campaigns});
   @override

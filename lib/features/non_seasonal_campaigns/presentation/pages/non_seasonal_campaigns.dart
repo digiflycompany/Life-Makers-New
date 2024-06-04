@@ -237,7 +237,7 @@ class _NonSeasonalCampaignsScreenState
           AppStrings.upcoming,
           style: TextStyle(
               color: _currentPage == 2
-                  ? AppColors.blueColor4
+                  ? AppColors.blueColor
                   : AppColors.greyColor3,
               fontFamily: FontFamilies.alexandria,
               fontWeight: _currentPage == 2 ? FontWeight.w600 : FontWeight.w400,
@@ -264,9 +264,9 @@ class _NonSeasonalCampaignsScreenState
         ],
       );
   Widget pages({
-    List<Campains>? previousCampaigns,
-    List<Campains>? currentCampaigns,
-    List<Campains>? upcomingCampaigns,
+    List<Campaigns>? previousCampaigns,
+    List<Campaigns>? currentCampaigns,
+    List<Campaigns>? upcomingCampaigns,
   }) =>
       Expanded(
           child: PageView(

@@ -13,7 +13,7 @@ class ForgetPasswordText extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(right: context.width6,bottom: context.height20),
       child: Align(
-        alignment: AlignmentDirectional.topEnd,
+        alignment: AlignmentDirectional.topStart,
         child: TextButton(
           onPressed: ()=>Routes.enterPhonePageRoute.moveTo,
           style: TextButton.styleFrom(

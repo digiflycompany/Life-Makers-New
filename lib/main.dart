@@ -2,10 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:life_makers/core/utils/app.service.dart';
 import 'package:life_makers/core/utils/app_theme.dart';
 import 'package:life_makers/features/authentication/cubit/card_cubit/cards_cubit.dart';
+import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_cubit.dart';
 import 'package:life_makers/features/edit_account/cubit/edit_account_cubit.dart';
 import 'package:life_makers/features/home_page/cubit/menu_page_cubit/menu_page_cubit.dart';
 import 'package:life_makers/features/seasonal_campaigns/cubit/seasonal_campaigns_cubit.dart';
@@ -15,6 +17,7 @@ import 'package:life_makers/features/volunteer_opportunity/cubit/remote_tasks_cu
 import 'package:life_makers/features/volunteer_opportunity/cubit/suggestion_cubit.dart';
 import 'package:life_makers/features/volunteer_opportunity/cubit/volunteer_cubit.dart';
 import 'package:life_makers/features/volunteer_opportunity/cubit/volunteer_thanks_cubit.dart';
+import 'package:life_makers/l10n/l10n.dart';
 import 'package:life_makers/services/dio_helper/dio_helper.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 
@@ -45,6 +48,9 @@ class MyApp extends StatelessWidget {
         builder: (BuildContext context, Widget? child) {
           return MultiBlocProvider(
             providers: [
+              BlocProvider<SignUpCubit>(
+                create: (BuildContext context) => SignUpCubit(),
+              ),
               BlocProvider<JoinCampaignCubit>(
                 create: (BuildContext context) => JoinCampaignCubit(),
               ),
@@ -101,6 +107,13 @@ class MyApp extends StatelessWidget {
               child: MaterialApp(
                 theme: AppTheme.lightTheme,
                 title: AppStrings.lifeMaker,
+                supportedLocales: L10n.all,
+                locale: const Locale('ar'),
+                localizationsDelegates: const [
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
                 debugShowCheckedModeBanner: false,
                 navigatorKey: AppService().navigatorKey,
                // onGenerateRoute: RouteGenerator.getRoute,

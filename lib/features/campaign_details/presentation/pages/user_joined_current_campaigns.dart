@@ -23,7 +23,7 @@ class JoinedCurrentCampaigns extends StatefulWidget {
 
 class _JoinedCurrentCampaignsState extends State<JoinedCurrentCampaigns> {
   late VolunteerCubit volunteerCubit;
-  Campains? campaignDetails;
+  Campaigns? campaignDetails;
   @override
   void initState() {
     volunteerCubit = context.read<VolunteerCubit>();

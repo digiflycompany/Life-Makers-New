@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:life_makers/core/utils/app_routes.dart';
+import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/features/authentication/data/models/phone_user_mode.dart';
 import 'package:life_makers/features/authentication/presentation/pages/login_screen.dart';
 import 'package:life_makers/features/home_page/presentation/pages/drawer_page.dart';
@@ -64,6 +66,7 @@ class PreferencesHelper {
   static void logOut() {
     preferences?.remove('token');
     preferences?.remove('userModel');
+    Routes.loginPageRoute.moveToCurrentRouteAndRemoveAll;
   }
 
   static Widget get applicationFirstPage {

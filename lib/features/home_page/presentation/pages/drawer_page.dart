@@ -17,15 +17,17 @@ class DrawerPage extends StatelessWidget {
       controller: _drawerController,
       style: DrawerStyle.defaultStyle,
       menuScreen: const MenuScreen(),
-      mainScreenTapClose: true,
+      //mainScreenTapClose: true,
       mainScreen: HomePage(),
       borderRadius: 24.r,
-      shadowLayer1Color: AppColors.blueColor4,
+      shadowLayer1Color: AppColors.blueColor,
       showShadow: true,
       angle: 0.0,
       drawerShadowsBackgroundColor: Colors.grey.shade400,
       slideWidth: MediaQuery.of(context).size.width * 0.72,
       isRtl: true,
+      openCurve: Curves.fastOutSlowIn,
+      closeCurve: Curves.bounceIn,
     );
   }
 }

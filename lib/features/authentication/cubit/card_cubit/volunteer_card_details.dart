@@ -72,7 +72,7 @@ class _VolunteerCardDetailsState extends State<VolunteerCardDetails> {
                           radius: 20,
                           child: IconButton(
                             icon: Icon(
-                              Icons.arrow_forward, color: AppColors.blueColor4,),
+                              Icons.arrow_forward, color: AppColors.blueColor,),
                             onPressed: () {
                               Navigator.pop(context);
                             },
