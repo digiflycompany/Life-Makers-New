@@ -10,7 +10,9 @@ import 'package:life_makers/features/authentication/presentation/pages/otp_scree
 import 'package:life_makers/features/authentication/presentation/pages/sign_up_screen.dart';
 import 'package:life_makers/features/edit_account/screens/edit_account_screen.dart';
 import 'package:life_makers/features/elections/presentation/pages/before_elections_screen.dart';
+import 'package:life_makers/features/home_page/data/models/home_calender_model.dart';
 import 'package:life_makers/features/home_page/presentation/pages/drawer_page.dart';
+import 'package:life_makers/features/home_page/presentation/pages/home_calender_details_screen.dart';
 import 'package:life_makers/features/home_page/presentation/pages/profile_screen.dart';
 import 'package:life_makers/features/membership_controll/screens/membership_control_screen.dart';
 import 'package:life_makers/features/non_seasonal_campaigns/presentation/pages/non_seasonal_campaigns.dart';
@@ -36,6 +38,7 @@ class Routes {
   static const String editAccountPageRoute = "/edit_account_screen";
   static const String seasonalCampaignsPageRoute = "/seasonal_campaigns";
   static const String nonSeasonalCampaignsPageRoute = "/non_seasonal_campaigns";
+  static const String homeCalenderDetailsPageRoute = "/home_calender_details_screen";
   static const String volunteerOpportunityPageRoute =
       "/volunteer_opportunity_screen";
   static const String beforeElectionsPageRoute = "/before_elections_screen";
@@ -118,6 +121,12 @@ class RouteGenerator {
       case Routes.changePasswordPageRoute:
         return buildPageRoute(
             child: ChangePasswordScreen(),
+            routeSettings: routeSettings,
+            pageRouteAnimation: PageRouteAnimation.fade);
+      case Routes.homeCalenderDetailsPageRoute:
+        final calendar = routeSettings.arguments as Calender;
+        return buildPageRoute(
+            child: HomeCalenderDetailsScreen(calender: calendar),
             routeSettings: routeSettings,
             pageRouteAnimation: PageRouteAnimation.fade);
       case Routes.volunteerCardDetailsPageRoute:
