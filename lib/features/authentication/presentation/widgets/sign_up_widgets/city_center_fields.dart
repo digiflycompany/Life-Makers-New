@@ -327,9 +327,8 @@ class CityAndCenterFields extends StatelessWidget {
                           ),
                         ))
                     .toList(),
-                onChange: (cityName) {
-                  signUpCubit.selectedCity = cityName;
-                  signUpCubit.fetchAreaData();
+                onChange: (area) {
+                  signUpCubit.selectedArea = area;
                 }),
           ],
         );

@@ -39,7 +39,7 @@ class SignUpCubit extends Cubit<SignUpState> {
   String? selectedCityName;
 
   City? selectedCity;
-  String? selectedAreaName;
+  Areas? selectedArea;
   late SignUpCubit signUpCubit;
   final TextEditingController resetPasswordController = TextEditingController();
   final TextEditingController confirmResetPasswordController =
@@ -48,8 +48,8 @@ class SignUpCubit extends Cubit<SignUpState> {
   final TextEditingController controller = TextEditingController();
   final TextEditingController textEditingController = TextEditingController();
   final TextEditingController textEditingController2 = TextEditingController();
-  final TextEditingController cityDropdownController = TextEditingController();
-  final TextEditingController areaDropdownController = TextEditingController();
+  // final TextEditingController cityDropdownController = TextEditingController();
+  // final TextEditingController areaDropdownController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -78,8 +78,8 @@ class SignUpCubit extends Cubit<SignUpState> {
       signUpCubit.idNumberController.text,
       signUpCubit.workController.text,
       signUpCubit.addressController.text,
-      signUpCubit.cityDropdownController.text,
-      signUpCubit.areaDropdownController.text,
+      signUpCubit.selectedCity!.name!,
+      signUpCubit.selectedArea!.name!,
       signUpCubit.previousExperienceController.text,
     );
   }
