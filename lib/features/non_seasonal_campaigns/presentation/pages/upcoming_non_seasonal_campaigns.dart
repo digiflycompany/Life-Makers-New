@@ -5,7 +5,7 @@ import 'package:life_makers/core/utils/app-assets.dart';
 import 'package:life_makers/core/utils/app-color.dart';
 import 'package:life_makers/core/utils/app_fonts.dart';
 import 'package:life_makers/features/seasonal_campaigns/model/seasonal_campaigns_model.dart';
-import 'package:life_makers/features/seasonal_campaigns/presentation/pages/previous_seasonal_campaigns.dart';
+import 'package:life_makers/features/seasonal_campaigns/presentation/widgets/campaigns_details_widget.dart';
 
 import '../../../../core/utils/app-string.dart';
 
