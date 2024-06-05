@@ -12,29 +12,24 @@ class HomeCalendar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(bottom: 100.h),
-      child: Expanded(
-        child: BlocBuilder<HomeCalenderCubit, CubitBaseState>(
-            builder: (context, state) {
-              final homeCalenderCubit = context.read<HomeCalenderCubit>();
-              if (state == CubitBaseState.done) {
-                return ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: homeCalenderCubit
-                        .homeCalenderModel?.calender?.length,
-                    shrinkWrap: true,
-                    itemBuilder: (BuildContext context, int index) {
-                      return HomeCalenderItem(
-                          calender: homeCalenderCubit
-                              .homeCalenderModel?.calender?[index]);
-                    });
-              } else if (state == CubitBaseState.loading) {
-                return Center(
-                    child: CircularProgressIndicator.adaptive(
-                    ));
-              }
-              return SizedBox.shrink();
-            }),
-      ),
+      child: BlocBuilder<HomeCalenderCubit, CubitBaseState>(
+          builder: (context, state) {
+        final homeCalenderCubit = context.read<HomeCalenderCubit>();
+        if (state == CubitBaseState.done) {
+          return ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              itemCount: homeCalenderCubit.homeCalenderModel?.calender?.length,
+              shrinkWrap: true,
+              itemBuilder: (BuildContext context, int index) {
+                return HomeCalenderItem(
+                    calender:
+                        homeCalenderCubit.homeCalenderModel?.calender?[index]);
+              });
+        } else if (state == CubitBaseState.loading) {
+          return Center(child: CircularProgressIndicator.adaptive());
+        }
+        return SizedBox.shrink();
+      }),
     );
   }
 }
