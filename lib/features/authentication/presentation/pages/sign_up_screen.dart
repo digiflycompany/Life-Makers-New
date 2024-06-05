@@ -11,9 +11,8 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SignUpCubit()
-        ..fetchCityData()
-        ..fetchAreaData(),
+      create: (context) => SignUpCubit()..fetchCityData(),
+      // ..fetchAreaData(),
       child: BlocConsumer<SignUpCubit, SignUpState>(listener: (context, state) {
         SignUpCubit signUpCubit = context.read<SignUpCubit>();
         switch (state.runtimeType) {
@@ -37,17 +36,17 @@ class SignUpScreen extends StatelessWidget {
       }, builder: (context, state) {
         return Scaffold(
             body: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: context.width20),
-                child: Column(
-                  children: [
-                    const SignUpLogo(),
-                    SignUpBody(),
-                  ],
-                ),
-              ),
-            ));
+          physics: const BouncingScrollPhysics(),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: context.width20),
+            child: Column(
+              children: [
+                const SignUpLogo(),
+                SignUpBody(),
+              ],
+            ),
+          ),
+        ));
       }),
     );
   }

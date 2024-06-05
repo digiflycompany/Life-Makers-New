@@ -25,7 +25,7 @@ class RegularTextField extends StatelessWidget {
       this.suffixIcon,
       this.controller,
       required this.hintText,
-      this.obscureText=false,
+      this.obscureText = false,
       this.validator,
       required this.img,
       this.iconWidth,
@@ -54,46 +54,49 @@ class RegularTextField extends StatelessWidget {
           obscureText: obscureText,
           decoration: InputDecoration(
             counterText: '',
-            contentPadding: EdgeInsets.symmetric(vertical: context.height20, horizontal: context.width20),
+            contentPadding: EdgeInsets.symmetric(vertical: context.height20),
             errorMaxLines: 1,
-            errorBorder:OutlineInputBorder(
+            errorBorder: OutlineInputBorder(
                 borderSide: const BorderSide(color: AppColors.redColor),
-                borderRadius: BorderRadius.circular(5.r)
-            ),
+                borderRadius: BorderRadius.circular(5.r)),
             focusedErrorBorder: OutlineInputBorder(
                 borderSide: const BorderSide(color: AppColors.redColor),
-                borderRadius: BorderRadius.circular(5.r)
-            ),
+                borderRadius: BorderRadius.circular(5.r)),
             errorStyle: TextStyle(
               color: AppColors.redColor,
               fontSize: 10.sp, // Customize the error text font size
             ),
             focusColor: AppColors.blueColor7,
             alignLabelWithHint: true,
-            hintTextDirection:TextDirection.rtl ,
+            hintTextDirection: TextDirection.rtl,
             enabledBorder: OutlineInputBorder(
                 borderSide: const BorderSide(color: AppColors.blueColor7),
-                borderRadius: BorderRadius.circular(5.r)
-            ),
+                borderRadius: BorderRadius.circular(5.r)),
             focusedBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: AppColors.blueColor7),
               borderRadius: BorderRadius.circular(5.r),
             ),
             fillColor: Colors.white,
-            filled:true,
+            filled: true,
             hintText: hintText,
             hintStyle: TextStyle(
-                color:AppColors.blueColor6,
+                color: AppColors.blueColor6,
                 fontSize: 11.sp,
-                fontWeight: FontWeight.w400
-            ),
-            prefixIcon:  Padding(
-              padding:  EdgeInsets.only(right: context.width16,left: context.width8),
+                fontWeight: FontWeight.w400),
+            prefixIcon: Padding(
+              padding:
+                  EdgeInsets.only(right: context.width16, left: context.width8),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  SvgPicture.asset(img,width: iconWidth,height: iconHeight,),
-                  SizedBox(width:context.width8,),
+                  SvgPicture.asset(
+                    img,
+                    width: iconWidth,
+                    height: iconHeight,
+                  ),
+                  SizedBox(
+                    width: context.width8,
+                  ),
                   Container(
                     width: 2.w,
                     height: context.height20,

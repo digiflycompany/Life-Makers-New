@@ -284,9 +284,11 @@ class CityAndCenterFields extends StatelessWidget {
       builder: (BuildContext context, SignUpState state) {
         final signUpCubit = SignUpCubit.get(context);
         return Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomDropDown(
                 hint: "المحافظة",
+                validationMessage: "من فضلك اختر المحافظة",
                 items: signUpCubit.citiesList
                     .map((City city) => DropdownMenuItem<City>(
                           value: city,
@@ -309,20 +311,21 @@ class CityAndCenterFields extends StatelessWidget {
             HorizontalSpace(10.w),
             CustomDropDown(
                 hint: "مركز",
+                validationMessage: "من فضلك اختر المركز",
                 items: signUpCubit.areasList
                     .map((Areas area) => DropdownMenuItem<Areas>(
-                  value: area,
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: FittedBox(
-                      child: Text(
-                        area.name ?? "",
-                        style: TextStyle(fontSize: 10.sp),
-                        textDirection: TextDirection.rtl,
-                      ),
-                    ),
-                  ),
-                ))
+                          value: area,
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: FittedBox(
+                              child: Text(
+                                area.name ?? "",
+                                style: TextStyle(fontSize: 10.sp),
+                                textDirection: TextDirection.rtl,
+                              ),
+                            ),
+                          ),
+                        ))
                     .toList(),
                 onChange: (cityName) {
                   signUpCubit.selectedCity = cityName;

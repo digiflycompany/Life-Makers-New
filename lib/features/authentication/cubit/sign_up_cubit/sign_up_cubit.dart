@@ -34,15 +34,17 @@ class SignUpCubit extends Cubit<SignUpState> {
   int? cityId;
   NotificationModel? notificationModel;
   CurrentJoinedCampaignsAndOpp? currentJoinedCampaignsAndOpp;
-  final TextEditingController phoneResetPasswordController = TextEditingController();
+  final TextEditingController phoneResetPasswordController =
+      TextEditingController();
   String? selectedCityName;
 
   City? selectedCity;
   String? selectedAreaName;
   late SignUpCubit signUpCubit;
   final TextEditingController resetPasswordController = TextEditingController();
-  final TextEditingController confirmResetPasswordController = TextEditingController();
-  final TextEditingController otpController =TextEditingController();
+  final TextEditingController confirmResetPasswordController =
+      TextEditingController();
+  final TextEditingController otpController = TextEditingController();
   final TextEditingController controller = TextEditingController();
   final TextEditingController textEditingController = TextEditingController();
   final TextEditingController textEditingController2 = TextEditingController();
@@ -164,19 +166,21 @@ class SignUpCubit extends Cubit<SignUpState> {
         emit(SignUpFailure("Invalid credentials"));
 
         RegisterErrorModel? errorModel =
-        RegisterErrorModel.fromJson(response.data);
+            RegisterErrorModel.fromJson(response.data);
         CustomSnackBars.showErrorToast(
-            title: '${errorModel.errors?.first ?? "خطأ في عملية انشاء الحساب"}');
+            title:
+                '${errorModel.errors?.first ?? "خطأ في عملية انشاء الحساب"}');
       }
-    }catch(e){
+    } catch (e) {
       bool result = await InternetConnectionChecker().hasConnection;
-      if(result == false) {
+      if (result == false) {
         emit(SignUpFailure('تأكد من الانترنت الخاص بك'));
       } else {
         emit(SignUpFailure('خطأ في عملية انشاء الحساب'));
       }
     }
   }
+
   Future<void> refresh() async {
     try {
       await Future.delayed(const Duration(seconds: 1));
@@ -187,6 +191,7 @@ class SignUpCubit extends Cubit<SignUpState> {
       }
     }
   }
+
   Future<void> GetUserNotifications() async {
     emit(NotificationsLoading());
     try {
@@ -249,7 +254,7 @@ class SignUpCubit extends Cubit<SignUpState> {
       }
     } catch (e) {
       bool result = await InternetConnectionChecker().hasConnection;
-      if(result == false) {
+      if (result == false) {
         emit(OtpSendFailure('تأكد من الانترنت الخاص بك'));
       } else {
         emit(OtpSendFailure("حدث خطأ في زمز التحقق"));
@@ -275,7 +280,7 @@ class SignUpCubit extends Cubit<SignUpState> {
       }
     } catch (e) {
       bool result = await InternetConnectionChecker().hasConnection;
-      if(result == false) {
+      if (result == false) {
         emit(otpResetPasswordSentFailure('تأكد من الانترنت الخاص بك'));
       } else {
         emit(otpResetPasswordSentFailure("هذا الرقم غير مسجل"));
@@ -302,11 +307,10 @@ class SignUpCubit extends Cubit<SignUpState> {
       }
     } catch (e) {
       bool result = await InternetConnectionChecker().hasConnection;
-      if(result == false) {
+      if (result == false) {
         emit(OtpSubmitFailure('تأكد من الانترنت الخاص بك'));
       } else {
-        emit(OtpSubmitFailure(
-            "رقم الهاتف غير مسجل.. حاول رقم آخر"));
+        emit(OtpSubmitFailure("رقم الهاتف غير مسجل.. حاول رقم آخر"));
       }
     }
   }
@@ -330,7 +334,7 @@ class SignUpCubit extends Cubit<SignUpState> {
       }
     } catch (e) {
       bool result = await InternetConnectionChecker().hasConnection;
-      if(result == false) {
+      if (result == false) {
         emit(otpResetPasswordSubmitFailure('تأكد من الانترنت الخاص بك'));
       } else {
         emit(otpResetPasswordSubmitFailure(
@@ -370,9 +374,9 @@ class SignUpCubit extends Cubit<SignUpState> {
       //   print('Error during Sign Up: $e');
       // }
       bool result = await InternetConnectionChecker().hasConnection;
-      if(result == false) {
+      if (result == false) {
         emit(changePasswordFailure('تأكد من الانترنت الخاص بك'));
-      } else{
+      } else {
         emit(changePasswordFailure("Phone Number is taken.. Try Another one"));
       }
     }
