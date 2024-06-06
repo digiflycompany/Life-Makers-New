@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
@@ -34,35 +33,35 @@ class ChangeNumberOrResendCodeButton extends StatelessWidget {
                     child: Column(
                       children: [
                         Container(
-                          width: context.width135*1.1,
+                          width: context.width135 * 1.1,
                           height: context.height64,
                           decoration: BoxDecoration(
                               color: AppColors.orangeColor,
-                              borderRadius:
-                              BorderRadius.circular(5.r)),
+                              borderRadius: BorderRadius.circular(5.r)),
                           child: state is OtpSubmitLoading
                               ? Center(
-                            child: Transform.scale(
-                              scale: 0.4,
-                              child: CircularProgressIndicator(
-                                color: Colors.white,
-                              ),
-                            ),
-                          )
+                                  child: Transform.scale(
+                                    scale: 0.4,
+                                    child: CircularProgressIndicator(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                )
                               : Center(
-                            child: Text(
-                              AppStrings.codeHasBeenSentEnterTheCodeCorrectly,
-                              textDirection: TextDirection.rtl,
-                              textAlign: TextAlign.center,
-                              maxLines: 2,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 9.5.sp,
-                                height: 2.h,
-                              ),
-                            ),
-                          ),
+                                  child: Text(
+                                    AppStrings
+                                        .codeHasBeenSentEnterTheCodeCorrectly,
+                                    textDirection: TextDirection.rtl,
+                                    textAlign: TextAlign.center,
+                                    maxLines: 2,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 9.5.sp,
+                                      height: 2.h,
+                                    ),
+                                  ),
+                                ),
                         ),
                         VerticalSpace(context.height16),
                         if (signUpCubit.resend)
@@ -76,11 +75,9 @@ class ChangeNumberOrResendCodeButton extends StatelessWidget {
                               child: Text(
                                 AppStrings.changeNumberOrdResendCode,
                                 style: TextStyle(
-                                    color:
-                                    AppColors.orangeColor,
+                                    color: AppColors.orangeColor,
                                     fontWeight: FontWeight.w800,
-                                    fontSize: 11.sp
-                                ),
+                                    fontSize: 11.sp),
                               ),
                             ),
                           ),
@@ -117,21 +114,18 @@ class ChangeNumberOrResendCodeButton extends StatelessWidget {
                             style: TextStyle(
                                 color: AppColors.orangeColor,
                                 fontWeight: FontWeight.w600,
-                                fontSize: 11.sp
-                            ),
+                                fontSize: 11.sp),
                           ),
                           HorizontalSpace(context.width6),
                           TimerCountdown(
                             descriptionTextStyle: TextStyle(
                                 color: AppColors.orangeColor,
                                 fontWeight: FontWeight.w600,
-                                fontSize: 11.sp
-                            ),
+                                fontSize: 11.sp),
                             timeTextStyle: TextStyle(
                                 color: AppColors.orangeColor,
                                 fontWeight: FontWeight.w600,
-                                fontSize: 11.sp
-                            ),
+                                fontSize: 11.sp),
                             format: CountDownTimerFormat.secondsOnly,
                             endTime: DateTime.now().add(
                               Duration(

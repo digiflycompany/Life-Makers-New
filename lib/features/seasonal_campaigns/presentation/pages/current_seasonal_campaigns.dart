@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../model/seasonal_campaigns_model.dart';
 import '../build_seasonal_widget.dart';
 
 class CurrentSeasonalCampaignsScreen extends StatefulWidget {
- final List<Campaigns>? campaigns;
+  final List<Campaigns>? campaigns;
 
   CurrentSeasonalCampaignsScreen({super.key, this.campaigns});
 
@@ -21,11 +22,11 @@ class _CurrentSeasonalCampaignsScreenState
       backgroundColor: Colors.white,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 21.w),
-        child: buildCampaignGridView(context: context,campaigns: widget.campaigns),
+        child: buildCampaignGridView(
+            context: context, campaigns: widget.campaigns),
       ),
     );
   }
-
 
   // get logoImg => Align(
   //     alignment: AlignmentDirectional.bottomEnd,

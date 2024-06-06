@@ -9,6 +9,7 @@ import 'package:life_makers/features/seasonal_campaigns/presentation/widgets/cam
 import 'package:life_makers/features/seasonal_campaigns/presentation/widgets/campaign_details_widgets/campaign_image.dart';
 import 'package:life_makers/features/seasonal_campaigns/presentation/widgets/campaign_details_widgets/campaign_name.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
+
 import 'choose_role_page.dart';
 import 'member_campaign_details.dart';
 
@@ -54,34 +55,34 @@ class _CampaignDetailsScreenState extends State<CampaignDetailsScreen> {
         bottomNavigationBar: PreferencesHelper.getIsVisitor
             ? SizedBox.shrink()
             : Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-          child: widget.campaignDetails?.userJoined == 'false'
-              ? NewsButton2(
-              onTap: () {
-                showJoinCampaignPopUp(
-                    context: context,
-                    campaignDetails: widget.campaignDetails);
-              },
-              text: AppStrings.joinCampaign)
-              : widget.campaignDetails?.userJoined == 'pending'
-              ? PendingButton(
-              onTap: () {}, text: AppStrings.pendingText)
-              : widget.campaignDetails?.userJoined == 'true'
-              ? NewsButton3(
-              onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => JoinCampaignDetails(
-                      taskId: 0,
-                      campaignDetails: widget.campaignDetails,
-                    ),
-                  ),
-                );
-              },
-              text: 'مشاهدة الحملة')
-              : SizedBox.shrink(),
-        ),
+                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+                child: widget.campaignDetails?.userJoined == 'false'
+                    ? NewsButton2(
+                        onTap: () {
+                          showJoinCampaignPopUp(
+                              context: context,
+                              campaignDetails: widget.campaignDetails);
+                        },
+                        text: AppStrings.joinCampaign)
+                    : widget.campaignDetails?.userJoined == 'pending'
+                        ? PendingButton(
+                            onTap: () {}, text: AppStrings.pendingText)
+                        : widget.campaignDetails?.userJoined == 'true'
+                            ? NewsButton3(
+                                onTap: () {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => JoinCampaignDetails(
+                                        taskId: 0,
+                                        campaignDetails: widget.campaignDetails,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                text: 'مشاهدة الحملة')
+                            : SizedBox.shrink(),
+              ),
       ),
     );
   }
