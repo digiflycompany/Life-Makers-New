@@ -21,7 +21,6 @@ import 'package:life_makers/features/volunteer_opportunity/cubit/volunteer_thank
 import 'package:life_makers/l10n/l10n.dart';
 import 'package:life_makers/services/dio_helper/dio_helper.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
-
 import 'core/utils/app-string.dart';
 import 'features/campaign_details/cubit/all_campaigns_cubit.dart';
 import 'features/campaign_details/cubit/join_campaign_cubit.dart';
@@ -121,6 +120,7 @@ class MyApp extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 navigatorKey: AppService().navigatorKey,
                 onGenerateRoute: RouteGenerator.getRoute,
+                //home: MemberShipFirstStep(),
               ),
             ),
           );

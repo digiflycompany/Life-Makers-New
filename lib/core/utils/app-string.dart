@@ -38,6 +38,10 @@ class AppStrings {
   static const String passwordHasBeenChangedSuccessfully = 'تم تغيير الرقم السري بنجاح';
   static const String pleaseEnterOtp = 'من فضلك أدخل ال otp';
   static const String sendConfirmationCode = 'ارسال رمز التأكيد';
+  static const String uploadProfilePhoto = 'ارفق صورة شخصية';
+  static const String checkIn = 'تسجيل حضور';
+  static const String checkOut = 'تسجيل إنصراف';
+  static const String uploadCampaignPhoto = 'ارفق صورة أثناء مشاركة الحملة';
   static const String codeHasBeenSentEnterTheCodeCorrectly = 'تم ارسال الرمز \nادخل الرمز صحيحا للتأكيد';
   static const String changeNumberOrdResendCode = 'تغيير الرقم/ إعادة الإرسال';
   static const String sendCodeAfter = 'إعادة إرسال الرمز بعد';

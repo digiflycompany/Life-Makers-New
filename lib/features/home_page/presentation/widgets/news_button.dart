@@ -126,6 +126,38 @@ class NewsButton3 extends StatelessWidget {
     );
   }
 }
+class NewsButton4 extends StatelessWidget {
+  final Function()? onTap;
+  final String? text;
+  final Color color;
+  const NewsButton4({super.key, required this.onTap, required this.text, this.color=AppColors.orangeColor});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: double.infinity,
+        height: 60.h,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(5.r),
+        ),
+        child:  Center(
+          child: Text(
+            text!,
+            style: const TextStyle(
+                color: Colors.white,
+                fontFamily: FontFamilies.alexandria,
+                fontWeight: FontWeight.w500,
+                fontSize: 12
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 class PendingButton extends StatelessWidget {
   final Function()? onTap;
