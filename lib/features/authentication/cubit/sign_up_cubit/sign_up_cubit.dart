@@ -39,7 +39,6 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   City? selectedCity;
   String? selectedAreaName;
-  late SignUpCubit signUpCubit;
   final TextEditingController resetPasswordController = TextEditingController();
   final TextEditingController confirmResetPasswordController = TextEditingController();
   final TextEditingController otpController =TextEditingController();
@@ -67,19 +66,19 @@ class SignUpCubit extends Cubit<SignUpState> {
   bool resend = false;
 
   void handleSignUp() {
-    signUpCubit.SignUp(
-      signUpCubit.nameController.text,
-      signUpCubit.usernameController.text,
-      signUpCubit.passwordController.text,
-      signUpCubit.emailController.text,
-      signUpCubit.phoneController.text,
-      signUpCubit.whatsappController.text,
-      signUpCubit.idNumberController.text,
-      signUpCubit.workController.text,
-      signUpCubit.addressController.text,
-      signUpCubit.cityDropdownController.text,
-      signUpCubit.areaDropdownController.text,
-      signUpCubit.previousExperienceController.text,
+    SignUp(
+      nameController.text,
+      usernameController.text,
+      passwordController.text,
+      emailController.text,
+      phoneController.text,
+      whatsappController.text,
+      idNumberController.text,
+      workController.text,
+      addressController.text,
+      cityDropdownController.text,
+      areaDropdownController.text,
+      previousExperienceController.text,
     );
   }
 
@@ -181,7 +180,7 @@ class SignUpCubit extends Cubit<SignUpState> {
   Future<void> refresh() async {
     try {
       await Future.delayed(const Duration(seconds: 1));
-      await signUpCubit.GetUserNotifications();
+      await GetUserNotifications();
     } catch (error) {
       if (kDebugMode) {
         print('Error refreshing data: $error');
@@ -294,8 +293,8 @@ class SignUpCubit extends Cubit<SignUpState> {
         },
       );
       if (response.statusCode == 200) {
-        print('asssssssssssssssssssssssssssssssssssssss');
         emit(OtpSubmitSuccess());
+        print('asssssssssssssssssssssssssssssssssssssss');
       }
       if (response.statusCode == 401) {
         emit(OtpSubmitFailure('Invalid Credentials'));
