@@ -1,19 +1,16 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:life_makers/core/utils/app-assets.dart';
+import 'package:life_makers/core/utils/app-color.dart';
+import 'package:life_makers/core/utils/app-string.dart';
+import 'package:life_makers/core/utils/app_fonts.dart';
 import 'package:life_makers/core/widgets/custom_appbar.dart';
 import 'package:life_makers/features/campaign_details/cubit/join_campaign_cubit.dart';
 import 'package:life_makers/features/campaign_details/presentation/pages/member_campaign_details.dart';
 import 'package:life_makers/features/home_page/presentation/widgets/news_button.dart';
 import 'package:life_makers/features/seasonal_campaigns/model/seasonal_campaigns_model.dart';
-import 'package:life_makers/services/cubit/global_cubit_state.dart';
-
-import '../../../../core/utils/app-color.dart';
-import '../../../../core/utils/app-string.dart';
-import '../../../../core/utils/app_fonts.dart';
 
 class ChooseRoleSecondPage extends StatefulWidget {
   ChooseRoleSecondPage(
@@ -46,9 +43,46 @@ class _ChooseRoleSecondPageState extends State<ChooseRoleSecondPage> {
           physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
-              headerImage,
+              Image.network(widget.campaignDetails!.photo!,
+                  fit: BoxFit.cover, width: double.infinity, height: 200.h),
               SizedBox(height: 30.h),
-              title,
+              Padding(
+                padding: EdgeInsets.only(right: 35.w),
+                child: Row(
+                  textDirection: TextDirection.rtl,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          dataEntry = !dataEntry;
+                        });
+                      },
+                      child: CircleAvatar(
+                        radius: 11.r,
+                        backgroundColor: AppColors.orangeColor,
+                        child: dataEntry == false
+                            ? SvgPicture.asset(
+                          AppAssets.plusIcon,
+                          width: 12.w,
+                        )
+                            : SvgPicture.asset(
+                          AppAssets.cancelIcon,
+                          width: 10.w,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 10.w),
+                    Text(
+                      ' ${widget.campaignDetails?.name}',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: FontFamilies.alexandria,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12),
+                    ),
+                  ],
+                ),
+              ),
               SizedBox(height: dataEntry == true ? 25.h : 470.h),
               if (dataEntry == true)
                 Directionality(
@@ -66,14 +100,17 @@ class _ChooseRoleSecondPageState extends State<ChooseRoleSecondPage> {
                                     .map(
                                       (e) => CheckboxMenuButton(
                                         value: true,
+                                        style: ButtonStyle(
+                                          iconColor: MaterialStateProperty.all(AppColors.orangeColor),
+                                        ),
                                         onChanged: (v) {},
                                         child: SizedBox(
                                           width: 240.w,
                                           child: Text(
                                             e,
                                             style: TextStyle(
-                                              fontFamily: 'Alexandria',
-                                              fontSize: 10,
+                                              fontFamily:FontFamilies.alexandria,
+                                              fontSize: 10.sp,
                                             ),
                                           ),
                                         ),
@@ -90,101 +127,20 @@ class _ChooseRoleSecondPageState extends State<ChooseRoleSecondPage> {
           ),
         ),
       ),
-      bottomNavigationBar: button2,
+      bottomNavigationBar: widget.campaignDetails?.userJoined == 'false'? Padding(
+        padding: EdgeInsets.symmetric(vertical: 20.h,horizontal: 20.w),
+        child: NewsButton2(
+            onTap: () {
+              joinCampaignCubit.joinCampaign(
+                  taskId: widget.selectedRoleId, context: context);
+            },
+            text: AppStrings.joinCampaign),
+      ):Padding(
+        padding: EdgeInsets.symmetric(vertical: 20.h,horizontal: 20.w),
+        child: PendingButton(onTap: () {}, text: AppStrings.pendingText),
+      ),
     );
   }
-
-  get headerImage => Image.network(widget.campaignDetails!.photo!,
-      fit: BoxFit.cover, width: double.infinity, height: 200.h);
-  get showMoreButton => GestureDetector(
-        onTap: () {
-          setState(() {
-            dataEntry = !dataEntry;
-          });
-        },
-        child: CircleAvatar(
-          radius: 11.r,
-          backgroundColor: AppColors.orangeColor,
-          child: dataEntry == false
-              ? SvgPicture.asset(
-                  AppAssets.plusIcon,
-                  width: 12.w,
-                )
-              : SvgPicture.asset(
-                  AppAssets.cancelIcon,
-                  width: 10.w,
-                ),
-        ),
-      );
-  get titleText => Text(
-        ' ${widget.campaignDetails?.name}',
-        style: TextStyle(
-            color: Colors.black,
-            fontFamily: FontFamilies.alexandria,
-            fontWeight: FontWeight.w500,
-            fontSize: 12),
-      );
-  get title => Padding(
-        padding: EdgeInsets.only(right: 35.w),
-        child: Row(
-          textDirection: TextDirection.rtl,
-          children: [
-            showMoreButton,
-            SizedBox(width: 10.w),
-            titleText,
-          ],
-        ),
-      );
-  get button => Padding(
-      padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
-      child: SizedBox(
-        width: 380.w,
-        height: 60.h,
-        child: BlocConsumer<JoinCampaignCubit, CubitBaseState>(
-          listener: (_, state) {
-            if (state == CubitBaseState.doneJoinCampaign) {
-              showJoinCampaignSuccessPoUp(context);
-            }
-          },
-          builder: (_, state) {
-            bool userJoined = widget.campaignDetails?.userJoined == 'true';
-            if (state == CubitBaseState.loading) {
-              return Center(child: CircularProgressIndicator.adaptive());
-            }
-            return userJoined
-                ? PendingButton(onTap: () {}, text: AppStrings.pendingText)
-                : NewsButton2(
-                    onTap: () {
-                      if (kDebugMode) {
-                        print('$userJoined');
-                      }
-                      joinCampaignCubit.joinCampaign(
-                          taskId: widget.selectedRoleId, context: context);
-                    },
-                    text: AppStrings.joinCampaign);
-          },
-        ),
-      ));
-  get button2 => Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          if (widget.campaignDetails?.userJoined == 'false')
-            Padding(
-              padding: EdgeInsets.only(bottom: 10.h),
-              child: NewsButton2(
-                  onTap: () {
-                    joinCampaignCubit.joinCampaign(
-                        taskId: widget.selectedRoleId, context: context);
-                  },
-                  text: AppStrings.joinCampaign),
-            ),
-          if (widget.campaignDetails?.userJoined == 'pending')
-            Padding(
-              padding: EdgeInsets.only(bottom: 10.h),
-              child: PendingButton(onTap: () {}, text: AppStrings.pendingText),
-            ),
-        ],
-      );
   void showJoinCampaignSuccessPoUp(BuildContext context) {
     showDialog(
       context: context,
@@ -192,7 +148,7 @@ class _ChooseRoleSecondPageState extends State<ChooseRoleSecondPage> {
         return AlertDialog(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(7.r))),
-            insetPadding: const EdgeInsets.all(26),
+            insetPadding: EdgeInsets.all(26.r),
             scrollable: true,
             titlePadding: const EdgeInsets.all(0),
             contentPadding: EdgeInsets.zero,

@@ -8,6 +8,7 @@ import 'package:life_makers/core/utils/app.service.dart';
 import 'package:life_makers/core/utils/app_routes.dart';
 import 'package:life_makers/core/utils/app_theme.dart';
 import 'package:life_makers/features/authentication/cubit/card_cubit/cards_cubit.dart';
+import 'package:life_makers/features/authentication/cubit/login_cubit/login_cubit.dart';
 import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_cubit.dart';
 import 'package:life_makers/features/edit_account/cubit/edit_account_cubit.dart';
 import 'package:life_makers/features/home_page/cubit/menu_page_cubit/menu_page_cubit.dart';
@@ -50,6 +51,9 @@ class MyApp extends StatelessWidget {
             providers: [
               BlocProvider<SignUpCubit>(
                 create: (BuildContext context) => SignUpCubit(),
+              ),
+              BlocProvider<LoginCubit>(
+                create: (BuildContext context) => LoginCubit(),
               ),
               BlocProvider<JoinCampaignCubit>(
                 create: (BuildContext context) => JoinCampaignCubit(),

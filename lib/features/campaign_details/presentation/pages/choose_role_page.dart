@@ -36,7 +36,7 @@ class _ChooseRolePageState extends State<ChooseRolePage> {
         children: [
           Container(
             width: double.infinity,
-            height: 55,
+            height: 55.h,
             decoration: BoxDecoration(
                 color: AppColors.orangeColor,
                 borderRadius: BorderRadius.only(
@@ -63,7 +63,7 @@ class _ChooseRolePageState extends State<ChooseRolePage> {
                     Navigator.pop(context);
                   },
                   child: Align(
-                      alignment: AlignmentDirectional.topEnd,
+                      alignment: AlignmentDirectional.topStart,
                       child: Padding(
                         padding: EdgeInsets.only(right: 16.w, top: 24.h),
                         child: SvgPicture.asset(AppAssets.closeDrawerICon),
@@ -77,9 +77,9 @@ class _ChooseRolePageState extends State<ChooseRolePage> {
             child: Directionality(
               textDirection: TextDirection.rtl,
               child: GridView.builder(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, mainAxisExtent: 40.h),
+                    crossAxisCount: 1, mainAxisExtent: 40.h),
                 itemBuilder: (context, index) {
                   return RadioMenuButton(
                       value: widget.campaignDetails?.tasks?[index].id,
@@ -95,7 +95,7 @@ class _ChooseRolePageState extends State<ChooseRolePage> {
                       },
                       child: Text(
                         '${widget.campaignDetails?.tasks?[index].task?.name}',style: TextStyle(
-                          fontFamily: 'Alexandria'
+                          fontFamily: FontFamilies.alexandria
                       ),));
                 },
                 itemCount: widget.campaignDetails?.tasks?.length,

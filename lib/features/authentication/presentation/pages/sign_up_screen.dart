@@ -15,23 +15,21 @@ class SignUpScreen extends StatelessWidget {
       // ..fetchAreaData(),
       child: BlocConsumer<SignUpCubit, SignUpState>(listener: (context, state) {
         SignUpCubit signUpCubit = context.read<SignUpCubit>();
-        switch (state.runtimeType) {
-          case SignUpSuccess:
-            Routes.mainPageRoute.moveToCurrentRouteAndRemoveAll();
-            break;
-          case OtpSendSuccess:
-            signUpCubit.otpSent = true;
-            break;
-          case OtpSubmitSuccess:
-            signUpCubit.isConfirmed = true;
-            break;
-          case OtpResend:
-            signUpCubit.resend = true;
-            break;
-          case OtpResendCycleState:
-            signUpCubit.otpSent = false;
-            signUpCubit.phoneController.clear();
-            break;
+        if (state is SignUpSuccess) {
+          Routes.mainPageRoute.moveToCurrentRouteAndRemoveAll();
+        }
+        if (state is OtpSendSuccess) {
+          signUpCubit.otpSent = true;
+        }
+        if (state is OtpSubmitSuccess) {
+          signUpCubit.isConfirmed = true;
+        }
+        if (state is OtpResend) {
+          signUpCubit.resend = true;
+        }
+        if (state is OtpResendCycleState) {
+          signUpCubit.otpSent = false;
+          signUpCubit.phoneController.clear();
         }
       }, builder: (context, state) {
         return Scaffold(
