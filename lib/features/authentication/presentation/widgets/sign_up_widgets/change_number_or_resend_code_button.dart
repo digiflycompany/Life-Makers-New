@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
@@ -20,7 +21,7 @@ class ChangeNumberOrResendCodeButton extends StatelessWidget {
         SignUpCubit signUpCubit = context.read<SignUpCubit>();
         return GestureDetector(
           onTap: () {
-            signUpCubit.OtpSubmit(signUpCubit.controller.text);
+            signUpCubit.OtpSubmit(signUpCubit.otpController2.text);
           },
           child: Align(
               alignment: AlignmentDirectional.centerEnd,
@@ -88,21 +89,24 @@ class ChangeNumberOrResendCodeButton extends StatelessWidget {
                   ),
                   Column(
                     children: [
-                      OtpTextField(
-                        textStyle: TextStyle(
-                            color: AppColors.orangeColor,
-                            fontWeight: FontWeight.w600),
-                        cursorColor: AppColors.orangeColor,
-                        fieldWidth: 35.w,
-                        numberOfFields: 4,
-                        focusedBorderColor:
-                        AppColors.orangeColor,
-                        borderColor: Color(0xFF512DA8),
-                        showFieldAsBox: true,
-                        onCodeChanged: (String code) {},
-                        onSubmit: (String verificationCode) {
-                          signUpCubit.controller.text = verificationCode;
-                        }, // end onSubmit
+                      Directionality(
+                        textDirection: TextDirection.ltr,
+                        child: OtpTextField(
+                          textStyle: TextStyle(
+                              color: AppColors.orangeColor,
+                              fontWeight: FontWeight.w600),
+                          cursorColor: AppColors.orangeColor,
+                          fieldWidth: 35.w,
+                          numberOfFields: 4,
+                          focusedBorderColor: AppColors.orangeColor,
+                          borderColor: Color(0xFF512DA8),
+                          showFieldAsBox: true,
+                          onCodeChanged: (String code) {},
+                          onSubmit: (String verificationCode) {
+                            signUpCubit.otpController2.text = verificationCode;
+                            print(signUpCubit.otpController2.text);
+                          }, // end onSubmit
+                        ),
                       ),
                       VerticalSpace(context.height16),
                       Row(

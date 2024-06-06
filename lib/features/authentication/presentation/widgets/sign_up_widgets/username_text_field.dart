@@ -16,7 +16,7 @@ class UsernameTextField extends StatelessWidget {
       builder: (context, state) {
         SignUpCubit signUpCubit = context.read<SignUpCubit>();
         return RegularTextField(
-          controller: signUpCubit.nameController,
+          controller: signUpCubit.usernameController,
           hintText: AppStrings.username,
           img: AppAssets.usernameIcon,
           validator: (value) {
