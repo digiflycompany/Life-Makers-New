@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:life_makers/core/utils/app.service.dart';
-
 
 Future<T?> pushRoute<T>(
     String route, {
@@ -39,13 +37,17 @@ void pop([Object? object]) {
   }
 }
 
-push(
-    {required BuildContext context,
-      required String route,
-      Map<String, dynamic>? argument}) =>
-    Navigator.pushNamed(context, route, arguments: argument);
+push({
+  required BuildContext context,
+  required String route,
+  Map<String, dynamic>? arguments,
+}) =>
+    Navigator.pushNamed(context, route, arguments: arguments);
 
 canPop(BuildContext context) => Navigator.canPop(context);
 
-pushAndRemove({required BuildContext context, required String route}) =>
+pushAndRemove({
+  required BuildContext context,
+  required String route,
+}) =>
     Navigator.pushNamedAndRemoveUntil(context, route, (route) => false);

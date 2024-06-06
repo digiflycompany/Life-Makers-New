@@ -43,6 +43,7 @@ class SignUpCubit extends Cubit<SignUpState> {
   final TextEditingController resetPasswordController = TextEditingController();
   final TextEditingController confirmResetPasswordController = TextEditingController();
   final TextEditingController otpController =TextEditingController();
+  final TextEditingController otpController2 =TextEditingController();
   final TextEditingController controller = TextEditingController();
   final TextEditingController textEditingController = TextEditingController();
   final TextEditingController textEditingController2 = TextEditingController();
@@ -293,6 +294,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         },
       );
       if (response.statusCode == 200) {
+        print('asssssssssssssssssssssssssssssssssssssss');
         emit(OtpSubmitSuccess());
       }
       if (response.statusCode == 401) {

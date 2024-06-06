@@ -104,8 +104,11 @@ extension StringExtension on String {
   pushReplacementWithData(Map<String, dynamic>? arguments) =>
       pushRoute(this, isToReplace: true, arguments: arguments);
 
-  pushWithData(Map<String, dynamic>? arguments) =>
-      pushRoute(this, arguments: arguments);
+  // pushWithData(Map<String, dynamic>? arguments) =>
+  //     pushRoute(this, arguments: arguments);
+  Future<T?> pushWithData<T>(Map<String, dynamic>? arguments) {
+    return pushRoute<T>(this, arguments: arguments);
+  }
 
   pushAndRemoveAllWithDataUntil(Map<String, dynamic>? arguments) =>
       pushRoute(this, isNewTask: true, arguments: arguments);

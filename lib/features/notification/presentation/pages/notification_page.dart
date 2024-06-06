@@ -7,10 +7,12 @@ import 'package:life_makers/features/notification/presentation/widgets/no_notifi
 import 'package:life_makers/features/notification/presentation/widgets/notification_list.dart';
 import 'package:life_makers/features/notification/presentation/widgets/notification_loading.dart';
 import 'package:life_makers/features/notification/presentation/widgets/notification_title.dart';
+import 'package:life_makers/features/seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 
 class NotificationPage extends StatefulWidget {
-  const NotificationPage({Key? key}) : super(key: key);
+  final Campaigns? campaignDetails;
+  const NotificationPage({Key? key, this.campaignDetails}) : super(key: key);
 
   @override
   State<NotificationPage> createState() => _NotificationPageState();

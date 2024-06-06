@@ -8,6 +8,7 @@ import 'package:life_makers/features/authentication/presentation/pages/enter_pho
 import 'package:life_makers/features/authentication/presentation/pages/login_screen.dart';
 import 'package:life_makers/features/authentication/presentation/pages/otp_screen.dart';
 import 'package:life_makers/features/authentication/presentation/pages/sign_up_screen.dart';
+import 'package:life_makers/features/campaign_details/presentation/pages/campaign_details_screen.dart';
 import 'package:life_makers/features/edit_account/screens/edit_account_screen.dart';
 import 'package:life_makers/features/elections/presentation/pages/before_elections_screen.dart';
 import 'package:life_makers/features/home_page/data/models/home_calender_model.dart';
@@ -16,6 +17,7 @@ import 'package:life_makers/features/home_page/presentation/pages/home_calender_
 import 'package:life_makers/features/home_page/presentation/pages/profile_screen.dart';
 import 'package:life_makers/features/membership_controll/screens/membership_control_screen.dart';
 import 'package:life_makers/features/non_seasonal_campaigns/presentation/pages/non_seasonal_campaigns.dart';
+import 'package:life_makers/features/seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import 'package:life_makers/features/seasonal_campaigns/presentation/pages/seasonal_campaigns.dart';
 import 'package:life_makers/features/volunteer_opportunity/presentation/screens/volunteer_opportunity_screen.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
@@ -39,6 +41,7 @@ class Routes {
   static const String seasonalCampaignsPageRoute = "/seasonal_campaigns";
   static const String nonSeasonalCampaignsPageRoute = "/non_seasonal_campaigns";
   static const String homeCalenderDetailsPageRoute = "/home_calender_details_screen";
+  static const String campaignDetailsPageRoute = "/campaign_details_screen";
   static const String volunteerOpportunityPageRoute =
       "/volunteer_opportunity_screen";
   static const String beforeElectionsPageRoute = "/before_elections_screen";
@@ -129,6 +132,14 @@ class RouteGenerator {
             child: HomeCalenderDetailsScreen(calender: calendar),
             routeSettings: routeSettings,
             pageRouteAnimation: PageRouteAnimation.fade);
+      case Routes.campaignDetailsPageRoute:
+        final args = routeSettings.arguments as Map<String, dynamic>;
+        final campaignDetails = args['campaignDetails'] as Campaigns?;
+        return buildPageRoute(
+          child: CampaignDetailsScreen(campaignDetails: campaignDetails),
+          routeSettings: routeSettings,
+          pageRouteAnimation: PageRouteAnimation.fade,
+        );
       case Routes.volunteerCardDetailsPageRoute:
         final index = routeSettings.arguments as int;
         return buildPageRoute(

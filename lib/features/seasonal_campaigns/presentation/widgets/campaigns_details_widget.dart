@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:life_makers/features/campaign_details/presentation/pages/campaign_details_screen.dart';
+import 'package:life_makers/core/utils/app_routes.dart';
+import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/features/seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import 'package:life_makers/features/seasonal_campaigns/presentation/widgets/campaign_content.dart';
 import 'package:life_makers/features/seasonal_campaigns/presentation/widgets/campaign_logo_img.dart';
-import 'package:page_transition/page_transition.dart';
 
 class CampaignDetailsWidget extends StatelessWidget {
   final Campaigns? campaignDetails;
@@ -23,14 +23,7 @@ class CampaignDetailsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-          context,
-          PageTransition(
-            type: PageTransitionType.fade,
-            duration: const Duration(milliseconds: 400),
-            child: CampaignDetailsScreen(campaignDetails: campaignDetails),
-          ),
-        );
+       Routes.campaignDetailsPageRoute.pushWithData({'campaignDetails':campaignDetails});
       },
       child: Container(
         decoration: BoxDecoration(
