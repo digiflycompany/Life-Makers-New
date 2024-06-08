@@ -40,7 +40,7 @@ class _NotificationListState extends State<NotificationList> {
         color: Colors.white,
         backgroundColor: AppColors.orangeColor,
         child: Padding(
-          padding:  EdgeInsets.only(bottom: 100.h),
+          padding:  EdgeInsets.only(bottom: 20.h),
           child: ListView.builder(
             physics: const BouncingScrollPhysics(),
             itemCount: signUpCubit.notificationModel?.notifications?.length,

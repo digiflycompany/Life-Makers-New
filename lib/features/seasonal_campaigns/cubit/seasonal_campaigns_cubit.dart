@@ -12,24 +12,20 @@ class SeasonalCampaignsCubit extends Cubit<SeasonalCampaignsStates> {
   late PageController pageController = PageController(initialPage: currentPage);
   int currentPage = 0;
 
-
   void changePageView(int page) {
     pageController.animateToPage(
-        page,
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
-      );
+      page,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
   }
 
   void changCurrentPage(int page){
     currentPage = page;
     emit(SeasonalCampaignsChangePageStates());
-
   }
 
-
   CampaignsModel? seasonalCampaignsModel;
-
   CampaignsRepoImpl? campaignsRepoImpl = CampaignsRepoImpl();
 
   Future<void> getSeasonalCampaignsRepo({required BuildContext context}) async {
@@ -41,7 +37,19 @@ class SeasonalCampaignsCubit extends Cubit<SeasonalCampaignsStates> {
       if (response?.statusCode == 200) {
         seasonalCampaignsModel = CampaignsModel.fromJson(response?.data);
 
-        emit(SeasonalCampaignsSuccessStates());
+        // Combine all campaigns into a single list
+        List<Campaigns> allCampaigns = [];
+        if (seasonalCampaignsModel?.currentCampaigns != null) {
+          allCampaigns.addAll(seasonalCampaignsModel!.currentCampaigns!);
+        }
+        if (seasonalCampaignsModel?.pastCampaigns != null) {
+          allCampaigns.addAll(seasonalCampaignsModel!.pastCampaigns!);
+        }
+        if (seasonalCampaignsModel?.nextCampaigns != null) {
+          allCampaigns.addAll(seasonalCampaignsModel!.nextCampaigns!);
+        }
+
+        emit(SeasonalCampaignsSuccessStates(campaigns: allCampaigns));
       } else {
         emit(SeasonalCampaignsErrorStates());
         errorHandler(context: context, response: response);

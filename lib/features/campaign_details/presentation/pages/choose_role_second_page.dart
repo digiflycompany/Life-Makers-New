@@ -8,9 +8,10 @@ import 'package:life_makers/core/utils/app-string.dart';
 import 'package:life_makers/core/utils/app_fonts.dart';
 import 'package:life_makers/core/widgets/custom_appbar.dart';
 import 'package:life_makers/features/campaign_details/cubit/join_campaign_cubit.dart';
-import 'package:life_makers/features/campaign_details/presentation/pages/member_campaign_details.dart';
+import 'package:life_makers/features/campaign_details/presentation/pages/campaign_details_screen.dart';
 import 'package:life_makers/features/home_page/presentation/widgets/news_button.dart';
 import 'package:life_makers/features/seasonal_campaigns/model/seasonal_campaigns_model.dart';
+import 'package:life_makers/services/cubit/global_cubit_state.dart';
 
 class ChooseRoleSecondPage extends StatefulWidget {
   ChooseRoleSecondPage(
@@ -33,6 +34,13 @@ class _ChooseRoleSecondPageState extends State<ChooseRoleSecondPage> {
   bool dataEntry = true;
   @override
   Widget build(BuildContext context) {
+    return BlocConsumer<JoinCampaignCubit, CubitBaseState>(
+  listener: (context, state) {
+    if(state == CubitBaseState.doneJoinCampaign){
+       showJoinCampaignSuccessPoUp(context);
+    }
+  },
+  builder: (context, state) {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size(double.infinity, 50.h),
@@ -140,6 +148,8 @@ class _ChooseRoleSecondPageState extends State<ChooseRoleSecondPage> {
         child: PendingButton(onTap: () {}, text: AppStrings.pendingText),
       ),
     );
+  },
+);
   }
   void showJoinCampaignSuccessPoUp(BuildContext context) {
     showDialog(
@@ -199,9 +209,10 @@ class _ChooseRoleSecondPageState extends State<ChooseRoleSecondPage> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-            builder: (context) => JoinCampaignDetails(
-                taskId: widget.selectedRoleId,
-                campaignDetails: widget.campaignDetails)),
+            builder: (context) => CampaignDetailsScreen(
+                campaignDetails: widget.campaignDetails,
+                Pending: true,
+            )),
       );
     });
   }

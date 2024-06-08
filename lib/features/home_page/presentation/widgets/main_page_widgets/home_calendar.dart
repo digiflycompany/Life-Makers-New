@@ -11,7 +11,7 @@ class HomeCalendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 100.h),
+      padding: EdgeInsets.only(bottom: 30.h),
       child: BlocBuilder<HomeCalenderCubit, CubitBaseState>(
           builder: (context, state) {
         final homeCalenderCubit = context.read<HomeCalenderCubit>();
