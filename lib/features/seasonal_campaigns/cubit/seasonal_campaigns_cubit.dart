@@ -20,7 +20,7 @@ class SeasonalCampaignsCubit extends Cubit<SeasonalCampaignsStates> {
     );
   }
 
-  void changCurrentPage(int page){
+  void changCurrentPage(int page) {
     currentPage = page;
     emit(SeasonalCampaignsChangePageStates());
   }
@@ -55,5 +55,9 @@ class SeasonalCampaignsCubit extends Cubit<SeasonalCampaignsStates> {
         errorHandler(context: context, response: response);
       }
     }
+  }
+
+  void resetState() {
+    emit(SeasonalCampaignsInitStates as SeasonalCampaignsStates);
   }
 }

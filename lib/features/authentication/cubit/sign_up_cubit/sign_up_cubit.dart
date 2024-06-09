@@ -249,6 +249,7 @@ class SignUpCubit extends Cubit<SignUpState> {
       );
       if (response.statusCode == 200) {
         emit(OtpSendSuccess());
+        print('aaaaaaaaaaaaaaaaaa');
       } else {
         emit(OtpSendFailure("Invalid credentials"));
       }

@@ -41,6 +41,7 @@ class AppStrings {
   static const String uploadProfilePhoto = 'ارفق صورة شخصية';
   static const String checkIn = 'تسجيل حضور';
   static const String checkOut = 'تسجيل إنصراف';
+  static const String checkedOut = 'تم تسجيل الانصراف';
   static const String uploadCampaignPhoto = 'ارفق صورة أثناء مشاركة الحملة';
   static const String codeHasBeenSentEnterTheCodeCorrectly = 'تم ارسال الرمز \nادخل الرمز صحيحا للتأكيد';
   static const String changeNumberOrdResendCode = 'تغيير الرقم/ إعادة الإرسال';
@@ -135,6 +136,7 @@ class AppStrings {
   static const String leaveCampaign = 'مغادرة الحملة';
   static const String leave = 'مغادرة';
   static const String suggestionSentSuccessfully = 'تم ارسال الاقتراح بنجاح';
+  static const String photosUploadedSuccessfully = 'تم رفع الصور بنجاح';
   static const String leavingReason = 'سبب المغادرة';
   static const String send = 'ارسال';
   static const String done = 'تم';

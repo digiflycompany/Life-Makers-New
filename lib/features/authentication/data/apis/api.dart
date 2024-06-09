@@ -70,4 +70,10 @@ class EndPoints {
       'https://life-makers.digifly-eg.com/api/user-notifications';
   static const String currentCampaignsAndOpportunities =
       'https://life-makers.digifly-eg.com/api/user-current-campaigns-opportunities';
+  static const String campaignCheckIn =
+      'https://life-makers.digifly-eg.com/api/campaign-check-in';
+  static const String campaignCheckOut =
+      'https://life-makers.digifly-eg.com/api/campaign-check-out';
+  static const String campaignCheckGallery =
+      'https://life-makers.digifly-eg.com/api/campaign-check-gallery';
 }

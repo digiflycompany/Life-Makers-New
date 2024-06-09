@@ -12,15 +12,13 @@ import 'package:life_makers/features/seasonal_campaigns/presentation/widgets/cam
 import 'package:life_makers/features/seasonal_campaigns/presentation/widgets/campaign_details_widgets/campaign_image.dart';
 import 'package:life_makers/features/seasonal_campaigns/presentation/widgets/campaign_details_widgets/campaign_name.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
-
 import 'choose_role_page.dart';
 import 'member_campaign_details.dart';
 
 class CampaignDetailsScreen extends StatefulWidget {
-  CampaignDetailsScreen({super.key, this.campaignDetails, this.tasks, this.Pending,});
+  CampaignDetailsScreen({super.key, this.campaignDetails, this.tasks,});
   final Campaigns? campaignDetails;
   final Tasks? tasks;
-  final bool? Pending;
 
   @override
   State<CampaignDetailsScreen> createState() => _CampaignDetailsScreenState();

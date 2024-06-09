@@ -16,6 +16,17 @@ class CampaignRepository {
 
     return response;
   }
+  Future<Response?> campaignCheckIn({required int campaignId}) async {
+    Response? response = await DioHelper.postData(
+        url: EndPoints.campaignCheckIn, data: {'campaign_id': campaignId});
+    return response;
+  }
+
+  Future<Response?> campaignCheckOut({required int campaignId}) async {
+    Response? response = await DioHelper.postData(
+        url: EndPoints.campaignCheckOut, data: {'campaign_id': campaignId});
+    return response;
+  }
 
   Future<Response?> sendCampaignSuggestion(
       {required int taskId, required String suggestion}) async {
