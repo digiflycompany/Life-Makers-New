@@ -74,18 +74,18 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
   @override
   void initState() {
     super.initState();
-    selectedCityName = userModel.user?.governorate;
-    selectedAreaName = userModel.user?.cityCenter;
-    nameController.text = userModel.user?.name ?? '';
-    userNameController.text = userModel.user?.username ?? '';
-    emailController.text = userModel.user?.email ?? '';
-    phoneController.text = userModel.user?.phone ?? '';
-    whatsappController.text = userModel.user?.whatsappNumber ?? '';
-    nationalIDController.text = userModel.user?.idCardNumber ?? '';
-    addressController.text = userModel.user?.theAddress ?? '';
+    selectedCityName = userModel.user.governorate;
+    selectedAreaName = userModel.user.cityCenter;
+    nameController.text = userModel.user.name;
+    userNameController.text = userModel.user.username;
+    emailController.text = userModel.user.email;
+    phoneController.text = userModel.user.phone;
+    whatsappController.text = userModel.user.whatsappNumber;
+    nationalIDController.text = userModel.user.idCardNumber;
+    addressController.text = userModel.user.address;
     previousExperienceController.text =
-        userModel.user?.previousExperience ?? '';
-    JobController.text = userModel.user?.theJob ?? '';
+        userModel.user.previousExperience;
+    JobController.text = userModel.user.job;
 
     signUpCubit = context.read<SignUpCubit>();
     signUpCubit.fetchCityData();
@@ -282,9 +282,9 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                       width: 70,
                                       height: 70,
                                     )
-                                  : userModel.user?.photo != null
+                                  : userModel.user.photo != null
                                       ? Image.network(
-                                          '${PreferencesHelper.getUserModel?.user?.photo}',
+                                          '${PreferencesHelper.getUserModel?.user.photo}',
                                           fit: BoxFit.fill,
                                           width: 70,
                                           height: 70,
@@ -774,7 +774,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                               context: context,
                                               phone: phoneController.text,
                                               gender:
-                                                  '${PreferencesHelper.getUserModel?.user?.gender}',
+                                                  '${PreferencesHelper.getUserModel?.user.gender}',
                                               address: addressController.text,
                                               job: JobController.text,
                                               governorate: selectedCityName,

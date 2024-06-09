@@ -29,16 +29,19 @@ class UserNameAndProgressLine extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.only(top: 20.h),
-            child: LinearPercentIndicator(
-              width: 190,
+            child:LinearPercentIndicator(
+              width: 190.w,
               backgroundColor: const Color(0xffF1F1F1),
               progressColor: const Color(0xffF7936F),
-              percent: 0,
+              percent: PreferencesHelper.getIsVisitor
+                  ? 0.01
+                  : PreferencesHelper.normalizePoints(PreferencesHelper.getUserPoints),
               isRTL: true,
-              lineHeight: 8,
+              lineHeight: 8.h,
               padding: EdgeInsets.zero,
-              barRadius: const Radius.circular(5),
+              barRadius: Radius.circular(5.r),
             ),
+
           ),
         ],
       ),

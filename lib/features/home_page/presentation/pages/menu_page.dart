@@ -99,8 +99,6 @@ class _MenuScreenState extends State<MenuScreen> {
                     ],
                     const CampaignsIcon(),
                     const VolunteerOppIcon(),
-                    const ElectionsCandidateIcon(),
-                    if (!PreferencesHelper.getIsVisitor) const ElectionsIcon(),
                     SizedBox(
                         height: menuCubit.isVisible == false ? 30.h : 20.h),
                     if (!PreferencesHelper.getIsVisitor) ...[

@@ -6,7 +6,6 @@ import 'package:life_makers/core/utils/app-assets.dart';
 import 'package:life_makers/core/utils/app-color.dart';
 import 'package:life_makers/core/utils/app-string.dart';
 import 'package:life_makers/core/utils/app_fonts.dart';
-import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/core/widgets/custom_appbar.dart';
 import 'package:life_makers/core/widgets/custom_snack_bar.dart';
 import 'package:life_makers/core/widgets/spacer.dart';
@@ -67,8 +66,6 @@ class _JoinCampaignDetailsState extends State<JoinCampaignDetails> {
       },
       builder: (context, state) {
         final joinCampaignCubit = context.read<JoinCampaignCubit>();
-        bool checkedIn=false;
-        bool checkedOut=false;
         return PopScope(
           onPopInvoked: (didPop) {
             joinCampaignCubit.resetState();
@@ -352,7 +349,6 @@ class _JoinCampaignDetailsState extends State<JoinCampaignDetails> {
                     joinCampaignCubit.campaignCheckOut(
                         campaignId: widget.campaignDetails!.id!,
                         context: context);
-                    checkedOut=true;
                   } else {
                     CustomSnackBars.showInfoSnackBar(
                       title: 'قم برفع الصور أولا',
@@ -367,7 +363,6 @@ class _JoinCampaignDetailsState extends State<JoinCampaignDetails> {
                   joinCampaignCubit.campaignCheckIn(
                       campaignId: widget.campaignDetails!.id!,
                       context: context);
-                  checkedIn=true;
                 },
                 text: AppStrings.checkIn,
               ),

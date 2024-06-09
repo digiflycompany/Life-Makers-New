@@ -16,7 +16,7 @@ class LoginIcon extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.only(right: 15.7.w,bottom: 22.h,top: 22.h),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
               AppStrings.loggingIn,

@@ -121,11 +121,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             shape: BoxShape.circle,
                             border: Border.all(color: Colors.grey)),
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(40),
-                          child: PreferencesHelper.getUserModel?.user?.photo !=
+                          borderRadius: BorderRadius.circular(40.r),
+                          child: PreferencesHelper.getUserModel?.user.photo !=
                                   null
                               ? Image.network(
-                                  '${PreferencesHelper.getUserModel?.user?.photo}',
+                                  '${PreferencesHelper.getUserModel?.user.photo}',
                             fit: BoxFit.fill,
                             width: 70,
                             height: 70,
@@ -231,11 +231,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         decoration: BoxDecoration(
                                             color: Colors.white,
                                             borderRadius:
-                                                BorderRadius.circular(10)),
+                                                BorderRadius.circular(10.r)),
                                         child: SvgPicture.network(
-                                            '${PreferencesHelper.getUserModel?.user?.qrCode}'),
+                                            '${PreferencesHelper.getUserModel?.user.qrCode}'),
                                       ),
-                                      const SizedBox(height: 8),
+                                      SizedBox(height: 8.h),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,

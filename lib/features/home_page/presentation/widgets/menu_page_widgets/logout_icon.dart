@@ -15,7 +15,7 @@ class LogoutIcon extends StatelessWidget {
       splashColor: Colors.transparent,
       onTap: ()=>PreferencesHelper.logOut(),
       child: Padding(
-        padding: EdgeInsets.only(top: 22.h,bottom: 22.h,right: 15.7.w),
+        padding: EdgeInsets.only(top: 90.h,bottom: 22.h,right: 15.7.w),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [

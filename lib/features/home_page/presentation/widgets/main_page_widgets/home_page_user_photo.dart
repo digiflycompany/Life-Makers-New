@@ -22,7 +22,7 @@ class HomePageUserPhoto extends StatelessWidget {
                   shape: BoxShape.circle,
                   color: Colors.white,
                   border: Border.all(color: Colors.grey)),
-              child: PreferencesHelper.getUserModel?.user?.photo == null
+              child: PreferencesHelper.getUserModel?.user.photo == null
                   ? SvgPicture.asset(
                 AppAssets.circleAvatar2,
                 fit: BoxFit.fill,
@@ -33,7 +33,7 @@ class HomePageUserPhoto extends StatelessWidget {
                   width: 70.w,
                   height: 65.h,
                   fit: BoxFit.fill,
-                  PreferencesHelper.getUserModel!.user!.photo!)),
+                  PreferencesHelper.getUserModel!.user.photo!)),
         ),
       ),
     );
