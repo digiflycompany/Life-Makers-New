@@ -10,7 +10,7 @@ class SeasonalCampaignsCubit extends Cubit<SeasonalCampaignsStates> {
   SeasonalCampaignsCubit() : super(SeasonalCampaignsInitStates());
 
   late PageController pageController = PageController(initialPage: currentPage);
-  int currentPage = 0;
+  int currentPage = 1;
 
   void changePageView(int page) {
     pageController.animateToPage(

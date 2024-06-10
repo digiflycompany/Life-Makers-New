@@ -50,7 +50,7 @@ class UserQR extends StatelessWidget {
                                   BorderRadius.circular(
                                       10.r)),
                               child: SvgPicture.network(
-                                  '${PreferencesHelper.getUserModel?.user.qrCode}'),
+                                  '${PreferencesHelper.getUserModel?.user?.qrCode}'),
                             ),
                             SizedBox(height: 8.h),
                             Row(

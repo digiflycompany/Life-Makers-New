@@ -18,31 +18,35 @@ class CampaignRepository {
   }
   Future<Response?> campaignCheckIn({required int campaignId}) async {
     Response? response = await DioHelper.postData(
-        url: EndPoints.campaignCheckIn, data: {'campaign_id': campaignId});
+        url: EndPoints.campaignCheckIn, data: {
+          'campaign_id': campaignId,
+    });
     return response;
   }
 
   Future<Response?> campaignCheckOut({required int campaignId}) async {
     Response? response = await DioHelper.postData(
-        url: EndPoints.campaignCheckOut, data: {'campaign_id': campaignId});
+        url: EndPoints.campaignCheckOut, data: {
+          'campaign_id': campaignId,
+    });
     return response;
   }
 
   Future<Response?> sendCampaignSuggestion(
-      {required int taskId, required String suggestion}) async {
+      {required int? campaignId, required String suggestion}) async {
     Response? response = await DioHelper.postData(
         url: EndPoints.campaignSuggestion,
-        data: {'task_id': taskId, 'suggestion': suggestion});
+        data: {'campaign_id': campaignId, 'suggestion': suggestion});
 
     return response;
   }
 
 
   Future<Response?> sendCampaignComplaign(
-      {required int taskId, required String complaint}) async {
+      {required int? campaignId, required String complaint}) async {
     Response? response = await DioHelper.postData(
         url: EndPoints.campaignComplaign,
-        data: {'task_id': taskId, 'complaint': complaint});
+        data: {'campaignId': campaignId, 'complaint': complaint});
 
     return response;
   }

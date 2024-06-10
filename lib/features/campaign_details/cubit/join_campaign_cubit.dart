@@ -1,15 +1,14 @@
+import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_makers/core/utils/extensions.dart';
 import 'package:life_makers/features/campaign_details/presentation/pages/member_campaign_details.dart';
 import 'package:life_makers/features/campaign_details/repo/join_campaign_repository.dart';
 import 'package:life_makers/services/cubit/global_cubit_state.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 import 'package:page_transition/page_transition.dart';
-
 import '../../../core/widgets/custom_snack_bar.dart';
 import '../../authentication/data/apis/api.dart';
 import '../../home_page/presentation/pages/drawer_page.dart';
@@ -60,8 +59,8 @@ class JoinCampaignCubit extends Cubit<CubitBaseState> {
     }
   }
 
-  Future<void> uploadFile({PlatformFile? file, PlatformFile? file2, String? campaignId}) async {
-    imagesUploadedToServer=true;
+  Future<void> uploadFile({PlatformFile? file, PlatformFile? file2, int? campaignId}) async {
+    emit(CubitBaseState.imagesLoading);
     try {
       String fileName = file!.path!.split('/').last;
       String fileName2 = file2!.path!.split('/').last;
@@ -73,9 +72,9 @@ class JoinCampaignCubit extends Cubit<CubitBaseState> {
       //   'campaign_id': campaignId
       // });
       FormData formData = FormData.fromMap({
+        'campaign_id': campaignId,
         'photo[0]':await MultipartFile.fromFile(file.path!,filename: fileName),
         'photo[1]':await MultipartFile.fromFile(file2.path!,filename: fileName2),
-        'campaign_id': campaignId,
       });
       //formData.fields.add(MapEntry('campaign_id', campaignId!));
 
@@ -84,12 +83,14 @@ class JoinCampaignCubit extends Cubit<CubitBaseState> {
           data: formData,
           options: Options(headers: {'Authorization': 'Bearer ${PreferencesHelper.getToken()}'})
       );
-      if(response.isNull){
-        emit(CubitBaseState.imagesLoading);
-      }
+      // if(response.isNull){
+      //   emit(CubitBaseState.imagesLoading);
+      // }
       if (response.statusCode == 200) {
         emit(CubitBaseState.imagesSuccess);
+        imagesUploadedToServer=true;
         print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+        print(response.toString());
         // imagesUploadedToServer=true;
       } else {
         emit(CubitBaseState.imagesFailure);
@@ -101,10 +102,32 @@ class JoinCampaignCubit extends Cubit<CubitBaseState> {
       print('eroooooooooooooooooooooooooooooooooooooooooooooor');
     }
   }
+  Future<void> uploadCampaignData(String campaignId, File photo1, File photo2) async {
+    var dio = Dio();
+    var url = 'http://your-api-url/api/campaign-check-gallery';
 
-  Future<void> submitPhoto(String? campaignId) async {
-    await uploadFile(file: finalFile, file2: finalFile2, campaignId: campaignId);
+    FormData formData = FormData.fromMap({
+      'campaign_id': campaignId,
+      'photo[0]': await MultipartFile.fromFile(photo1.path, filename: 'photo1.jpg'),
+      'photo[1]': await MultipartFile.fromFile(photo2.path, filename: 'photo2.jpg'),
+    });
+
+    try {
+      var response = await dio.post(url, data: formData);
+
+      if (response.statusCode == 200) {
+        print('Upload successful');
+      } else {
+        print('Upload failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Upload failed with error: $e');
+    }
   }
+
+  // Future<void> submitPhoto(String? campaignId) async {
+  //   await uploadFile(file: finalFile, file2: finalFile2, campaignId: campaignId);
+  // }
 
   Future<void> joinCampaign({
     required int taskId,
@@ -178,36 +201,36 @@ class JoinCampaignCubit extends Cubit<CubitBaseState> {
   }
 
   Future<void> sendCampaignSuggestion({
-    required int taskId,
+    required int? campaignId,
     required String suggestion,
     required BuildContext context,
   }) async {
     emit(CubitBaseState.done);
     Response? response = await joinCampaignRepository?.sendCampaignSuggestion(
-        taskId: taskId, suggestion: suggestion);
+        campaignId: campaignId, suggestion: suggestion);
 
     if (response?.data['status'] == false) {
       emit(CubitBaseState.error);
       Navigator.pop(context);
 
       CustomSnackBars.showErrorToast(title: '${response?.data['msg']}');
+      print(response?.data['msg']);
     } else {
       CustomSnackBars.showSuccessToast(title: 'تم ارسال المقترح بنجاح');
       Navigator.pop(context);
 
       emit(CubitBaseState.done);
-      showSuccessPopUp(context);
     }
   }
 
   Future<void> sendCampaignComplaign({
-    required int campaignId,
+    required int? campaignId,
     required String complaign,
     required BuildContext context,
   }) async {
     emit(CubitBaseState.done);
     Response? response = await joinCampaignRepository?.sendCampaignComplaign(
-        taskId: campaignId, complaint: complaign);
+        campaignId: campaignId, complaint: complaign);
 
     if (response?.data['status'] == false) {
       emit(CubitBaseState.error);
@@ -219,7 +242,6 @@ class JoinCampaignCubit extends Cubit<CubitBaseState> {
       Navigator.pop(context);
 
       emit(CubitBaseState.done);
-      showSuccessPopUp(context);
     }
   }
 

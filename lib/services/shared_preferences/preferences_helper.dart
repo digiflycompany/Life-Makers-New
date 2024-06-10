@@ -55,12 +55,12 @@ class PreferencesHelper {
 
   static String get getName {
     UserModel? userModel = getUserModel;
-    return userModel?.user.name ?? '';
+    return userModel?.user?.name ?? '';
   }
 
   static int get getUserPoints {
     UserModel? userModel = getUserModel;
-    return userModel?.user.points ?? 0;
+    return userModel?.user?.points ?? 0;
   }
 
   static double normalizePoints(int points, {int maxPoints = 1000}) {

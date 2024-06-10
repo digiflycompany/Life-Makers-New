@@ -9,4 +9,9 @@ class HomeRepository {
     getData(url: EndPoints.homeCalender);
     return response;
   }
+  Future<Response?> getCampaignDetails(String? url) async {
+    Response? response = await DioHelper.
+    getData(url: url!);
+    return response;
+  }
 }

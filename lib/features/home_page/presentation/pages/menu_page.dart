@@ -9,8 +9,6 @@ import 'package:life_makers/features/home_page/cubit/menu_page_cubit/menu_page_s
 import 'package:life_makers/features/home_page/presentation/widgets/menu_page_widgets/campaigns_icon.dart';
 import 'package:life_makers/features/home_page/presentation/widgets/menu_page_widgets/close_drawer_icon.dart';
 import 'package:life_makers/features/home_page/presentation/widgets/menu_page_widgets/edit_account_icon.dart';
-import 'package:life_makers/features/home_page/presentation/widgets/menu_page_widgets/elections_candidate_icon.dart';
-import 'package:life_makers/features/home_page/presentation/widgets/menu_page_widgets/elections_icon.dart';
 import 'package:life_makers/features/home_page/presentation/widgets/menu_page_widgets/login_icon.dart';
 import 'package:life_makers/features/home_page/presentation/widgets/menu_page_widgets/logout_icon.dart';
 import 'package:life_makers/features/home_page/presentation/widgets/menu_page_widgets/mentorship_edit_icon.dart';

@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:life_makers/features/home_page/cubit/home_calender_cubit.dart';
 import 'package:life_makers/features/home_page/presentation/widgets/main_page_widgets/home_calendatr_item.dart';
+import 'package:life_makers/features/home_page/repo/calendar_campaigns_model.dart';
 import 'package:life_makers/services/cubit/global_cubit_state.dart';
 
 class HomeCalendar extends StatelessWidget {
-  const HomeCalendar({super.key});
+  const HomeCalendar({super.key,});
+
 
   @override
   Widget build(BuildContext context) {

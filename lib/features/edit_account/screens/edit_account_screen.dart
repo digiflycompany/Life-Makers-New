@@ -50,7 +50,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
 
   final TextEditingController nationalIDController = TextEditingController();
   final TextEditingController previousExperienceController =
-      TextEditingController();
+  TextEditingController();
 
   final TextEditingController textEditingController = TextEditingController();
   final TextEditingController textEditingController2 = TextEditingController();
@@ -74,18 +74,18 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
   @override
   void initState() {
     super.initState();
-    selectedCityName = userModel.user.governorate;
-    selectedAreaName = userModel.user.cityCenter;
-    nameController.text = userModel.user.name;
-    userNameController.text = userModel.user.username;
-    emailController.text = userModel.user.email;
-    phoneController.text = userModel.user.phone;
-    whatsappController.text = userModel.user.whatsappNumber;
-    nationalIDController.text = userModel.user.idCardNumber;
-    addressController.text = userModel.user.address;
+    selectedCityName = userModel.user?.governorate;
+    selectedAreaName = userModel.user?.cityCenter;
+    nameController.text = userModel.user?.name??'';
+    userNameController.text = userModel.user?.username??'';
+    emailController.text = userModel.user?.email??'';
+    phoneController.text = userModel.user?.phone??'';
+    whatsappController.text = userModel.user?.whatsappNumber??'';
+    nationalIDController.text = userModel.user?.idCardNumber??'';
+    addressController.text = userModel.user?.theAddress??'';
     previousExperienceController.text =
-        userModel.user.previousExperience;
-    JobController.text = userModel.user.job;
+        userModel.user?.previousExperience??'';
+    JobController.text = userModel.user?.theJob??'';
 
     signUpCubit = context.read<SignUpCubit>();
     signUpCubit.fetchCityData();
@@ -117,111 +117,111 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
             isScrollControlled: true,
             context: context,
             builder: (context) => BlocBuilder<MenuCubit, MenuState>(
-                  builder: (context, state) {
-                    return Container(
-                      height: 170.h,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(
-                              40.0), // Adjust the radius as needed
-                          topRight: Radius.circular(
-                              40.0), // Adjust the radius as needed
-                        ),
-                        color: Colors.white,
+              builder: (context, state) {
+                return Container(
+                  height: 170.h,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(
+                          40.0), // Adjust the radius as needed
+                      topRight: Radius.circular(
+                          40.0), // Adjust the radius as needed
+                    ),
+                    color: Colors.white,
+                  ),
+                  child: state is DeleteAccountInProgress
+                      ? Center(
+                    child: SizedBox(
+                      height: 50.h,
+                      child: CircularProgressIndicator(
+                        color: AppColors.orangeColor,
                       ),
-                      child: state is DeleteAccountInProgress
-                          ? Center(
-                              child: SizedBox(
-                                height: 50.h,
-                                child: CircularProgressIndicator(
-                                  color: AppColors.orangeColor,
+                    ),
+                  )
+                      : Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: 20.h),
+                        child: Text(
+                          AppStrings.areYouSureYouWantToDeleteAccount,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 14.5,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: FontFamilies.alexandria,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 47.h,
+                      ),
+                      Row(
+                        textDirection: TextDirection.rtl,
+                        mainAxisAlignment:
+                        MainAxisAlignment.spaceEvenly,
+                        children: [
+                          InkWell(
+                            splashColor: Colors.transparent,
+                            onTap: () {
+                              menuCubit.deleteAccount();
+                            },
+                            child: Container(
+                              height: 56.h,
+                              width: 107.w,
+                              decoration: BoxDecoration(
+                                color: Colors.red,
+                                borderRadius:
+                                BorderRadius.circular(16.r),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  AppStrings.yes,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily:
+                                      FontFamilies.alexandria,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16),
                                 ),
                               ),
-                            )
-                          : Column(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(top: 20.h),
-                                  child: Text(
-                                    AppStrings.areYouSureYouWantToDeleteAccount,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 14.5,
-                                      fontWeight: FontWeight.w600,
-                                      fontFamily: FontFamilies.alexandria,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 47.h,
-                                ),
-                                Row(
-                                  textDirection: TextDirection.rtl,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    InkWell(
-                                      splashColor: Colors.transparent,
-                                      onTap: () {
-                                        menuCubit.deleteAccount();
-                                      },
-                                      child: Container(
-                                        height: 56.h,
-                                        width: 107.w,
-                                        decoration: BoxDecoration(
-                                          color: Colors.red,
-                                          borderRadius:
-                                              BorderRadius.circular(16.r),
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            AppStrings.yes,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontFamily:
-                                                    FontFamilies.alexandria,
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 16),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    InkWell(
-                                      splashColor: Colors.transparent,
-                                      onTap: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: Container(
-                                        height: 56.h,
-                                        width: 107.w,
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: Colors.red, width: 2.w),
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(16.r),
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            AppStrings.cancel,
-                                            style: TextStyle(
-                                                color: Colors.red,
-                                                fontFamily:
-                                                    FontFamilies.alexandria,
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 16),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              ],
                             ),
-                    );
-                  },
-                ));
+                          ),
+                          InkWell(
+                            splashColor: Colors.transparent,
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Container(
+                              height: 56.h,
+                              width: 107.w,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Colors.red, width: 2.w),
+                                color: Colors.white,
+                                borderRadius:
+                                BorderRadius.circular(16.r),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  AppStrings.cancel,
+                                  style: TextStyle(
+                                      color: Colors.red,
+                                      fontFamily:
+                                      FontFamilies.alexandria,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                );
+              },
+            ));
       }
 
       return Scaffold(
@@ -277,24 +277,24 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                               borderRadius: BorderRadius.circular(40),
                               child: _image != null
                                   ? Image.file(
-                                      File(_image!.path),
-                                      fit: BoxFit.fill,
-                                      width: 70,
-                                      height: 70,
-                                    )
-                                  : userModel.user.photo != null
-                                      ? Image.network(
-                                          '${PreferencesHelper.getUserModel?.user.photo}',
-                                          fit: BoxFit.fill,
-                                          width: 70,
-                                          height: 70,
-                                        )
-                                      : SvgPicture.asset(
-                                          AppAssets.circleAvatar2,
-                                          fit: BoxFit.fill,
-                                          width: 70,
-                                          height: 70,
-                                        ))),
+                                File(_image!.path),
+                                fit: BoxFit.fill,
+                                width: 70,
+                                height: 70,
+                              )
+                                  : userModel.user?.photo != null
+                                  ? Image.network(
+                                '${PreferencesHelper.getUserModel?.user?.photo}',
+                                fit: BoxFit.fill,
+                                width: 70,
+                                height: 70,
+                              )
+                                  : SvgPicture.asset(
+                                AppAssets.circleAvatar2,
+                                fit: BoxFit.fill,
+                                width: 70,
+                                height: 70,
+                              ))),
                       InkWell(
                         onTap: () async {
                           final picker = ImagePicker();
@@ -357,7 +357,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                         labelText: 'الاسم * ',
                                         labelStyle: buildLabelStyle(),
                                         focusedBorder:
-                                            buildUnderlineInputBorder(),
+                                        buildUnderlineInputBorder(),
                                       ))),
                               const SizedBox(width: 34),
                               Flexible(
@@ -371,7 +371,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                         labelText: 'اسم المستخدم * ',
                                         labelStyle: buildLabelStyle(),
                                         focusedBorder:
-                                            buildUnderlineInputBorder(),
+                                        buildUnderlineInputBorder(),
                                       ))),
                             ],
                           ),
@@ -392,7 +392,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                           labelText: 'رقم الهاتف * ',
                                           labelStyle: buildLabelStyle(),
                                           focusedBorder:
-                                              buildUnderlineInputBorder(),
+                                          buildUnderlineInputBorder(),
                                         ))),
                                 const SizedBox(width: 34),
                                 Flexible(
@@ -407,7 +407,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                           labelText: 'رقم الواتساب * ',
                                           labelStyle: buildLabelStyle(),
                                           focusedBorder:
-                                              buildUnderlineInputBorder(),
+                                          buildUnderlineInputBorder(),
                                         ))),
                               ],
                             ),
@@ -429,7 +429,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                           labelText: 'الرقم القومي * ',
                                           labelStyle: buildLabelStyle(),
                                           focusedBorder:
-                                              buildUnderlineInputBorder(),
+                                          buildUnderlineInputBorder(),
                                         ))),
                                 const SizedBox(
                                   width: 34,
@@ -445,7 +445,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                           labelText: 'العمل * ',
                                           labelStyle: buildLabelStyle(),
                                           focusedBorder:
-                                              buildUnderlineInputBorder(),
+                                          buildUnderlineInputBorder(),
                                         ))),
                               ],
                             ),
@@ -466,7 +466,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                           labelText: 'العنوان * ',
                                           labelStyle: buildLabelStyle(),
                                           focusedBorder:
-                                              buildUnderlineInputBorder(),
+                                          buildUnderlineInputBorder(),
                                         ))),
                                 const SizedBox(
                                   width: 34,
@@ -474,7 +474,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                 Flexible(
                                     child: TextField(
                                         controller:
-                                            previousExperienceController,
+                                        previousExperienceController,
                                         cursorColor: AppColors.blueColor,
                                         textInputAction: TextInputAction.next,
                                         keyboardType: TextInputType.name,
@@ -483,13 +483,12 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                           labelText: 'الخبرة السابقة * ',
                                           labelStyle: buildLabelStyle(),
                                           focusedBorder:
-                                              buildUnderlineInputBorder(),
+                                          buildUnderlineInputBorder(),
                                         ))),
                               ],
                             ),
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Padding(
                                 padding: EdgeInsets.only(top: 14.h),
@@ -505,21 +504,21 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                       isExpanded: true,
                                       items: signUpCubit.citiesList
                                           .map((City city) =>
-                                              DropdownMenuItem<String>(
-                                                value: city.name ??
-                                                    "", // Assuming city.name is a String
-                                                child: Align(
-                                                  alignment:
-                                                      Alignment.centerRight,
-                                                  child: Text(
-                                                    city.name ?? "",
-                                                    textDirection:
-                                                        TextDirection.rtl,
-                                                    maxLines:
-                                                        2, // Set text direction to RTL
-                                                  ),
-                                                ),
-                                              ))
+                                          DropdownMenuItem<String>(
+                                            value: city.name ??
+                                                "", // Assuming city.name is a String
+                                            child: Align(
+                                              alignment:
+                                              Alignment.centerRight,
+                                              child: Text(
+                                                city.name ?? "",
+                                                textDirection:
+                                                TextDirection.rtl,
+                                                maxLines:
+                                                2, // Set text direction to RTL
+                                              ),
+                                            ),
+                                          ))
                                           .toList(),
                                       onChanged: (String? cityName) {
                                         selectedCityName = cityName;
@@ -527,8 +526,8 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                         setState(() {});
                                         // Find the corresponding city object based on the selected city name
                                         final selectedCity =
-                                            signUpCubit.citiesList.firstWhere(
-                                          (city) => city.name == cityName,
+                                        signUpCubit.citiesList.firstWhere(
+                                              (city) => city.name == cityName,
                                           orElse: () => signUpCubit.citiesList
                                               .first, // Default to the first city
                                         );
@@ -544,7 +543,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                           style: TextStyle(
                                               color: AppColors.blueColor6,
                                               fontFamily:
-                                                  FontFamilies.alexandria,
+                                              FontFamilies.alexandria,
                                               fontSize: 11,
                                               fontWeight: FontWeight.w700),
                                         ),
@@ -563,12 +562,12 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                         decoration: BoxDecoration(
                                             color: Colors.white,
                                             borderRadius:
-                                                BorderRadius.circular(8.0),
+                                            BorderRadius.circular(8.0),
                                             border: Border.all(
                                                 color: Colors.transparent)),
                                       ),
                                       menuItemStyleData:
-                                          const MenuItemStyleData(
+                                      const MenuItemStyleData(
                                         height: 40,
                                       ),
                                       dropdownSearchData: DropdownSearchData(
@@ -589,18 +588,18 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                             decoration: InputDecoration(
                                               isDense: true,
                                               contentPadding:
-                                                  const EdgeInsets.symmetric(
+                                              const EdgeInsets.symmetric(
                                                 horizontal: 10,
                                                 vertical: 8,
                                               ),
                                               hintTextDirection:
-                                                  TextDirection.rtl,
+                                              TextDirection.rtl,
                                               hintText: 'ابحث عن محافظة....',
                                               hintStyle:
-                                                  const TextStyle(fontSize: 12),
+                                              const TextStyle(fontSize: 12),
                                               border: OutlineInputBorder(
                                                 borderRadius:
-                                                    BorderRadius.circular(8),
+                                                BorderRadius.circular(8),
                                               ),
                                             ),
                                           ),
@@ -608,9 +607,9 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                         searchMatchFn: (item, searchValue) {
                                           final myItem = signUpCubit.citiesList
                                               .firstWhere((element) =>
-                                                  element.name == item.value);
+                                          element.name == item.value);
                                           return myItem.name!
-                                                  .contains(searchValue) ||
+                                              .contains(searchValue) ||
                                               item.value
                                                   .toString()
                                                   .contains(searchValue);
@@ -625,6 +624,10 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                   ),
                                 ),
                               ),
+                            ],
+                          ),
+                          Row(
+                            children: [
                               Padding(
                                 padding: EdgeInsets.only(top: 14.h),
                                 child: Container(
@@ -639,23 +642,23 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                       alignment: Alignment.centerRight,
                                       items: signUpCubit.areasList
                                           .map((Areas area) =>
-                                              DropdownMenuItem<String>(
-                                                value: area.name ??
-                                                    "", // Assuming city.name is a String
-                                                child: Align(
-                                                  alignment:
-                                                      Alignment.centerRight,
-                                                  child: Text(
-                                                    area.name ?? "",
-                                                    textDirection:
-                                                        TextDirection.rtl,
-                                                    maxLines: 2,
-                                                    style: TextStyle(
-                                                        fontFamily:
-                                                            'Alexandria'),
-                                                  ),
-                                                ),
-                                              ))
+                                          DropdownMenuItem<String>(
+                                            value: area.name ??
+                                                "", // Assuming city.name is a String
+                                            child: Align(
+                                              alignment:
+                                              Alignment.centerRight,
+                                              child: Text(
+                                                area.name ?? "",
+                                                textDirection:
+                                                TextDirection.rtl,
+                                                maxLines: 2,
+                                                style: TextStyle(
+                                                    fontFamily:
+                                                    'Alexandria'),
+                                              ),
+                                            ),
+                                          ))
                                           .toSet()
                                           .toList(),
                                       onChanged: (String? areaName) {
@@ -670,7 +673,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                           style: TextStyle(
                                               color: AppColors.blueColor6,
                                               fontFamily:
-                                                  FontFamilies.alexandria,
+                                              FontFamilies.alexandria,
                                               fontSize: 11,
                                               fontWeight: FontWeight.w700),
                                         ),
@@ -691,17 +694,17 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                         decoration: BoxDecoration(
                                             color: Colors.white,
                                             borderRadius:
-                                                BorderRadius.circular(8.0),
+                                            BorderRadius.circular(8.0),
                                             border: Border.all(
                                                 color: Colors.transparent)),
                                       ),
                                       menuItemStyleData:
-                                          const MenuItemStyleData(
+                                      const MenuItemStyleData(
                                         height: 40,
                                       ),
                                       dropdownSearchData: DropdownSearchData(
                                         searchController:
-                                            textEditingController2,
+                                        textEditingController2,
                                         searchInnerWidgetHeight: 50,
                                         searchInnerWidget: Container(
                                           height: 50,
@@ -718,18 +721,18 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                             decoration: InputDecoration(
                                               isDense: true,
                                               contentPadding:
-                                                  const EdgeInsets.symmetric(
+                                              const EdgeInsets.symmetric(
                                                 horizontal: 10,
                                                 vertical: 8,
                                               ),
                                               hintTextDirection:
-                                                  TextDirection.rtl,
+                                              TextDirection.rtl,
                                               hintText: 'ابحث عن مركز....',
                                               hintStyle:
-                                                  const TextStyle(fontSize: 12),
+                                              const TextStyle(fontSize: 12),
                                               border: OutlineInputBorder(
                                                 borderRadius:
-                                                    BorderRadius.circular(8),
+                                                BorderRadius.circular(8),
                                               ),
                                             ),
                                           ),
@@ -737,9 +740,9 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                         searchMatchFn: (item, searchValue) {
                                           final myItem = signUpCubit.areasList
                                               .firstWhere((element) =>
-                                                  element.name == item.value);
+                                          element.name == item.value);
                                           return myItem.name!
-                                                  .contains(searchValue) ||
+                                              .contains(searchValue) ||
                                               item.value
                                                   .toString()
                                                   .contains(searchValue);
@@ -760,31 +763,31 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                             padding: EdgeInsets.only(top: 12.h),
                             child: Center(
                               child:
-                                  BlocBuilder<EditAccountCubit, CubitBaseState>(
+                              BlocBuilder<EditAccountCubit, CubitBaseState>(
                                 builder: (context, state) {
                                   return ElevatedButton(
                                     onPressed: () {
                                       context
                                           .read<EditAccountCubit>()
                                           .editAccountData(
-                                              file: _image,
-                                              name: nameController.text,
-                                              email: emailController.text,
-                                              password: passwordController.text,
-                                              context: context,
-                                              phone: phoneController.text,
-                                              gender:
-                                                  '${PreferencesHelper.getUserModel?.user.gender}',
-                                              address: addressController.text,
-                                              job: JobController.text,
-                                              governorate: selectedCityName,
-                                              whatsAppNumber:
-                                                  whatsappController.text,
-                                              cityCenter: selectedAreaName,
-                                              previousExperience:
-                                                  previousExperienceController
-                                                      .text,
-                                              education: 'education');
+                                          file: _image,
+                                          name: nameController.text,
+                                          email: emailController.text,
+                                          password: passwordController.text,
+                                          context: context,
+                                          phone: phoneController.text,
+                                          gender:
+                                          '${PreferencesHelper.getUserModel?.user?.gender}',
+                                          address: addressController.text,
+                                          job: JobController.text,
+                                          governorate: selectedCityName,
+                                          whatsAppNumber:
+                                          whatsappController.text,
+                                          cityCenter: selectedAreaName,
+                                          previousExperience:
+                                          previousExperienceController
+                                              .text,
+                                          education: 'education');
                                     },
                                     style: ElevatedButton.styleFrom(
                                         elevation: 0,
@@ -792,21 +795,21 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                         fixedSize: Size(95.w, 48.h),
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
-                                                BorderRadius.circular(8.r))),
+                                            BorderRadius.circular(8.r))),
                                     child: state == CubitBaseState.loading
                                         ? CircularProgressIndicator.adaptive(
-                                            backgroundColor: Colors.white,
-                                          )
+                                      backgroundColor: Colors.white,
+                                    )
                                         : Text(
-                                            'حفظ',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontFamily:
-                                                  FontFamilies.alexandria,
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
+                                      'حفظ',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily:
+                                        FontFamilies.alexandria,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
                                   );
                                 },
                               ),
@@ -817,60 +820,64 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                     ),
                     Row(
                       children: [
-                        GestureDetector(
-                          onTap: () {
-                            _showBottomSheetDeleteAccount();
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.only(top: 30.h),
-                            child: Align(
-                              alignment: AlignmentDirectional.centerStart,
-                              child: Container(
-                                width: 115.w,
-                                height: 41.h,
-                                decoration: BoxDecoration(
-                                    color: Colors.red,
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(6.r),
-                                      bottomLeft: Radius.circular(6.r),
-                                    )),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    settingsIcon,
-                                    SizedBox(width: 11.w),
-                                    mentorshipText,
-                                  ],
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              _showBottomSheetDeleteAccount();
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 30.h),
+                              child: Align(
+                                alignment: AlignmentDirectional.centerStart,
+                                child: Container(
+                                  width: 115.w,
+                                  height: 41.h,
+                                  decoration: BoxDecoration(
+                                      color: Colors.red,
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(6.r),
+                                        bottomLeft: Radius.circular(6.r),
+                                      )),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      settingsIcon,
+                                      SizedBox(width: 11.w),
+                                      mentorshipText,
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                         ),
                         Spacer(),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                PageTransition(
-                                    type: PageTransitionType.fade,
-                                    duration: const Duration(milliseconds: 400),
-                                    child: ChangePasswordAfterLoginScreen()));
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.only(top: 30.h),
-                            child: Align(
-                              alignment: AlignmentDirectional.centerStart,
-                              child: Container(
-                                width: 115.w,
-                                height: 41.h,
-                                decoration: BoxDecoration(
-                                    color: AppColors.orangeColor,
-                                    borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(6.r),
-                                      bottomRight: Radius.circular(6.r),
-                                    )),
-                                child: Center(
-                                  child: changePasswordText,
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  PageTransition(
+                                      type: PageTransitionType.fade,
+                                      duration: const Duration(milliseconds: 400),
+                                      child: ChangePasswordAfterLoginScreen()));
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 30.h),
+                              child: Align(
+                                alignment: AlignmentDirectional.centerStart,
+                                child: Container(
+                                  width: 115.w,
+                                  height: 41.h,
+                                  decoration: BoxDecoration(
+                                      color: AppColors.orangeColor,
+                                      borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(6.r),
+                                        bottomRight: Radius.circular(6.r),
+                                      )),
+                                  child: Center(
+                                    child: changePasswordText,
+                                  ),
                                 ),
                               ),
                             ),
@@ -887,78 +894,6 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
             },
           ),
         ),
-        // bottomNavigationBar: Padding(
-        //   padding: EdgeInsets.only(left: 25, right: 25, bottom: 20),
-        //   child: Row(
-        //     children: [
-        //       InkWell(
-        //         onTap: () {
-        //           Navigator.push(
-        //               context,
-        //               PageTransition(
-        //                   type: PageTransitionType.leftToRight,
-        //                   duration: const Duration(milliseconds: 530),
-        //                   child: const CompleteEditAccountScreen()));
-        //         },
-        //         child: const CircleAvatar(
-        //           backgroundColor: AppColors.greyContainerColor,
-        //           radius: 17,
-        //           child: Icon(
-        //             Icons.arrow_left,
-        //             color: Colors.white,
-        //           ),
-        //         ),
-        //       ),
-        //       Spacer(),
-        //       Padding(
-        //         padding: EdgeInsets.only(right: 15.w),
-        //         child: BlocBuilder<EditAccountCubit, CubitBaseState>(
-        //           builder: (context, state) {
-        //             return ElevatedButton(
-        //               onPressed: () {
-        //                 context.read<EditAccountCubit>().editAccountData(
-        //                     name: nameController.text,
-        //                     email: emailController.text,
-        //                     password: passwordController.text,
-        //                     context: context,
-        //                     phone: phoneController.text,
-        //                     gender:
-        //                         '${PreferencesHelper.getUserModel?.user?.gender}',
-        //                     address: addressController.text,
-        //                     job: JobController.text,
-        //                     governorate: governorateController.text,
-        //                     whatsAppNumber: whatsappController.text,
-        //                     cityCenter: centerController.text,
-        //                     previousExperience: previousExperienceController.text,
-        //                     education: 'education');
-        //               },
-        //               style: ElevatedButton.styleFrom(
-        //                   elevation: 0,
-        //                   backgroundColor: AppColors.orangeColor,
-        //                   fixedSize: Size(230.w, 50.h),
-        //                   shape: RoundedRectangleBorder(
-        //                       borderRadius: BorderRadius.circular(5))),
-        //               child: state == CubitBaseState.loading
-        //                   ? CircularProgressIndicator.adaptive(
-        //                       backgroundColor: Colors.white,
-        //                     )
-        //                   : Text(
-        //                       'حفظ',
-        //                       style: TextStyle(
-        //                         color: Colors.white,
-        //                         fontFamily: 'Alexandria',
-        //                         fontSize: 11,
-        //                         fontWeight: FontWeight.w500,
-        //                       ),
-        //                     ),
-        //             );
-        //           },
-        //         ),
-        //       ),
-        //       Spacer(),
-        //     ],
-        //   ),
-        // ),
       );
     });
   }
@@ -979,23 +914,23 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
   }
 
   get mentorshipText => Text(
-        AppStrings.deleteAccount,
-        style: TextStyle(
-            fontFamily: FontFamilies.alexandria,
-            fontWeight: FontWeight.w600,
-            color: Colors.white,
-            fontSize: 10),
-      );
+    AppStrings.deleteAccount,
+    style: TextStyle(
+        fontFamily: FontFamilies.alexandria,
+        fontWeight: FontWeight.w600,
+        color: Colors.white,
+        fontSize: 10),
+  );
   get changePasswordText => Text(
-        AppStrings.changePasswordText,
-        style: TextStyle(
-            fontFamily: FontFamilies.alexandria,
-            fontWeight: FontWeight.w600,
-            color: Colors.white,
-            fontSize: 10),
-      );
+    AppStrings.changePasswordText,
+    style: TextStyle(
+        fontFamily: FontFamilies.alexandria,
+        fontWeight: FontWeight.w600,
+        color: Colors.white,
+        fontSize: 10),
+  );
   get settingsIcon => SvgPicture.asset(
-        AppAssets.deleteAccIcon,
-        width: 14.w,
-      );
+    AppAssets.deleteAccIcon,
+    width: 14.w,
+  );
 }

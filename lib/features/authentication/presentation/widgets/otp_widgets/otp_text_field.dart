@@ -18,24 +18,27 @@ class OtpCustomTextField extends StatelessWidget {
         SignUpCubit signUpCubit = context.read<SignUpCubit>();
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w),
-          child: OTPTextField(
-            length: 4,
-            width: context.width,
-            fieldWidth: context.width52,
-            style: TextStyle(
-                fontSize: 17.sp,
-                color: AppColors.orangeColor,
-                fontWeight: FontWeight.w700
+          child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: OTPTextField(
+              length: 4,
+              width: context.width,
+              fieldWidth: context.width52,
+              style: TextStyle(
+                  fontSize: 17.sp,
+                  color: AppColors.orangeColor,
+                  fontWeight: FontWeight.w700
+              ),
+              textFieldAlignment: MainAxisAlignment.spaceAround,
+              fieldStyle: FieldStyle.underline,
+              otpFieldStyle: OtpFieldStyle(
+                  focusBorderColor: Colors.orange,
+                  borderColor: Colors.black
+              ),
+              onCompleted: (pin) {
+                signUpCubit.otpController.text = pin;
+              },
             ),
-            textFieldAlignment: MainAxisAlignment.spaceAround,
-            fieldStyle: FieldStyle.underline,
-            otpFieldStyle: OtpFieldStyle(
-                focusBorderColor: Colors.orange,
-                borderColor: Colors.black
-            ),
-            onCompleted: (pin) {
-              signUpCubit.otpController.text = pin;
-            },
           ),
         );
       },

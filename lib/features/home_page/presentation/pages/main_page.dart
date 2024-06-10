@@ -9,6 +9,7 @@ import 'package:life_makers/features/home_page/presentation/widgets/main_page_wi
 import 'package:life_makers/features/home_page/presentation/widgets/main_page_widgets/home_calendar.dart';
 import 'package:life_makers/features/home_page/presentation/widgets/main_page_widgets/urgent_campaigns.dart';
 import 'package:life_makers/features/home_page/presentation/widgets/main_page_widgets/user_details_card.dart';
+import 'package:life_makers/features/home_page/repo/calendar_campaigns_model.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -41,12 +42,15 @@ class _MainPageState extends State<MainPage> {
             preferredSize: Size(double.infinity, 50.h), child: HomeAppBar()),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
-          child: const Column(
-            children: [
-              UserDetailsCard(),
-              UrgentCampaigns(),
-              HomeCalendar(),
-            ],
+          child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: Column(
+              children: [
+                UserDetailsCard(),
+                UrgentCampaigns(),
+                HomeCalendar(),
+              ],
+            ),
           ),
         ),
       ),

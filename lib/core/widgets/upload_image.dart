@@ -11,7 +11,10 @@ class UploadImage extends StatelessWidget {
   final String text;
   final Function()? onTap;
   final Color color;
-  const UploadImage({super.key, required this.text, this.onTap, this.color=Colors.white});
+  final Color textColor;
+  final bool uploadIcon;
+  final double fontSize;
+  const UploadImage({super.key, required this.text, this.onTap, this.color=Colors.white,  this.textColor=AppColors.greyColor8, this.uploadIcon=true, this.fontSize=10});
 
   @override
   Widget build(BuildContext context) {
@@ -31,15 +34,17 @@ class UploadImage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SvgPicture.asset(AppAssets.uploadIcon,width: 22.w,),
-                  HorizontalSpace(10.w),
+                  if(uploadIcon==true)...[
+                    SvgPicture.asset(AppAssets.uploadIcon,width: 22.w,),
+                    HorizontalSpace(10.w),
+                  ],
                   Text(
                     text,
                     style: TextStyle(
-                      color: AppColors.greyColor8,
+                      color: textColor,
                       fontWeight: FontWeight.w400,
                       fontFamily: FontFamilies.alexandria,
-                      fontSize: 10.sp,
+                      fontSize: fontSize.sp,
                     ),
                   ),
                 ],

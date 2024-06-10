@@ -52,7 +52,7 @@ class _MembershipControlState extends State<MembershipControl> {
         ),
       ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image.asset(
             'assets/images/img.png',
@@ -78,7 +78,7 @@ class _MembershipControlState extends State<MembershipControl> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const Text(
                   'بعد مرور 3 شهور من تطوعك وتحقيق 30% من انجازاتك',
@@ -102,7 +102,7 @@ class _MembershipControlState extends State<MembershipControl> {
             padding:
                 const EdgeInsets.only(top: 24, bottom: 73, left: 25, right: 25),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const Text(
                   'بعد تحقيق 70% من الحملات المشترك بها',
@@ -122,6 +122,8 @@ class _MembershipControlState extends State<MembershipControl> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Icon(Icons.info_outline),
+              const SizedBox(width: 10),
               const Text(
                 'لا يشترط تحقيق الشرطين',
                 style: TextStyle(
@@ -131,8 +133,7 @@ class _MembershipControlState extends State<MembershipControl> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const SizedBox(width: 10),
-              Icon(Icons.info_outline),
+
             ],
           ),
           Center(

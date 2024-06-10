@@ -33,8 +33,8 @@ class EditAccountRepository {
       'governorate': governorate,
       'city_center': cityCenter,
       'previous_experience': previousExperience,
-      'gender': PreferencesHelper.getUserModel?.user.gender,
-      'education': PreferencesHelper.getUserModel?.user.education,
+      'gender': PreferencesHelper.getUserModel?.user?.gender,
+      'education': PreferencesHelper.getUserModel?.user?.education,
       'email': email,
       "photo": file!=null?await MultipartFile.fromFile(file.path, filename:fileName):null,
 

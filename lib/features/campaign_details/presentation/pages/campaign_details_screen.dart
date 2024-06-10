@@ -68,7 +68,7 @@ class _CampaignDetailsScreenState extends State<CampaignDetailsScreen> {
                   ),
                 );
               } else if (state is SeasonalCampaignsErrorStates) {
-                return Center(child: Text('state.message'));
+                return Center(child: Text(''));
               } else {
                 return Center(child: Text('Error loading campaign details'));
               }
@@ -96,15 +96,22 @@ class _CampaignDetailsScreenState extends State<CampaignDetailsScreen> {
                       : campaignDetails.userJoined == 'true'
                       ? NewsButton3(
                       onTap: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => JoinCampaignDetails(
-                              taskId: 0,
-                              campaignDetails: campaignDetails,
+                        if (campaignDetails.tasks != null && campaignDetails.tasks!.isNotEmpty) {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => JoinCampaignDetails(
+                                taskId: campaignDetails.tasks!.first.id!,
+                                campaignDetails: campaignDetails,
+                              ),
                             ),
-                          ),
-                        );
+                          );
+                        } else {
+                          // Handle the case where there are no tasks or task ID is null
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('No tasks available for this campaign')),
+                          );
+                        }
                       },
                       text: 'مشاهدة الحملة')
                       : SizedBox.shrink(),

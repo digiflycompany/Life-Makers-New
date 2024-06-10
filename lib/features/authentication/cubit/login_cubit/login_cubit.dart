@@ -4,12 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:life_makers/core/utils/app_routes.dart';
 import 'package:life_makers/core/utils/extensions.dart';
+import 'package:life_makers/features/authentication/cubit/login_cubit/login_states.dart';
+import 'package:life_makers/features/authentication/data/apis/api.dart';
+import 'package:life_makers/features/authentication/data/models/user_model.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../data/apis/api.dart';
-import '../../data/models/user_model.dart';
-import 'login_states.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
@@ -65,7 +64,7 @@ class LoginCubit extends Cubit<LoginState> {
       if(result == false) {
         emit(LoginFailure('تأكد من الانترنت الخاص بك'));
       } else {
-        emit(LoginFailure('اسم مستخدم خاطيء أو رقم سري خاطيء'));
+        emit(LoginFailure(e.toString()));
       }
     }
   }

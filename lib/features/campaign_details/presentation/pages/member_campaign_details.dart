@@ -33,17 +33,18 @@ class JoinCampaignDetails extends StatefulWidget {
 
 class _JoinCampaignDetailsState extends State<JoinCampaignDetails> {
   late JoinCampaignCubit joinCampaignCubit;
+
   @override
   void initState() {
-    // TODO: implement initState
-    final joinCampaignCubit = context.read<JoinCampaignCubit>();
-    joinCampaignCubit.checkedIn=false;
-    joinCampaignCubit.checkedOut=false;
-    joinCampaignCubit.imagesUploadedToServer=false;
-    joinCampaignCubit.image1Uploaded=false;
-    joinCampaignCubit.image2Uploaded=false;
     super.initState();
+    joinCampaignCubit = context.read<JoinCampaignCubit>();
+    joinCampaignCubit.checkedIn = false;
+    joinCampaignCubit.checkedOut = false;
+    joinCampaignCubit.imagesUploadedToServer = false;
+    joinCampaignCubit.image1Uploaded = false;
+    joinCampaignCubit.image2Uploaded = false;
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +54,13 @@ class _JoinCampaignDetailsState extends State<JoinCampaignDetails> {
           CustomSnackBars.showSuccessToast(
             title: 'تم تسجيل الانصراف بنجاح',
           );
-        } else if (state == CubitBaseState.imagesSuccess) {
+        }
+        // if(joinCampaignCubit.imagesUploadedToServer==true){
+        //   CustomSnackBars.showSuccessToast(
+        //     title: AppStrings.photosUploadedSuccessfully,
+        //   );
+        // }
+        if (state == CubitBaseState.imagesSuccess) {
           CustomSnackBars.showSuccessToast(
             title: AppStrings.photosUploadedSuccessfully,
           );
@@ -65,7 +72,6 @@ class _JoinCampaignDetailsState extends State<JoinCampaignDetails> {
         }
       },
       builder: (context, state) {
-        final joinCampaignCubit = context.read<JoinCampaignCubit>();
         return PopScope(
           onPopInvoked: (didPop) {
             joinCampaignCubit.resetState();
@@ -89,71 +95,62 @@ class _JoinCampaignDetailsState extends State<JoinCampaignDetails> {
                         CampaignDate(campaignDetails: widget.campaignDetails),
                         CampaignContent(campaignDetails: widget.campaignDetails),
                         UploadImage(
-                          text: joinCampaignCubit.image1Uploaded==true
+                          text: joinCampaignCubit.image1Uploaded == true
                               ? AppStrings.photoUploadedSuccessfully
                               : AppStrings.uploadProfilePhoto,
-                          onTap: (){
-                            if(joinCampaignCubit.checkedIn==true){
+                          textColor: joinCampaignCubit.image1Uploaded == true
+                               ? Colors.white:AppColors.greyColor8,
+                          uploadIcon: joinCampaignCubit.image1Uploaded == true
+                               ? false:true,
+                          fontSize: joinCampaignCubit.image1Uploaded == true
+                               ? 15:10,
+                          onTap: () {
+                            if (joinCampaignCubit.checkedIn == true) {
                               joinCampaignCubit.pickProfileImage();
-                            }else{
-                              CustomSnackBars.showInfoSnackBar(title: 'قم بتسجيل الحضور');
+                            } else {
+                              CustomSnackBars.showInfoSnackBar(
+                                  title: 'قم بتسجيل الحضور');
                             }
                           },
-                          color: joinCampaignCubit.image1Uploaded==true
+                          color: joinCampaignCubit.image1Uploaded == true
                               ? AppColors.greenColor
                               : Colors.white,
                         ),
                         VerticalSpace(35.h),
                         UploadImage(
-                          text: joinCampaignCubit.image2Uploaded==true
+                          text: joinCampaignCubit.image2Uploaded == true
                               ? AppStrings.photoUploadedSuccessfully
                               : AppStrings.uploadCampaignPhoto,
-                          onTap: (){
-                            if(joinCampaignCubit.checkedIn==true){
+                          textColor: joinCampaignCubit.image2Uploaded == true
+                              ? Colors.white:AppColors.greyColor8,
+                          uploadIcon: joinCampaignCubit.image2Uploaded == true
+                              ? false:true,
+                          fontSize: joinCampaignCubit.image2Uploaded == true
+                              ? 15:10,
+                          onTap: () {
+                            if (joinCampaignCubit.checkedIn == true) {
                               joinCampaignCubit.pickUserInCampaignImage();
-                            }else{
-                              CustomSnackBars.showInfoSnackBar(title: 'قم بتسجيل الحضور');
+                            } else {
+                              CustomSnackBars.showInfoSnackBar(
+                                  title: 'قم بتسجيل الحضور');
                             }
                           },
-                          color: joinCampaignCubit.image2Uploaded==true
+                          color: joinCampaignCubit.image2Uploaded == true
                               ? AppColors.greenColor
                               : Colors.white,
                         ),
-                        // UploadImage(
-                        //   text: joinCampaignCubit.image1Uploaded==true?AppStrings.photoUploadedSuccessfully
-                        //       : AppStrings.uploadProfilePhoto,
-                        //   onTap: () => joinCampaignCubit.pickProfileImage(),
-                        //   color: joinCampaignCubit.image1Uploaded==true
-                        //       ? AppColors.greenColor
-                        //       : Colors.white,
-                        // ),
-                        // VerticalSpace(35.h),
-                        // UploadImage(
-                        //   text: joinCampaignCubit.image2Uploaded==true
-                        //       ? AppStrings.photoUploadedSuccessfully
-                        //       : AppStrings.uploadCampaignPhoto,
-                        //   onTap: () => joinCampaignCubit.pickUserInCampaignImage(),
-                        //   color: joinCampaignCubit.image2Uploaded==true
-                        //       ? AppColors.greenColor
-                        //       : Colors.white,
-                        // ),
                         VerticalSpace(20.h),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 70.w),
                           child: NewsButton4(
                             onTap: () {
-                              // if (state == CubitBaseState.userInCampaignImageSuccess &&
-                              //     state == CubitBaseState.profileImageSuccess) {
-                              //   joinCampaignCubit.submitPhoto(widget.campaignDetails!.id);
-                              // } else {
-                              //   CustomSnackBars.showInfoSnackBar(
-                              //     title: 'من فضلك ارفق الصور',
-                              //   );
-                              // }
-                              if (joinCampaignCubit.image1Uploaded==true&&
-                                  joinCampaignCubit.image1Uploaded==true) {
-                                //joinCampaignCubit.submitPhoto(widget.campaignDetails!.id);
-                                joinCampaignCubit.uploadFile(file: joinCampaignCubit.finalFile,file2: joinCampaignCubit.finalFile2,campaignId:'${widget.campaignDetails!.id}');
+                              if (joinCampaignCubit.image1Uploaded == true &&
+                                  joinCampaignCubit.image1Uploaded == true) {
+                                joinCampaignCubit.uploadFile(
+                                    file: joinCampaignCubit.finalFile,
+                                    file2: joinCampaignCubit.finalFile2,
+                                    campaignId: widget.campaignDetails!.id);
+                                CustomSnackBars.showInfoSnackBar(title: 'جاري رفع الصور انتظر قليلا...');
                               } else {
                                 CustomSnackBars.showInfoSnackBar(
                                   title: 'من فضلك ارفق الصور',
@@ -164,7 +161,8 @@ class _JoinCampaignDetailsState extends State<JoinCampaignDetails> {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.symmetric(horizontal: 0.w, vertical: 20.h),
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 40.w, vertical: 20.h),
                           width: double.infinity,
                           height: 63.h,
                           decoration: BoxDecoration(
@@ -176,22 +174,29 @@ class _JoinCampaignDetailsState extends State<JoinCampaignDetails> {
                               padding: EdgeInsets.symmetric(horizontal: 5.w),
                               child: Row(
                                 textDirection: TextDirection.rtl,
-                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisAlignment:
+                                MainAxisAlignment.center,
                                 children: [
                                   GestureDetector(
+                                    behavior: HitTestBehavior.opaque,
                                     onTap: () {
-                                      _showSuggestionPopup(context: context, taskId: widget.taskId);
+                                      _showSuggestionPopup(
+                                          context: context,
+                                          taskId: widget.taskId);
                                     },
                                     child: Row(
                                       textDirection: TextDirection.rtl,
                                       children: [
-                                        SvgPicture.asset(AppAssets.suggestionIcon, width: 18.w),
+                                        SvgPicture.asset(
+                                            AppAssets.suggestionIcon,
+                                            width: 18.w),
                                         SizedBox(width: 7.w),
                                         const Text(
                                           AppStrings.suggestion,
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontFamily: FontFamilies.alexandria,
+                                            fontFamily:
+                                            FontFamilies.alexandria,
                                             fontWeight: FontWeight.w500,
                                             fontSize: 10.5,
                                           ),
@@ -209,51 +214,27 @@ class _JoinCampaignDetailsState extends State<JoinCampaignDetails> {
                                   ),
                                   SizedBox(width: 4.w),
                                   GestureDetector(
+                                    behavior: HitTestBehavior.opaque,
                                     onTap: () {
-                                      _showComplainPopup(taskId: widget.taskId, context: context);
+                                      _showComplainPopup(
+                                          taskId: widget.taskId,
+                                          context: context);
                                     },
                                     child: Row(
                                       textDirection: TextDirection.rtl,
                                       children: [
-                                        SvgPicture.asset(AppAssets.complainIcon, width: 18.w),
+                                        SvgPicture.asset(
+                                            AppAssets.complainIcon,
+                                            width: 18.w),
                                         SizedBox(width: 7.w),
                                         const Text(
                                           AppStrings.complain,
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontFamily: FontFamilies.alexandria,
+                                            fontFamily:
+                                            FontFamilies.alexandria,
                                             fontWeight: FontWeight.w500,
                                             fontSize: 10.5,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(width: 4.w),
-                                  SizedBox(
-                                    height: 40.h,
-                                    child: const VerticalDivider(
-                                      color: Colors.white,
-                                      thickness: 1,
-                                    ),
-                                  ),
-                                  SizedBox(width: 4.w),
-                                  GestureDetector(
-                                    onTap: () {
-                                      _showLeavingPopup(context);
-                                    },
-                                    child: Row(
-                                      textDirection: TextDirection.rtl,
-                                      children: [
-                                        SvgPicture.asset(AppAssets.joinCampaignIcon, width: 18.w),
-                                        SizedBox(width: 7.w),
-                                        Text(
-                                          AppStrings.leaveCampaign,
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: FontFamilies.alexandria,
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 10.5.sp,
                                           ),
                                         ),
                                       ],
@@ -271,57 +252,11 @@ class _JoinCampaignDetailsState extends State<JoinCampaignDetails> {
                 ],
               ),
             ),
-            // bottomNavigationBar: state == CubitBaseState.loading
-            //     ? Center(child: CircularProgressIndicator.adaptive())
-            //     : Padding(
-            //   padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
-            //   child: state == CubitBaseState.campaignCheckedOut
-            //       ? Container(
-            //     width: double.infinity,
-            //     height: 63.h,
-            //     decoration: BoxDecoration(
-            //       color: Colors.grey,
-            //       borderRadius: BorderRadius.circular(5.r),
-            //     ),
-            //     child: Center(
-            //       child: Text(
-            //         AppStrings.checkedOut,
-            //         style: TextStyle(
-            //           color: Colors.white,
-            //           fontFamily: FontFamilies.alexandria,
-            //           fontWeight: FontWeight.w500,
-            //           fontSize: 15.sp,
-            //         ),
-            //       ),
-            //     ),
-            //   )
-            //       : state == CubitBaseState.campaignCheckedIn
-            //       ? NewsButton4(
-            //     onTap: () {
-            //       if (joinCampaignCubit.imagesUploadedToServer) {
-            //         joinCampaignCubit.campaignCheckOut(
-            //             campaignId: widget.campaignDetails!.id!,
-            //             context: context);
-            //       } else {
-            //         CustomSnackBars.showInfoSnackBar(
-            //           title: 'قم برفع الصور أولا',
-            //         );
-            //       }
-            //     },
-            //     text: AppStrings.checkOut,
-            //     color: AppColors.redColor,
-            //   )
-            //       : NewsButton4(
-            //     onTap: () => joinCampaignCubit.campaignCheckIn(
-            //         campaignId: widget.campaignDetails!.id!,
-            //         context: context),
-            //     text: AppStrings.checkIn,
-            //   ),
-            // ),
             bottomNavigationBar: state == CubitBaseState.loading
                 ? Center(child: CircularProgressIndicator.adaptive())
                 : Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+              padding: EdgeInsets.symmetric(
+                  horizontal: 16.w, vertical: 20.h),
               child: joinCampaignCubit.checkedOut
                   ? Container(
                 width: double.infinity,
@@ -345,9 +280,15 @@ class _JoinCampaignDetailsState extends State<JoinCampaignDetails> {
                   : joinCampaignCubit.checkedIn
                   ? NewsButton4(
                 onTap: () {
-                  if (joinCampaignCubit.imagesUploadedToServer) {
+                  if (joinCampaignCubit
+                      .imagesUploadedToServer) {
+                    // joinCampaignCubit.campaignCheckOut(
+                    //     campaignId:
+                    //     widget.campaignDetails!.id!,
+                    //     context: context);
                     joinCampaignCubit.campaignCheckOut(
-                        campaignId: widget.campaignDetails!.id!,
+                        campaignId:
+                        widget.campaignDetails!.id!,
                         context: context);
                   } else {
                     CustomSnackBars.showInfoSnackBar(
@@ -359,10 +300,11 @@ class _JoinCampaignDetailsState extends State<JoinCampaignDetails> {
                 color: AppColors.redColor,
               )
                   : NewsButton4(
-                onTap: (){
+                onTap: () {
                   joinCampaignCubit.campaignCheckIn(
-                      campaignId: widget.campaignDetails!.id!,
-                      context: context);
+                    campaignId: widget.campaignDetails!.id!,
+                    context: context,
+                  );
                 },
                 text: AppStrings.checkIn,
               ),
@@ -372,7 +314,6 @@ class _JoinCampaignDetailsState extends State<JoinCampaignDetails> {
       },
     );
   }
-
 
   void _showSuggestionPopup(
       {required BuildContext context, required int taskId}) {
@@ -461,7 +402,7 @@ class _JoinCampaignDetailsState extends State<JoinCampaignDetails> {
                     onTap: () {
                       if (suggestion != null) {
                         joinCampaignCubit.sendCampaignSuggestion(
-                            taskId: taskId,
+                            campaignId: widget.campaignDetails?.id,
                             suggestion: suggestion!,
                             context: context);
                       }
@@ -561,105 +502,10 @@ class _JoinCampaignDetailsState extends State<JoinCampaignDetails> {
                   SendButton(onTap: () async {
                     if (complaign != null) {
                       joinCampaignCubit.sendCampaignComplaign(
-                          campaignId: taskId,
+                          campaignId: widget.campaignDetails?.id,
                           complaign: complaign!,
                           context: context);
                     }
-                  })
-                ],
-              ),
-            ));
-      },
-    );
-  }
-
-  void _showLeavingPopup(BuildContext context) {
-    String? leaveReason;
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(7.r))),
-            insetPadding: const EdgeInsets.all(26),
-            scrollable: true,
-            titlePadding: const EdgeInsets.all(0),
-            contentPadding: EdgeInsets.zero,
-            content: Container(
-              height: 432.h,
-              width: 450.w,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(7.r),
-              ),
-              child: Column(
-                textDirection: TextDirection.rtl,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Align(
-                        alignment: AlignmentDirectional.topEnd,
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 22.h, right: 23.w),
-                          child: SvgPicture.asset(
-                            AppAssets.darkCancelIcon,
-                            width: 17.w,
-                          ),
-                        )),
-                  ),
-                  SizedBox(
-                    height: 7.h,
-                  ),
-                  const Text(
-                    AppStrings.leavingReason,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: FontFamilies.alexandria,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 13),
-                  ),
-                  SizedBox(
-                    height: 25.h,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 25.w),
-                    child: Container(
-                      width: double.infinity,
-                      height: 270.h,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey, width: 1.w),
-                        borderRadius: BorderRadius.circular(5.r),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: TextField(
-                          onChanged: (val) {
-                            leaveReason = val;
-                          },
-                          textDirection: TextDirection.rtl,
-                          maxLines: 5,
-                          decoration: InputDecoration.collapsed(
-                            hintTextDirection: TextDirection.rtl,
-                            hintText: AppStrings.message,
-                            hintStyle: TextStyle(
-                                color: AppColors.blueColor6,
-                                fontFamily: FontFamilies.alexandria,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 11),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 16.h,
-                  ),
-                  SendButton(onTap: () async {
-                    joinCampaignCubit.leaveCampaign(
-                        campaignId: 0,
-                        context: context,
-                        leaveReason: leaveReason);
                   })
                 ],
               ),
