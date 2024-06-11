@@ -46,7 +46,7 @@ class CampaignRepository {
       {required int? campaignId, required String complaint}) async {
     Response? response = await DioHelper.postData(
         url: EndPoints.campaignComplaign,
-        data: {'campaignId': campaignId, 'complaint': complaint});
+        data: {'campaign_id': campaignId, 'complaint': complaint});
 
     return response;
   }
