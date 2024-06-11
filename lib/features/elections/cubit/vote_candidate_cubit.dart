@@ -22,7 +22,7 @@ class VoteCandidateCubit extends Cubit<CubitBaseState> {
       required BuildContext context,
       required int managerId}) async {
     emit(CubitBaseState.loading);
-    String url = 'https://life-makers.digifly-eg.com/api/toggleVote';
+    String url = 'https://app.digifly-eg.com/api/toggleVote';
     FormData formData = FormData.fromMap({
       'voters_id[0]': votedList[0],
       'voters_id[1]': votedList[1],

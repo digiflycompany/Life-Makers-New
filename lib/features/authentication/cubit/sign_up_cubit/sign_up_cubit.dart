@@ -430,7 +430,7 @@ class SignUpCubit extends Cubit<SignUpState> {
     emit(areaListLoading());
     try {
       final response = await Dio().get(
-          'https://life-makers.digifly-eg.com/api/areas/${selectedCity?.id}');
+          'https://app.digifly-eg.com/api/areas/${selectedCity?.id}');
       if (response.statusCode == 200) {
         areaModel = AreaModel.fromJson(response.data);
         List<dynamic> areaData = response.data['areas'];

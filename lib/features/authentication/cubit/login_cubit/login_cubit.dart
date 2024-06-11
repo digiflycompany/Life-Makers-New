@@ -64,7 +64,7 @@ class LoginCubit extends Cubit<LoginState> {
       if(result == false) {
         emit(LoginFailure('تأكد من الانترنت الخاص بك'));
       } else {
-        emit(LoginFailure(e.toString()));
+        LoginFailure('اسم مستخدم خاطيء أو رقم سري خاطيء');
       }
     }
   }

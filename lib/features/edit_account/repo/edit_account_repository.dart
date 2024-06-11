@@ -42,7 +42,7 @@ class EditAccountRepository {
 
 
     Response response = await dio.post(
-      'https://life-makers.digifly-eg.com/api/user-edit',
+      'https://app.digifly-eg.com/api/user-edit',
       options: Options(
           headers: {'Authorization': 'Bearer ${PreferencesHelper.getToken()}'}),
       data: formData,
