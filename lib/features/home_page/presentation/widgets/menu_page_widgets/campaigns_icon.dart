@@ -89,7 +89,7 @@ class CampaignsIcon extends StatelessWidget {
                     children: [
                       InkWell(
                         splashColor: Colors.transparent,
-                        onTap: ()=>Routes.seasonalCampaignsPageRoute.moveTo,
+                        onTap: ()=>Navigator.pushNamed(context, Routes.seasonalCampaignsPageRoute, arguments: 1),
                         child: Row(
                           textDirection: TextDirection.rtl,
                           children: [

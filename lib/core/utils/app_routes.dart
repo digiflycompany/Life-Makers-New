@@ -102,8 +102,9 @@ class RouteGenerator {
             routeSettings: routeSettings,
             pageRouteAnimation: PageRouteAnimation.fade);
       case Routes.seasonalCampaignsPageRoute:
+        final index = routeSettings.arguments as int;
         return buildPageRoute(
-            child: SeasonalCampaignsScreen(),
+            child: SeasonalCampaignsScreen(index: index,),
             routeSettings: routeSettings,
             pageRouteAnimation: PageRouteAnimation.fade);
       case Routes.volunteerOpportunityPageRoute:
