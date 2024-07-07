@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:life_makers/features/home_page/cubit/home_calender_cubit.dart';
 import 'package:life_makers/features/home_page/data/models/home_calender_model.dart';
-import 'package:life_makers/features/home_page/repo/calendar_campaigns_model.dart';
 import 'package:life_makers/services/cubit/global_cubit_state.dart';
 import '../../../../core/utils/app-color.dart';
 
@@ -26,7 +25,7 @@ class _HomeCalenderDetailsScreenState extends State<HomeCalenderDetailsScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCalenderCubit, CubitBaseState>(
   builder: (context, state) {
-    CalendarCampaignsModel calendarCampaignsModel;
+    // CalendarCampaignsModel calendarCampaignsModel;
     return Scaffold(
       body: Directionality(
         textDirection: TextDirection.rtl,

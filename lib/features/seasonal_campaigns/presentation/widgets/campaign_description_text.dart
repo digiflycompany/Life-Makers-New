@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CampaignDescriptionText extends StatelessWidget {
   final String desc;
@@ -14,17 +15,25 @@ class CampaignDescriptionText extends StatelessWidget {
       alignment: AlignmentDirectional.centerStart,
       child: Padding(
         padding: EdgeInsets.only(right: 0),
-        child: Text(
-          desc,
-          style: TextStyle(
-            color: Colors.black,
-            fontFamily: 'Alexandria', // Assuming FontFamilies.alexandria is a string 'Alexandria'
-            fontWeight: FontWeight.w400,
-            fontSize: 10,
-            height: 1.56,
+        child: Container(
+          height: 20.h,
+          child: Wrap(
+            children: [
+            Text(
+              desc,
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: 'Alexandria', // Assuming FontFamilies.alexandria is a string 'Alexandria'
+                fontWeight: FontWeight.w400,
+                fontSize: 10,
+                height: 1.56,
+              ),
+              textDirection: TextDirection.rtl,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
           ),
-          textDirection: TextDirection.rtl,
-          maxLines: 3,
         ),
       ),
     );
