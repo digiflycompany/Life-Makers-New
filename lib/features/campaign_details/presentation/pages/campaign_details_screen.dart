@@ -16,7 +16,7 @@ import 'choose_role_page.dart';
 import 'member_campaign_details.dart';
 
 class CampaignDetailsScreen extends StatefulWidget {
-  CampaignDetailsScreen({super.key, this.campaignDetails, this.tasks,});
+  CampaignDetailsScreen({super.key, this.campaignDetails, this.tasks});
   final Campaigns? campaignDetails;
   final Tasks? tasks;
 
@@ -35,7 +35,7 @@ class _CampaignDetailsScreenState extends State<CampaignDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<SeasonalCampaignsCubit>(
-      create: (BuildContext context) => SeasonalCampaignsCubit()..getSeasonalCampaignsRepo(context: context),
+      create: (BuildContext context) => SeasonalCampaignsCubit(0)..getSeasonalCampaignsRepo(context: context), // Pass an initial page index
       child: SafeArea(
         child: Scaffold(
           appBar: PreferredSize(

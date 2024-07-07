@@ -76,7 +76,7 @@ class MyApp extends StatelessWidget {
                 create: (BuildContext context) => MenuCubit(),
               ),
               BlocProvider<SeasonalCampaignsCubit>(
-                create: (BuildContext context) => SeasonalCampaignsCubit(),
+                create: (BuildContext context) => SeasonalCampaignsCubit(0),
               ),
               BlocProvider<VolunteerCubit>(
                 create: (BuildContext context) => VolunteerCubit(),

@@ -5,9 +5,10 @@ import 'package:life_makers/features/seasonal_campaigns/presentation/pages/previ
 import 'package:life_makers/features/seasonal_campaigns/presentation/pages/upcoming_seasonal_campaigns.dart';
 
 class SeasonalCampaignsPages extends StatelessWidget {
+  final int index;
   const SeasonalCampaignsPages({
     super.key,
-    required this.seasonalCampaignsCubit,
+    required this.seasonalCampaignsCubit, required this.index,
   });
 
   final SeasonalCampaignsCubit seasonalCampaignsCubit;
@@ -16,22 +17,22 @@ class SeasonalCampaignsPages extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
         child: PageView(
-      physics: const BouncingScrollPhysics(),
-      controller: seasonalCampaignsCubit.pageController,
-      onPageChanged: (int page) {
-        seasonalCampaignsCubit.changCurrentPage(page);
-      },
-      children: [
-        PreviousSeasonalCampaignsScreen(
-            campaigns:
+          physics: const BouncingScrollPhysics(),
+          controller: seasonalCampaignsCubit.pageController,
+          onPageChanged: (index) {
+            seasonalCampaignsCubit.changCurrentPage(index);
+          },
+          children: [
+            PreviousSeasonalCampaignsScreen(
+                campaigns:
                 seasonalCampaignsCubit.seasonalCampaignsModel?.pastCampaigns),
-        CurrentSeasonalCampaignsScreen(
-            campaigns: seasonalCampaignsCubit
-                .seasonalCampaignsModel?.currentCampaigns),
-        UpcomingSeasonalCampaigns(
-            campaigns:
+            CurrentSeasonalCampaignsScreen(
+                campaigns: seasonalCampaignsCubit
+                    .seasonalCampaignsModel?.currentCampaigns),
+            UpcomingSeasonalCampaigns(
+                campaigns:
                 seasonalCampaignsCubit.seasonalCampaignsModel?.nextCampaigns),
-      ],
-    ));
+          ],
+        ));
   }
 }

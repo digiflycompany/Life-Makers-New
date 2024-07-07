@@ -7,10 +7,14 @@ import 'package:life_makers/features/seasonal_campaigns/repo/seasonal_campaigns_
 import 'package:life_makers/services/dio_helper/error_handler.dart';
 
 class SeasonalCampaignsCubit extends Cubit<SeasonalCampaignsStates> {
-  SeasonalCampaignsCubit() : super(SeasonalCampaignsInitStates());
+  SeasonalCampaignsCubit(int initialPage)
+      : currentPage = initialPage,
+        super(SeasonalCampaignsInitStates()) {
+    pageController = PageController(initialPage: initialPage);
+  }
 
-  late PageController pageController = PageController(initialPage: currentPage);
-  int currentPage = 1;
+  late PageController pageController;
+  int currentPage;
 
   void changePageView(int page) {
     pageController.animateToPage(
