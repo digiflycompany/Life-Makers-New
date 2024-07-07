@@ -9,7 +9,6 @@ import 'package:life_makers/features/home_page/presentation/widgets/main_page_wi
 import 'package:life_makers/features/home_page/presentation/widgets/main_page_widgets/home_calendar.dart';
 import 'package:life_makers/features/home_page/presentation/widgets/main_page_widgets/urgent_campaigns.dart';
 import 'package:life_makers/features/home_page/presentation/widgets/main_page_widgets/user_details_card.dart';
-import 'package:life_makers/features/home_page/repo/calendar_campaigns_model.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});

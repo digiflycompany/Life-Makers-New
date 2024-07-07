@@ -4,7 +4,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_makers/features/campaign_details/presentation/pages/member_campaign_details.dart';
 import 'package:life_makers/features/campaign_details/repo/join_campaign_repository.dart';
 import 'package:life_makers/services/cubit/global_cubit_state.dart';
 import 'package:life_makers/services/shared_preferences/preferences_helper.dart';

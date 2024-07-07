@@ -27,12 +27,12 @@ class CampaignContent extends StatelessWidget {
           padding: EdgeInsets.only(left: 4.w),
           child: CampaignTitleText(title: title),
         ),
-        SizedBox(height: 11.h),
+        SizedBox(height: 8.h),
         CampaignDescriptionText(desc: desc),
         SizedBox(height: 8.h),
         Spacer(),
         CampaignDateText(date: date),
-        SizedBox(height: 10.h),
+        SizedBox(height: 5.h),
       ],
     );
   }
