@@ -16,7 +16,7 @@ class LoginScreen extends StatelessWidget {
         listener: (context, state) {
           LoginCubit loginCubit = context.read<LoginCubit>();
           if (state is LoginSuccess) {
-            loginCubit.LoginSuccessful(
+            loginCubit.loginSuccessful(
                 context, loginCubit.emailController.text);
           } else if (state is LoginFailure) {
             CustomSnackBars.showErrorToast(title: state.error);

@@ -107,7 +107,7 @@ class AppStrings {
   static const String noSeasonalCampaigns = 'حملات غير موسمية';
   static const String dummyData = '';
   static const String date = '22-10-2023';
-  static const String noCampaignsText = 'لا يوجد انشطة';
+  static const String noCampaignsText = 'لا توجد حملات';
   static const String notificationText = '';
   static const String hourAgo = 'منذ ساعة';
   static const String lifeMakers = 'صناع الحياة';

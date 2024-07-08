@@ -56,14 +56,14 @@ class RouteGenerator {
   static Route<dynamic>? getRoute(RouteSettings routeSettings) {
     debugPrint(routeSettings.name);
     switch (routeSettings.name) {
-      case Routes.firstPageRoute:
-        return buildPageRoute(
-            child: PreferencesHelper.applicationFirstPage,
-            routeSettings: routeSettings,
-            pageRouteAnimation: PageRouteAnimation.fade);
+      // case Routes.firstPageRoute:
+      //   return buildPageRoute(
+      //       child: PreferencesHelper.applicationFirstPage,
+      //       routeSettings: routeSettings,
+      //       pageRouteAnimation: PageRouteAnimation.fade);
       case Routes.loginPageRoute:
         return buildPageRoute(
-            child: const LoginScreen(),
+            child: LoginScreen(),
             routeSettings: routeSettings,
             pageRouteAnimation: PageRouteAnimation.fade);
       case Routes.signUpPageRoute:

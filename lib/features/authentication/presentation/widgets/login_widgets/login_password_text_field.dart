@@ -24,18 +24,16 @@ class LoginPasswordTextField extends StatelessWidget {
             onTap: () {
               loginCubit.togglePasswordVisibility();
             },
-            child: loginCubit.isPasswordVisible
-                ? Padding(
+            child: Padding(
               padding: EdgeInsets.only(top: 3.h),
               child: Transform.scale(
-                  scale: 0.49,
-                  child: SvgPicture.asset(AppAssets.hideIcon)),
-            )
-                : Padding(
-              padding: EdgeInsets.only(top: 3.h),
-              child: Transform.scale(
-                  scale: 0.49,
-                  child: SvgPicture.asset(AppAssets.showIcon)),
+                scale: 0.49,
+                child: SvgPicture.asset(
+                  loginCubit.isPasswordVisible
+                      ? AppAssets.hideIcon
+                      : AppAssets.showIcon,
+                ),
+              ),
             ),
           ),
           validator: (value) {
