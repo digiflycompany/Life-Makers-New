@@ -11,7 +11,7 @@ import '../../features/authentication/data/models/user_model.dart';
 class PreferencesHelper {
   static SharedPreferences? preferences;
 
-  static void init() async {
+  static Future<void> init() async {
     preferences = await SharedPreferences.getInstance();
   }
 
@@ -73,7 +73,12 @@ class PreferencesHelper {
     Routes.loginPageRoute.moveToCurrentRouteAndRemoveAll;
   }
 
-  static Widget get applicationFirstPage {
-    return PreferencesHelper.getToken() != null ? DrawerPage() : const LoginScreen();
+  static Future<Widget> applicationFirstPage() async {
+    return await getToken() != null ? DrawerPage() : LoginScreen();
   }
+
+  static Future<bool> isLoggedIn() async {
+    return getToken() != null;
+  }
+
 }

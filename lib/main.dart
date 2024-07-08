@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -10,8 +9,10 @@ import 'package:life_makers/core/utils/app_theme.dart';
 import 'package:life_makers/features/authentication/cubit/card_cubit/cards_cubit.dart';
 import 'package:life_makers/features/authentication/cubit/login_cubit/login_cubit.dart';
 import 'package:life_makers/features/authentication/cubit/sign_up_cubit/sign_up_cubit.dart';
+import 'package:life_makers/features/authentication/presentation/pages/login_screen.dart';
 import 'package:life_makers/features/edit_account/cubit/edit_account_cubit.dart';
 import 'package:life_makers/features/home_page/cubit/menu_page_cubit/menu_page_cubit.dart';
+import 'package:life_makers/features/home_page/presentation/pages/drawer_page.dart';
 import 'package:life_makers/features/seasonal_campaigns/cubit/seasonal_campaigns_cubit.dart';
 import 'package:life_makers/features/volunteer_opportunity/cubit/one_day_activity_cubit.dart';
 import 'package:life_makers/features/volunteer_opportunity/cubit/remote_tasks_cubit.dart';
@@ -33,7 +34,7 @@ import 'features/non_seasonal_campaigns/cubit/non_seasonal_campaigns_cubit.dart'
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
-  PreferencesHelper.init();
+  await PreferencesHelper.init();
   runApp(MyApp());
 }
 
@@ -120,7 +121,16 @@ class MyApp extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 navigatorKey: AppService().navigatorKey,
                 onGenerateRoute: RouteGenerator.getRoute,
-                //home: MemberShipFirstStep(),
+                home: FutureBuilder<bool>(
+                  future: PreferencesHelper.isLoggedIn(),
+                  builder: (context, snapshot) {
+                    if(snapshot.data ==true){
+                       return DrawerPage();
+                    }else{
+                      return LoginScreen();
+                    }
+                  },
+                ),
               ),
             ),
           );

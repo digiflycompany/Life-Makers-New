@@ -10,8 +10,13 @@ import 'package:life_makers/features/authentication/presentation/widgets/login_w
 import 'package:life_makers/features/authentication/presentation/widgets/login_widgets/sign_up_text.dart';
 import 'package:life_makers/features/authentication/presentation/widgets/login_widgets/welcome_back_text.dart';
 
-class LoginBody extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
+class LoginBody extends StatefulWidget {
+  @override
+  State<LoginBody> createState() => _LoginBodyState();
+}
+
+class _LoginBodyState extends State<LoginBody> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
