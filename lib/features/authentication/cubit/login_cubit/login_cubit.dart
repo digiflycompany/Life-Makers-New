@@ -16,14 +16,22 @@ class LoginCubit extends Cubit<LoginState> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  LoginCubit getCubit(context) => BlocProvider.of(context);
   Dio dio = Dio();
   Future<SharedPreferences> prefs = SharedPreferences.getInstance();
 
   IconData textFieldIcon = Icons.visibility_off;
+
   bool isPasswordVisible = true;
 
   void togglePasswordVisibility() {
     isPasswordVisible = !isPasswordVisible;
+    emit(LoginInitial());
+  }
+
+  void LoginSuccessful(BuildContext context, String email) async {
+    PreferencesHelper.saveIsVisitor(isVisitor: false);
+    Routes.mainPageRoute.moveToCurrentRouteAndRemoveAll;
   }
 
   void loginSuccessful(BuildContext context, String email) async {
@@ -53,15 +61,16 @@ class LoginCubit extends Cubit<LoginState> {
         await PreferencesHelper.saveUserModel(userModel);
         emit(LoginSuccess());
       } else {
-        emit(LoginFailure('اسم مستخدم خاطيء أو رقم سري خاطيء'));
+        LoginFailure('اسم مستخدم خاطيء أو رقم سري خاطيء');
       }
     } catch (e) {
       bool result = await InternetConnectionChecker().hasConnection;
-      if (result == false) {
+      if(result == false) {
         emit(LoginFailure('تأكد من الانترنت الخاص بك'));
       } else {
-        emit(LoginFailure('اسم مستخدم خاطيء أو رقم سري خاطيء'));
+        LoginFailure('اسم مستخدم خاطيء أو رقم سري خاطيء');
       }
     }
   }
 }
+

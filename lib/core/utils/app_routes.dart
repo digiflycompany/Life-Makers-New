@@ -20,7 +20,6 @@ import 'package:life_makers/features/non_seasonal_campaigns/presentation/pages/n
 import 'package:life_makers/features/seasonal_campaigns/model/seasonal_campaigns_model.dart';
 import 'package:life_makers/features/seasonal_campaigns/presentation/pages/seasonal_campaigns.dart';
 import 'package:life_makers/features/volunteer_opportunity/presentation/screens/volunteer_opportunity_screen.dart';
-import 'package:life_makers/services/shared_preferences/preferences_helper.dart';
 
 enum PageRouteAnimation { fade, scale, rotate, slide, slideBottomTop }
 

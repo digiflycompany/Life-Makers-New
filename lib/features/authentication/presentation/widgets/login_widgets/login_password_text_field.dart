@@ -23,17 +23,20 @@ class LoginPasswordTextField extends StatelessWidget {
           prefixIcon: GestureDetector(
             onTap: () {
               loginCubit.togglePasswordVisibility();
+              print('sdsdsdsdsd');
             },
-            child: Padding(
+            child: loginCubit.isPasswordVisible
+                ? Padding(
               padding: EdgeInsets.only(top: 3.h),
               child: Transform.scale(
-                scale: 0.49,
-                child: SvgPicture.asset(
-                  loginCubit.isPasswordVisible
-                      ? AppAssets.hideIcon
-                      : AppAssets.showIcon,
-                ),
-              ),
+                  scale: 0.49,
+                  child: SvgPicture.asset(AppAssets.hideIcon)),
+            )
+                : Padding(
+              padding: EdgeInsets.only(top: 3.h),
+              child: Transform.scale(
+                  scale: 0.49,
+                  child: SvgPicture.asset(AppAssets.showIcon)),
             ),
           ),
           validator: (value) {
